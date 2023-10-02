@@ -44,3 +44,9 @@ ul {
   background-color: #1ae94a;
   color: black;
 }
+
+.legal-stuff {
+  text-align: center;
+  padding-inline: 20%;
+  font-style: italic;
+}
