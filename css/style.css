@@ -12,7 +12,9 @@ html {
   overflow: hidden;
   text-align: center;
 }
-
+#content {
+  padding-top: 70px; /*Mueve el contenido más abajo para que no se superponga con la barra de navegación*/
+}
 .topnav a {
   position: relative;
   color: #f2f2f2;
