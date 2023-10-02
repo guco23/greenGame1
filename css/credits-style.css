@@ -1,0 +1,32 @@
+#credits-container { /*Contenedor general de la lista con créditos*/
+    margin-left: 21%;
+    margin-right: 21%;
+    background-color: aqua; /*Color provisional para ver el tamaño de los contenedores*/
+}
+
+#credits-container ul{
+    padding-left: 0%; /*Elimina el padding predeterminadod de ul*/
+}
+
+.credit-container { /*Contenedor general del contenido del crédito*/
+    margin-left: 0%;
+    margin-top: 1%;
+    display: flex;
+    justify-content: space-between;
+    background-color: greenyellow; /*Color provisional para ver el tamaño de los contenedores*/
+}
+
+.credit-container img { /*Contenedor de la imagen para manipular más facilmente*/
+    width: 180px;
+}
+
+.credit-text-container { /*Contenedor de la sección con texto del crédito*/
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+}
+
+.credit-name-title { /*Formato del título del nombre del crédito*/
+    
+}

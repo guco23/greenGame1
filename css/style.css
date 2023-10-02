@@ -3,6 +3,11 @@
 html {
   background-color: #ddd; /*Fondo provisional, en el futuro colocar una imagen todo lo guapa*/
 }
+
+ul {
+  list-style-type: none; /*Quita las bolitas en las listas ul*/
+}
+
 .topnav {
   position: fixed;
   top: 0;
@@ -28,10 +33,6 @@ html {
 
 .topnav li {
   display: inline;
-}
-
-.topnav ul {
-  list-style-type: none;
 }
 
 .topnav a:hover { /*Aspecto del botón al pasar el ratón por encima*/
