@@ -4,5 +4,15 @@
   },
   "devDependencies": {
     "eslint": "^8.50.0"
-  }
+  },
+  "name": "greengame1",
+  "description": "RPG por turnos en un mundo distópico en el que un grupo de valientes legumbres debe enfrentarse a los signos del zodiaco para salvar la realidad.\r Conoce a multitud de carismáticas judías con distintas personalidades. Combina sus poderes para crear el equipo perfecto con el que enfrentarte a trepidantes batallas tácticas.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
