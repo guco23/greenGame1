@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css"> <!--Fichero de estilo css general-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue">
-    <!--Enlazado para el uso de las fuentes-->
+    <link rel="stylesheet" href="css/index-style.css"> <!--Fichero de estilo css de esta página-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue"> <!--Enlazado para el uso de la fuente-->
+
     <title id="titleName">GREEN GAME</title>
+    <script src="js/game.js"></script>
 
 </head>
 <html>
@@ -18,6 +19,10 @@
     </ul>
 </nav>
 <div id="content"><!--Contenido de la página como tal-->
+    <div class="espacio-juego">
+        <canvas id="canvas"></canvas>
+    </div>
+
     <div class="legal-stuff">Todos los derechos de los
         assets visuales propios reservados Copyright @ 2023 atribuído a sus respectivos autores.
         <div xmlns:cc="http://creativecommons.org/ns#">Código abierto de uso público bajo <a
