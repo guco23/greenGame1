@@ -1,7 +1,4 @@
-canvas {
-    width: 920px;
-}
 
-.espacio-juego {
+#espacio-juego {
     text-align: center; /*Centra el canvas*/
 }
