@@ -6,7 +6,6 @@ var config = {
     scene: {
         preload: preload,
         create: create,
-        update: update
     },
     parent: 'espacio-juego'
 };
@@ -15,7 +14,7 @@ var game = new Phaser.Game(config);
 
 //preload assets and data function
 function preload() {
-  
+      this.load.image('javier', './images/javier.jpg');
 }
 
 //create function
