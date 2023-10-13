@@ -22,5 +22,5 @@ function preload() {
 
 //crear aqui los objetos de la escena
 function create() {
-    this.add.image(400, 300, 'javier');
+    this.add.image(400, 300, 'javier').setScale(0.7,0.7); //omg so sexy
 }
