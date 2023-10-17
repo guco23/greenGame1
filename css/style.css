@@ -51,11 +51,11 @@ ul {
   font-style: italic;
 }
 
-#lista-socials {
-  display: none;
-  
+.boton-socials:hover .lista-socials {
+  display: block;
 }
 
-#boton-socials {
+.lista-socials {
+  display: none;
 
 }
