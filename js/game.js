@@ -1,12 +1,19 @@
 import { Escena1 } from "./escena1.js";
 
+//Configuración inicial del juego
 var config = {
-    type: Phaser.AUTO,
+    type: Phaser.AUTO, //Usa WebGL si es posible. En caso contrario, usa canvas 
     width: 900, //Configurar aquí el tamaño de la ventana de juego
     height: 600,
-    pixelArt: true,
+    pixelArt: true, //Asegura que no se va a fastidiar el pixel art al escalarlo
+    scale: {
+        autoCenter: Phaser.Scale.CENTER_HORIZONTALY, //Phaser centra la ventana
+        //mode: Phaser.Scale.FIT,
+        //zoom: 1
+    },
     scene: Escena1,
-    parent: 'espacio-juego'
+    parent: 'espacio-juego' //El elemento de html sobre el que se colocará el "canvas" de Phaser
 };
 
+//Inicializa el juego
 var game = new Phaser.Game(config);
