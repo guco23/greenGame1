@@ -1,4 +1,6 @@
 export class Enemigo {
+    id; //Identificador
+
     maxHp; 
     currentHp;
     atk;
@@ -58,5 +60,6 @@ export class Enemigo {
         else {
             stunned = 0;
         }
+        combatManager.nextTurn();
     }
 }

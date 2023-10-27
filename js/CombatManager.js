@@ -20,6 +20,10 @@ export class CombatManager {
 
     spPoints; //Puntos de habilidad especial
 
+    constructor() {
+        
+    }
+
     nextTurn() {
         if(this.whoseTurn === 0) {
             if(current < this.teamSize) {
