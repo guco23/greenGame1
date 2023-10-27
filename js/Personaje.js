@@ -19,9 +19,9 @@ export class Personaje {
 
 
 
-    takeTurn() {
+    takeTurn(combatManager) {
         if(stunned === 0) {
-
+            //Como esperar un input????
         }
         else {
             stunned = 0;

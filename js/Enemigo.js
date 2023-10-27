@@ -28,6 +28,10 @@ export class Enemigo {
         else {
             this.currentHp -= Math.floor(dmg * this.def);
         }
+        if(this.currentHp <= 0) {
+            this.currentHp = 0;
+            living = 1;
+        }
     }
 
     attack(playerTeam) {
