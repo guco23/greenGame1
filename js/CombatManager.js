@@ -14,9 +14,9 @@ export class CombatManager {
     current; //Apunta al personaje o enemigo que tiene el turno
     whoseTurn; //Booleano, 0 para jugadores y 1 para enemigos
 
-    target; //Objetivo de parte del jugador
+    target; //Objetivo de parte del jugador. -1 para cuando no esté targeteando (tema de renderizado)
     whereAim; //Booleano para el targeteo, 0 para equipo aliado (curas y bufos), 1 para los enemigos
-    targetAll; //Booleano que indica 
+    targetAll; //Booleano que indica si targetea a todos o no. 0 single 1 area
 
     spPoints; //Puntos de habilidad especial
 
@@ -24,11 +24,20 @@ export class CombatManager {
         
     }
 
+    setTarget(aim, all) {
+        this.whereAim = aim;
+        this.targetAll = all;
+    }
+
+    cancelTarget() {
+        target = -1;
+    }
+
     nextTurn() {
         if(this.whoseTurn === 0) {
             if(current < this.teamSize) {
                 if(this.playerTeam[this.current].living === 0) {
-                    //LLamamos al método de turno independiente
+                    this.playerTeam[this.current].takeTurn();
                 }
                 current++;
             }
@@ -36,6 +45,10 @@ export class CombatManager {
                 current = 0;
                 this.whoseTurn = 1;
                 this.livingEnemies = 0;
+                if(this.livingParty === 0) {
+                    this.endCombat = 1;
+                }
+                this.takeTurn();
             }
         }
         else {
@@ -49,15 +62,13 @@ export class CombatManager {
             else {
                 current = 0;
                 this.whoseTurn = 0;
-                if(this.livingEnemies = 0) {
+                if(this.livingEnemies === 0) {
                     this.endCombat = 1;
                 }
+                this.takeTurn();
             }
         }
-        if(this.endCombat = 0) {
-            this.nextTurn();
-        }
-        else {
+        if(this.endCombat === 1) {
             //Método para acabar el combate, dar recompensas, volver a la pantalla principal, etc.
         }
     }
