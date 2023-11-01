@@ -10,8 +10,10 @@ export class Enemigo {
 
     prefType; //Tipo preferido para atacar (más posibilidades de que ataque)
 
-    living; //Booleano para la vida, 0 si esta vivo, 1 si no
-    stunned; //Booleano de aturdimiento, 1 si está aturdido 0 si no
+    living; //Booleano para la vida, true si esta vivo, false si no
+    stunned; //Booleano de aturdimiento, true si está aturdido false si no
+
+    currentCombat;
 
     imgLink; //String con un link a la imagen
     
@@ -19,8 +21,12 @@ export class Enemigo {
 
     }
 
+    endTurn() {
+        combatManager.nextTurn();
+    }
+
     stun() {
-        stunned = 1;
+        stunned = true;
     }
 
     sufferDamage(dmg) {
@@ -32,7 +38,7 @@ export class Enemigo {
         }
         if(this.currentHp <= 0) {
             this.currentHp = 0;
-            living = 1;
+            living = false;
         }
     }
 
@@ -49,17 +55,20 @@ export class Enemigo {
         }
         //genera numero aleatorio
         let target;
+        //generador de aleatorio (?)
         //ataca
         selecion[target].sufferDamage(this.atk);
+        //Animación, llamada a evento y llamada posterior a acabar turno. Por ahora hago llamada directa por falta de animaciones
+        this.endTurn();
     }
 
     takeTurn(combatManager) {
-        if(stunned === 0) {
+        if(stunned === false) {
             this.attack(combatManager.playerTeam);
         }
         else {
-            stunned = 0;
+            stunned = false;
+            this.endTurn();
         }
-        combatManager.nextTurn();
     }
 }

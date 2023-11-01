@@ -20,19 +20,23 @@ export class Personaje {
     living; //Booleano para la vida, 0 si esta vivo, 1 si no
     stunned; //Booleano de aturdimiento, 1 si está aturdido 0 si no
 
-
+    //Cosas de flujo de combate y eventos
 
     currentCombat;
 
     status; //Estado del menu del jugador: 0 es el inicial, 1 es el menú de targeteo del ataque normal, 2 es el menú de targeteo del ataque especial
     accion; //Número entre 0 y 2. 0 es atacar, 1 especial, 2 defender;
 
-    targetKind; //Determina el tipo de targeteo para la habilidad 
+    targetKind; //Determina el tipo de targeteo para la habilidad. 0 un enemigo, 1 un aliado, 2 todo enemigo, 2 todo aliado
 
     ableToAct; //Booleano que le da el control al jugador para que pueda meter input en su turno, en cuyo caso será 0
 
     endTurn() {
 
+    }
+
+    gainShield(shield) {
+        this.escudo += shield;
     }
 
     startCombat(combatManager) {
@@ -49,7 +53,15 @@ export class Personaje {
     }
 
     selectAction() {
+        if(this.accion === 0) {
 
+        }
+        else if (this.accion === 1) {
+
+        }
+        else if (this.accion === 2) {
+            this.gainShield(def * 100);
+        }
     }
 
     takeTurn(combatManager) {
