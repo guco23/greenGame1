@@ -1,3 +1,5 @@
+import { RAIZ_IMAGENES } from "./constants.js";
+
 export class CombateEscena extends Phaser.Scene {
     //CombatManager combatManager;
 
@@ -8,15 +10,16 @@ export class CombateEscena extends Phaser.Scene {
 
         //Placeholders
         //Es importante que los sprites finales tengan la misma resolución
-        let aliados = ['./images/javier.jpg', './images/javier.jpg', './images/javier.jpg', './images/javier.jpg']; //En la version final sacará esto de combatManager
-        let enemigos = ['../images/furro.jpg', '../images/furro.jpg', '../images/profile.png', '../images/furro.jpg', '../images/furro.jpg']; //En la version final sacará esto de combatManager
+        //Esto finalmente deberán ser datos traídos del combat manager
+        let aliados = ['javier.jpg', 'javier.jpg', 'javier.jpg', 'javier.jpg']; //En la version final sacará esto de combatManager
+        let enemigos = ['furro.jpg', 'furro.jpg', 'profile.png', 'furro.jpg', 'furro.jpg']; //En la version final sacará esto de combatManager
 
         //Añade las imagenes a la escena como enemigo/aliado y el numero que ocupan en su array
         for (let i = 0; i < aliados.length; i++) {
-            this.load.image('aliado' + i, aliados[i]);
+            this.load.image('aliado' + i, RAIZ_IMAGENES + aliados[i]);
         }
         for (let i = 0; i < enemigos.length; i++) {
-            this.load.image('enemigo' + i, enemigos[i]);
+            this.load.image('enemigo' + i, RAIZ_IMAGENES + enemigos[i]);
         }
     }
 

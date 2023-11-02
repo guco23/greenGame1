@@ -5,3 +5,5 @@ Conoce a multitud de carismáticas judías con distintas personalidades. Combina
 "Nadie sabe pues, qué deparará el destino... quizás la ambición ahogará el brote de vuestra empresa... quizás es sólo la primera semilla de algo mucho más grande... sea como sea; muy libra de tu parte."
 
 - Augurio de la Judía Astral
+
+Añadir aquí el GDD
