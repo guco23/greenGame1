@@ -1,8 +1,10 @@
+import { RAIZ_IMAGENES } from "./constants.js";
+
 export class Escena1 extends Phaser.Scene {
     //cargar aqui los datos de la escena.
 
     preload() {
-        this.load.image('javier', '../images/javier.jpg');
+        this.load.image('javier', RAIZ_IMAGENES + 'javier.jpg');
         this.upscaleval = 0.001;
 
     }
