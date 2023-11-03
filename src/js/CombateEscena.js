@@ -21,6 +21,8 @@ export class CombateEscena extends Phaser.Scene {
         for (let i = 0; i < enemigos.length; i++) {
             this.load.image('enemigo' + i, RAIZ_IMAGENES + enemigos[i]);
         }
+        //Carga el fondo, dependerá de la zona del juego en la que nos encontremos
+        this.load.image('background', RAIZ_IMAGENES + "combatBackground/combatBackgroundPlaceholder.png");
     }
 
     //crear aqui los objetos de la escena
@@ -32,6 +34,8 @@ export class CombateEscena extends Phaser.Scene {
         let gameWidth = this.game.config.width;
         let gameHeight = this.game.config.height;
 
+        //Coloca el fondo
+        this.add.image(gameWidth / 2, gameHeight / 2,'background')
         //Coloca los sprites de los enemigos en la escena
         for (let i = 0; i < aliados.length; i++) {
             aliados[i] = this.add.image(gameWidth / 5, (gameHeight - gameHeight / 6)/  (aliados.length + 1) * (i + 1) , 'aliado' + i)
