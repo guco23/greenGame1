@@ -1,3 +1,3 @@
-Los assets visuales, es decir sprites, diseños de personales y graficos del videojuego, son de nuestra propiedad, de BerdEstudios, y creados desde cero, pero teniendo como inspiración el estilo gráfico de juegos rpgs en 8 bits de antaño como los Pokemon de GameBoy y Mother, y sin copiar nada.
+Los assets visuales, es decir sprites, diseños de personales y graficos del videojuego, son de nuestra propiedad, de BerdEstudios, y creados desde cero, pero teniendo como inspiración el estilo gráfico de juegos rpgs en 8 bits de antaño como los Pokemon de GameBoy, Final Fantasy y Mother, y sin copiar nada.
 
 Todos los derechos de los assets visuales propios reservados Copyright (C) 2023 atribuido a sus respectivos autores del equipo de desarrollo BerdEstudios.
