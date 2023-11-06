@@ -1,4 +1,6 @@
 import { RAIZ_IMAGENES } from "./constants.js";
+import { Enemigo } from "./Enemigo.js";
+import { Personaje } from "./Personaje.js";
 
 export class CombateEscena extends Phaser.Scene {
     //CombatManager combatManager;
@@ -28,8 +30,17 @@ export class CombateEscena extends Phaser.Scene {
     //crear aqui los objetos de la escena
     create() {
         //Arrays declarados provisionales para guardar los objetos de la escena
-        var aliados = Array(4);
-        var enemigos = Array(5);
+        let aliados = [];
+        aliados.push(new Personaje("Pablo", 0, 30, 20, 120, 110));
+        aliados.push(new Personaje("Diego", 1, 30, 20, 120, 110));
+        aliados.push(new Personaje("Jose", 2, 30, 20, 120, 110));
+        aliados.push(new Personaje("Batman", 3, 30, 20, 120, 110));
+        let enemigos = []; //En la version final sacará esto de combatManager
+        enemigos.push(new Enemigo("Enemigo1", 0, 30, 20, 120, 110));
+        enemigos.push(new Enemigo("Enemigo2", 1, 30, 20, 120, 110));
+        enemigos.push(new Enemigo("Enemigo3", 2, 30, 20, 120, 110));
+        enemigos.push(new Enemigo("Enemigo4", 3, 30, 20, 120, 110));
+        enemigos.push(new Enemigo("Enemigo5", 4, 30, 20, 120, 110));
 
         let gameWidth = this.game.config.width;
         let gameHeight = this.game.config.height;
@@ -38,12 +49,13 @@ export class CombateEscena extends Phaser.Scene {
         this.add.image(gameWidth / 2, gameHeight / 2,'background')
         //Coloca los sprites de los enemigos en la escena
         for (let i = 0; i < aliados.length; i++) {
-            aliados[i] = this.add.image(gameWidth / 5, (gameHeight - gameHeight / 6)/  (aliados.length + 1) * (i + 1) , 'aliado' + i)
+            aliados[i] = this.add.image(gameWidth / 5, (gameHeight - gameHeight / 6)/  (aliados.length + 1) * (i + 1) , 'aliado' + aliados[i].id)
             aliados[i].setScale(0.05);
         }
         for (let i = 0; i < enemigos.length; i++) {
-            enemigos[i] = this.add.image(gameWidth - (gameWidth / 5), gameHeight /  (enemigos.length + 1) * (i + 1) , 'enemigo' + i)
+            enemigos[i] = this.add.image(gameWidth - (gameWidth / 5), gameHeight /  (enemigos.length + 1) * (i + 1) , 'enemigo' + enemigos[i].id)
             enemigos[i].setScale(0.05);
         }
     }
+
 };

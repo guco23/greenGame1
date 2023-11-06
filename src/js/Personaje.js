@@ -42,9 +42,9 @@ export class Personaje {
         this.def = defs;
         this.maxHp = hpMax;
         this.currentHp = hp;
-        escudo = 0;
-        living = true;
-        stunned = false;
+        this.escudo = 0;
+        this.living = true;
+        this.stunned = false;
     }
 
     startCombat(combatManager) {
