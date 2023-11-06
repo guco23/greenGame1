@@ -21,6 +21,10 @@ export class Enemigo {
 
     }
 
+    startCombat(combatManager) {
+        this.currentCombat = combatManager;
+    }
+
     endTurn() {
         combatManager.nextTurn();
     }
@@ -46,17 +50,17 @@ export class Enemigo {
         let length = 0;
         let selecion = new Array(8);
         for(i = 0; i < playerTeam.length; i++) {
-            if(playerTeam[i].type == this.prefType) {
-                selecion[length] = playerTeam[i];
+            if(playerTeam[i].living) {
+                if(playerTeam[i].type === this.prefType) {
+                    selecion[length] = playerTeam[i];
+                    length++;
+                }
+                selecion[length] = playerTeam;
                 length++;
             }
-            selecion[length] = playerTeam;
-            length++;
         }
-        //genera numero aleatorio
         let target;
-        //generador de aleatorio (?)
-        //ataca
+        //En target se genera un número aleatorio
         selecion[target].sufferDamage(this.atk);
         //Animación, llamada a evento y llamada posterior a acabar turno. Por ahora hago llamada directa por falta de animaciones
         this.endTurn();
