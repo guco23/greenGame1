@@ -17,7 +17,7 @@ export class CombatManager {
 
     target; //Objetivo de parte del jugador. -1 para cuando no esté targeteando (tema de renderizado)
     whereAim; //Booleano para el targeteo, true para equipo aliado (curas y bufos), false para los enemigos
-    targetAll; //Booleano que indica si targetea a todos o no. 0 single 1 area
+    targetAll; //Booleano que indica si targetea a todos o no. 
 
     spPoints; //Puntos de habilidad especial
 
@@ -25,14 +25,27 @@ export class CombatManager {
         
     }
 
-    tryTarget(num) {
-        if(this.whereAi && num < this.teamSize) {
-            if(this.playerTeam[num].living === true) {
+    changeSp(shift) {
+        this.spPoints += shift;
+        if(this.spPoints < 0) this.spPoints = 0;
+        else if (this.spPoints > this.teamSize) this.spPoints = this.teamSize;
+    }
+
+    tryTarget(num, dir) {
+        if(this.whereAim) {
+            if (num < this.teamSize && num >= 0) {
+                return false;
+            }
+            else if(this.playerTeam[num].living === true) {
                 this.target = num;
+                return true;
             }
             else {
-                this.tryTarget()
+                return this.tryTarget(num + dir, dir);
             }
+        }
+        else if(num < this.enemySize && num >= 0) {
+
         }
     }
 
@@ -40,6 +53,10 @@ export class CombatManager {
         this.whereAim = aim;
         this.targetAll = all;
         this.tryTarget(0);
+    }
+
+    shiftTarget(direction) {
+        this.tryTarget(this.target, direction);
     }
 
     cancelTarget() {
