@@ -1,4 +1,5 @@
 import { Escena1 } from "./escena1.js";
+import {EscenaTilesets} from "./escenaTileset.js"
 import { CombateEscena } from "./CombateEscena.js";
 
 //Configuración inicial del juego
@@ -12,7 +13,7 @@ var config = {
         //mode: Phaser.Scale.FIT,
         //zoom: 1
     },
-    scene: Escena1, //Probando la escena de combate
+    scene: EscenaTilesets, //Probando la escena de combate
     parent: 'espacio-juego' //El elemento de html sobre el que se colocará el "canvas" de Phaser
 };
 
