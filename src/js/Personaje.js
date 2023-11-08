@@ -32,7 +32,7 @@ export class Personaje {
     constructor(namer, iden, attk, defs, hpMax, hp, combatManager) {
         this.name = namer;
         this.id = iden;
-
+        
         this.atk = attk;
         this.def = defs;
         this.maxHp = hpMax;
@@ -71,7 +71,7 @@ export class Personaje {
         this.checkAlive();    
         this.status = 0;
         this.accion = 0;
-        return;
+        combatManager.nextTurn();
     }
 
     heal(heal) {
@@ -104,7 +104,6 @@ export class Personaje {
         this.ableToAct = false;
         this.currentCombat.enemyTeam[this.currentCombat.target].sufferDamage(this.atk);
         this.endTurn();
-        return;
     }
 
     selectAction() {
