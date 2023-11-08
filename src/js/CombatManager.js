@@ -22,7 +22,7 @@ export class CombatManager {
     spPoints; //Puntos de habilidad especial
 
     constructor() {
-        
+        //Mamá sacame de javascript xd
     }
 
     changeSp(shift) {
@@ -33,7 +33,7 @@ export class CombatManager {
 
     tryTarget(num, dir) {
         if(this.whereAim) {
-            if (num < this.teamSize && num >= 0) {
+            if (num >= this.teamSize && num < 0) {
                 return false;
             }
             else if(this.playerTeam[num].living === true) {
@@ -44,8 +44,17 @@ export class CombatManager {
                 return this.tryTarget(num + dir, dir);
             }
         }
-        else if(num < this.enemySize && num >= 0) {
-
+        else  {
+            if(num >= this.enemySize && num < 0) {
+                return false;
+            }
+            else if(this.enemyTeam[num].living === true) {
+                this.target = num;
+                return true;
+            }
+            else {
+                return this.tryTarget(num + dir, dir);
+            }
         }
     }
 
