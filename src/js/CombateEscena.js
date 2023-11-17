@@ -29,6 +29,7 @@ export class CombateEscena extends Phaser.Scene {
 
     //crear aqui los objetos de la escena
     create() {
+                this.graphics = this.add.graphics();
         //Arrays declarados provisionales para guardar los objetos de la escena
         let aliados = [];
         aliados.push(new Personaje("Pablo", 0, 30, 20, 120, 110));
@@ -44,9 +45,17 @@ export class CombateEscena extends Phaser.Scene {
 
         let gameWidth = this.game.config.width;
         let gameHeight = this.game.config.height;
-
+        let uiBoxHeight = gameHeight / 3.2;
+        let uiBoxWidth = gameWidth / 3;
+        this.graphics.lineStyle(1, 0xffffff);
+        this.graphics.fillStyle(0x031f4c, 1);        
+        this.graphics.strokeRect(0, gameHeight - uiBoxHeight, uiBoxWidth, uiBoxHeight);
+        this.graphics.fillRect(2, 150, 90, 100);
+        this.graphics.strokeRect(95, 150, 90, 100);
+        this.graphics.fillRect(95, 150, 90, 100);
+        this.graphics.strokeRect(188, 150, 130, 100);
+        this.graphics.fillRect(188, 150, 130, 100);
         //Coloca el fondo
-        this.add.image(gameWidth / 2, gameHeight / 2,'background')
         //Coloca los sprites de los enemigos en la escena
         for (let i = 0; i < aliados.length; i++) {
             aliados[i] = this.add.image(gameWidth / 5, (gameHeight - gameHeight / 6)/  (aliados.length + 1) * (i + 1) , 'aliado' + aliados[i].id)
