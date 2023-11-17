@@ -32,8 +32,12 @@ export class Enemigo {
         this.currentCombat = combatManager;
     }
 
-    startCombat(combatManager) {
+    /*startCombat(combatManager) {
         this.currentCombat = combatManager;
+    }*/
+
+    critChance() {
+
     }
 
     checkAlive() {
@@ -54,6 +58,7 @@ export class Enemigo {
     }
 
     sufferDamage(dmg) {
+        let damage = Math.floor(dmg * this.def);
         if(dmg * def < 1) {
             this.currentHp--;
         }
@@ -63,6 +68,7 @@ export class Enemigo {
         this.checkAlive();
     }
 
+    //Mover a cada enemigo individual
     attack(playerTeam) {
         let length = 0;
         let selecion = new Array(8);
@@ -78,7 +84,12 @@ export class Enemigo {
         }
         let target;
         //En target se genera un número aleatorio
-        selecion[target].sufferDamage(this.atk);
+        if(this.critChance()) {
+            selecion[target].sufferDamage(this.atk * 3);
+        }
+        else {
+            
+        }
         //Animación, llamada a evento y llamada posterior a acabar turno. Por ahora hago llamada directa por falta de animaciones
         this.endTurn();
     }
