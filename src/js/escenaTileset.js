@@ -6,7 +6,7 @@ export class EscenaTilesets extends Phaser.Scene {
     preload() {
         /*this.load.image('javier', RAIZ_IMAGENES + 'javier.jpg');
         this.upscaleval = 0.001;*/
-        this.load.tilemapTiledJSON('Prueba', 'src/js/Prueba.json');
+        this.load.tilemapTiledJSON('Almacen1', 'src/json/Almacen1.json');
         this.load.image('tileset_mercadona', 'assets/images/tilesets/tileset_mercadona.png');
 
     }
@@ -20,12 +20,14 @@ export class EscenaTilesets extends Phaser.Scene {
         this.image.setScale(0.3);
         this.image.setPosition(screenWidth / 2, screenHeight / 2);*/
         this.map = this.make.tilemap({ 
-            key: 'Prueba', 
+            key: 'Almacen1', 
             tileWidth: 16, 
             tileHeight: 16 
           });
           const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
-          this.backgroundLayer = this.map.createLayer('Capa de patrones 1', tileset1);
+          this.FloorLayer = this.map.createLayer('Suelo', tileset1);
+          this.WallLayer = this.map.createLayer('Paredes', tileset1);
+          this.HighWallLayer = this.map.createLayer('Paredes atravesables', tileset1);
     }
 
     update() {
