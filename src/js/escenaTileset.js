@@ -6,8 +6,8 @@ export class EscenaTilesets extends Phaser.Scene {
     preload() {
         /*this.load.image('javier', RAIZ_IMAGENES + 'javier.jpg');
         this.upscaleval = 0.001;*/
-        this.load.tilemapTiledJSON('Prueba', 'Prueba.json');
-        this.load.image('tileset_mercadona', '..\/..\/assets/images/tileset_mercadona.png');
+        this.load.tilemapTiledJSON('Prueba', 'src/js/Prueba.json');
+        this.load.image('tileset_mercadona', 'assets/images/tilesets/tileset_mercadona.png');
 
     }
 
