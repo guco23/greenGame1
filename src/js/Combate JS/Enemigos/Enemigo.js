@@ -6,7 +6,7 @@ export class Enemigo {
     atk;
     def; //Numero entre 0.01 y 1 por el cual se modifica el daño sufrido. En la representación, corresponden a 99 y 0 DEF. Se hará siempre un mínimo de 1 de daño
 
-    critChance;
+    //critChance; No me acuerdo de haber puesto esto aquí lol. Mejor lo dejamos para una subclase
 
     prefType; //Tipo preferido para atacar (más posibilidades de que ataque)
 
@@ -17,35 +17,58 @@ export class Enemigo {
 
     imgLink; //String con un link a la imagen
     
-    constructor() {
+    constructor(iden, hpMax, atk, def, type, iLink, combatManager) {
+        this.id = iden;
+        this.maxHp = hpMax;
+        this.currentHp = this.maxHp;
+        this.atk = atk;
+        this.def = def;
+        this.prefType = type;
+        this.imgLink = iLink;
 
-    }
+        this.living = true;
+        this.stunned = false;
 
-    startCombat(combatManager) {
         this.currentCombat = combatManager;
     }
 
+    /*startCombat(combatManager) {
+        this.currentCombat = combatManager;
+    }*/
+
+    critChance() {
+
+    }
+
+    checkAlive() {
+        if(this.currentHp <= 0) {
+            this.currentHp = 0;
+            this.living = false;
+        }
+    }
+
     endTurn() {
-        combatManager.nextTurn();
+        this.currentHp -= this.dot;
+        this.checkAlive(); 
+        this.currentCombat.nextTurn();
     }
 
     stun() {
-        stunned = true;
+        this.stunned = true;
     }
 
     sufferDamage(dmg) {
+        let damage = Math.floor(dmg * this.def);
         if(dmg * def < 1) {
             this.currentHp--;
         }
         else {
             this.currentHp -= Math.floor(dmg * this.def);
         }
-        if(this.currentHp <= 0) {
-            this.currentHp = 0;
-            living = false;
-        }
+        this.checkAlive();
     }
 
+    //Mover a cada enemigo individual
     attack(playerTeam) {
         let length = 0;
         let selecion = new Array(8);
@@ -61,7 +84,12 @@ export class Enemigo {
         }
         let target;
         //En target se genera un número aleatorio
-        selecion[target].sufferDamage(this.atk);
+        if(this.critChance()) {
+            selecion[target].sufferDamage(this.atk * 3);
+        }
+        else {
+            
+        }
         //Animación, llamada a evento y llamada posterior a acabar turno. Por ahora hago llamada directa por falta de animaciones
         this.endTurn();
     }
