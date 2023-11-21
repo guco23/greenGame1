@@ -5,31 +5,58 @@ export class CombatManager {
 
     //Parámetros para trackear a los combatientes
 
-    enemyTeam = new Array(4); //Array que contiene a los objetos 'Enemigos'
+    enemyTeam;      //Array que contiene a los objetos 'Enemigos'
     enemySize;
-    livingEnemies; //Numero que comprueba los enemigos que siguen vivos
-    playerTeam = new Array(4); //Array que contiene a los objetos 'Personajes'
+    livingEnemies;  //Numero que comprueba los enemigos que siguen vivos
+    playerTeam;     //Array que contiene a los objetos 'Personajes'
     teamSize;
-    livingParty; //Numero que comprueba los personajes que sigues vivos
+    livingParty;    //Numero que comprueba los personajes que sigues vivos
 
     //Parámetros para trackear los turnos
 
-    endCombat; //Booleano que comprueba si todo un equipo ha muerto, causando el final del combate. false continua el combate, true lo acaba
-    current; //Apunta al personaje o enemigo que tiene el turno
-    whoseTurn; //Booleano, true para jugadores y false para enemigos
+    endCombat;  //Booleano que comprueba si todo un equipo ha muerto, causando el final del combate. false continua el combate, true lo acaba
+    current;    //Apunta al personaje o enemigo que tiene el turno
+    whoseTurn;  //Booleano, true para jugadores y false para enemigos
 
     //Parámetros para trackear el apuntado
 
-    target; //Objetivo de parte del jugador. -1 para cuando no esté targeteando (tema de renderizado)
-    whereAim; //Booleano para el targeteo, true para equipo aliado (curas y bufos), false para los enemigos
-    targetAll; //Booleano que indica si targetea a todos o no. 
+    target;     //Objetivo de parte del jugador. -1 para cuando no esté targeteando (tema de renderizado)
+    whereAim;   //Booleano para el targeteo, true para equipo aliado (curas y bufos), false para los enemigos
+    targetAll;  //Booleano que indica si targetea a todos o no. 
 
     //Otros parámetros
 
-    spPoints; //Puntos de habilidad especial
+    spPoints;   //Puntos de habilidad especial
+    dropId;     //Item dropeado al finalizar el combate
+    dropChance; //Probabilidad de dropear el objeto
 
-    constructor() {
+    constructor(combatInfo, partyInfo) {
         //Mamá sacame de javascript xd
+        this.enemySize = combatInfo.participants;
+        this.livingEnemies = this.enemySize;
+        this.enemyTeam = new Array(this.enemySize);
+        for(i = 0; i < this.enemySize; i++){
+            let e = "e" + i;
+            enemy = combatInfo.e;
+            this.enemyTeam[i] = new enemy.class(enemy, this);
+        }
+
+        this.teamSize = partyInfo.number;
+        this.livingParty = this.teamSize;
+        this.playerTeam = new Array(this.teamSize);
+        for(i = 0; i < this.teamSize; i++) {
+            let p = "p" + i;
+            enemy = combatInfo.p;
+            this.playerTeam[i] = new Personaje();
+        }
+
+        this.endCombat = false;
+        this.whereAim = false;
+        this.targetAll = false;
+
+        this.spPoints = Math.floor(this.teamSize/2);
+        this.dropId = combatInfo.itemId;
+        this.dropChance = combatInfo.dropChance;
     }
 
     changeSp(shift) {

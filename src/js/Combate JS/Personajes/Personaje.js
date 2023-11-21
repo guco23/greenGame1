@@ -71,6 +71,7 @@ export class Personaje {
         this.checkAlive();    
         this.status = 0;
         this.accion = 0;
+        combatManager.cancelTarget();
         combatManager.nextTurn();
     }
 
