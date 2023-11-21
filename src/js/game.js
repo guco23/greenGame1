@@ -13,6 +13,15 @@ var config = {
         //mode: Phaser.Scale.FIT,
         //zoom: 1
     },
+    physics: { 
+        default: 'arcade', 
+        checkCollision: {
+            up: true,
+            down: true,
+            left: true,
+            right: true
+        }
+    },
     scene: EscenaTilesets, //Probando la escena de combate
     parent: 'espacio-juego' //El elemento de html sobre el que se colocará el "canvas" de Phaser
 };

@@ -1,3 +1,4 @@
+import character from "./character.js";
 import { RAIZ_IMAGENES } from "./constants.js";
 
 export class EscenaTilesets extends Phaser.Scene {
@@ -8,7 +9,7 @@ export class EscenaTilesets extends Phaser.Scene {
         this.upscaleval = 0.001;*/
         this.load.tilemapTiledJSON('Almacen1', 'src/json/Almacen1.json');
         this.load.image('tileset_mercadona', 'assets/images/tilesets/tileset_mercadona.png');
-
+        this.load.image('character', 'assets/images/spritespjs/libra_boss.png')
     }
 
     //crear aqui los objetos de la escena
@@ -28,9 +29,12 @@ export class EscenaTilesets extends Phaser.Scene {
           this.FloorLayer = this.map.createLayer('Suelo', tileset1);
           this.WallLayer = this.map.createLayer('Paredes', tileset1);
           this.HighWallLayer = this.map.createLayer('Paredes atravesables', tileset1);
+          
+          let Char = new character(this, 100, 100);
+          Char.body.onCollide = true;                    
     }
 
-    update() {
+    update() {        
         /*this.image.scale += this.upscaleval;
         if (this.image.scale > 0.6)
             this.upscaleval = -0.001;
