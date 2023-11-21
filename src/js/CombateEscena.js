@@ -1,7 +1,8 @@
 import { RAIZ_IMAGENES } from "./constants.js";
-import { Enemigo } from "./Enemigo.js";
-import { Personaje } from "./Personaje.js";
+import {Enemigo} from "./Combate JS/Enemigos/Enemigo.js"
+import { Personaje } from "./Combate JS/Personajes/Personaje.js"
 import { BarraVida } from "./HUDElems/BarraVida.js";
+import { TextoVida } from "./HUDElems/TextoVida.js";
 
 export class CombateEscena extends Phaser.Scene {
     //CombatManager combatManager;
@@ -35,15 +36,15 @@ export class CombateEscena extends Phaser.Scene {
          //En la version final aliados y enemigos serán de combatManager
         this.aliados = [];
         this.aliados.push(new Personaje('Diego', 1, 30, 20, 120, 110));
-        this.aliados.push(new Personaje('Pablo', 0, 30, 20, 120, 110));
-        this.aliados.push(new Personaje('Jose', 2, 30, 20, 120, 110));
+        this.aliados.push(new Personaje('Pablo', 0, 30, 20, 140, 100));
+        this.aliados.push(new Personaje('Jose', 2, 30, 20, 125, 1));
         this.aliados.push(new Personaje('Batman', 3, 30, 20, 120, 110));
         this.enemigos = [];
-        this.enemigos.push(new Enemigo('Enemigo1', 0, 30, 20, 120, 110));
-        this.enemigos.push(new Enemigo('Enemigo2', 1, 30, 20, 120, 110));
-        this.enemigos.push(new Enemigo('Enemigo3', 2, 30, 20, 120, 110));
-        this.enemigos.push(new Enemigo('Enemigo4', 3, 30, 20, 120, 110));
-        this.enemigos.push(new Enemigo('Enemigo5', 4, 30, 20, 120, 110));
+        this.enemigos.push(new Enemigo(0, 30, 20, 120, 110));
+        this.enemigos.push(new Enemigo(1, 30, 20, 120, 110));
+        this.enemigos.push(new Enemigo(2, 30, 20, 120, 110));
+        this.enemigos.push(new Enemigo(3, 30, 20, 120, 110));
+        this.enemigos.push(new Enemigo(4, 30, 20, 120, 110));
 
         let gameWidth = this.game.config.width;
         let gameHeight = this.game.config.height;
@@ -63,8 +64,10 @@ export class CombateEscena extends Phaser.Scene {
         for (let i = 0; i < this.aliados.length; i++) {
             this.add.image(gameWidth / 5, (gameHeight - gameHeight / 6)/  (this.aliados.length + 1) * (i + 1) - 50, 'aliado' + this.aliados[i].id).setScale(0.05);
         }
+        
+        this.imgsEnem = [];
         for (let i = 0; i < this.enemigos.length; i++) {
-            this.add.image(gameWidth - (gameWidth / 5), gameHeight /  (this.enemigos.length + 1) * (i + 1) , 'enemigo' + this.enemigos[i].id).setScale(0.05);
+            this.imgsEnem[i] = this.add.image(gameWidth - (gameWidth / 5),  (gameHeight - gameHeight / 6)/  (this.enemigos.length + 1) * (i + 1) - 40, 'enemigo' + this.enemigos[i].id).setScale(0.05);
         }
 
         //Creación de los cuadros del HUD
@@ -73,12 +76,16 @@ export class CombateEscena extends Phaser.Scene {
         var hudBox1 = this.graphics.fillRoundedRect(2, gameHeight - 180, 270, 180, { tl: 12, tr: 12, bl: 0, br: 0 });
         var hudBox2 = this.graphics.fillRoundedRect(275, gameHeight - 180, 600, 180, { tl: 12, tr: 12, bl: 12, br: 12 });
 
-        this.barrasVida = [];
+        this.vidasAliados = [];
         for (let i = 0; i < this.aliados.length; i++) {
             let positionY = 440 + (i * 37);
-            console.log(this.aliados[i].atk);
             this.add.text(20, positionY, this.aliados[i].name);
-            this.barrasVida.push(new BarraVida(this, 120, positionY, this.aliados[i].maxHp, this.aliados[i].currentHp))
+            this.vidasAliados.push(new TextoVida(this, 120, positionY, this.aliados[i].maxHp, this.aliados[i].currentHp))
+        }
+
+        this.vidasEnemigos = [];
+        for (let i = 0; i < this.enemigos.length; i++) {
+            this.vidasEnemigos.push(new BarraVida(this, this.imgsEnem[i].x - 40, this. imgsEnem[i].y - 43, this.enemigos[i].maxHp))
         }
     }
 };
