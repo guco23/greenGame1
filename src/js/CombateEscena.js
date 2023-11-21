@@ -1,6 +1,7 @@
 import { RAIZ_IMAGENES } from "./constants.js";
 import { Enemigo } from "./Enemigo.js";
 import { Personaje } from "./Personaje.js";
+import { BarraVida } from "./HUDElems/BarraVida.js";
 
 export class CombateEscena extends Phaser.Scene {
     //CombatManager combatManager;
@@ -49,12 +50,23 @@ export class CombateEscena extends Phaser.Scene {
         this.add.image(gameWidth / 2, gameHeight / 2,'background')
         //Coloca los sprites de los enemigos en la escena
         for (let i = 0; i < aliados.length; i++) {
-            aliados[i] = this.add.image(gameWidth / 5, (gameHeight - gameHeight / 6)/  (aliados.length + 1) * (i + 1) , 'aliado' + aliados[i].id)
+            aliados[i] = this.add.image(gameWidth / 5, (gameHeight - gameHeight / 6)/  (aliados.length + 1) * (i + 1) - 50, 'aliado' + aliados[i].id)
             aliados[i].setScale(0.05);
         }
         for (let i = 0; i < enemigos.length; i++) {
             enemigos[i] = this.add.image(gameWidth - (gameWidth / 5), gameHeight /  (enemigos.length + 1) * (i + 1) , 'enemigo' + enemigos[i].id)
             enemigos[i].setScale(0.05);
+        }
+
+        //Creación de los cuadros del HUD
+        this.graphics = this.add.graphics();
+        this.graphics.fillStyle(0x0033cc, 1);
+        var hudBox1 = this.graphics.fillRoundedRect(2, gameHeight - 180, 250, 180, { tl: 12, tr: 12, bl: 0, br: 0 });
+        var hudBox2 = this.graphics.fillRoundedRect(275, gameHeight - 180, 600, 180, { tl: 12, tr: 12, bl: 12, br: 12 });
+
+        this.barrasVida = [];
+        for (let i = 0; i < aliados.length; i++) { 
+            this.barrasVida.push(new BarraVida(this, hudBox1.x, hudBox1.y, 100))
         }
     }
 
