@@ -14,15 +14,15 @@ export class CombateEscena extends Phaser.Scene {
         //Placeholders
         //Es importante que los sprites finales tengan la misma resolución
         //Esto finalmente deberán ser datos traídos del combat manager
-        let aliados = ['javier.jpg', 'javier.jpg', 'javier.jpg', 'javier.jpg']; //En la version final sacará esto de combatManager
-        let enemigos = ['furro.jpg', 'furro.jpg', 'profile.png', 'furro.jpg', 'furro.jpg']; //En la version final sacará esto de combatManager
+        let imgaliados = ['javier.jpg', 'javier.jpg', 'javier.jpg', 'javier.jpg']; //En la version final sacará esto de combatManager
+        let imgenemigos = ['furro.jpg', 'furro.jpg', 'profile.png', 'furro.jpg', 'furro.jpg']; //En la version final sacará esto de combatManager
 
         //Añade las imagenes a la escena como enemigo/aliado y el numero que ocupan en su array
-        for (let i = 0; i < aliados.length; i++) {
-            this.load.image('aliado' + i, RAIZ_IMAGENES + aliados[i]);
+        for (let i = 0; i < imgaliados.length; i++) {
+            this.load.image('aliado' + i, RAIZ_IMAGENES + imgaliados[i]);
         }
-        for (let i = 0; i < enemigos.length; i++) {
-            this.load.image('enemigo' + i, RAIZ_IMAGENES + enemigos[i]);
+        for (let i = 0; i < imgenemigos.length; i++) {
+            this.load.image('enemigo' + i, RAIZ_IMAGENES + imgenemigos[i]);
         }
         //Carga el fondo, dependerá de la zona del juego en la que nos encontremos
         this.load.image('background', RAIZ_IMAGENES + "combatBackground/combatBackgroundPlaceholder.png");
@@ -31,43 +31,44 @@ export class CombateEscena extends Phaser.Scene {
     //crear aqui los objetos de la escena
     create() {
         //Arrays declarados provisionales para guardar los objetos de la escena
-        let aliados = [];
-        aliados.push(new Personaje("Pablo", 0, 30, 20, 120, 110));
-        aliados.push(new Personaje("Diego", 1, 30, 20, 120, 110));
-        aliados.push(new Personaje("Jose", 2, 30, 20, 120, 110));
-        aliados.push(new Personaje("Batman", 3, 30, 20, 120, 110));
-        let enemigos = []; //En la version final sacará esto de combatManager
-        enemigos.push(new Enemigo("Enemigo1", 0, 30, 20, 120, 110));
-        enemigos.push(new Enemigo("Enemigo2", 1, 30, 20, 120, 110));
-        enemigos.push(new Enemigo("Enemigo3", 2, 30, 20, 120, 110));
-        enemigos.push(new Enemigo("Enemigo4", 3, 30, 20, 120, 110));
-        enemigos.push(new Enemigo("Enemigo5", 4, 30, 20, 120, 110));
+         //En la version final aliados y enemigos serán de combatManager
+        this.aliados = [];
+        this.aliados.push(new Personaje('Diego', 1, 30, 20, 120, 110));
+        this.aliados.push(new Personaje('Pablo', 0, 30, 20, 120, 110));
+        this.aliados.push(new Personaje('Jose', 2, 30, 20, 120, 110));
+        this.aliados.push(new Personaje('Batman', 3, 30, 20, 120, 110));
+        this.enemigos = [];
+        this.enemigos.push(new Enemigo('Enemigo1', 0, 30, 20, 120, 110));
+        this.enemigos.push(new Enemigo('Enemigo2', 1, 30, 20, 120, 110));
+        this.enemigos.push(new Enemigo('Enemigo3', 2, 30, 20, 120, 110));
+        this.enemigos.push(new Enemigo('Enemigo4', 3, 30, 20, 120, 110));
+        this.enemigos.push(new Enemigo('Enemigo5', 4, 30, 20, 120, 110));
 
         let gameWidth = this.game.config.width;
         let gameHeight = this.game.config.height;
 
         //Coloca el fondo
         this.add.image(gameWidth / 2, gameHeight / 2,'background')
-        //Coloca los sprites de los enemigos en la escena
-        for (let i = 0; i < aliados.length; i++) {
-            aliados[i] = this.add.image(gameWidth / 5, (gameHeight - gameHeight / 6)/  (aliados.length + 1) * (i + 1) - 50, 'aliado' + aliados[i].id)
-            aliados[i].setScale(0.05);
+        //Coloca los sprites de los enemigos en la escena, en la versión final los personajes contienen sprites y su funcionalidad
+        for (let i = 0; i < this.aliados.length; i++) {
+            this.add.image(gameWidth / 5, (gameHeight - gameHeight / 6)/  (this.aliados.length + 1) * (i + 1) - 50, 'aliado' + this.aliados[i].id).setScale(0.05);
         }
-        for (let i = 0; i < enemigos.length; i++) {
-            enemigos[i] = this.add.image(gameWidth - (gameWidth / 5), gameHeight /  (enemigos.length + 1) * (i + 1) , 'enemigo' + enemigos[i].id)
-            enemigos[i].setScale(0.05);
+        for (let i = 0; i < this.enemigos.length; i++) {
+            this.add.image(gameWidth - (gameWidth / 5), gameHeight /  (this.enemigos.length + 1) * (i + 1) , 'enemigo' + this.enemigos[i].id).setScale(0.05);
         }
 
         //Creación de los cuadros del HUD
         this.graphics = this.add.graphics();
         this.graphics.fillStyle(0x0033cc, 1);
-        var hudBox1 = this.graphics.fillRoundedRect(2, gameHeight - 180, 250, 180, { tl: 12, tr: 12, bl: 0, br: 0 });
+        var hudBox1 = this.graphics.fillRoundedRect(2, gameHeight - 180, 270, 180, { tl: 12, tr: 12, bl: 0, br: 0 });
         var hudBox2 = this.graphics.fillRoundedRect(275, gameHeight - 180, 600, 180, { tl: 12, tr: 12, bl: 12, br: 12 });
 
         this.barrasVida = [];
-        for (let i = 0; i < aliados.length; i++) { 
-            this.barrasVida.push(new BarraVida(this, hudBox1.x, hudBox1.y, 100))
+        for (let i = 0; i < this.aliados.length; i++) {
+            let positionY = 440 + (i * 37);
+            console.log(this.aliados[i].atk);
+            this.add.text(20, positionY, this.aliados[i].name);
+            this.barrasVida.push(new BarraVida(this, 120, positionY, this.aliados[i].maxHp, this.aliados[i].currentHp))
         }
     }
-
 };
