@@ -141,7 +141,6 @@ export class CombatManager {
                     if(this.playerTeam[this.current].living === 0) {
                         this.livingParty++;
                         this.playerTeam[this.current].takeTurn();
-                        this.current++;
                     }
                     else {
                         this.current++;
@@ -162,7 +161,6 @@ export class CombatManager {
                 if (this.current < this.enemySize) {
                     if(this.enemyTeam[this.current].living) {
                         this.livingEnemies++;
-                        this.current++;
                         this.enemyTeam[this.current].takeTurn(this);
                     }
                     else {
@@ -185,6 +183,7 @@ export class CombatManager {
 
     endTurn(){
         //Do stuff with scene 
+        this.current++;
         this.waitingConfirmation = true;
     }
 
