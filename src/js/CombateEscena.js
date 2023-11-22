@@ -85,7 +85,9 @@ export class CombateEscena extends Phaser.Scene {
 
         this.vidasEnemigos = [];
         for (let i = 0; i < this.enemigos.length; i++) {
-            this.vidasEnemigos.push(new BarraVida(this, this.imgsEnem[i].x - 40, this. imgsEnem[i].y - 43, this.enemigos[i].maxHp))
+            this.vidasEnemigos.push(new BarraVida(this, this.imgsEnem[i].x - 40, this. imgsEnem[i].y - 43, 80, 18, this.enemigos[i].maxHp))
         }
+        //Prueba de la barra de vida
+        this.vidasEnemigos[2].actualizarHp(25);
     }
 };
