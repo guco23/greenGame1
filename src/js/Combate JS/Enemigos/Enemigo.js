@@ -61,13 +61,17 @@ export class Enemigo {
         if(this.currentHp <= 0) {
             this.currentHp = 0;
             this.living = false;
+            this.currentCombat.addInfo("die", 0, this, null);
         }
     }
 
     endTurn() {
-        this.currentHp -= this.dot;
-        this.checkAlive(); 
-        this.currentCombat.nextTurn();
+        if(this.dot != 0) {
+            this.currentHp -= this.dot;
+            this.currentCombat.addInfo("dot", this.dot, this, null);
+            this.checkAlive(); 
+        }
+        this.currentCombat.endTurn();
     }
 
     stun() {
@@ -78,11 +82,12 @@ export class Enemigo {
         let damage = Math.floor(dmg * this.def);
         if(damage < 1) {
             this.currentHp--;
+            return 1;
         }
         else {
             this.currentHp -= damage;
+            return damage;
         }
-        this.checkAlive();
     }
 
     //Mover a cada enemigo individual
@@ -102,12 +107,13 @@ export class Enemigo {
         let target;
         //En target se genera un número aleatorio
         if(this.critChance()) {
-            selecion[target].sufferDamage(this.atk * 3);
+            this.currentCombat.addInfo("attack", selecion[target].sufferDamage(this.atk * 3), this, selecion[target]);
+            selecion[target].checkAlive();
         }
         else {
-            
+            this.currentCombat.addInfo("attack", selecion[target].sufferDamage(this.atk), this, selecion[target]);
+            selecion[target].checkAlive();
         }
-        //Animación, llamada a evento y llamada posterior a acabar turno. Por ahora hago llamada directa por falta de animaciones
         this.endTurn();
     }
 
@@ -117,6 +123,7 @@ export class Enemigo {
         }
         else {
             stunned = false;
+            combatManager.addInfo("stun", 0, this,  null);
             this.endTurn();
         }
     }

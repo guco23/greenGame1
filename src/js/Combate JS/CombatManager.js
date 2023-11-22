@@ -30,6 +30,9 @@ export class CombatManager {
     dropId;     //Item dropeado al finalizar el combate
     dropChance; //Probabilidad de dropear el objeto
 
+    waitingConfirmation;    //Espera a que el jugador pulse A (mensajes en pantalla)
+    actInfo;             //Info del resultado de cada acción
+
     constructor(combatInfo, partyInfo) {
         //Mamá sacame de javascript xd
         this.enemySize = combatInfo.participants;
@@ -46,8 +49,8 @@ export class CombatManager {
         this.playerTeam = new Array(this.teamSize);
         for(i = 0; i < this.teamSize; i++) {
             let p = "p" + i;
-            enemy = combatInfo.p;
-            this.playerTeam[i] = new Personaje();
+            player = partyInfo.p;
+            this.playerTeam[i] = new p.class(p, this);
         }
 
         this.endCombat = false;
@@ -106,6 +109,28 @@ export class CombatManager {
         target = -1;
     }
 
+    addInfo(action, value, from, to) {
+        if(action === "attack") {
+            this.actInfo += from.name + " attacked " + to.name + " for " + value + " damage.\n";
+        }
+        if(action === "defend") {
+            this.actInfo += from.name + " defended and added " + value + " shield.\n";
+        }
+        if(action === "die") {
+            this.actInfo += from.name + " died!\n"
+        }
+        if(action === "dot") {
+            this.actInfo += from.name + " suffered " + value + " damage due to negative effects."
+        }
+        if(action === "stun") {
+            this.actInfo += from.name + " was stunned and couldn't act"
+        }
+    }
+
+    showInfo() {
+        return this.actInfo;
+    }
+
     nextTurn() {
         if(this.endCombat === true) {
             //Método para acabar el combate, dar recompensas, volver a la pantalla principal, etc.
@@ -155,6 +180,22 @@ export class CombatManager {
                     this.nextTurn();
                 }
             }
+        }
+    }
+
+    endTurn(){
+        //Do stuff with scene 
+        this.waitingConfirmation = true;
+    }
+
+    eventHandler(event) {
+        if(this.waitingConfirmation && event === "D") {
+            this.actInfo = "";
+            this.waitingConfirmation = false;
+            this.nextTurn();
+        }
+        else if (this.whoseTurn) {
+
         }
     }
 }
