@@ -31,10 +31,12 @@ export class EscenaTilesets extends Phaser.Scene {
           this.HighWallLayer = this.map.createLayer('Paredes atravesables', tileset1);
           
           let Char = new character(this, 100, 100);
-          Char.body.onCollide = true;                    
+          Char.body.onCollide = true;              
+          this.cameras.main.startFollow(Char);      
+          this.cameras.main.zoom = 2.2;
     }
 
-    update() {        
+    update() {                
         /*this.image.scale += this.upscaleval;
         if (this.image.scale > 0.6)
             this.upscaleval = -0.001;

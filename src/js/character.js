@@ -18,7 +18,7 @@ export default class character extends Phaser.GameObjects.Sprite {
         
 		scene.physics.add.existing(this);
 		// Decimos que el caballero colisiona con los límites del mundo
-		this.body.setCollideWorldBounds();        
+		//this.body.setCollideWorldBounds();        
 		// Ajustamos el "collider" de nuestro caballero
 		this.bodyOffset = this.body.width/4;
 		this.bodyWidth = this.body.width/2;

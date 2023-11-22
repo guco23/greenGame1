@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="9" height="8" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="1">
+ <editorsettings>
+  <export target="../src/json/Almacen3.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" source="Mercadona.tsx"/>
+ <layer id="2" name="Suelo" width="9" height="8">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,2,37,37,13,37,37,3,0,
+0,18,1,1,1,1,1,35,0,
+0,19,1,1,1,1,1,20,0,
+0,0,18,1,1,1,35,0,0,
+0,0,19,36,36,36,20,0,0,
+0,0,0,36,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="3" name="Paredes atravesables" width="9" height="8">
+  <data encoding="csv">
+0,0,0,0,25,0,0,0,0,
+0,0,0,0,42,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="4" name="Paredes" width="9" height="8">
+  <data encoding="csv">
+4,7,7,7,0,7,7,8,4,
+6,7,7,9,0,7,7,7,6,
+6,0,0,0,0,0,0,0,6,
+6,0,0,0,0,0,0,0,6,
+6,0,0,0,0,0,0,0,6,
+4,4,0,0,0,0,0,4,4,
+0,6,0,0,0,0,0,6,0,
+0,4,5,5,5,5,5,4,0
+</data>
+ </layer>
+</map>
