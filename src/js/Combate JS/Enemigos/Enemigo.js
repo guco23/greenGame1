@@ -33,7 +33,7 @@ export class Enemigo {
 
         this.currentCombat = combatManager;
     }
-
+/*
     constructor(idn, combatManager) {
         this.id = idn.name;
         this.maxHp = idn.maxHp;
@@ -48,7 +48,7 @@ export class Enemigo {
 
         this.currentCombat = combatManager;
     }
-
+*/
     /*startCombat(combatManager) {
         this.currentCombat = combatManager;
     }*/

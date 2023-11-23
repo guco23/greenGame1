@@ -39,9 +39,9 @@ export class CombateEscena extends Phaser.Scene {
             } else if (event.code === "ArrowDown") {
                 this.selectorAcciones.siguiente();
             }
-            else if (event.code === "Space" || event.code === "ArrowLeft") {
+            else if (event.code === "Space") {
                 //SELECCIONAR
-                console.log("seleccionado" + this.selectorAcciones.selection);
+                //Llamada al combatmanager para hacer sus cositas selectorAcciones.selection contiene el indice 0, 1, 2
             }
         }, this);
     }
@@ -111,7 +111,8 @@ export class CombateEscena extends Phaser.Scene {
         this.selectorAcciones = new SelectorAcciones(this, 300, 440, this.textoDescriptivo);
     }
 
-    OnKeyInput(event) {
-
+    seleccionarEnemigo() {
+        //Hace lo que sea necesario en la escena para que el jugador pueda seleccionar un enemigo
+        //Devuelve el indice del array de enemigos del enemigo seleccionado
     }
 };

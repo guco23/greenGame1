@@ -50,6 +50,7 @@ export class Personaje {
         this.currentCombat = combatManager;
     }
 
+    /*
     constructor(idn, combatManager) {
         this.name = idn.name;
 
@@ -67,6 +68,7 @@ export class Personaje {
 
         this.currentCombat = combatManager;
     }
+*/
 
     startCombat(combatManager) {
         this.currentCombat = combatManager;
