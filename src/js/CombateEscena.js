@@ -5,6 +5,7 @@ import { BarraVida } from "./HUDElems/BarraVida.js";
 import { TextoVida } from "./HUDElems/TextoVida.js";
 import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
 import { SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
+import { SelectorEnemigos } from "./HUDElems/SelectorEnemigos.js";
 
 export class CombateEscena extends Phaser.Scene {
     //CombatManager combatManager;
@@ -37,11 +38,14 @@ export class CombateEscena extends Phaser.Scene {
             if (event.code === "ArrowUp") {
                 this.menuActual.anterior();
             } else if (event.code === "ArrowDown") {
+
                 this.menuActual.siguiente();
             }
             else if (event.code === "Space") {
                 //SELECCIONAR
-                //Llamada al combatmanager para hacer sus cositas selectorAcciones.selection contiene el indice 0, 1, 2
+                //Llamada al combatmanager para hacer sus cositas menuActual.selection contiene el indice del elemento en el menu
+                //para SelectorAcciones 0 = Atacar, 1 = Habilidad, 2 = Defender
+                //para SelectorEnemigos es el indice propio del array de enemigos
             }
         }, this);
     }
@@ -108,11 +112,12 @@ export class CombateEscena extends Phaser.Scene {
         this.vidasEnemigos[2].actualizarHp(25);
 
         this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
-        this.menuActual = new SelectorAcciones(this, 300, 440, this.textoDescriptivo);
+        this.selectorAcciones = new SelectorAcciones(this, 300, 440, this.textoDescriptivo);
+        this.selectorEnemigos = new SelectorEnemigos(this, this.imgsEnem);
+        this.menuActual = this.selectorEnemigos;
     }
 
     seleccionarEnemigo() {
         //Hace lo que sea necesario en la escena para que el jugador pueda seleccionar un enemigo
-        //Devuelve el indice del array de enemigos del enemigo seleccionado
     }
 };
