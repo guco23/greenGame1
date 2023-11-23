@@ -28,12 +28,16 @@ export class EscenaTilesets extends Phaser.Scene {
           const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
           this.FloorLayer = this.map.createLayer('Suelo', tileset1);
           this.WallLayer = this.map.createLayer('Paredes', tileset1);
+          this.WallLayer.setCollisionByExclusion([-1]);
           this.HighWallLayer = this.map.createLayer('Paredes atravesables', tileset1);
           
-          let Char = new character(this, 100, 100);
-          Char.body.onCollide = true;              
+          let Char = new character(this, 70, 100);
+          this.physics.world.enable(Char);
+          this.physics.add.collider(Char, this.WallLayer);
+                    
           this.cameras.main.startFollow(Char);      
           this.cameras.main.zoom = 2.2;
+
     }
 
     update() {                
