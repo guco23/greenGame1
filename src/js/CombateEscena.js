@@ -35,9 +35,9 @@ export class CombateEscena extends Phaser.Scene {
         this.input.keyboard.on('keydown', function (event) {
             //Control
             if (event.code === "ArrowUp") {
-                this.selectorAcciones.anterior();
+                this.menuActual.anterior();
             } else if (event.code === "ArrowDown") {
-                this.selectorAcciones.siguiente();
+                this.menuActual.siguiente();
             }
             else if (event.code === "Space") {
                 //SELECCIONAR
@@ -108,7 +108,7 @@ export class CombateEscena extends Phaser.Scene {
         this.vidasEnemigos[2].actualizarHp(25);
 
         this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
-        this.selectorAcciones = new SelectorAcciones(this, 300, 440, this.textoDescriptivo);
+        this.menuActual = new SelectorAcciones(this, 300, 440, this.textoDescriptivo);
     }
 
     seleccionarEnemigo() {
