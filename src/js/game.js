@@ -12,7 +12,7 @@ var config = {
         //mode: Phaser.Scale.FIT,
         //zoom: 1
     },
-    scene: Escena1, //Probando la escena de combate
+    scene: CombateEscena, //Probando la escena de combate
     parent: 'espacio-juego' //El elemento de html sobre el que se colocará el "canvas" de Phaser
 };
 
