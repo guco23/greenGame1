@@ -17,4 +17,8 @@ export class TextoDescriptivo extends Phaser.GameObjects.Container {
     aplicarTexto(texto) {
         this.textElem.setText(texto);
     }
+
+    visible(t) {
+        this.textElem.visible = t;
+    }
 }

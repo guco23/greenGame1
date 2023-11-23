@@ -6,10 +6,12 @@ class SelectorEnem extends Phaser.GameObjects.Container {
         this.unselect();
     }
 
+    //Cambia la visibilidad de el objeto a que no se vea
     selected() {
         this.rect.visible = true;
     }
 
+    //Cambia la visibilidad de el objeto a que si se vea
     unselect() {
         this.rect.visible = false;
     }
@@ -63,17 +65,17 @@ export class SelectorEnemigos extends Phaser.GameObjects.Container {
     }
 
     /**
-     * Oculta la UI de las acciones
+     * Oculta la seleccion de los enemigos
      */
     ocultar() {
-        this.visible = false;
+        this.opciones[this.selection].unselect();
     }
 
     /**
-     * Muestra la UI de las acciones
+     * Muestra la seleccion de los enemigos
      */
     mostrar() {
-        this.visible = true;
+        this.opciones[this.selection].select();
     }
 
 }

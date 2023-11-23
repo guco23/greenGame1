@@ -113,11 +113,13 @@ export class CombateEscena extends Phaser.Scene {
 
         this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
         this.selectorAcciones = new SelectorAcciones(this, 300, 440, this.textoDescriptivo);
-        this.selectorEnemigos = new SelectorEnemigos(this, this.imgsEnem);
-        this.menuActual = this.selectorEnemigos;
+        this.selectorEnemigos = new SelectorEnemigos(this, this.imgsEnem).ocultar();
+        this.menuActual = this.selectorAcciones;
     }
 
     seleccionarEnemigo() {
         //Hace lo que sea necesario en la escena para que el jugador pueda seleccionar un enemigo
+        this.menuActual = this.selectorEnemigos;
+        this.selectorAcciones.ocultar();
     }
 };

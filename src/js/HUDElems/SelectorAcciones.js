@@ -13,6 +13,10 @@ class AccionText extends Phaser.GameObjects.Container {
         this.textElem.setTint(0xFFFFFF);
     }
 
+    visible(t) {
+        this.textElem.visible = t;
+    }
+
 }
 
 export class SelectorAcciones extends Phaser.GameObjects.Container {
@@ -62,13 +66,15 @@ export class SelectorAcciones extends Phaser.GameObjects.Container {
      * Oculta el menu de las acciones
      */
     ocultar() {
-        this.visible = false;
+        this.opciones.forEach(opcion => opcion.visible(false));
+        this.textoDescriptivo.visible(false);
     }
 
     /**
      * Muestra el menu de las acciones
      */
     mostrar() {
-        this.visible = true;
+        this.opciones.forEach(opcion => opcion.visible(true));
+        this.textoDescriptivo.visible(true);
     }
 }
