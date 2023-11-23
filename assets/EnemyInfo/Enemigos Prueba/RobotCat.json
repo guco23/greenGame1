@@ -1,0 +1,1 @@
+{"class": "Enemigo", "name":"RobotCat", "maxHp":30, "atk": 5, "def": 20, "prefType": "type", "imgLink": "src"}

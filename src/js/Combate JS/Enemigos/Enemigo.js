@@ -1,5 +1,5 @@
 export class Enemigo {
-    id; //Identificador
+    name; //Identificador
 
     maxHp; 
     currentHp;
@@ -15,6 +15,8 @@ export class Enemigo {
 
     currentCombat;
 
+    dot;
+
     imgLink; //String con un link a la imagen
     
     constructor(iden, hpMax, atk, def, type, iLink, combatManager) {
@@ -25,6 +27,21 @@ export class Enemigo {
         this.def = def;
         this.prefType = type;
         this.imgLink = iLink;
+
+        this.living = true;
+        this.stunned = false;
+
+        this.currentCombat = combatManager;
+    }
+
+    constructor(idn, combatManager) {
+        this.id = idn.name;
+        this.maxHp = idn.maxHp;
+        this.currentHp = hpMax;
+        this.atk = idn.atk;
+        this.def = (100 - idn.def) / 100;
+        this.prefType = idn.type;
+        this.imgLink = idn.imgLink;
 
         this.living = true;
         this.stunned = false;
@@ -44,13 +61,17 @@ export class Enemigo {
         if(this.currentHp <= 0) {
             this.currentHp = 0;
             this.living = false;
+            this.currentCombat.addInfo("die", 0, this, null);
         }
     }
 
     endTurn() {
-        this.currentHp -= this.dot;
-        this.checkAlive(); 
-        this.currentCombat.nextTurn();
+        if(this.dot != 0) {
+            this.currentHp -= this.dot;
+            this.currentCombat.addInfo("dot", this.dot, this, null);
+            this.checkAlive(); 
+        }
+        this.currentCombat.endTurn();
     }
 
     stun() {
@@ -59,13 +80,14 @@ export class Enemigo {
 
     sufferDamage(dmg) {
         let damage = Math.floor(dmg * this.def);
-        if(dmg * def < 1) {
+        if(damage < 1) {
             this.currentHp--;
+            return 1;
         }
         else {
-            this.currentHp -= Math.floor(dmg * this.def);
+            this.currentHp -= damage;
+            return damage;
         }
-        this.checkAlive();
     }
 
     //Mover a cada enemigo individual
@@ -85,12 +107,13 @@ export class Enemigo {
         let target;
         //En target se genera un número aleatorio
         if(this.critChance()) {
-            selecion[target].sufferDamage(this.atk * 3);
+            this.currentCombat.addInfo("attack", selecion[target].sufferDamage(this.atk * 3), this, selecion[target]);
+            selecion[target].checkAlive();
         }
         else {
-            
+            this.currentCombat.addInfo("attack", selecion[target].sufferDamage(this.atk), this, selecion[target]);
+            selecion[target].checkAlive();
         }
-        //Animación, llamada a evento y llamada posterior a acabar turno. Por ahora hago llamada directa por falta de animaciones
         this.endTurn();
     }
 
@@ -100,6 +123,7 @@ export class Enemigo {
         }
         else {
             stunned = false;
+            combatManager.addInfo("stun", 0, this,  null);
             this.endTurn();
         }
     }

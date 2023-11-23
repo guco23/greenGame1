@@ -1,6 +1,7 @@
 export class Personaje {
     name;
-    id;
+
+    personality;
 
     maxHp;
     currentHp;
@@ -10,28 +11,29 @@ export class Personaje {
     atk;
     def;
 
-    escudo; //Valor que sirve como vida extra. Tiene como máximo maxHp;
+    escudo;     //Valor que sirve como vida extra. Tiene como máximo maxHp;
 
-    living; //Booleano para la vida
-    stunned; //Booleano de aturdimiento
+    living;     //Booleano para la vida
+    stunned;    //Booleano de aturdimiento
 
-    dot; //Valor del daño por veneno y eso
+    dot;        //Valor del daño por veneno y eso
 
     //Cosas de flujo de combate y eventos
 
     currentCombat;
 
-    status; //Estado del menu del jugador: 0 es el inicial, 1 es el menú de targeteo del ataque normal, 2 es el menú de targeteo del ataque especial
-    accion; //Número entre 0 y 2. 0 es atacar, 1 especial, 2 defender;
+    status;     //Estado del menu del jugador: 0 es el inicial, 1 es el menú de targeteo del ataque normal, 2 es el menú de targeteo del ataque especial
+    accion;     //Número entre 0 y 2. 0 es atacar, 1 especial, 2 defender.
 
     //targetKind; //Determina el tipo de targeteo para la habilidad. 0 un enemigo, 1 un aliado, 2 todo enemigo, 2 todo aliado
     //Probablemente este parámetro no sea necesario una vez tengamos los heredados pero lo dejo porque a lo mejor nos puede resultar útil en terminos generales por ahora.
 
-    ableToAct; //Booleano que le da el control al jugador para que pueda meter input en su turno, en cuyo caso será 0
+    ableToAct;  //Booleano que le da el control al jugador para que pueda meter input en su turno, en cuyo caso será 0
 
-    constructor(namer, iden, attk, defs, hpMax, hp, combatManager) {
+    imgLink;    
+
+    constructor(namer, attk, defs, hpMax, hp, combatManager) {
         this.name = namer;
-        this.id = iden;
         
         this.atk = attk;
         this.def = defs;
@@ -48,14 +50,36 @@ export class Personaje {
         this.currentCombat = combatManager;
     }
 
+    constructor(idn, combatManager) {
+        this.name = idn.name;
+
+        this.atk = idn.atk;
+        this.def = idn.def;
+        this.maxHp = idn.maxHp;
+        this.currentHp = this.maxHp;
+
+        this.escudo = 0;
+        this.living = true;
+        this.stunned = false;
+        this.dot = 0;
+        this.status = 0;
+        this.accion = 0;
+
+        this.currentCombat = combatManager;
+    }
+
     startCombat(combatManager) {
         this.currentCombat = combatManager;
     }
     
     gainShield(shield) {
-        this.escudo += shield;
-        if(this.escudo > this.maxHp) {
+        if(this.escudo + shield > this.maxHp) {
+            this.currentCombat.addInfo("defend", this.maxHp - this.escudo, this, null);
             this.escudo = this.maxHp;
+        }
+        else {
+            this.currentCombat.addInfo("defend", shield, this, null);
+            this.escudo += shield;
         }
     }
     
@@ -63,15 +87,20 @@ export class Personaje {
         if(this.currentHp <= 0) {
             this.currentHp = 0;
             this.living = false;
+            this.currentCombat.addInfo("die", 0, this, null);
         }
     }
     
     endTurn() {
-        this.currentHp -= this.dot;
-        this.checkAlive();    
+        if(dot != 0) {
+            this.currentHp -= this.dot;
+            this.currentCombat.addInfo("dot", this.dot, this, null);
+            this.checkAlive();    
+        }
         this.status = 0;
         this.accion = 0;
-        combatManager.nextTurn();
+        combatManager.cancelTarget();
+        combatManager.endTurn();
     }
 
     heal(heal) {
@@ -82,13 +111,16 @@ export class Personaje {
     }
 
     sufferDamage(dmg) {
-        if(dmg * this.def < 1) {
+        let damage = Math.floor(dmg * this.def)
+        if(damage < 1) {
             this.currentHp--;
+            return 1;
         }
         else {
-            this.currentHp -= Math.floor(dmg * this.def);
+            this.currentHp -= damage;
+            return damage;
         }
-        this.checkAlive();
+        //this.checkAlive();
     }
     
     shiftAction(direction) {
@@ -102,7 +134,9 @@ export class Personaje {
 
     attack() {
         this.ableToAct = false;
-        this.currentCombat.enemyTeam[this.currentCombat.target].sufferDamage(this.atk);
+        let myTarget = this.currentCombat.enemyTeam[this.currentCombat.target]
+        this.currentCombat.addInfo("attack", myTarget.sufferDamage(this.atk), this, target);
+        target.checkAlive();
         this.endTurn();
     }
 
@@ -128,6 +162,7 @@ export class Personaje {
         }
         else {
             this.stunned = false;
+            combatManager.addInfo("stun", 0, this,  null);
             this.endTurn();
         }
     }
