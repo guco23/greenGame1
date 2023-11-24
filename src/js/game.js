@@ -15,6 +15,9 @@ var config = {
     },
     physics: { 
         default: 'arcade',         
+        arcade:{
+            debug: true
+        },
         checkCollision: {
             up: true,
             down: true,

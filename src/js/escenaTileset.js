@@ -25,26 +25,47 @@ export class EscenaTilesets extends Phaser.Scene {
             tileWidth: 16, 
             tileHeight: 16 
           });
+          this.interactKey = this.input.keyboard.addKey('E');
+          this.interact = 1;
           const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
           this.FloorLayer = this.map.createLayer('Suelo', tileset1);
           this.WallLayer = this.map.createLayer('Paredes', tileset1);
           this.WallLayer.setCollisionByExclusion([-1]);
-          this.HighWallLayer = this.map.createLayer('Paredes atravesables', tileset1);
-          
-          let Char = new character(this, 70, 100);
-          this.physics.world.enable(Char);
-          this.physics.add.collider(Char, this.WallLayer);
+          this.ChangeScene = this.map.createLayer('CambioEscena', tileset1);    
+          this.hitbox = this.map.createFromObjects('Cambio Escena Objetos', {id:1});
+          this.physics.add.existing(this.hitbox[0]);
+
+          this.Char = new character(this, 70, 100);
+          this.physics.world.enable(this.Char);
+          this.physics.add.collider(this.Char, this.WallLayer);
+          /*var self=this;
+          var onCollision = function(){                   
+            if(self.interact == 0) console.log("Hay colision");
+            else console.log("No :C");
+          }*/
+
+          this.physics.add.overlap(this.Char, this.hitbox[0], ()=>{
+            if(this.interact == 0) console.log("Hay colision");
+            else console.log("No :C");
+        })
                     
-          this.cameras.main.startFollow(Char);      
+          this.cameras.main.startFollow(this.Char);      
           this.cameras.main.zoom = 2.2;
 
     }
 
-    update() {                
+
+    update() {   
+        if(this.interactKey.isDown){
+            this.interact = 0;
+            
+        }else{
+            this.interact = 1;            
+        }
         /*this.image.scale += this.upscaleval;
         if (this.image.scale > 0.6)
             this.upscaleval = -0.001;
         else if (this.image.scale < 0.2)
             this.upscaleval = 0.001;*/
-    }
+    }    
 };
