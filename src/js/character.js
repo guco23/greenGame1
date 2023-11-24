@@ -19,27 +19,27 @@ export default class character extends Phaser.GameObjects.Sprite {
         
 		scene.physics.add.existing(this);
 		this.scene.anims.create({
-			key: 'idleLeft	',
+			key: 'idleLeft',
 			frames: scene.anims.generateFrameNumbers('character', {start:6, end:6}),
-			frameRate: 1,
+			frameRate: 5,
 			repeat: 0
 		});
 		this.scene.anims.create({
-			key: 'idleRight	',
+			key: 'idleRight',
 			frames: scene.anims.generateFrameNumbers('character', {start:9, end:9}),
-			frameRate: 1,
+			frameRate: 5,
 			repeat: 0
 		});
 		this.scene.anims.create({
-			key: 'idleUp	',
+			key: 'idleUp',
 			frames: scene.anims.generateFrameNumbers('character', {start:3, end:3}),
-			frameRate: 1,
+			frameRate: 5,
 			repeat: 0
 		});
 		this.scene.anims.create({
-			key: 'idleDown	',
+			key: 'idleDown',
 			frames: scene.anims.generateFrameNumbers('character', {start:0, end:0}),
-			frameRate: 1,
+			frameRate: 5,
 			repeat: 0
 		});
 		this.scene.anims.create({
@@ -66,7 +66,7 @@ export default class character extends Phaser.GameObjects.Sprite {
 			frameRate: 5,
 			repeat: -1
 		});
-		this.play('moveDown');
+		this.play('idleDown');
 		this.anims.stop();
 
 
@@ -129,16 +129,16 @@ export default class character extends Phaser.GameObjects.Sprite {
         if(Phaser.Input.Keyboard.JustUp(this.aKey) || Phaser.Input.Keyboard.JustUp(this.dKey)){			
 			this.body.setVelocityX(0);
 			if(this.MovingY == 0){
-				if(this.MovingX ==1) this.anims.stop();
-				else if(this.MovingX ==-1) this.anims.stop();
+				if(this.MovingX ==1) this.play('idleRight');
+				else if(this.MovingX ==-1) this.play('idleLeft');
 			}
 			this.MovingX = 0;			
 		}
         if(Phaser.Input.Keyboard.JustUp(this.wKey) || Phaser.Input.Keyboard.JustUp(this.sKey)){			
 			this.body.setVelocityY(0);
 			if(this.MovingX == 0){
-				if(this.MovingY ==1) this.anims.stop();
-				else if(this.MovingY ==-1) this.anims.stop();
+				if(this.MovingY ==1) this.play('idleDown');
+				else if(this.MovingY ==-1) this.play('idleUp');
 			}
 			this.MovingY = 0;
 		}
