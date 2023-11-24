@@ -14,10 +14,7 @@ var config = {
         //zoom: 1
     },
     physics: { 
-        default: 'arcade', 
-        arcade: {
-            debug: true
-        },
+        default: 'arcade',         
         checkCollision: {
             up: true,
             down: true,

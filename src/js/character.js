@@ -7,7 +7,8 @@ export default class character extends Phaser.GameObjects.Sprite {
 	constructor(scene, x, y) {
 		super(scene, x, y, 'character');
 		this.speed = 140; // Nuestra velocidad de movimiento será 140		
-
+		this.MovingX=0;
+		this.MovingY=0;
 		this.scene.add.existing(this); //Añadimos el caballero a la escena	        
 
 		// Seteamos las teclas para mover al personaje
@@ -17,11 +18,67 @@ export default class character extends Phaser.GameObjects.Sprite {
 		this.dKey = this.scene.input.keyboard.addKey('D'); //derecha		
         
 		scene.physics.add.existing(this);
-		// Decimos que el caballero colisiona con los límites del mundo
-		this.body.setCollideWorldBounds();        
+		this.scene.anims.create({
+			key: 'idleLeft	',
+			frames: scene.anims.generateFrameNumbers('character', {start:6, end:6}),
+			frameRate: 1,
+			repeat: 0
+		});
+		this.scene.anims.create({
+			key: 'idleRight	',
+			frames: scene.anims.generateFrameNumbers('character', {start:9, end:9}),
+			frameRate: 1,
+			repeat: 0
+		});
+		this.scene.anims.create({
+			key: 'idleUp	',
+			frames: scene.anims.generateFrameNumbers('character', {start:3, end:3}),
+			frameRate: 1,
+			repeat: 0
+		});
+		this.scene.anims.create({
+			key: 'idleDown	',
+			frames: scene.anims.generateFrameNumbers('character', {start:0, end:0}),
+			frameRate: 1,
+			repeat: 0
+		});
+		this.scene.anims.create({
+			key: 'moveLeft',
+			frames: scene.anims.generateFrameNumbers('character', {start:7, end:8}),
+			frameRate: 5,
+			repeat: -1
+		});		
+		this.scene.anims.create({
+			key: 'moveRight',
+			frames: scene.anims.generateFrameNumbers('character', {start:10, end:11}),
+			frameRate: 5,
+			repeat: -1
+		});
+		this.scene.anims.create({
+			key: 'moveUp',
+			frames: scene.anims.generateFrameNumbers('character', {start:4, end:5}),
+			frameRate: 5,
+			repeat: -1
+		});
+		this.scene.anims.create({
+			key: 'moveDown',
+			frames: scene.anims.generateFrameNumbers('character', {start:1, end:2}),
+			frameRate: 5,
+			repeat: -1
+		});
+		this.play('moveDown');
+		this.anims.stop();
+
+
+
+
+
+
+
 		// Ajustamos el "collider" de nuestro caballero
 		this.bodyOffset = this.body.width/4;
 		this.bodyWidth = this.body.width/2;
+		this.bodyHeight = this.body.bodyHeight/2;
 		
 		this.body.setOffset(this.bodyOffset, 0);
 		this.body.width = this.bodyWidth;
@@ -42,6 +99,8 @@ export default class character extends Phaser.GameObjects.Sprite {
 			//this.setFlip(true, false)
 			//this.x -= this.speed*dt / 1000;
 			this.body.setVelocityX(-this.speed);
+			this.MovingX = -1;
+			if(this.MovingY==0 && this.anims.currentAnim.key !== 'moveLeft') this.play('moveLeft');
 		}
 
 		// Mientras pulsemos la tecla 'D' movelos el personaje en la X
@@ -49,23 +108,39 @@ export default class character extends Phaser.GameObjects.Sprite {
 			//this.setFlip(false, false)			
 			//this.x += this.speed*dt / 1000;
 			this.body.setVelocityX(this.speed);
+			this.MovingX = 1;
+			if(this.MovingY==0 && this.anims.currentAnim.key !== 'moveRight') this.play('moveRight');
 		}
         if(this.wKey.isDown){
 			//this.setFlip(false, false)			
 			//this.y += this.speed*dt / 1000;
 			this.body.setVelocityY(-this.speed);
+			this.MovingY = -1;
+			if(this.anims.currentAnim.key !== 'moveUp')this.play('moveUp');
 		}
         if(this.sKey.isDown){
 			//this.setFlip(false, false)			
 			//this.y += this.speed*dt / 1000;
 			this.body.setVelocityY(this.speed);
+			this.MovingY=1;
+			if(this.anims.currentAnim.key !== 'moveDown') this.play('moveDown');
 		}		
 
         if(Phaser.Input.Keyboard.JustUp(this.aKey) || Phaser.Input.Keyboard.JustUp(this.dKey)){			
 			this.body.setVelocityX(0);
+			if(this.MovingY == 0){
+				if(this.MovingX ==1) this.anims.stop();
+				else if(this.MovingX ==-1) this.anims.stop();
+			}
+			this.MovingX = 0;			
 		}
         if(Phaser.Input.Keyboard.JustUp(this.wKey) || Phaser.Input.Keyboard.JustUp(this.sKey)){			
 			this.body.setVelocityY(0);
+			if(this.MovingX == 0){
+				if(this.MovingY ==1) this.anims.stop();
+				else if(this.MovingY ==-1) this.anims.stop();
+			}
+			this.MovingY = 0;
 		}
 	}
 }

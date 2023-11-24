@@ -9,7 +9,7 @@ export class EscenaTilesets extends Phaser.Scene {
         this.upscaleval = 0.001;*/
         this.load.tilemapTiledJSON('Almacen1', 'src/json/Almacen1.json');
         this.load.image('tileset_mercadona', 'assets/images/tilesets/tileset_mercadona.png');
-        this.load.image('character', 'assets/images/spritespjs/libra_boss.png')
+        this.load.spritesheet('character', 'assets/images/spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
     }
 
     //crear aqui los objetos de la escena
