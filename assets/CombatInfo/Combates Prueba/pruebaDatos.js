@@ -1,0 +1,1 @@
+export var prueba = {"participants":2, "e1": "Dragon", "e2": "RobotCat", "e3":null, "e4":null, "itemId":0, "dropChance":0}

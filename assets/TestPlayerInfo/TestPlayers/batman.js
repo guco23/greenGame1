@@ -1,0 +1,1 @@
+ export var bat = {"class":null, "name":"", "maxHp":0, "atk":0, "def":0, "type":"", "imgLink":"", "itemId":""}

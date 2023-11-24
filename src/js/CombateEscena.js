@@ -6,6 +6,10 @@ import { TextoVida } from "./HUDElems/TextoVida.js";
 import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
 import { SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
 import { SelectorEnemigos } from "./HUDElems/SelectorEnemigos.js";
+import { CombatManager } from "./Combate JS/CombatManager.js";
+import { enemies } from "../../assets/EnemyInfo/Enemigos Prueba/Dragon.js";
+import { prueba } from "../../assets/CombatInfo/Combates Prueba/pruebaDatos.js";
+import { equipoBase } from "../../assets/TestPlayerInfo/TestTeam/baseTeam.js";
 
 export class CombateEscena extends Phaser.Scene {
     //CombatManager combatManager;
@@ -31,41 +35,33 @@ export class CombateEscena extends Phaser.Scene {
         //Carga el fondo, dependerá de la zona del juego en la que nos encontremos
         this.load.image('background', RAIZ_IMAGENES + "combatBackground/combatBackgroundPlaceholder.png");
 
-        //Controles en combate
-        this.cursors = this.input.keyboard.createCursorKeys();
-        this.input.keyboard.on('keydown', function (event) {
-            //Control
-            if (event.code === "ArrowUp") {
-                this.menuActual.anterior();
-            } else if (event.code === "ArrowDown") {
 
-                this.menuActual.siguiente();
-            }
-            else if (event.code === "Space") {
-                //SELECCIONAR
-                //Llamada al combatmanager para hacer sus cositas menuActual.selection contiene el indice del elemento en el menu
-                //para SelectorAcciones 0 = Atacar, 1 = Habilidad, 2 = Defender
-                //para SelectorEnemigos es el indice propio del array de enemigos
-            }
-        }, this);
     }
 
     //crear aqui los objetos de la escena
     create() {
+        this.combatManager = new CombatManager(prueba, equipoBase, this);
         this.graphics = this.add.graphics();
         //Arrays declarados provisionales para guardar los objetos de la escena
         //En la version final aliados y enemigos serán de combatManager
         this.aliados = [];
-        this.aliados.push(new Personaje('Diego', 1, 30, 20, 120, 110));
-        this.aliados.push(new Personaje('Pablo', 0, 30, 20, 140, 100));
-        this.aliados.push(new Personaje('Jose', 2, 30, 20, 125, 1));
-        this.aliados.push(new Personaje('Batman', 3, 30, 20, 120, 110));
+        this.aliados.push(new Personaje('Diego', 1, 30, 120, 20, this.combatManager));
+        this.aliados.push(new Personaje('Pablo', 0, 30, 140, 20, this.combatManager));
+        this.aliados.push(new Personaje('Jose', 2, 30, 125, 30, this.combatManager));
+        this.aliados.push(new Personaje('Batman', 3, 30, 120, 20, this.combatManager));
         this.enemigos = [];
+        /*
         this.enemigos.push(new Enemigo(0, 30, 20, 120, 110));
         this.enemigos.push(new Enemigo(1, 30, 20, 120, 110));
         this.enemigos.push(new Enemigo(2, 30, 20, 120, 110));
         this.enemigos.push(new Enemigo(3, 30, 20, 120, 110));
         this.enemigos.push(new Enemigo(4, 30, 20, 120, 110));
+        */
+       this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
+       this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
+       this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
+       //this.enemigos.push(new Enemigo(RobotCat, this.combatManager));
+    
 
         let gameWidth = this.game.config.width;
         let gameHeight = this.game.config.height;
@@ -113,13 +109,48 @@ export class CombateEscena extends Phaser.Scene {
 
         this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
         this.selectorAcciones = new SelectorAcciones(this, 300, 440, this.textoDescriptivo);
-        this.selectorEnemigos = new SelectorEnemigos(this, this.imgsEnem).ocultar();
+        this.selectorEnemigos = new SelectorEnemigos(this, this.imgsEnem);
         this.menuActual = this.selectorAcciones;
+        
+
+        //Controles en combate
+        this.cursors = this.input.keyboard.createCursorKeys();
+        this.input.keyboard.on('keydown', function (event) {
+            //Control
+            if (event.code === "ArrowUp") {
+                this.menuActual.anterior();
+            } else if (event.code === "ArrowDown") {
+                this.menuActual.siguiente();
+            }
+            else if (event.code === "Space") {
+                if(this.menuActual === this.selectorAcciones) {
+                    if(this.menuActual.selection === 0) {
+                        
+                    }
+                    else if (this.menuActual.selection === 1) {
+                        //Llamas al combat manager para pedir la info de la habilidad especial y activas el menu correspondiente
+                    }
+                    else {
+                        this.combatManager.do
+                    }
+                }
+                else {
+                    if(selectorAcciones.selection === 0) {
+                        //Llamar al combat manager con ataque
+                    }
+                }
+                //SELECCIONAR
+                //Llamada al combatmanager para hacer sus cositas menuActual.selection contiene el indice del elemento en el menu
+                //para SelectorAcciones 0 = Atacar, 1 = Habilidad, 2 = Defender
+                //para SelectorEnemigos es el indice propio del array de enemigos
+            }
+        }, this);
     }
 
     seleccionarEnemigo() {
         //Hace lo que sea necesario en la escena para que el jugador pueda seleccionar un enemigo
         this.menuActual = this.selectorEnemigos;
+        this.selectorEnemigos.mostrar();
         this.selectorAcciones.ocultar();
     }
 };

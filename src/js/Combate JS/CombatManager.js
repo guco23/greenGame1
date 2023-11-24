@@ -1,5 +1,6 @@
 import Enemigo from "./Enemigo";
 import { Personaje } from "./Personaje";
+import { dragon } from "../../assets/TestPlayerInfo/TestTeam/baseTeam.js";
 
 export class CombatManager {
 
@@ -19,11 +20,11 @@ export class CombatManager {
     whoseTurn;  //Booleano, true para jugadores y false para enemigos
 
     //Parámetros para trackear el apuntado
-
-    target;     //Objetivo de parte del jugador. -1 para cuando no esté targeteando (tema de renderizado)
+    /*
+    target;     //Objetivo de parte del jugador. [-1 para cuando no esté targeteando (tema de renderizado)]
     whereAim;   //Booleano para el targeteo, true para equipo aliado (curas y bufos), false para los enemigos
     targetAll;  //Booleano que indica si targetea a todos o no. 
-
+    */
     //Otros parámetros
 
     spPoints;   //Puntos de habilidad especial
@@ -33,47 +34,79 @@ export class CombatManager {
     waitingConfirmation;    //Espera a que el jugador pulse A (mensajes en pantalla)
     actInfo;             //Info del resultado de cada acción
 
-    constructor(combatInfo, partyInfo) {
+    combatScene;
+
+    constructor(combatInfo, partyInfo, scene) {
         //Mamá sacame de javascript xd
         this.enemySize = combatInfo.participants;
         this.livingEnemies = this.enemySize;
         this.enemyTeam = new Array(this.enemySize);
-        for(i = 0; i < this.enemySize; i++){
+        for (i = 0; i < this.enemySize; i++) {
             let e = "e" + i;
-            enemy = combatInfo.e;
-            this.enemyTeam[i] = new enemy.class(enemy, this);
+            enemy = combatInfo[e];
+            this.enemyTeam[i] = new Enemigo(enemy, this);
         }
 
         this.teamSize = partyInfo.number;
         this.livingParty = this.teamSize;
         this.playerTeam = new Array(this.teamSize);
-        for(i = 0; i < this.teamSize; i++) {
+        for (i = 0; i < this.teamSize; i++) {
             let p = "p" + i;
-            player = partyInfo.p;
-            this.playerTeam[i] = new p.class(p, this);
+            player = partyInfo[p];
+            this.playerTeam[i] = new Personaje(p, this);
         }
 
         this.endCombat = false;
         this.whereAim = false;
         this.targetAll = false;
 
-        this.spPoints = Math.floor(this.teamSize/2);
+        this.spPoints = Math.floor(this.teamSize / 2);
         this.dropId = combatInfo.itemId;
         this.dropChance = combatInfo.dropChance;
+
+        this.combatScene = scene;
+    }
+
+    /*constructor(enemyTeam, enemySize, playerTeam, teamSize, scene) {
+        this.enemyTeam = enemyTeam;
+        this.enemySize = enemySize;
+        this.playerTeam = playerTeam;
+        this.teamSize = teamSize;
+
+        this.endCombat = false;
+
+        this.spPoints = Math.floor(this.teamSize / 2);
+        //this.dropId = combatInfo.itemId;
+        //this.dropChance = combatInfo.dropChance;
+
+        this.combatScene = scene;    
+    }*/
+
+    constructor(scene) {
+        this.combatScene = scene; 
+    }
+
+    setTeams(enemyTeam, enemySize, playerTeam, teamSize){
+        this.enemyTeam = enemyTeam;
+        this.enemySize = enemySize;
+        this.playerTeam = playerTeam;
+        this.teamSize = teamSize;
+
+        this.spPoints = Math.floor(this.teamSize / 2);
     }
 
     changeSp(shift) {
         this.spPoints += shift;
-        if(this.spPoints < 0) this.spPoints = 0;
+        if (this.spPoints < 0) this.spPoints = 0;
         else if (this.spPoints > this.teamSize) this.spPoints = this.teamSize;
     }
 
-    tryTarget(num, dir) {
-        if(this.whereAim) {
+    /*tryTarget(num, dir) {
+        if (this.whereAim) {
             if (num >= this.teamSize && num < 0) {
                 return false;
             }
-            else if(this.playerTeam[num].living === true) {
+            else if (this.playerTeam[num].living === true) {
                 this.target = num;
                 return true;
             }
@@ -81,11 +114,11 @@ export class CombatManager {
                 return this.tryTarget(num + dir, dir);
             }
         }
-        else  {
-            if(num >= this.enemySize && num < 0) {
+        else {
+            if (num >= this.enemySize && num < 0) {
                 return false;
             }
-            else if(this.enemyTeam[num].living === true) {
+            else if (this.enemyTeam[num].living === true) {
                 this.target = num;
                 return true;
             }
@@ -107,22 +140,22 @@ export class CombatManager {
 
     cancelTarget() {
         target = -1;
-    }
+    }*/
 
     addInfo(action, value, from, to) {
-        if(action === "attack") {
+        if (action === "attack") {
             this.actInfo += from.name + " attacked " + to.name + " for " + value + " damage.\n";
         }
-        if(action === "defend") {
+        if (action === "defend") {
             this.actInfo += from.name + " defended and added " + value + " shield.\n";
         }
-        if(action === "die") {
+        if (action === "die") {
             this.actInfo += from.name + " died!\n"
         }
-        if(action === "dot") {
+        if (action === "dot") {
             this.actInfo += from.name + " suffered " + value + " damage due to negative effects."
         }
-        if(action === "stun") {
+        if (action === "stun") {
             this.actInfo += from.name + " was stunned and couldn't act"
         }
     }
@@ -132,13 +165,13 @@ export class CombatManager {
     }
 
     nextTurn() {
-        if(this.endCombat === true) {
+        if (this.endCombat === true) {
             //Método para acabar el combate, dar recompensas, volver a la pantalla principal, etc.
         }
         else {
-            if(this.whoseTurn === true) {
-                if(this.current < this.teamSize) {
-                    if(this.playerTeam[this.current].living === 0) {
+            if (this.whoseTurn === true) {
+                if (this.current < this.teamSize) {
+                    if (this.playerTeam[this.current].living === 0) {
                         this.livingParty++;
                         this.playerTeam[this.current].takeTurn();
                     }
@@ -151,7 +184,7 @@ export class CombatManager {
                     this.current = 0;
                     this.whoseTurn = false;
                     this.livingEnemies = 0;
-                    if(this.livingParty === 0) {
+                    if (this.livingParty === 0) {
                         this.endCombat = true;
                     }
                     this.nextTurn();
@@ -159,7 +192,7 @@ export class CombatManager {
             }
             else {
                 if (this.current < this.enemySize) {
-                    if(this.enemyTeam[this.current].living) {
+                    if (this.enemyTeam[this.current].living) {
                         this.livingEnemies++;
                         this.enemyTeam[this.current].takeTurn(this);
                     }
@@ -172,7 +205,7 @@ export class CombatManager {
                     this.current = 0;
                     this.whoseTurn = true;
                     this.livingParty = 0;
-                    if(this.livingEnemies === 0) {
+                    if (this.livingEnemies === 0) {
                         this.endCombat = true;
                     }
                     this.nextTurn();
@@ -181,20 +214,37 @@ export class CombatManager {
         }
     }
 
-    endTurn(){
-        //Do stuff with scene 
+    endTurn() {
+        this.combatScene.ActualizarEscena();
         this.current++;
         this.waitingConfirmation = true;
     }
-
-    eventHandler(event) {
-        if(this.waitingConfirmation && event === "D") {
-            this.actInfo = "";
-            this.waitingConfirmation = false;
-            this.nextTurn();
+    /*
+        eventHandler(event) {
+            if(this.waitingConfirmation && event === "D") {
+                this.actInfo = "";
+                this.waitingConfirmation = false;
+                this.nextTurn();
+            }
+            else if (this.whoseTurn) {
+    
+            }
         }
-        else if (this.whoseTurn) {
+    */
 
+    specialRequestInfo() {
+        return this.playerTeam[this.current].targetKind;
+    }
+
+    doAction(action, target) {
+        if(action === 2) { //Defensa
+            this.playerTeam[current].gainShield;
+        }
+        else if (action === 0) { //Ataque
+            this.playerTeam[this.current].attack(target);
+        }
+        else if (action === 1) { //Especial
+            this.playerTeam[this.current].special(target);
         }
     }
 }

@@ -75,7 +75,7 @@ export class SelectorEnemigos extends Phaser.GameObjects.Container {
      * Muestra la seleccion de los enemigos
      */
     mostrar() {
-        this.opciones[this.selection].select();
+        this.opciones[this.selection].selected();
     }
 
 }

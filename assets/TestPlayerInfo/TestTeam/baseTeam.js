@@ -1,0 +1,1 @@
+export var equipoBase = {"number": 0, "p1": "", "p2":"", "p3": "", "p4": ""}

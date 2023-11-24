@@ -19,7 +19,7 @@ export class Enemigo {
 
     imgLink; //String con un link a la imagen
     
-    constructor(iden, hpMax, atk, def, type, iLink, combatManager) {
+    /*constructor(iden, hpMax, atk, def, type, iLink, combatManager) {
         this.id = iden;
         this.maxHp = hpMax;
         this.currentHp = this.maxHp;
@@ -32,8 +32,8 @@ export class Enemigo {
         this.stunned = false;
 
         this.currentCombat = combatManager;
-    }
-/*
+    }*/
+
     constructor(idn, combatManager) {
         this.id = idn.name;
         this.maxHp = idn.maxHp;
@@ -48,7 +48,7 @@ export class Enemigo {
 
         this.currentCombat = combatManager;
     }
-*/
+
     /*startCombat(combatManager) {
         this.currentCombat = combatManager;
     }*/

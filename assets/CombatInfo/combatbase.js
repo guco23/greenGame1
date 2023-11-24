@@ -1,0 +1,1 @@
+export var combateBase = {"participants":"0", "e1": null, "e2": null, "e3":null, "e4":null, "itemId":0, "dropChance":0}
