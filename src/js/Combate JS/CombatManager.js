@@ -1,6 +1,5 @@
-import Enemigo from "./Enemigo";
-import { Personaje } from "./Personaje";
-import { dragon } from "../../assets/TestPlayerInfo/TestTeam/baseTeam.js";
+import { Personaje } from "./Personajes/Personaje.js";
+import { Enemigo } from "./Enemigos/Enemigo.js";
 
 export class CombatManager {
 
@@ -35,7 +34,7 @@ export class CombatManager {
     actInfo;             //Info del resultado de cada acción
 
     combatScene;
-
+/*
     constructor(combatInfo, partyInfo, scene) {
         //Mamá sacame de javascript xd
         this.enemySize = combatInfo.participants;
@@ -66,6 +65,7 @@ export class CombatManager {
 
         this.combatScene = scene;
     }
+*/
 
     /*constructor(enemyTeam, enemySize, playerTeam, teamSize, scene) {
         this.enemyTeam = enemyTeam;

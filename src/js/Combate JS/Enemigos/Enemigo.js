@@ -37,7 +37,7 @@ export class Enemigo {
     constructor(idn, combatManager) {
         this.id = idn.name;
         this.maxHp = idn.maxHp;
-        this.currentHp = hpMax;
+        this.currentHp = idn.hpMax;
         this.atk = idn.atk;
         this.def = (100 - idn.def) / 100;
         this.prefType = idn.type;

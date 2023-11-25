@@ -18,16 +18,16 @@ class SelectorEnem extends Phaser.GameObjects.Container {
 
 }
 
-export class SelectorEnemigos extends Phaser.GameObjects.Container {
+export class SelectorPersonajes extends Phaser.GameObjects.Container {
     //Necesita el array de enemigos para saber si están vivos y conocer su ubicación en la escena
-    constructor(scene, enemigos) {
+    constructor(scene, personajes) {
         super(scene);
         this.selection = 0;
         //Crea las flechas
         this.opciones = [];
-        for(let i = 0; i < enemigos.length; i++) {
+        for(let i = 0; i < personajes.length; i++) {
             //El metodo dependera de como sean los enemigos. Si finalmente heredan de sprite de phaser esto funcionará.
-            this.opciones.push(new SelectorEnem(scene, enemigos[i].x - 100, enemigos[i].y));
+            this.opciones.push(new SelectorEnem(scene, personajes[i].x - 100, personajes[i].y));
         }
         this.select();
     }
