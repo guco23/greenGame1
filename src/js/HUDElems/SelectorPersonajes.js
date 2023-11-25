@@ -7,7 +7,7 @@ class SelectorEnem extends Phaser.GameObjects.Container {
     }
 
     //Cambia la visibilidad de el objeto a que no se vea
-    selected() {
+    select() {
         this.rect.visible = true;
     }
 
@@ -29,14 +29,8 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
             //El metodo dependera de como sean los enemigos. Si finalmente heredan de sprite de phaser esto funcionará.
             this.opciones.push(new SelectorEnem(scene, personajes[i].x - 100, personajes[i].y));
         }
-        this.select();
-    }
-
-    /**
-     * Marca el enemigo como seleccionado. Metodo solo para usar desde la clase
-     */
-    select() {
-        this.opciones[this.selection].selected();
+        this.opciones[this.selection].select();
+        this.singleSelectionMode = true; //Indica si la selección será de un unico objetivo
     }
 
     /**
@@ -45,10 +39,10 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
     siguiente() {
         //Condición para evitar que se salga del array
         
-        if (this.selection < this.opciones.length - 1) {
+        if (this.singleSelectionMode && this.selection < this.opciones.length - 1) {
             this.opciones[this.selection].unselect();
             this.selection = this.selection + 1;
-            this.select();
+            this.opciones[this.selection].select();
         }
     }
 
@@ -57,25 +51,62 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
      */
     anterior() {
         //Condición para evitar que se salga del array
-        if (this.selection > 0) {
+        if (this.singleSelectionMode && this.selection > 0) {
             this.opciones[this.selection].unselect();
             this.selection = this.selection - 1;
-            this.select();
+            this.opciones[this.selection].select();
         }
     }
 
     /**
-     * Oculta la seleccion de los enemigos
+     * Oculta la todas las selecciones
      */
     ocultar() {
-        this.opciones[this.selection].unselect();
+        this.opciones.forEach(element => {
+            element.unselect();
+        });
     }
 
     /**
-     * Muestra la seleccion de los enemigos
+     * Muestra la seleccion
      */
     mostrar() {
-        this.opciones[this.selection].selected();
+        this.opciones[this.selection].select();
     }
 
+    /**
+     * Muestra la seleccion de todos los personajes (se usa en las habilidades AOE)
+     */
+    fullTeamSelection() {
+        for(let i = 0; i < opciones[this.selection.length]; i++) {
+            this.opciones[i].select();
+        }
+        this.singleSelectionMode = false;
+    }
+
+    /**
+     * Actualiza el selector con todos los cambios necesarios tras el final de cualquier accion (si ha muerto un personaje, etc)
+     */
+    update() {
+        //Si un personaje esta muerto, no debe poder ser seleccionado
+        this.singleSelectionMode = true;
+    }
+
+    /**
+     * Muestra un unico personaje seleccionable
+     * 
+     * @param {El indice el personaje seleccionable} pred 
+     */
+    seleccionPredefinida(pred) {
+        this.singleSelectionMode = false;
+        this.ocultar();
+        this.opciones[pred].select();        
+    }
+
+    /**Recupera el estado base de el menu y lo aculta */
+    restore() {
+        this.singleSelectionMode = true;
+        this.ocultar();
+        //TODO
+    }
 }

@@ -23,7 +23,7 @@ export class CombateEscena extends Phaser.Scene {
         //Es importante que los sprites finales tengan la misma resolución
         //Esto finalmente deberán ser datos traídos del combat manager
         let imgenemigos = ['furro.jpg', 'furro.jpg', 'profile.png', 'furro.jpg', 'furro.jpg']; //En la version final sacará esto de combatManager
-        
+
         //Añade las imagenes a la escena como enemigo/aliado y el numero que ocupan en su array{
         this.load.image('Diego', RAIZ_IMAGENES + "javier.jpg");
         this.load.image('Pablo', RAIZ_IMAGENES + "javier.jpg");
@@ -42,7 +42,7 @@ export class CombateEscena extends Phaser.Scene {
 
     //crear aqui los objetos de la escena
     create() {
-        this.combatManager = new CombatManager(prueba, equipoBase, this);
+       //this.combatManager = new CombatManager(prueba, equipoBase, this);
         this.graphics = this.add.graphics();
         //Arrays declarados provisionales para guardar los objetos de la escena
         //En la version final aliados y enemigos serán de combatManager
@@ -59,10 +59,13 @@ export class CombateEscena extends Phaser.Scene {
         this.enemigos.push(new Enemigo(3, 30, 20, 120, 110));
         this.enemigos.push(new Enemigo(4, 30, 20, 120, 110));
         */
-       this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
-       this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
-       this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
-       //this.enemigos.push(new Enemigo(RobotCat, this.combatManager));
+        this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
+        this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
+        this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
+        //this.enemigos.push(new Enemigo(RobotCat, this.combatManager));
+
+        this.combatManager = new CombatManager(this.enemigos, this.enemigos.size, this.aliados, this.aliados.size, this);
+        this.combatManager.nextTurn();
 
         let gameWidth = this.game.config.width;
         let gameHeight = this.game.config.height;
@@ -113,8 +116,8 @@ export class CombateEscena extends Phaser.Scene {
         this.selectorAcciones = new SelectorAcciones(this, 300, 440, this.textoDescriptivo);
         this.selectorEnemigos = new SelectorPersonajes(this, this.imgsEnem);
         this.selectorAliados = new SelectorPersonajes(this, this.imgsAliad);
-        this.menuActual = this.selectorAliados;
-        
+        this.menuActual = this.selectorAcciones;
+
 
         //Controles en combate
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -126,21 +129,31 @@ export class CombateEscena extends Phaser.Scene {
                 this.menuActual.siguiente();
             }
             else if (event.code === "Space") {
-                if(this.menuActual === this.selectorAcciones) {
-                    if(this.menuActual.selection === 0) {
-                        
+                if (this.menuActual === this.selectorAcciones) {
+                    if (this.menuActual.selection === 0) {
+                        this.seleccionarEnemigo();
                     }
                     else if (this.menuActual.selection === 1) {
                         //Llamas al combat manager para pedir la info de la habilidad especial y activas el menu correspondiente
+                        this.combatManager.specialRequestInfo();
                     }
                     else {
-                        this.combatManager.do
+                        this.selectorAliados.seleccionPredefinida(combatManager.whoseTurn);
                     }
                 }
                 else {
-                    if(selectorAcciones.selection === 0) {
+                    if (this.selectorAcciones.selection === 0) {
                         //Llamar al combat manager con ataque
+                        this.combatManager.doAction(0, this.menuActual.selection);
                     }
+                    if (this.selectorAcciones.selection === 1) {
+                        //TODO
+                    }
+                    if (this.selectorAcciones.selection === 2) {
+                        this.combatManager.doAction(2, -1); //No importa el target, la defensa es solo para el current personaje
+                    }
+                    this.selectorAcciones.mostrar();
+                    this.menuActual = this.selectorAcciones;
                 }
                 //SELECCIONAR
                 //Llamada al combatmanager para hacer sus cositas menuActual.selection contiene el indice del elemento en el menu

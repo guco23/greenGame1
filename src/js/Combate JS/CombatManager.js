@@ -67,7 +67,7 @@ export class CombatManager {
     }
 */
 
-    /*constructor(enemyTeam, enemySize, playerTeam, teamSize, scene) {
+    constructor(enemyTeam, enemySize, playerTeam, teamSize, scene) {
         this.enemyTeam = enemyTeam;
         this.enemySize = enemySize;
         this.playerTeam = playerTeam;
@@ -80,12 +80,14 @@ export class CombatManager {
         //this.dropChance = combatInfo.dropChance;
 
         this.combatScene = scene;    
-    }*/
+    }
 
+    /*
     constructor(scene) {
         this.combatScene = scene; 
     }
-
+    */
+    
     setTeams(enemyTeam, enemySize, playerTeam, teamSize){
         this.enemyTeam = enemyTeam;
         this.enemySize = enemySize;
