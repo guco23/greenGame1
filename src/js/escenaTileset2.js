@@ -1,30 +1,29 @@
-//import {Scene} from 'phaser';
-import character from "./character.js"; 
+import character from "./character.js";
 import { RAIZ_IMAGENES } from "./constants.js";
 
-export class EscenaTilesets extends Phaser.Scene {
+export class EscenaTilesets2 extends Phaser.Scene {
     //cargar aqui los datos de la escena.
-    constructor(){
-        super('escenaTilesets')
-    }
+constructor(){
+    super('escenaTilesets2')
+}
     preload() {
         /*this.load.image('javier', RAIZ_IMAGENES + 'javier.jpg');
         this.upscaleval = 0.001;*/
-        this.load.tilemapTiledJSON('Almacen1', 'src/json/Almacen1.json');
+        this.load.tilemapTiledJSON('Almacen2', 'src/json/Almacen2.json');
         this.load.image('tileset_mercadona', 'assets/images/tilesets/tileset_mercadona.png');
         this.load.spritesheet('character', 'assets/images/spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
     }
 
     //crear aqui los objetos de la escena
-    create() {
-        /*let screenWidth = this.game.config.width;
+    create() {/*
+        let screenWidth = this.game.config.width;
         let screenHeight = this.game.config.height;
         //Imagen 1
         this.image = this.add.image(screenWidth, screenHeight, 'javier'); //omg so sexy
         this.image.setScale(0.3);
         this.image.setPosition(screenWidth / 2, screenHeight / 2);*/
         this.map = this.make.tilemap({ 
-            key: 'Almacen1', 
+            key: 'Almacen2', 
             tileWidth: 16, 
             tileHeight: 16 
           });
@@ -34,8 +33,12 @@ export class EscenaTilesets extends Phaser.Scene {
           this.FloorLayer = this.map.createLayer('Suelo', tileset1);
           this.WallLayer = this.map.createLayer('Paredes', tileset1);
           this.WallLayer.setCollisionByExclusion([-1]);          
-          this.hitbox = this.map.createFromObjects('Cambio Escena Objetos', {id:1});
-          this.physics.add.existing(this.hitbox[0]);
+          this.hitbox1 = this.map.createFromObjects('Transiciones', {id:4});          
+          this.physics.add.existing(this.hitbox1[0]);
+          this.hitbox2 = this.map.createFromObjects('Transiciones', {id:3});
+          this.physics.add.existing(this.hitbox2[0]);
+          this.hitbox3 = this.map.createFromObjects('Transiciones', {id:2});
+          this.physics.add.existing(this.hitbox3[0]);
 
           this.Char = new character(this, 70, 100);
           this.physics.world.enable(this.Char);
@@ -45,9 +48,16 @@ export class EscenaTilesets extends Phaser.Scene {
             if(self.interact == 0) console.log("Hay colision");
             else console.log("No :C");
           }*/
-          
-          this.physics.add.overlap(this.Char, this.hitbox[0], ()=>{
-            if(this.interact == 0) this.scene.start('escenaTilesets2');
+          this.physics.add.overlap(this.Char, this.hitbox1[0], ()=>{
+            if(this.interact == 0) this.scene.start('escenaTilesets');
+            else console.log("No :C");
+        })
+        this.physics.add.overlap(this.Char, this.hitbox2[0], ()=>{
+            if(this.interact == 0) this.scene.start('escenaTilesets3');
+            else console.log("No :C");
+        })
+        this.physics.add.overlap(this.Char, this.hitbox3[0], ()=>{
+            if(this.interact == 0) this.scene.start('escenaTilesets4');
             else console.log("No :C");
         })
                     
@@ -63,11 +73,6 @@ export class EscenaTilesets extends Phaser.Scene {
             
         }else{
             this.interact = 1;            
-        }
-        /*this.image.scale += this.upscaleval;
-        if (this.image.scale > 0.6)
-            this.upscaleval = -0.001;
-        else if (this.image.scale < 0.2)
-            this.upscaleval = 0.001;*/
+        }        
     }    
 };

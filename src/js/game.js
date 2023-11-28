@@ -1,6 +1,8 @@
-import { Escena1 } from "./escena1.js";
 import {EscenaTilesets} from "./escenaTileset.js"
 import { CombateEscena } from "./CombateEscena.js";
+import { EscenaTilesets2 } from "./escenaTileset2.js";
+import { EscenaTilesets3 } from "./escenaTileset3.js";
+import { EscenaTilesets4 } from "./escenaTileset4.js";
 
 //Configuración inicial del juego
 var config = {
@@ -25,7 +27,7 @@ var config = {
             right: true
         }
     },
-    scene: EscenaTilesets, //Probando la escena de combate
+    scene: [EscenaTilesets, EscenaTilesets2,EscenaTilesets4,EscenaTilesets3], //Probando la escena de combate
     parent: 'espacio-juego' //El elemento de html sobre el que se colocará el "canvas" de Phaser
 };
 
