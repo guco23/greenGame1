@@ -31,11 +31,11 @@ export class Personaje {
 
     imgLink;    
 
-    constructor(namer, attk, defs, hpMax, hp, combatManager) {
+    constructor(namer, attk, defs, hpMax, hp) {
         this.name = namer;
         
         this.atk = attk;
-        this.def = defs;
+        this.def = (100 - defs) / 100;
         this.maxHp = hpMax;
         this.currentHp = hp;
 
@@ -48,7 +48,7 @@ export class Personaje {
 
         this.targetKind = 0;
 
-        this.currentCombat = combatManager;
+        //this.currentCombat = combatManager;
     }
 
     /*constructor(idn, combatManager) {
@@ -75,15 +75,14 @@ export class Personaje {
     }
 
     endTurn() {
-        if(dot != 0) {
+        if(this.dot != 0) {
             this.currentHp -= this.dot;
             this.currentCombat.addInfo("dot", this.dot, this, null);
             this.checkAlive();    
         }
         this.status = 0;
         this.accion = 0;
-        combatManager.cancelTarget();
-        combatManager.endTurn();
+        this.currentCombat.endTurn();
     }
     
     gainShield(shield) {
@@ -138,9 +137,9 @@ export class Personaje {
 
     attack(target) {
         //this.ableToAct = false;
-        let myTarget = this.currentCombat.enemyTeam[target]
-        this.currentCombat.addInfo("attack", myTarget.sufferDamage(this.atk), this, target);
-        target.checkAlive();
+        let myTarget = this.currentCombat.enemyTeam[target];
+        this.currentCombat.addInfo("attack", myTarget.sufferDamage(this.atk), this, myTarget);
+        myTarget.checkAlive();
         this.endTurn();
     }
 
@@ -165,10 +164,7 @@ export class Personaje {
     }
 
     takeTurn() {
-        if(this.stunned === false) {
-            //this.ableToAct = true;
-        }
-        else {
+        if(this.stunned === true) {
             this.stunned = false;
             combatManager.addInfo("stun", 0, this,  null);
             this.endTurn();

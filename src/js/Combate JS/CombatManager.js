@@ -2,7 +2,6 @@ import { Personaje } from "./Personajes/Personaje.js";
 import { Enemigo } from "./Enemigos/Enemigo.js";
 
 export class CombatManager {
-
     //Parámetros para trackear a los combatientes
 
     enemyTeam;      //Array que contiene a los objetos 'Enemigos'
@@ -67,19 +66,22 @@ export class CombatManager {
     }
 */
 
-    constructor(enemyTeam, enemySize, playerTeam, teamSize, scene) {
-        this.enemyTeam = enemyTeam;
-        this.enemySize = enemySize;
-        this.playerTeam = playerTeam;
-        this.teamSize = teamSize;
+    constructor(enmyTeam, enmySize, playrTeam, teamSze, scene) {
+        this.enemyTeam = enmyTeam;
+        this.enemySize = enmySize;
+        this.playerTeam = playrTeam;
+        this.teamSize = teamSze;
 
         this.endCombat = false;
+        this.current = 0;
+        this.whoseTurn = true;
 
         this.spPoints = Math.floor(this.teamSize / 2);
         //this.dropId = combatInfo.itemId;
         //this.dropChance = combatInfo.dropChance;
 
-        this.combatScene = scene;    
+        this.combatScene = scene;  
+        this.actInfo = "";
     }
 
     /*
@@ -155,10 +157,13 @@ export class CombatManager {
             this.actInfo += from.name + " died!\n"
         }
         if (action === "dot") {
-            this.actInfo += from.name + " suffered " + value + " damage due to negative effects."
+            this.actInfo += from.name + " suffered " + value + " damage due to negative effects.\n"
         }
         if (action === "stun") {
-            this.actInfo += from.name + " was stunned and couldn't act"
+            this.actInfo += from.name + " was stunned and couldn't act.\n"
+        }
+        if (action === "special") {
+            this.actInfo += value;
         }
     }
 
@@ -167,13 +172,16 @@ export class CombatManager {
     }
 
     nextTurn() {
+        console.log(this.current + " " + this.whoseTurn);
         if (this.endCombat === true) {
             //Método para acabar el combate, dar recompensas, volver a la pantalla principal, etc.
         }
         else {
             if (this.whoseTurn === true) {
                 if (this.current < this.teamSize) {
-                    if (this.playerTeam[this.current].living === 0) {
+                    if (this.playerTeam[this.current].living) {
+                        this.combatScene.selectorAcciones.mostrar();
+                        this.combatScene.menuActual = this.combatScene.selectorAcciones;
                         this.livingParty++;
                         this.playerTeam[this.current].takeTurn();
                     }
@@ -217,36 +225,24 @@ export class CombatManager {
     }
 
     endTurn() {
-        this.combatScene.ActualizarEscena();
         this.current++;
-        this.waitingConfirmation = true;
+        this.combatScene.ActualizarEscena(this.actInfo);
+        this.actInfo = "";
     }
-    /*
-        eventHandler(event) {
-            if(this.waitingConfirmation && event === "D") {
-                this.actInfo = "";
-                this.waitingConfirmation = false;
-                this.nextTurn();
-            }
-            else if (this.whoseTurn) {
-    
-            }
-        }
-    */
 
     specialRequestInfo() {
         return this.playerTeam[this.current].targetKind;
     }
 
     doAction(action, target) {
-        if(action === 2) { //Defensa
-            this.playerTeam[current].gainShield;
-        }
-        else if (action === 0) { //Ataque
+        if (action === 0) { //Ataque
             this.playerTeam[this.current].attack(target);
         }
         else if (action === 1) { //Especial
             this.playerTeam[this.current].special(target);
+        }
+        else if(action === 2) { //Defensa
+            this.playerTeam[this.current].gainShield;
         }
     }
 }

@@ -64,8 +64,15 @@ export class CombateEscena extends Phaser.Scene {
         this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
         //this.enemigos.push(new Enemigo(RobotCat, this.combatManager));
 
-        this.combatManager = new CombatManager(this.enemigos, this.enemigos.size, this.aliados, this.aliados.size, this);
-        this.combatManager.nextTurn();
+        this.combatManager = new CombatManager(this.enemigos, 3, this.aliados, 4, this);
+        console.log(this.aliados.size);
+        for(let i = 0; i < 4; i++ ) {
+            this.aliados[i].startCombat(this.combatManager);
+        }
+        for(let i = 0; i < 3; i++ ) {
+            this.enemigos[i].startCombat(this.combatManager);
+        }
+        
 
         let gameWidth = this.game.config.width;
         let gameHeight = this.game.config.height;
@@ -123,6 +130,7 @@ export class CombateEscena extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
         this.input.keyboard.on('keydown', function (event) {
             //Control
+        if (this.menuActual != textoDescriptivo) {
             if (event.code === "ArrowUp") {
                 this.menuActual.anterior();
             } else if (event.code === "ArrowDown") {
@@ -132,11 +140,10 @@ export class CombateEscena extends Phaser.Scene {
                 if (this.menuActual === this.selectorAcciones) {
                     if (this.menuActual.selection === 0) {
                         this.menuActual = this.selectorEnemigos;
-                        this.selectorEnemigos.seleccionNormal();
                     }
                     else if (this.menuActual.selection === 1) {
-                        //Llamas al combat manager para pedir la info de la habilidad especial y activas el menu correspondiente
-                        this.combatManager.specialRequestInfo();
+                            //Llamas al combat manager para pedir la info de la habilidad especial y activas el menu correspondiente
+                            this.combatManager.specialRequestInfo();
                     }
                     else {
                         this.menuActual = this.selectorAliados;
@@ -145,23 +152,38 @@ export class CombateEscena extends Phaser.Scene {
                 }
                 else {
                     if (this.selectorAcciones.selection === 0) {
-                        //Llamar al combat manager con ataque
+                         //Llamar al combat manager con ataque
                         this.combatManager.doAction(0, this.menuActual.selection);
                     }
                     if (this.selectorAcciones.selection === 1) {
                         //TODO
                     }
                     if (this.selectorAcciones.selection === 2) {
-                        this.combatManager.doAction(2, -1); //No importa el target, la defensa es solo para el current personaje
+                            this.combatManager.doAction(2, -1); //No importa el target, la defensa es solo para el current personaje
                     }
-                    this.selectorAcciones.mostrar();
-                    this.menuActual = this.selectorAcciones;
                 }
-                //SELECCIONAR
+                 //SELECCIONAR
                 //Llamada al combatmanager para hacer sus cositas menuActual.selection contiene el indice del elemento en el menu
                 //para SelectorAcciones 0 = Atacar, 1 = Habilidad, 2 = Defender
                 //para SelectorEnemigos es el indice propio del array de enemigos
             }
+            }
+        else {
+            if(event. code === "Space") {
+                this.combatManager.nextTurn();
+            }
+        }
         }, this);
+
+        this.combatManager.nextTurn();
+    }
+
+    ActualizarEscena(info) {
+        if (this.menuActual != this.textoDescriptivo) {
+            this.menuActual.ocultar()
+            this.menuActual = this.textoDescriptivo;
+        }
+        this.menuActual.aplicarTexto(info);
+        this.menuActual.visible(1);
     }
 };
