@@ -18,19 +18,26 @@ class SelectorEnem extends Phaser.GameObjects.Container {
 
 }
 
+const Estados = {
+    SELECCION_INDIVIDUAL: "seleccion_individual", //Puede seleccionar el objetivo que quiera
+    SELECCION_PREDEFINIDA: "seleccion_predefinida", //Un objetivo queda marcado y sólo puede seleccionar ese
+    SELECCION_COMPLETA: "seleccion_completa" //Se muestra la seleccion del equipo aliado entero
+}
+
 export class SelectorPersonajes extends Phaser.GameObjects.Container {
-    //Necesita el array de enemigos para saber si están vivos y conocer su ubicación en la escena
-    constructor(scene, personajes) {
+    //Necesita el array de personajes para saber si están vivos y conocer su ubicación en la escena
+    constructor(scene, personajes, imgs) {
         super(scene);
+        this.estado = Estados.SELECCION_INDIVIDUAL;
         this.selection = 0;
+        this.personajes = personajes;
+        this.imgs = imgs;
+        this.scene = scene;
         //Crea las flechas
         this.opciones = [];
-        for(let i = 0; i < personajes.length; i++) {
-            //El metodo dependera de como sean los enemigos. Si finalmente heredan de sprite de phaser esto funcionará.
-            this.opciones.push(new SelectorEnem(scene, personajes[i].x - 100, personajes[i].y));
-        }
+        this.refresh();
         this.opciones[this.selection].select();
-        this.singleSelectionMode = true; //Indica si la selección será de un unico objetivo
+
     }
 
     /**
@@ -38,8 +45,7 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
      */
     siguiente() {
         //Condición para evitar que se salga del array
-        
-        if (this.singleSelectionMode && this.selection < this.opciones.length - 1) {
+        if (this.estado == Estados.SELECCION_INDIVIDUAL && this.selection < this.opciones.length - 1) {
             this.opciones[this.selection].unselect();
             this.selection = this.selection + 1;
             this.opciones[this.selection].select();
@@ -51,7 +57,7 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
      */
     anterior() {
         //Condición para evitar que se salga del array
-        if (this.singleSelectionMode && this.selection > 0) {
+        if (this.estado == Estados.SELECCION_INDIVIDUAL && this.selection > 0) {
             this.opciones[this.selection].unselect();
             this.selection = this.selection - 1;
             this.opciones[this.selection].select();
@@ -75,38 +81,39 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
     }
 
     /**
-     * Muestra la seleccion de todos los personajes (se usa en las habilidades AOE)
+     * Destruye todas las flechitas anteriores y las vuelve a crear asegurandose de que no pone una en los personajes muertos
      */
-    fullTeamSelection() {
-        for(let i = 0; i < opciones[this.selection.length]; i++) {
+    refresh() {
+        //Elimina los que ya están creados
+        for (let i = 0; i < this.opciones.length; i++) {
+            this.opciones[i].destroy();
+        }
+        //Crea los nuevos elementos
+        this.opciones = [];
+        for (let i = 0; i < this.imgs.length; i++) {
+            //El metodo dependera de como sean los enemigos. Si finalmente heredan de sprite de phaser esto funcionará.
+            if (this.personajes[i].living)
+                this.opciones.push(new SelectorEnem(this.scene, this.imgs[i].x - 100, this.imgs[i].y));
+        }
+    }
+
+    seleccionNormal() {
+        this.estado = Estados.SELECCION_INDIVIDUAL;
+        this.ocultar();
+        this.mostrar();
+    }
+
+    seleccionCompleta() {
+        this.estado = Estados.SELECCION_COMPLETA;
+        for(let i; i < this.opciones.length; i++) {
             this.opciones[i].select();
         }
-        this.singleSelectionMode = false;
     }
 
-    /**
-     * Actualiza el selector con todos los cambios necesarios tras el final de cualquier accion (si ha muerto un personaje, etc)
-     */
-    update() {
-        //Si un personaje esta muerto, no debe poder ser seleccionado
-        this.singleSelectionMode = true;
-    }
-
-    /**
-     * Muestra un unico personaje seleccionable
-     * 
-     * @param {El indice el personaje seleccionable} pred 
-     */
-    seleccionPredefinida(pred) {
-        this.singleSelectionMode = false;
+    seleccionPredefinida(selec) {
+        this.estado = Estados.SELECCION_PREDEFINIDA;
         this.ocultar();
-        this.opciones[pred].select();        
-    }
-
-    /**Recupera el estado base de el menu y lo aculta */
-    restore() {
-        this.singleSelectionMode = true;
-        this.ocultar();
-        //TODO
+        this.selection = selec;
+        this.mostrar();
     }
 }
