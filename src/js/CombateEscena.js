@@ -123,6 +123,8 @@ export class CombateEscena extends Phaser.Scene {
         this.selectorAcciones = new SelectorAcciones(this, 300, 440, this.textoDescriptivo);
         this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.imgsEnem);
         this.selectorAliados = new SelectorPersonajes(this, this.aliados, this.imgsAliad);
+        this.selectorAliados.ocultar();
+        this.selectorEnemigos.ocultar();
         this.menuActual = this.selectorAcciones;
 
 
@@ -130,7 +132,7 @@ export class CombateEscena extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
         this.input.keyboard.on('keydown', function (event) {
             //Control
-        if (this.menuActual != textoDescriptivo) {
+        if (this.menuActual != this.textoDescriptivo) {
             if (event.code === "ArrowUp") {
                 this.menuActual.anterior();
             } else if (event.code === "ArrowDown") {
@@ -147,7 +149,7 @@ export class CombateEscena extends Phaser.Scene {
                     }
                     else {
                         this.menuActual = this.selectorAliados;
-                        this.selectorAliados.seleccionPredefinida(2/*this.combatManager.whoseTurn*/);
+                        this.selectorAliados.seleccionPredefinida(this.combatManager.current);
                     }
                 }
                 else {
