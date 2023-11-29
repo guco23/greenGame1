@@ -35,23 +35,24 @@ export class Enemigo {
     }*/
 
     constructor(idn, combatManager) {
-        this.id = idn.name;
+        this.name = idn.name;
         this.maxHp = idn.maxHp;
-        this.currentHp = idn.hpMax;
+        this.currentHp = idn.maxHp;
         this.atk = idn.atk;
         this.def = (100 - idn.def) / 100;
-        this.prefType = idn.type;
+        this.prefType = idn.prefType;
         this.imgLink = idn.imgLink;
 
         this.living = true;
         this.stunned = false;
+        this.dot = 0;
 
         this.currentCombat = combatManager;
     }
 
-    /*startCombat(combatManager) {
+    startCombat(combatManager) {
         this.currentCombat = combatManager;
-    }*/
+    }
 
     critChance() {
 
@@ -93,19 +94,22 @@ export class Enemigo {
     //Mover a cada enemigo individual
     attack(playerTeam) {
         let length = 0;
+        console.log(playerTeam[0].name);
         let selecion = new Array(8);
-        for(i = 0; i < playerTeam.length; i++) {
+        for(let i = 0; i < playerTeam.length; i++) {
             if(playerTeam[i].living) {
-                if(playerTeam[i].type === this.prefType) {
+                /*if(playerTeam[i].type === this.prefType) {
                     selecion[length] = playerTeam[i];
                     length++;
-                }
-                selecion[length] = playerTeam;
+                }*/
+                selecion[length] = playerTeam[i];
+                console.log(playerTeam[i].name + " " + selecion[length].name);
                 length++;
             }
         }
-        let target;
+        let target = 0;
         //En target se genera un número aleatorio
+        console.log(selecion[target].name);
         if(this.critChance()) {
             this.currentCombat.addInfo("attack", selecion[target].sufferDamage(this.atk * 3), this, selecion[target]);
             selecion[target].checkAlive();
@@ -118,11 +122,11 @@ export class Enemigo {
     }
 
     takeTurn(combatManager) {
-        if(stunned === false) {
+        if(this.stunned === false) {
             this.attack(combatManager.playerTeam);
         }
         else {
-            stunned = false;
+            this.stunned = false;
             combatManager.addInfo("stun", 0, this,  null);
             this.endTurn();
         }
