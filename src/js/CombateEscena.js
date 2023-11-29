@@ -42,7 +42,7 @@ export class CombateEscena extends Phaser.Scene {
 
     //crear aqui los objetos de la escena
     create() {
-       //this.combatManager = new CombatManager(prueba, equipoBase, this);
+        //this.combatManager = new CombatManager(prueba, equipoBase, this);
         this.graphics = this.add.graphics();
         //Arrays declarados provisionales para guardar los objetos de la escena
         //En la version final aliados y enemigos serán de combatManager
@@ -121,8 +121,8 @@ export class CombateEscena extends Phaser.Scene {
 
         this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
         this.selectorAcciones = new SelectorAcciones(this, 300, 440, this.textoDescriptivo);
-        this.selectorEnemigos = new SelectorPersonajes(this, this.imgsEnem);
-        this.selectorAliados = new SelectorPersonajes(this, this.imgsAliad);
+        this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.imgsEnem);
+        this.selectorAliados = new SelectorPersonajes(this, this.aliados, this.imgsAliad);
         this.menuActual = this.selectorAcciones;
 
 
@@ -139,14 +139,15 @@ export class CombateEscena extends Phaser.Scene {
             else if (event.code === "Space") {
                 if (this.menuActual === this.selectorAcciones) {
                     if (this.menuActual.selection === 0) {
-                            this.seleccionarEnemigo();
+                        this.menuActual = this.selectorEnemigos;
                     }
                     else if (this.menuActual.selection === 1) {
                             //Llamas al combat manager para pedir la info de la habilidad especial y activas el menu correspondiente
                             this.combatManager.specialRequestInfo();
                     }
                     else {
-                            this.selectorAliados.seleccionPredefinida(this.combatManager.current);
+                        this.menuActual = this.selectorAliados;
+                        this.selectorAliados.seleccionPredefinida(2/*this.combatManager.whoseTurn*/);
                     }
                 }
                 else {
@@ -175,13 +176,6 @@ export class CombateEscena extends Phaser.Scene {
         }, this);
 
         this.combatManager.nextTurn();
-    }
-
-    seleccionarEnemigo() {
-        //Hace lo que sea necesario en la escena para que el jugador pueda seleccionar un enemigo
-        this.menuActual = this.selectorEnemigos;
-        this.selectorEnemigos.mostrar();
-        this.selectorAcciones.ocultar();
     }
 
     ActualizarEscena(info) {
