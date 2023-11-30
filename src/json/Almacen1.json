@@ -60,6 +60,28 @@
          "y":0
         }, 
         {
+         "draworder":"topdown",
+         "id":8,
+         "name":"Dialogo",
+         "objects":[
+                {
+                 "height":15.8387458006719,
+                 "id":5,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":false,
+                 "width":16.7704367301232,
+                 "x":16.3045912653975,
+                 "y":48.2150055991041
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
          "data":[4, 5, 5, 5, 5, 5, 5, 4, 0,
             6, 7, 7, 7, 7, 7, 9, 6, 0,
             6, 7, 7, 8, 7, 7, 7, 6, 0,
@@ -83,8 +105,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":8,
- "nextobjectid":5,
+ "nextlayerid":9,
+ "nextobjectid":8,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
