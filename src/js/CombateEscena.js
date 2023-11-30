@@ -109,12 +109,12 @@ export class CombateEscena extends Phaser.Scene {
         for (let i = 0; i < this.aliados.length; i++) {
             let positionY = 440 + (i * 37);
             this.add.text(20, positionY, this.aliados[i].name);
-            this.vidasAliados.push(new TextoVida(this, 120, positionY, this.aliados[i].maxHp, this.aliados[i].currentHp))
+            this.vidasAliados.push(new TextoVida(this, 120, positionY, this.aliados[i]));
         }
 
         this.vidasEnemigos = [];
         for (let i = 0; i < this.enemigos.length; i++) {
-            this.vidasEnemigos.push(new BarraVida(this, this.imgsEnem[i].x - 40, this.imgsEnem[i].y - 43, 80, 18, this.enemigos[i].maxHp))
+            this.vidasEnemigos.push(new BarraVida(this, this.imgsEnem[i].x - 40, this.imgsEnem[i].y - 43, 80, 18, this.enemigos[i]))
         }
         //Prueba de la barra de vida
         this.vidasEnemigos[2].actualizarHp(25);
@@ -142,6 +142,7 @@ export class CombateEscena extends Phaser.Scene {
                 if (this.menuActual === this.selectorAcciones) {
                     if (this.menuActual.selection === 0) {
                         this.menuActual = this.selectorEnemigos;
+                        this.menuActual.mostrar();
                     }
                     else if (this.menuActual.selection === 1) {
                             //Llamas al combat manager para pedir la info de la habilidad especial y activas el menu correspondiente
@@ -172,6 +173,7 @@ export class CombateEscena extends Phaser.Scene {
             }
         else {
             if(event. code === "Space") {
+                this.textoDescriptivo.aplicarTexto(""); //Vacía el texto
                 this.combatManager.nextTurn();
             }
         }
@@ -187,5 +189,18 @@ export class CombateEscena extends Phaser.Scene {
         }
         this.menuActual.aplicarTexto(info);
         this.menuActual.visible(1);
+        //Actualiza ambas las barras/textos de vida de los enemigos y aliados respectivamente
+        this.vidasEnemigos.forEach(element => {
+            element.actualizarHp();
+        });
+        this.vidasAliados.forEach(element => {
+            element.actualizarHp();
+        });
+        //Comprueba si el enemigo ha muerto, en cuyo caso oculta la imagen
+        for(let i = 0; i < this.enemigos.length; i++) {
+            if(!this.enemigos[i].living) {
+                this.imgsEnem[i].visible = false;
+            }
+        }
     }
 };

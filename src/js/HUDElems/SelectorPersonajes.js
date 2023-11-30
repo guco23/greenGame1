@@ -90,10 +90,16 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
         }
         //Crea los nuevos elementos
         this.opciones = [];
+        //Indica si el personaje de la selección actual está muerto, en cuyo caso debería dejar de estar seleccionado
+        let selectionDied = !this.personajes[this.selection].living;
         for (let i = 0; i < this.imgs.length; i++) {
             //El metodo dependera de como sean los enemigos. Si finalmente heredan de sprite de phaser esto funcionará.
-            if (this.personajes[i].living)
-                this.opciones.push(new SelectorEnem(this.scene, this.imgs[i].x - 100, this.imgs[i].y));
+            if (this.personajes[i].living) {
+                this.opciones[i] = new SelectorEnem(this.scene, this.imgs[i].x - 100, this.imgs[i].y);
+                if(selectionDied) {
+                    this.selection = i;
+                }
+            }
         }
     }
 
