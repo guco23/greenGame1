@@ -1,5 +1,6 @@
 import character from "./character.js";
 import { RAIZ_IMAGENES } from "./constants.js";
+import ObjetoClave from "./ObjetoClave.js";
 
 export class EscenaTilesets2 extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -12,6 +13,11 @@ constructor(){
         this.load.tilemapTiledJSON('Almacen2', 'src/json/Almacen2.json');
         this.load.image('tileset_mercadona', 'assets/images/tilesets/tileset_mercadona.png');
         this.load.spritesheet('character', 'assets/images/spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
+    }
+
+    init(data){
+        this.myObjetoclave = data.obj;
+
     }
 
     //crear aqui los objetos de la escena
@@ -49,15 +55,15 @@ constructor(){
             else console.log("No :C");
           }*/
           this.physics.add.overlap(this.Char, this.hitbox1[0], ()=>{
-            if(this.interact == 0) this.scene.start('escenaTilesets');
+            if(this.interact == 0) this.scene.start('escenaTilesets',{obj:this.myObjetoclave});
             else console.log("No :C");
         })
         this.physics.add.overlap(this.Char, this.hitbox2[0], ()=>{
-            if(this.interact == 0) this.scene.start('escenaTilesets3');
+            if(this.interact == 0) this.scene.start('escenaTilesets3',{obj:this.myObjetoclave});
             else console.log("No :C");
         })
         this.physics.add.overlap(this.Char, this.hitbox3[0], ()=>{
-            if(this.interact == 0) this.scene.start('escenaTilesets4');
+            if(this.interact == 0) this.scene.start('escenaTilesets4',{obj:this.myObjetoclave});
             else console.log("No :C");
         })
                     

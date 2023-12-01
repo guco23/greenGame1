@@ -2,12 +2,20 @@
 import character from "./character.js"; 
 import { RAIZ_IMAGENES } from "./constants.js";
 import dialogo from "./dialogo.js";
+import ObjetoClave from "./ObjetoClave.js";
 
 export class EscenaTilesets extends Phaser.Scene {
     //cargar aqui los datos de la escena.
     constructor(){
         super('escenaTilesets')
+        console.log("xd");
+        this.myObjetoclave = new ObjetoClave();
     }
+    init(data){
+        this.myObjetoclave = data.obj;
+
+    }
+
     preload() {
         /*this.load.image('javier', RAIZ_IMAGENES + 'javier.jpg');
         this.upscaleval = 0.001;*/
@@ -52,19 +60,50 @@ export class EscenaTilesets extends Phaser.Scene {
           }*/
           
           this.physics.add.overlap(this.Char, this.hitbox[0], ()=>{
-            if(this.interact == 0) this.scene.start('escenaTilesets2');
-            else console.log("No :C");
+            if(this.interact == 0) this.scene.start('escenaTilesets2', {obj:this.myObjetoclave});
         })
         this.physics.add.overlap(this.Char, this.Hitboxdialogo[0], ()=>{
+            this.myObjetoclave.Activate(1);
             if(this.interact == 0 && !this.Texto) {                
                 new dialogo(this, this.Char, ["Queso", "Pimiento", "Pimsahbhsahbiento", "Pimientoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]);                
-                console.log("A");
                 this.Texto = true;
             }            
         })
                     
           this.cameras.main.startFollow(this.Char);      
           this.cameras.main.zoom = 2.2;
+
+          /*var objetos = {
+            this.Objets = [];
+		this.Objets[0]={
+            'Nombre': "Nota1",
+            'Pillado': false,            
+            };
+            this.Objets[1]={
+                'Nombre': "Nota2",
+                'Pillado': false,            
+            };
+            this.Objets[2]={
+                'Nombre': "Nota3",
+                'Pillado': false,            
+            };
+            this.Objets[3]={
+                'Nombre': "ValeCajaFuerte",
+                'Pillado': false,            
+            };
+            this.Objets[4]={s
+                'Nombre': "CajaDeHerramientas",
+                'Pillado': false,            
+            };
+            this.Objets[5]={
+                'Nombre': "Madera",
+                'Pillado': false,            
+            };
+            this.Objets[6]={
+                'Nombre': "PlanosPuente",
+                'Pillado': false,            
+            };
+          }*/
             
     }
 

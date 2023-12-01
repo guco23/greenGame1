@@ -1,10 +1,15 @@
 import character from "./character.js";
 import { RAIZ_IMAGENES } from "./constants.js";
+import ObjetoClave from "./ObjetoClave.js";
 
 export class EscenaTilesets4 extends Phaser.Scene {
     //cargar aqui los datos de la escena.
 constructor(){
     super('escenaTilesets4')
+}
+init(data){
+    this.myObjetoclave = data.obj;
+
 }
     preload() {
         /*this.load.image('javier', RAIZ_IMAGENES + 'javier.jpg');
@@ -45,7 +50,7 @@ constructor(){
             else console.log("No :C");
           }*/
           this.physics.add.overlap(this.Char, this.hitbox1[0], ()=>{
-            if(this.interact == 0) this.scene.start('escenaTilesets2');
+            if(this.interact == 0) this.scene.start('escenaTilesets2',{obj:this.myObjetoclave});
             else console.log("No :C");
         })
                     

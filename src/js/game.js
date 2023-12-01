@@ -3,7 +3,6 @@ import { CombateEscena } from "./CombateEscena.js";
 import { EscenaTilesets2 } from "./escenaTileset2.js";
 import { EscenaTilesets3 } from "./escenaTileset3.js";
 import { EscenaTilesets4 } from "./escenaTileset4.js";
-
 //Configuración inicial del juego
 var config = {
     type: Phaser.AUTO, //Usa WebGL si es posible. En caso contrario, usa canvas 
