@@ -156,7 +156,7 @@ export class CombateEscena extends Phaser.Scene {
                 else {
                     if (this.selectorAcciones.selection === 0) {
                          //Llamar al combat manager con ataque
-                        this.combatManager.doAction(0, this.menuActual.selection);
+                        this.combatManager.doAction(0, this.menuActual.getSelection());
                     }
                     if (this.selectorAcciones.selection === 1) {
                         //TODO
@@ -196,6 +196,8 @@ export class CombateEscena extends Phaser.Scene {
         this.vidasAliados.forEach(element => {
             element.actualizarHp();
         });
+        this.selectorAliados.refresh();
+        this.selectorEnemigos.refresh();
         //Comprueba si el enemigo ha muerto, en cuyo caso oculta la imagen
         for(let i = 0; i < this.enemigos.length; i++) {
             if(!this.enemigos[i].living) {

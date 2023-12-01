@@ -1,9 +1,18 @@
-class SelectorEnem extends Phaser.GameObjects.Container {
-    constructor(scene, x, y) {
+class Selector extends Phaser.GameObjects.Container {
+    /**
+     * 
+     * @param {La ecena en la que se va a pintar} scene 
+     * @param {La posición sobre x} x 
+     * @param {La posición sobre y} y 
+     * @param {El índice del personaje en el array de personajes} indic 
+     */
+    constructor(scene, x, y, indic) {
         super(scene);
         //Construye un rectángulo hasta que tengamos un sprite de flecha
         this.rect = scene.add.rectangle(x, y, 50, 50, 0xffffff);
         this.unselect();
+        //El indice en el array de personajes del personaje que señala este selector
+        this.indPersAsociado = indic;
     }
 
     //Cambia la visibilidad de el objeto a que no se vea
@@ -25,7 +34,12 @@ const Estados = {
 }
 
 export class SelectorPersonajes extends Phaser.GameObjects.Container {
-    //Necesita el array de personajes para saber si están vivos y conocer su ubicación en la escena
+    /**
+     * 
+     * @param {La ecena en la que se va a pintar} scene 
+     * @param {El array de personajes} personajes 
+     * @param {Las imagenes de los personajes, si finalmente los personajes como tal tienen sprite esto no va aquí} imgs 
+     */
     constructor(scene, personajes, imgs) {
         super(scene);
         this.estado = Estados.SELECCION_INDIVIDUAL;
@@ -34,10 +48,7 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
         this.imgs = imgs;
         this.scene = scene;
         //Crea las flechas
-        this.opciones = [];
         this.refresh();
-        this.opciones[this.selection].select();
-
     }
 
     /**
@@ -81,45 +92,49 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
     }
 
     /**
-     * Destruye todas las flechitas anteriores y las vuelve a crear asegurandose de que no pone una en los personajes muertos
+     * Actualización a llamar al final de cada turno para actualizar los selectores a mostrar
      */
     refresh() {
-        //Elimina los que ya están creados
-        for (let i = 0; i < this.opciones.length; i++) {
-            this.opciones[i].destroy();
-        }
-        //Crea los nuevos elementos
         this.opciones = [];
-        //Indica si el personaje de la selección actual está muerto, en cuyo caso debería dejar de estar seleccionado
-        let selectionDied = !this.personajes[this.selection].living;
         for (let i = 0; i < this.imgs.length; i++) {
-            //El metodo dependera de como sean los enemigos. Si finalmente heredan de sprite de phaser esto funcionará.
+            //Sólo crea flechas para los personajes que estén vivos
             if (this.personajes[i].living) {
-                this.opciones[i] = new SelectorEnem(this.scene, this.imgs[i].x - 100, this.imgs[i].y);
-                if(selectionDied) {
-                    this.selection = i;
-                }
-            }
+                this.opciones.push(new Selector(this.scene, this.imgs[i].x - 100, this.imgs[i].y, i));}
         }
     }
 
+    /**
+     * Aplica el modo de selección de un único personaje típico
+     */
     seleccionNormal() {
         this.estado = Estados.SELECCION_INDIVIDUAL;
         this.ocultar();
         this.mostrar();
     }
 
+    /**
+     * Aplica un modo de selección de todos los personajes a la vez (para los AOE)
+     */
     seleccionCompleta() {
         this.estado = Estados.SELECCION_COMPLETA;
-        for(let i; i < this.opciones.length; i++) {
+        for (let i; i < this.opciones.length; i++) {
             this.opciones[i].select();
         }
     }
 
+    /**
+     * Aplica un modo de selección de personaje que ya viene predefinido y el jugador no puede cambiar (ej. defensa)
+     * @param {El índice del elemento que será seleccionados} selec 
+     */
     seleccionPredefinida(selec) {
         this.estado = Estados.SELECCION_PREDEFINIDA;
         this.ocultar();
         this.selection = selec;
         this.mostrar();
+    }
+
+    /**Devuelve el índice en el array de personajes del personaje seleccionado */
+    getSelection() {
+        return this.opciones[this.selection].indPersAsociado;
     }
 }
