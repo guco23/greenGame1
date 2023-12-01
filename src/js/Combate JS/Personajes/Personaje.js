@@ -48,6 +48,8 @@ export class Personaje {
 
         this.targetKind = 0;
 
+        this.personality = "Green";
+
         //this.currentCombat = combatManager;
     }
 
@@ -69,6 +71,9 @@ export class Personaje {
         this.currentCombat = combatManager;
     }*/
 
+    applyDot(value) {
+        this.dot += value;
+    }
 
     startCombat(combatManager) {
         this.currentCombat = combatManager;

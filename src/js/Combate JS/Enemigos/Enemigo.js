@@ -58,6 +58,10 @@ export class Enemigo {
 
     }
 
+    applyDot(value) {
+        this.dot += value;
+    }
+
     checkAlive() {
         if(this.currentHp <= 0) {
             this.currentHp = 0;
@@ -98,10 +102,10 @@ export class Enemigo {
         let selecion = new Array(8);
         for(let i = 0; i < playerTeam.length; i++) {
             if(playerTeam[i].living) {
-                /*if(playerTeam[i].type === this.prefType) {
+                if(playerTeam[i].personality === this.prefType) {
                     selecion[length] = playerTeam[i];
                     length++;
-                }*/
+                }
                 selecion[length] = playerTeam[i];
                 console.log(playerTeam[i].name + " " + selecion[length].name);
                 length++;
@@ -121,13 +125,13 @@ export class Enemigo {
         this.endTurn();
     }
 
-    takeTurn(combatManager) {
+    takeTurn() {
         if(this.stunned === false) {
-            this.attack(combatManager.playerTeam);
+            this.attack(this.currentCombat.playerTeam);
         }
         else {
             this.stunned = false;
-            combatManager.addInfo("stun", 0, this,  null);
+            this.currentCombat.addInfo("stun", 0, this,  null);
             this.endTurn();
         }
     }
