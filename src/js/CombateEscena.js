@@ -66,13 +66,13 @@ export class CombateEscena extends Phaser.Scene {
 
         this.combatManager = new CombatManager(this.enemigos, 3, this.aliados, 4, this);
         console.log(this.aliados.size);
-        for(let i = 0; i < 4; i++ ) {
+        for (let i = 0; i < 4; i++) {
             this.aliados[i].startCombat(this.combatManager);
         }
-        for(let i = 0; i < 3; i++ ) {
+        for (let i = 0; i < 3; i++) {
             this.enemigos[i].startCombat(this.combatManager);
         }
-        
+
 
         let gameWidth = this.game.config.width;
         let gameHeight = this.game.config.height;
@@ -132,51 +132,57 @@ export class CombateEscena extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
         this.input.keyboard.on('keydown', function (event) {
             //Control
-        if (this.menuActual != this.textoDescriptivo) {
-            if (event.code === "ArrowUp") {
-                this.menuActual.anterior();
-            } else if (event.code === "ArrowDown") {
-                this.menuActual.siguiente();
-            }
-            else if (event.code === "Space") {
-                if (this.menuActual === this.selectorAcciones) {
-                    if (this.menuActual.selection === 0) {
-                        this.menuActual = this.selectorEnemigos;
-                        this.menuActual.mostrar();
-                    }
-                    else if (this.menuActual.selection === 1) {
+            if (this.menuActual != this.textoDescriptivo) {
+                if (event.code === "ArrowUp") {
+                    this.menuActual.anterior();
+                } 
+                else if (event.code === "ArrowDown") {
+                    this.menuActual.siguiente();
+                } 
+                else if (event.code === "KeyB") {
+                    this.menuActual.ocultar();
+                    this.menuActual = this.selectorAcciones;
+                    this.menuActual.mostrar();
+                } 
+                else if (event.code === "Space") {
+                    if (this.menuActual === this.selectorAcciones) {
+                        if (this.menuActual.selection === 0) {
+                            this.menuActual = this.selectorEnemigos;
+                            this.menuActual.mostrar();
+                        }
+                        else if (this.menuActual.selection === 1) {
                             //Llamas al combat manager para pedir la info de la habilidad especial y activas el menu correspondiente
                             this.combatManager.specialRequestInfo();
+                        }
+                        else {
+                            this.menuActual = this.selectorAliados;
+                            this.selectorAliados.seleccionPredefinida(this.combatManager.current);
+                        }
                     }
                     else {
-                        this.menuActual = this.selectorAliados;
-                        this.selectorAliados.seleccionPredefinida(this.combatManager.current);
-                    }
-                }
-                else {
-                    if (this.selectorAcciones.selection === 0) {
-                         //Llamar al combat manager con ataque
-                        this.combatManager.doAction(0, this.menuActual.getSelection());
-                    }
-                    if (this.selectorAcciones.selection === 1) {
-                        //TODO
-                    }
-                    if (this.selectorAcciones.selection === 2) {
+                        if (this.selectorAcciones.selection === 0) {
+                            //Llamar al combat manager con ataque
+                            this.combatManager.doAction(0, this.menuActual.getSelection());
+                        }
+                        if (this.selectorAcciones.selection === 1) {
+                            //TODO
+                        }
+                        if (this.selectorAcciones.selection === 2) {
                             this.combatManager.doAction(2, -1); //No importa el target, la defensa es solo para el current personaje
+                        }
                     }
+                    //SELECCIONAR
+                    //Llamada al combatmanager para hacer sus cositas menuActual.selection contiene el indice del elemento en el menu
+                    //para SelectorAcciones 0 = Atacar, 1 = Habilidad, 2 = Defender
+                    //para SelectorEnemigos es el indice propio del array de enemigos
                 }
-                 //SELECCIONAR
-                //Llamada al combatmanager para hacer sus cositas menuActual.selection contiene el indice del elemento en el menu
-                //para SelectorAcciones 0 = Atacar, 1 = Habilidad, 2 = Defender
-                //para SelectorEnemigos es el indice propio del array de enemigos
             }
+            else {
+                if (event.code === "Space") {
+                    this.textoDescriptivo.aplicarTexto(""); //Vacía el texto
+                    this.combatManager.nextTurn();
+                }
             }
-        else {
-            if(event. code === "Space") {
-                this.textoDescriptivo.aplicarTexto(""); //Vacía el texto
-                this.combatManager.nextTurn();
-            }
-        }
         }, this);
 
         this.combatManager.nextTurn();
@@ -199,8 +205,8 @@ export class CombateEscena extends Phaser.Scene {
         this.selectorAliados.refresh();
         this.selectorEnemigos.refresh();
         //Comprueba si el enemigo ha muerto, en cuyo caso oculta la imagen
-        for(let i = 0; i < this.enemigos.length; i++) {
-            if(!this.enemigos[i].living) {
+        for (let i = 0; i < this.enemigos.length; i++) {
+            if (!this.enemigos[i].living) {
                 this.imgsEnem[i].visible = false;
             }
         }
