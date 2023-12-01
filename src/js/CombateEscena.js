@@ -8,8 +8,7 @@ import { SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
 import { SelectorPersonajes } from "./HUDElems/SelectorPersonajes.js";
 import { CombatManager } from "./Combate JS/CombatManager.js";
 import { enemies } from "../../assets/EnemyInfo/Enemigos Prueba/Dragon.js";
-import { prueba } from "../../assets/CombatInfo/Combates Prueba/pruebaDatos.js";
-import { equipoBase } from "../../assets/TestPlayerInfo/TestTeam/baseTeam.js";
+import { MarcadorActivo } from "./HUDElems/MarcadorActivo.js";
 
 export class CombateEscena extends Phaser.Scene {
     //CombatManager combatManager;
@@ -108,7 +107,7 @@ export class CombateEscena extends Phaser.Scene {
         this.vidasAliados = [];
         for (let i = 0; i < this.aliados.length; i++) {
             let positionY = 440 + (i * 37);
-            this.add.text(20, positionY, this.aliados[i].name);
+            this.nombresAliados = this.add.text(20, positionY, this.aliados[i].name);
             this.vidasAliados.push(new TextoVida(this, 120, positionY, this.aliados[i]));
         }
 
@@ -123,6 +122,9 @@ export class CombateEscena extends Phaser.Scene {
         this.selectorAcciones = new SelectorAcciones(this, 300, 440, this.textoDescriptivo);
         this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.imgsEnem);
         this.selectorAliados = new SelectorPersonajes(this, this.aliados, this.imgsAliad);
+        this.marcadorImgsAliados = new MarcadorActivo(this, this.imgsAliad);
+        this.marcadorNombres = new MarcadorActivo(this, this.nombresAliados);
+
         this.selectorAliados.ocultar();
         this.selectorEnemigos.ocultar();
         this.menuActual = this.selectorAcciones;
@@ -210,5 +212,7 @@ export class CombateEscena extends Phaser.Scene {
                 this.imgsEnem[i].visible = false;
             }
         }
+        this.marcadorImgsAliados.refresh(this.combatManager.current);
+        this.marcadorNombres.refresh(this.combatManager.current);
     }
 };
