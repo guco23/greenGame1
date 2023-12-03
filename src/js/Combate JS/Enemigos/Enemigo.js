@@ -100,6 +100,13 @@ export class Enemigo {
             return damage;
         }
     }
+    
+    heal(heal) {
+        this.currentHp += heal;
+        if(this.currentHp > this.maxHp) {
+            this.currentHp = this.maxHp;
+        }
+    }
 
     //Mover a cada enemigo individual
     attack(playerTeam) {
