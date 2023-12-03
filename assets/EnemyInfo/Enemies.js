@@ -3,7 +3,7 @@ export var enemies = {
 
     calamar: {class: Veneno, name:"H", maxHp:80, atk: 20, def: 10, prefType: "", imgLink: ""},
 
-    cocacola: {class: Tanque, name:"Julián", maxHp:60, atk: 35, def: 10, prefType: "", imgLink: ""},
+    cocacola: {class: Enemigo, name:"Julián", maxHp:60, atk: 35, def: 10, prefType: "", imgLink: ""},
 
     libra: {class: Libra, name:"Libra, Guardián del Equilibrio", maxHp:500, atk: 45, def: 30, prefType: "", imgLink: ""},
 

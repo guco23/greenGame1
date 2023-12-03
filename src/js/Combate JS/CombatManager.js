@@ -150,21 +150,25 @@ export class CombatManager {
         if (action === "attack") {
             this.actInfo += from.name + " attacked " + to.name + " for " + value + " damage.\n";
         }
+        if(action === "crit") {
+            this.actInfo += "It was a critical blow!\n";
+        }
         if (action === "defend") {
             this.actInfo += from.name + " defended and added " + value + " shield.\n";
         }
         if (action === "die") {
             this.actInfo += from.name + " died!\n"
         }
-        if (action === "poison") {
-            this.actInfo += from.name + " applied " + value + " poison to " + to.name + "\n";
-        }
         if (action === "dot") {
             this.actInfo += from.name + " suffered " + value + " damage due to negative effects.\n"
+        }
+        if (action === "poison") {
+            this.actInfo += from.name + " applied " + value + " poison to " + to.name + "\n";
         }
         if (action === "stun") {
             this.actInfo += from.name + " was stunned and couldn't act.\n"
         }
+        
         if (action === "special") {
             this.actInfo += value;
         }

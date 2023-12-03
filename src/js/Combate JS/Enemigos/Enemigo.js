@@ -6,7 +6,7 @@ export class Enemigo {
     atk;
     def; //Numero entre 0.01 y 1 por el cual se modifica el daño sufrido. En la representación, corresponden a 99 y 0 DEF. Se hará siempre un mínimo de 1 de daño
 
-    //critChance; No me acuerdo de haber puesto esto aquí lol. Mejor lo dejamos para una subclase
+    critChance; //No me acuerdo de haber puesto esto aquí lol. Mejor lo dejamos para una subclase
 
     prefType; //Tipo preferido para atacar (más posibilidades de que ataque)
 
@@ -54,8 +54,13 @@ export class Enemigo {
         this.currentCombat = combatManager;
     }
 
-    critChance() {
+    getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
 
+    critChance() {
+        let crit = this.getRandomInt(100);
+        return crit < this.critChance;
     }
 
     applyDot(value) {
@@ -111,11 +116,12 @@ export class Enemigo {
                 length++;
             }
         }
-        let target = 0;
+        let target = this.getRandomInt(length);
         //En target se genera un número aleatorio
         console.log(selecion[target].name);
         if(this.critChance()) {
             this.currentCombat.addInfo("attack", selecion[target].sufferDamage(this.atk * 3), this, selecion[target]);
+            this.currentCombat.addInfo("crit", 0, this, null);
             selecion[target].checkAlive();
         }
         else {
