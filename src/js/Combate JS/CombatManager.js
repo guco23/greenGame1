@@ -84,12 +84,6 @@ export class CombatManager {
         this.actInfo = "";
     }
 
-    /*
-    constructor(scene) {
-        this.combatScene = scene; 
-    }
-    */
-    
     setTeams(enemyTeam, enemySize, playerTeam, teamSize){
         this.enemyTeam = enemyTeam;
         this.enemySize = enemySize;
@@ -179,7 +173,6 @@ export class CombatManager {
     }
 
     nextTurn() {
-        console.log(this.current + " " + this.whoseTurn);
         if (this.endCombat === true) {
             //Método para acabar el combate, dar recompensas, volver a la pantalla principal, etc.
         }

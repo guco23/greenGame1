@@ -46,6 +46,7 @@ export class Enemigo {
         this.living = true;
         this.stunned = false;
         this.dot = 0;
+        this.critChance = idn.crit;
 
         this.currentCombat = combatManager;
     }
@@ -58,9 +59,9 @@ export class Enemigo {
         return Math.floor(Math.random() * max);
     }
 
-    critChance() {
+    getCrit() {
         let crit = this.getRandomInt(100);
-        return crit < this.critChance;
+        return (crit < this.critChance);
     }
 
     applyDot(value) {
@@ -119,7 +120,7 @@ export class Enemigo {
         let target = this.getRandomInt(length);
         //En target se genera un número aleatorio
         console.log(selecion[target].name);
-        if(this.critChance()) {
+        if(this.getCrit()) {
             this.currentCombat.addInfo("attack", selecion[target].sufferDamage(this.atk * 3), this, selecion[target]);
             this.currentCombat.addInfo("crit", 0, this, null);
             selecion[target].checkAlive();

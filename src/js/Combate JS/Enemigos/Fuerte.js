@@ -19,7 +19,7 @@ export class Fuerte extends Enemigo {
         let target = this.getRandomInt(length);
         //En target se genera un número aleatorio
         console.log(selecion[target].name);
-        if(this.critChance()) {
+        if(this.getCrit()) {
             this.currentCombat.addInfo("attack", selecion[target].sufferDamage(this.atk * 6), this, selecion[target]);
             this.currentCombat.addInfo("crit", 0, this, null);
             selecion[target].checkAlive();
