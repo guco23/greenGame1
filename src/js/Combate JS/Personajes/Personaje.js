@@ -75,6 +75,11 @@ export class Personaje {
         this.dot += value;
     }
 
+    stun() {
+        this.stunned = true;
+        this.currentCombat.addInfo("stunned", 0, this, null);
+    }
+
     startCombat(combatManager) {
         this.currentCombat = combatManager;
     }
@@ -128,18 +133,7 @@ export class Personaje {
             this.currentHp -= damage;
             return damage;
         }
-        //this.checkAlive();
     }
-    
-    /*shiftAction(direction) {
-        if(direction < 0 && this.action > 0) {
-            this.action--;
-        }
-        else if (direction > 0 && this.accion < 2) {
-            this.action++;
-        }
-    }*/
-
     attack(target) {
         //this.ableToAct = false;
         let myTarget = this.currentCombat.enemyTeam[target];
@@ -147,22 +141,6 @@ export class Personaje {
         myTarget.checkAlive();
         this.endTurn();
     }
-
-    /*selectAction() {
-        if(this.accion === 0) {
-            this.status = 1;
-            this.currentCombat.setTarget(false, false);
-        }
-        else if (this.accion === 1) {
-            this.status = 2;
-        }
-        else if (this.accion === 2) {
-            //this.ableToAct = false;
-            this.gainShield(this.def * 100);
-            this.currentCombat.changeSp(1);
-            this.endTurn();
-        }
-    }*/
 
     special(target) {
         //Definido en subclases
@@ -175,40 +153,4 @@ export class Personaje {
             this.endTurn();
         }
     }
-/*
-    eventHandler(event) {
-        if(this.ableToAct === true) {
-            if(this.status === 0) {
-                if(event === 'up') {
-                    this.shiftAction(-1);
-                }
-                else if(event === 'down') {
-                    this.shiftAction(1);
-                }
-                else if(event === 'select') {
-                    this.selectAction();
-                }
-            }   
-            else if(this.status === 1) {
-                if(event === 'right') {
-                    this.currentCombat.shiftTarget(1);
-                }
-                else if(event === 'left') {
-                    this.currentCombat.shiftTarget(-1);
-                }
-                else if(event === 'select') {
-                    this.attack();
-                }
-                else if (event === 'back') {
-                    this.status === 0;
-                }
-            }      
-            else if(this.status === 2) {
-                if (event === 'back') {
-                    this.status === 0;
-                }
-            }
-        }
-    }
-    */
 }

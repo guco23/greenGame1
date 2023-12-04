@@ -87,6 +87,7 @@ export class Enemigo {
 
     stun() {
         this.stunned = true;
+        this.currentCombat.addInfo("stunned", 0, this, null);
     }
 
     sufferDamage(dmg) {

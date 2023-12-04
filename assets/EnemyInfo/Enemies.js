@@ -21,5 +21,5 @@ export var enemies = {
 
     salchicha: {class: Fuerte, name:"Salchineitor", maxHp:50, atk: 40, def: 5, prefType: "", imgLink: "", crit: 10},
 
-    sardina: {class: Aturdir, name:"Cap. Sardinez", maxHp:60, atk: 20, def: 10, prefType: "", imgLink: "", crit: 5}
+    sardina: {class: Aturdidor, name:"Cap. Sardinez", maxHp:60, atk: 20, def: 10, prefType: "", imgLink: "", crit: 5}
 }

@@ -159,10 +159,12 @@ export class CombatManager {
         if (action === "poison") {
             this.actInfo += from.name + " applied " + value + " poison to " + to.name + "\n";
         }
+        if (action === "stunned") {
+            this.actInfo += from.name + " became stunned!";
+        }
         if (action === "stun") {
             this.actInfo += from.name + " was stunned and couldn't act.\n"
         }
-        
         if (action === "special") {
             this.actInfo += value;
         }
