@@ -1,6 +1,6 @@
 import character from "./character.js";
 import { RAIZ_IMAGENES } from "./constants.js";
-import ObjetoClave from "./ObjetoClave.js";
+import ObjetosClave from "./ObjetoClave.js";
 export class EscenaTilesets3 extends Phaser.Scene {
     //cargar aqui los datos de la escena.
 constructor(){

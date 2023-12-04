@@ -9,11 +9,14 @@ export class EscenaTilesets extends Phaser.Scene {
     constructor(){
         super('escenaTilesets')
         console.log("xd");
+        if (this.myObjetoclave == null)
         this.myObjetoclave = new ObjetoClave();
     }
     init(data){
-        this.myObjetoclave = data.obj;
-
+        if (data.obj != null){
+            this.myObjetoclave = data.obj;
+            console.log("tu mama 1");
+        }
     }
 
     preload() {
@@ -63,7 +66,7 @@ export class EscenaTilesets extends Phaser.Scene {
             if(this.interact == 0) this.scene.start('escenaTilesets2', {obj:this.myObjetoclave});
         })
         this.physics.add.overlap(this.Char, this.Hitboxdialogo[0], ()=>{
-            this.myObjetoclave.Activate(1);
+            this.myObjetoclave. AñadeObjetoClave(1);
             if(this.interact == 0 && !this.Texto) {                
                 new dialogo(this, this.Char, ["Queso", "Pimiento", "Pimsahbhsahbiento", "Pimientoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]);                
                 this.Texto = true;

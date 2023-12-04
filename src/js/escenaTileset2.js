@@ -17,6 +17,7 @@ constructor(){
 
     init(data){
         this.myObjetoclave = data.obj;
+        console.log("tu mama 2");
 
     }
 
@@ -59,6 +60,8 @@ constructor(){
             else console.log("No :C");
         })
         this.physics.add.overlap(this.Char, this.hitbox2[0], ()=>{
+            
+            this.myObjetoclave.CheckObjetoClave(1);
             if(this.interact == 0) this.scene.start('escenaTilesets3',{obj:this.myObjetoclave});
             else console.log("No :C");
         })

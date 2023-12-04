@@ -32,8 +32,13 @@ export default class ObjetoClave {
                 'Pillado': false,            
             };
             console.log("AAAAAAAAAA");
-            this.Activate = function(aux){
-            this.Objets[aux].Pillado = true;}
+            this.AñadeObjetoClave = function(aux){
+                console.log("tocame uwu");
+                this.Objets[aux].Pillado = true;
+            }
+            this.CheckObjetoClave = function(aux){
+                console.log(this.Objets[aux].Pillado);
+            }
 	}
     
     AñadeObjetoClave(aux){
