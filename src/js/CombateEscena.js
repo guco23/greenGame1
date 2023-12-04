@@ -118,10 +118,10 @@ export class CombateEscena extends Phaser.Scene {
         //Prueba de la barra de vida
         this.vidasEnemigos[2].actualizarHp(25);
         //Los datos para crear la lista del selector acciones
-        let datosAcciones = [new DatosAccion("Atacar", "Ataque básico a un objetivo"), 
+        let datosAcciones = [new DatosAccion("Atacar", "Ataque básico a un objetivo"),
         new DatosAccion("Habilidad", "TODO: depende del personaje"),
         new DatosAccion("Defender", "Reduce el daño recibido hasta el siguiente turno")];
-        
+
         this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
         this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 300, 440, 40, datosAcciones);
         this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.imgsEnem);
@@ -141,15 +141,15 @@ export class CombateEscena extends Phaser.Scene {
             if (this.menuActual != this.textoDescriptivo) {
                 if (event.code === "ArrowUp") {
                     this.menuActual.anterior();
-                } 
+                }
                 else if (event.code === "ArrowDown") {
                     this.menuActual.siguiente();
-                } 
+                }
                 else if (event.code === "KeyB") {
                     this.menuActual.ocultar();
                     this.menuActual = this.selectorAcciones;
                     this.menuActual.mostrar();
-                } 
+                }
                 else if (event.code === "Space") {
                     if (this.menuActual === this.selectorAcciones) {
                         if (this.menuActual.selection === 0) {
@@ -216,7 +216,5 @@ export class CombateEscena extends Phaser.Scene {
                 this.imgsEnem[i].visible = false;
             }
         }
-        this.marcadorImgsAliados.refresh(this.combatManager.current);
-        this.marcadorNombres.refresh(this.combatManager.current);
     }
 };
