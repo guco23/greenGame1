@@ -9,6 +9,7 @@ import { SelectorPersonajes } from "./HUDElems/SelectorPersonajes.js";
 import { CombatManager } from "./Combate JS/CombatManager.js";
 import { enemies } from "../../assets/EnemyInfo/Enemigos Prueba/Dragon.js";
 import { MarcadorActivo } from "./HUDElems/MarcadorActivo.js";
+import { CharacterArray } from "./HUDElems/ScenePersonaje.js";
 
 export class CombateEscena extends Phaser.Scene {
     //CombatManager combatManager;
@@ -61,6 +62,7 @@ export class CombateEscena extends Phaser.Scene {
         this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
         this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
         this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
+        this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
         //this.enemigos.push(new Enemigo(RobotCat, this.combatManager));
 
         this.combatManager = new CombatManager(this.enemigos, 3, this.aliados, 4, this);
@@ -86,17 +88,15 @@ export class CombateEscena extends Phaser.Scene {
         this.graphics.strokeRect(188, 150, 130, 100);
         this.graphics.fillRect(188, 150, 130, 100);
         //Coloca el fondo
-        this.add.image(gameWidth / 2, gameHeight / 2, 'background')
-        //Coloca los sprites de los enemigos en la escena, en la versión final los personajes contienen sprites y su funcionalidad
-        this.imgsAliad = [];
-        for (let i = 0; i < this.aliados.length; i++) {
-            this.imgsAliad[i] = this.add.image(gameWidth / 5, (gameHeight - gameHeight / 6) / (this.aliados.length + 1) * (i + 1) - 50, this.aliados[i].name).setScale(0.05);
-        }
+        this.add.image(gameWidth / 2, gameHeight / 2, 'background');
 
-        this.imgsEnem = [];
-        for (let i = 0; i < this.enemigos.length; i++) {
-            this.imgsEnem[i] = this.add.image(gameWidth - (gameWidth / 5), (gameHeight - gameHeight / 6) / (this.enemigos.length + 1) * (i + 1) - 40, this.enemigos[i].imgLink).setScale(0.05);
+        //esto es temporal para asignar una imagen que mostrar
+        for (let i = 0; i < this.aliados.length; i++) {
+            this.aliados[i].imgLink = this.aliados[i].name;
         }
+        //Coloca los sprites de los enemigos en la escena, en la versión final los personajes contienen sprites y su funcionalidad
+        this.imgsAliad = new CharacterArray(this, gameWidth / 9, 15, 400, false, this.aliados);
+        this.imgsEnem = new CharacterArray(this, gameWidth - (gameWidth / 5), 30, 400, false, this.enemigos);
 
         //Creación de los cuadros del HUD
         this.graphics = this.add.graphics();
@@ -113,22 +113,21 @@ export class CombateEscena extends Phaser.Scene {
 
         this.vidasEnemigos = [];
         for (let i = 0; i < this.enemigos.length; i++) {
-            this.vidasEnemigos.push(new BarraVida(this, this.imgsEnem[i].x - 40, this.imgsEnem[i].y - 43, 80, 18, this.enemigos[i]))
+            this.vidasEnemigos.push(new BarraVida(this, this.imgsEnem.imgs[i].x - 2, this.imgsEnem.imgs[i].y - 10, 80, 18, this.enemigos[i]))
         }
         //Prueba de la barra de vida
         this.vidasEnemigos[2].actualizarHp(25);
 
         this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
         this.selectorAcciones = new SelectorAcciones(this, 300, 440, this.textoDescriptivo);
-        this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.imgsEnem);
-        this.selectorAliados = new SelectorPersonajes(this, this.aliados, this.imgsAliad);
-        this.marcadorImgsAliados = new MarcadorActivo(this, this.imgsAliad);
+        this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.imgsEnem.imgs);
+        this.selectorAliados = new SelectorPersonajes(this, this.aliados, this.imgsAliad.imgs);
+        this.marcadorImgsAliados = new MarcadorActivo(this, this.imgsAliad.imgs);
         this.marcadorNombres = new MarcadorActivo(this, this.nombresAliados);
 
         this.selectorAliados.ocultar();
         this.selectorEnemigos.ocultar();
         this.menuActual = this.selectorAcciones;
-
 
         //Controles en combate
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -137,15 +136,15 @@ export class CombateEscena extends Phaser.Scene {
             if (this.menuActual != this.textoDescriptivo) {
                 if (event.code === "ArrowUp") {
                     this.menuActual.anterior();
-                } 
+                }
                 else if (event.code === "ArrowDown") {
                     this.menuActual.siguiente();
-                } 
+                }
                 else if (event.code === "KeyB") {
                     this.menuActual.ocultar();
                     this.menuActual = this.selectorAcciones;
                     this.menuActual.mostrar();
-                } 
+                }
                 else if (event.code === "Space") {
                     if (this.menuActual === this.selectorAcciones) {
                         if (this.menuActual.selection === 0) {

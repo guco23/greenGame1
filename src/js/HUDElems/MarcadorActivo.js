@@ -24,7 +24,7 @@ export class MarcadorActivo extends Phaser.GameObjects.Container {
         this.opciones = [];
         for(let i = 0; i < sceneList.length; i++) {
             console.log(i);
-            this.opciones.push(new Selector(scene, sceneList[i].x, sceneList[i].y));
+            this.opciones.push(new Selector(scene, sceneList[i].imgs.x, sceneList[i].imgs.y));
         }
     }
 
