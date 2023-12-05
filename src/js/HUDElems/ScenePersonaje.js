@@ -9,23 +9,25 @@ class ScenePersonaje extends Phaser.GameObjects.Container {
         this.img = scene.add.image(x, y, img).setScale(0.05);
         this.img.setOrigin(0, 0);
         //Esto será un sprite cuando esté hecho
-        this.stun = scene.add.rectangle(x + this.img.displayWidth - statusIconSize.x, y + this.img.displayHeight - statusIconSize.y , statusIconSize.x, statusIconSize.y, 0xFFFF00).setOrigin(0,0);
-        this.poisoned = scene.add.rectangle(x + this.img.displayWidth - statusIconSize.x * 2, y + this.img.displayHeight - statusIconSize.y , statusIconSize.x, statusIconSize.y, 0x9402fc).setOrigin(0,0);
+        this.stun = scene.add.rectangle(x + this.img.displayWidth - statusIconSize.x, y + this.img.displayHeight - statusIconSize.y, statusIconSize.x, statusIconSize.y, 0xFFFF00).setOrigin(0, 0);
+        this.poison = scene.add.rectangle(x + this.img.displayWidth - statusIconSize.x * 2, y + this.img.displayHeight - statusIconSize.y, statusIconSize.x, statusIconSize.y, 0x9402fc).setOrigin(0, 0);
+        this.stun.visible = false;
+        this.poison.visible = false;
     }
 
     ocultar() {
         this.img.visible = false;
-        this.stun.visible = true;
-        this.poisoned.visible = true;
+        this.stun.visible = false;
+        this.poison.visible = false;
 
     }
 
-    setPoisoned() {
-        this.poisoned.visible = true;
+    setPoisoned(b) {
+        this.poison.visible = b;
     }
 
-    setStunned() {
-        this.stun.visible = true;
+    setStunned(b) {
+        this.stun.visible = b;
     }
 }
 
@@ -47,6 +49,8 @@ export class CharacterArray {
     /**Actualiza cada elemento del array con los estados y si ha muerto oculta */
     refresh() {
         for (let i = 0; i < this.personajes.length; i++) {
+            this.array[i].setStunned(this.personajes[i].stunned);
+            this.array[i].setPoisoned(this.personajes[i].dot > 0);
             if (!this.personajes[i].living)
                 this.array[i].ocultar();
         }
