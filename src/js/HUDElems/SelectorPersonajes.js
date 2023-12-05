@@ -40,12 +40,12 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
      * @param {El array de personajes} personajes 
      * @param {Las imagenes de los personajes, si finalmente los personajes como tal tienen sprite esto no va aquí} imgs 
      */
-    constructor(scene, personajes, imgs) {
+    constructor(scene, personajes, arrayImgs) {
         super(scene);
         this.estado = Estados.SELECCION_INDIVIDUAL;
         this.selection = 0;
         this.personajes = personajes;
-        this.imgs = imgs;
+        this.arrayImgs = arrayImgs;
         this.scene = scene;
         //Crea las flechas
         this.refresh();
@@ -96,10 +96,10 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
      */
     refresh() {
         this.opciones = [];
-        for (let i = 0; i < this.imgs.length; i++) {
+        for (let i = 0; i < this.arrayImgs.length; i++) {
             //Sólo crea flechas para los personajes que estén vivos
             if (this.personajes[i].living) {
-                this.opciones.push(new Selector(this.scene, this.imgs[i].x - 50, this.imgs[i].y + this.imgs[i].displayHeight / 2, i));}
+                this.opciones.push(new Selector(this.scene, this.arrayImgs[i].img.x - 50, this.arrayImgs[i].img.y + this.arrayImgs[i].img.displayHeight / 2, i));}
         }
     }
 

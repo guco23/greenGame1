@@ -8,7 +8,6 @@ import { DatosAccion, SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
 import { SelectorPersonajes } from "./HUDElems/SelectorPersonajes.js";
 import { CombatManager } from "./Combate JS/CombatManager.js";
 import { enemies } from "../../assets/EnemyInfo/Enemigos Prueba/Dragon.js";
-import { MarcadorActivo } from "./HUDElems/MarcadorActivo.js";
 import { CharacterArray } from "./HUDElems/ScenePersonaje.js";
 
 export class CombateEscena extends Phaser.Scene {
@@ -95,8 +94,8 @@ export class CombateEscena extends Phaser.Scene {
             this.aliados[i].imgLink = this.aliados[i].name;
         }
         //Coloca los sprites de los enemigos en la escena, en la versión final los personajes contienen sprites y su funcionalidad
-        this.imgsAliad = new CharacterArray(this, gameWidth / 9, 15, 400, false, this.aliados);
-        this.imgsEnem = new CharacterArray(this, gameWidth - (gameWidth / 5), 30, 400, false, this.enemigos);
+        this.sceneAliad = new CharacterArray(this, gameWidth / 9, 15, 400, false, this.aliados);
+        this.sceneEnem = new CharacterArray(this, gameWidth - (gameWidth / 5), 30, 400, false, this.enemigos);
 
         //Creación de los cuadros del HUD
         this.graphics = this.add.graphics();
@@ -113,7 +112,7 @@ export class CombateEscena extends Phaser.Scene {
 
         this.vidasEnemigos = [];
         for (let i = 0; i < this.enemigos.length; i++) {
-            this.vidasEnemigos.push(new BarraVida(this, this.imgsEnem.imgs[i].x - 2, this.imgsEnem.imgs[i].y - 10, 80, 18, this.enemigos[i]))
+            this.vidasEnemigos.push(new BarraVida(this, this.sceneEnem.array[i].img.x - 2, this.sceneEnem.array[i].img.y - 10, 80, 18, this.enemigos[i]))
         }
         //Prueba de la barra de vida
         this.vidasEnemigos[2].actualizarHp(25);
@@ -123,11 +122,10 @@ export class CombateEscena extends Phaser.Scene {
         new DatosAccion("Defender", "Reduce el daño recibido hasta el siguiente turno")];
 
         this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
-        this.selectorAcciones = new SelectorAcciones(this, 300, 440, this.textoDescriptivo);
-        this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.imgsEnem.imgs);
-        this.selectorAliados = new SelectorPersonajes(this, this.aliados, this.imgsAliad.imgs);
-        this.marcadorImgsAliados = new MarcadorActivo(this, this.imgsAliad.imgs);
-        this.marcadorNombres = new MarcadorActivo(this, this.nombresAliados);
+        this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 300, 440, 40, datosAcciones);
+        this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.sceneEnem.array);
+        this.selectorAliados = new SelectorPersonajes(this, this.aliados, this.sceneAliad.array);
+
 
         this.selectorAliados.ocultar();
         this.selectorEnemigos.ocultar();
@@ -210,10 +208,8 @@ export class CombateEscena extends Phaser.Scene {
         this.selectorAliados.refresh();
         this.selectorEnemigos.refresh();
         //Comprueba si el enemigo ha muerto, en cuyo caso oculta la imagen
-        for (let i = 0; i < this.enemigos.length; i++) {
-            if (!this.enemigos[i].living) {
-                this.imgsEnem[i].visible = false;
-            }
-        }
+        this.sceneAliad.refresh();
+        this.sceneEnem.refresh();
+
     }
 };
