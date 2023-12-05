@@ -18,6 +18,8 @@ class Selector extends Phaser.GameObjects.Container {
     }
 }
 
+/**
+ *Esta clase funciona muy, muy mal se va a rehacer más tarde  */
 export class MarcadorActivo extends Phaser.GameObjects.Container {
     constructor(scene, sceneList) {
         super(scene);

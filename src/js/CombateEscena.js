@@ -4,7 +4,7 @@ import { Personaje } from "./Combate JS/Personajes/Personaje.js"
 import { BarraVida } from "./HUDElems/BarraVida.js";
 import { TextoVida } from "./HUDElems/TextoVida.js";
 import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
-import { SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
+import { DatosAccion, SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
 import { SelectorPersonajes } from "./HUDElems/SelectorPersonajes.js";
 import { CombatManager } from "./Combate JS/CombatManager.js";
 import { enemies } from "../../assets/EnemyInfo/Enemigos Prueba/Dragon.js";
@@ -117,6 +117,10 @@ export class CombateEscena extends Phaser.Scene {
         }
         //Prueba de la barra de vida
         this.vidasEnemigos[2].actualizarHp(25);
+        //Los datos para crear la lista del selector acciones
+        let datosAcciones = [new DatosAccion("Atacar", "Ataque básico a un objetivo"),
+        new DatosAccion("Habilidad", "TODO: depende del personaje"),
+        new DatosAccion("Defender", "Reduce el daño recibido hasta el siguiente turno")];
 
         this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
         this.selectorAcciones = new SelectorAcciones(this, 300, 440, this.textoDescriptivo);
@@ -211,7 +215,5 @@ export class CombateEscena extends Phaser.Scene {
                 this.imgsEnem[i].visible = false;
             }
         }
-        this.marcadorImgsAliados.refresh(this.combatManager.current);
-        this.marcadorNombres.refresh(this.combatManager.current);
     }
 };
