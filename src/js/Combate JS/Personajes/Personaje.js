@@ -53,13 +53,13 @@ export class Personaje {
         //this.currentCombat = combatManager;
     }
 
-    /*constructor(idn, combatManager) {
+    /*constructor(idn) {
         this.name = idn.name;
 
         this.atk = idn.atk;
         this.def = idn.def;
         this.maxHp = idn.maxHp;
-        this.currentHp = this.maxHp;
+        this.currentHp = idn.currentHp;
 
         this.escudo = 0;
         this.living = true;
@@ -67,8 +67,6 @@ export class Personaje {
         this.dot = 0;
         this.status = 0;
         this.accion = 0;
-
-        this.currentCombat = combatManager;
     }*/
 
     applyDot(value) {
@@ -126,14 +124,29 @@ export class Personaje {
     sufferDamage(dmg) {
         let damage = Math.floor(dmg * this.def)
         if(damage < 1) {
-            this.currentHp--;
+            if(this.escudo > 0) {
+                this.escudo--;
+            }
+            else {
+                this.currentHp--;
+            }
             return 1;
         }
         else {
-            this.currentHp -= damage;
+            if(this.escudo > 0) {
+                this.escudo -= damage;
+                if(this.escudo < 0) {
+                    this.currentHp -= this.escudo;
+                    this.escudo = 0;
+                }
+            }
+            else{
+                this.currentHp -= damage;
+            }
             return damage;
         }
     }
+
     attack(target) {
         //this.ableToAct = false;
         let myTarget = this.currentCombat.enemyTeam[target];
@@ -144,6 +157,10 @@ export class Personaje {
 
     special(target) {
         //Definido en subclases
+    }
+
+    defend() {
+        this.gainShield(this.def);
     }
 
     takeTurn() {
