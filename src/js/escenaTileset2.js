@@ -1,6 +1,8 @@
 import character from "./character.js";
 import { RAIZ_IMAGENES } from "./constants.js";
 import ObjetoClave from "./ObjetoClave.js";
+import { enemies } from "../../assets/EnemyInfo/Enemies.js";
+import SlimeEnemigo from "./SlimeEnemigo.js"
 
 export class EscenaTilesets2 extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -57,7 +59,7 @@ constructor(){
         })
         this.physics.add.overlap(this.Char, this.hitbox2[0], ()=>{
             
-            //this.myObjetoclave.CheckObjetoClave(1);
+            this.myObjetoclave.CheckObjetoClave(1);
             if(this.interact == 0) this.scene.start('escenaTilesets3',{obj:this.myObjetoclave,cx:70, cy:70, dir:3});            
         })
         this.physics.add.overlap(this.Char, this.hitbox3[0], ()=>{
@@ -66,7 +68,12 @@ constructor(){
                     
           this.cameras.main.startFollow(this.Char);      
           this.cameras.main.zoom = 2.2;
-
+        
+        this.enemigo1 = new SlimeEnemigo(this, 100, 1, 1, 50, 110, "pene de plastico", [enemies.botella, enemies.cocacola, enemies.pollo], this.WallLayer);
+        var self = this;
+        this.physics.add.collider(this.Char, this.enemigo1, ()=>{
+            console.log('muereeeeeeee');
+        });
     }
 
 

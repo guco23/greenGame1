@@ -86,11 +86,12 @@ export default class character extends Phaser.GameObjects.Sprite {
 
 		// Ajustamos el "collider" de nuestro caballero
 		this.bodyOffset = this.body.width/4;
-		this.bodyWidth = this.body.width/2;
-		this.bodyHeight = this.body.bodyHeight/2;
+		this.bodyWidth = 16;
+		this.bodyHeight = 25;
 		
 		this.body.setOffset(this.bodyOffset, 0);
 		this.body.width = this.bodyWidth;
+		this.body.height = this.bodyHeight;
 
 	}
 

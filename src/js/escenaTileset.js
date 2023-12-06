@@ -30,6 +30,7 @@ export class EscenaTilesets extends Phaser.Scene {
         this.load.tilemapTiledJSON('Almacen1', 'src/json/Almacen1.json');
         this.load.image('tileset_mercadona', 'assets/images/tilesets/tileset_mercadona.png');
         this.load.image('UI', 'assets/images/UI_dialogo.png');
+        this.load.spritesheet('Slime', 'assets/images/Slime.png', {frameWidth: 16, frameHeight: 16});
         this.load.spritesheet('character', 'assets/images/spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
     }
 
@@ -68,7 +69,9 @@ export class EscenaTilesets extends Phaser.Scene {
           }*/
           
           this.physics.add.overlap(this.Char, this.hitbox[0], ()=>{
-            if(this.interact == 0) this.scene.start('escenaTilesets2', {obj:this.myObjetoclave, cx:30, cy:110,dir:2});
+            if(this.interact == 0){
+                this.scene.start('escenaTilesets2', {obj:this.myObjetoclave, cx:30, cy:110,dir:2});
+            } 
         })
         this.physics.add.overlap(this.Char, this.Hitboxdialogo[0], ()=>{
             this.myObjetoclave. AñadeObjetoClave(1);
@@ -77,44 +80,12 @@ export class EscenaTilesets extends Phaser.Scene {
                 this.Texto = true;
             }            
         })
-
-        //Enemigo de prueba para que Jose se lo goze
-        this.enemigo1 = new SlimeEnemigo(this, 1, 1, "pene de plastico", [enemies.botella, enemies.cocacola, enemies.pollo]);
+        
 
           this.cameras.main.startFollow(this.Char);      
           this.cameras.main.zoom = 2.2;
 
-          /*var objetos = {
-            this.Objets = [];
-		this.Objets[0]={
-            'Nombre': "Nota1",
-            'Pillado': false,            
-            };
-            this.Objets[1]={
-                'Nombre': "Nota2",
-                'Pillado': false,            
-            };
-            this.Objets[2]={
-                'Nombre': "Nota3",
-                'Pillado': false,            
-            };
-            this.Objets[3]={
-                'Nombre': "ValeCajaFuerte",
-                'Pillado': false,            
-            };
-            this.Objets[4]={s
-                'Nombre': "CajaDeHerramientas",
-                'Pillado': false,            
-            };
-            this.Objets[5]={
-                'Nombre': "Madera",
-                'Pillado': false,            
-            };
-            this.Objets[6]={
-                'Nombre': "PlanosPuente",
-                'Pillado': false,            
-            };
-          }*/
+       
             
     }
 
