@@ -84,12 +84,6 @@ export class CombatManager {
         this.actInfo = "";
     }
 
-    /*
-    constructor(scene) {
-        this.combatScene = scene; 
-    }
-    */
-    
     setTeams(enemyTeam, enemySize, playerTeam, teamSize){
         this.enemyTeam = enemyTeam;
         this.enemySize = enemySize;
@@ -150,6 +144,9 @@ export class CombatManager {
         if (action === "attack") {
             this.actInfo += from.name + " attacked " + to.name + " for " + value + " damage.\n";
         }
+        if(action === "crit") {
+            this.actInfo += "It was a critical blow!\n";
+        }
         if (action === "defend") {
             this.actInfo += from.name + " defended and added " + value + " shield.\n";
         }
@@ -158,6 +155,12 @@ export class CombatManager {
         }
         if (action === "dot") {
             this.actInfo += from.name + " suffered " + value + " damage due to negative effects.\n"
+        }
+        if (action === "poison") {
+            this.actInfo += from.name + " applied " + value + " poison to " + to.name + "\n";
+        }
+        if (action === "stunned") {
+            this.actInfo += from.name + " became stunned!";
         }
         if (action === "stun") {
             this.actInfo += from.name + " was stunned and couldn't act.\n"
@@ -172,7 +175,6 @@ export class CombatManager {
     }
 
     nextTurn() {
-        console.log(this.current + " " + this.whoseTurn);
         if (this.endCombat === true) {
             //Método para acabar el combate, dar recompensas, volver a la pantalla principal, etc.
         }

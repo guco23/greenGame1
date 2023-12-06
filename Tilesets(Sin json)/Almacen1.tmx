@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="9" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="8">
+ <editorsettings>
+  <export target="../src/json/Almacen1.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" source="Mercadona.tsx"/>
+ <layer id="2" name="Suelo" width="9" height="13">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,
+0,2,37,37,37,37,3,0,0,
+0,18,1,1,1,1,35,0,0,
+0,18,1,1,1,1,35,0,0,
+0,18,1,1,1,1,1,3,0,
+0,18,1,1,1,1,1,15,0,
+0,18,1,1,1,1,1,20,0,
+0,18,1,1,1,1,35,0,0,
+0,18,1,1,1,1,35,0,0,
+0,19,36,36,36,36,20,0,0,
+0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="7" name="Cambio Escena Objetos">
+  <object id="1" x="119.691" y="116.285" width="12.8936" height="12.6503"/>
+  <object id="3" x="118.475" y="112.636" width="21.1649" height="15.5696"/>
+ </objectgroup>
+ <objectgroup id="8" name="Dialogo">
+  <object id="5" x="16.3046" y="48.215" width="16.7704" height="15.8387"/>
+ </objectgroup>
+ <layer id="4" name="Paredes" width="9" height="13">
+  <data encoding="csv">
+4,5,5,5,5,5,5,4,0,
+6,7,7,7,7,7,9,6,0,
+6,7,7,8,7,7,7,6,0,
+6,0,0,0,0,0,0,4,0,
+6,0,0,0,0,0,0,7,4,
+6,0,0,0,0,0,0,7,6,
+6,0,0,0,0,0,0,0,6,
+6,0,0,0,0,0,0,0,6,
+6,0,0,0,0,0,0,0,4,
+6,0,0,0,0,0,0,4,0,
+6,0,0,0,0,0,0,6,0,
+6,0,0,0,0,0,0,6,0,
+4,5,5,5,5,5,5,4,0
+</data>
+ </layer>
+</map>

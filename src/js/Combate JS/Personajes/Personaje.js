@@ -48,16 +48,18 @@ export class Personaje {
 
         this.targetKind = 0;
 
+        this.personality = "Green";
+
         //this.currentCombat = combatManager;
     }
 
-    /*constructor(idn, combatManager) {
+    /*constructor(idn) {
         this.name = idn.name;
 
         this.atk = idn.atk;
         this.def = idn.def;
         this.maxHp = idn.maxHp;
-        this.currentHp = this.maxHp;
+        this.currentHp = idn.currentHp;
 
         this.escudo = 0;
         this.living = true;
@@ -65,10 +67,16 @@ export class Personaje {
         this.dot = 0;
         this.status = 0;
         this.accion = 0;
-
-        this.currentCombat = combatManager;
     }*/
 
+    applyDot(value) {
+        this.dot += value;
+    }
+
+    stun() {
+        this.stunned = true;
+        this.currentCombat.addInfo("stunned", 0, this, null);
+    }
 
     startCombat(combatManager) {
         this.currentCombat = combatManager;
@@ -116,24 +124,28 @@ export class Personaje {
     sufferDamage(dmg) {
         let damage = Math.floor(dmg * this.def)
         if(damage < 1) {
-            this.currentHp--;
+            if(this.escudo > 0) {
+                this.escudo--;
+            }
+            else {
+                this.currentHp--;
+            }
             return 1;
         }
         else {
-            this.currentHp -= damage;
+            if(this.escudo > 0) {
+                this.escudo -= damage;
+                if(this.escudo < 0) {
+                    this.currentHp -= this.escudo;
+                    this.escudo = 0;
+                }
+            }
+            else{
+                this.currentHp -= damage;
+            }
             return damage;
         }
-        //this.checkAlive();
     }
-    
-    /*shiftAction(direction) {
-        if(direction < 0 && this.action > 0) {
-            this.action--;
-        }
-        else if (direction > 0 && this.accion < 2) {
-            this.action++;
-        }
-    }*/
 
     attack(target) {
         //this.ableToAct = false;
@@ -143,24 +155,12 @@ export class Personaje {
         this.endTurn();
     }
 
-    /*selectAction() {
-        if(this.accion === 0) {
-            this.status = 1;
-            this.currentCombat.setTarget(false, false);
-        }
-        else if (this.accion === 1) {
-            this.status = 2;
-        }
-        else if (this.accion === 2) {
-            //this.ableToAct = false;
-            this.gainShield(this.def * 100);
-            this.currentCombat.changeSp(1);
-            this.endTurn();
-        }
-    }*/
-
     special(target) {
         //Definido en subclases
+    }
+
+    defend() {
+        this.gainShield(this.def);
     }
 
     takeTurn() {
@@ -170,40 +170,4 @@ export class Personaje {
             this.endTurn();
         }
     }
-/*
-    eventHandler(event) {
-        if(this.ableToAct === true) {
-            if(this.status === 0) {
-                if(event === 'up') {
-                    this.shiftAction(-1);
-                }
-                else if(event === 'down') {
-                    this.shiftAction(1);
-                }
-                else if(event === 'select') {
-                    this.selectAction();
-                }
-            }   
-            else if(this.status === 1) {
-                if(event === 'right') {
-                    this.currentCombat.shiftTarget(1);
-                }
-                else if(event === 'left') {
-                    this.currentCombat.shiftTarget(-1);
-                }
-                else if(event === 'select') {
-                    this.attack();
-                }
-                else if (event === 'back') {
-                    this.status === 0;
-                }
-            }      
-            else if(this.status === 2) {
-                if (event === 'back') {
-                    this.status === 0;
-                }
-            }
-        }
-    }
-    */
 }
