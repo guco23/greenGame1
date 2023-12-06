@@ -8,14 +8,17 @@ export class EscenaTilesets extends Phaser.Scene {
     //cargar aqui los datos de la escena.
     constructor(){
         super('escenaTilesets')
-        console.log("xd");
-        if (this.myObjetoclave == null)
         this.myObjetoclave = new ObjetoClave();
+        this.cx = 50;  
+        this.cy = 110;
+        this.dir = 2;
     }
     init(data){
         if (data.obj != null){
             this.myObjetoclave = data.obj;
-            console.log("tu mama 1");
+            this.cx = data.cx;  
+            this.cy = data.cy;       
+            this.dir = data.dir;     
         }
     }
 
@@ -52,7 +55,7 @@ export class EscenaTilesets extends Phaser.Scene {
           this.Hitboxdialogo = this.map.createFromObjects('Dialogo', {id:5});
           this.physics.add.existing(this.Hitboxdialogo[0]);
 
-          this.Char = new character(this, 70, 100);
+          this.Char = new character(this, this.cx, this.cy, this.dir);
           this.physics.world.enable(this.Char);
           this.physics.add.collider(this.Char, this.WallLayer);
           this.Texto = false;
@@ -63,7 +66,7 @@ export class EscenaTilesets extends Phaser.Scene {
           }*/
           
           this.physics.add.overlap(this.Char, this.hitbox[0], ()=>{
-            if(this.interact == 0) this.scene.start('escenaTilesets2', {obj:this.myObjetoclave});
+            if(this.interact == 0) this.scene.start('escenaTilesets2', {obj:this.myObjetoclave, cx:30, cy:110,dir:2});
         })
         this.physics.add.overlap(this.Char, this.Hitboxdialogo[0], ()=>{
             this.myObjetoclave. AñadeObjetoClave(1);

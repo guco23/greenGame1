@@ -9,7 +9,9 @@ constructor(){
 }
 init(data){
     this.myObjetoclave = data.obj;
-
+    this.cx = data.cx;  
+    this.cy = data.cy;       
+    this.dir = data.dir;  
 }
     preload() {
         /*this.load.image('javier', RAIZ_IMAGENES + 'javier.jpg');
@@ -41,7 +43,7 @@ init(data){
           this.hitbox1 = this.map.createFromObjects('Transiciones', {id:2});          
           this.physics.add.existing(this.hitbox1[0]);
 
-          this.Char = new character(this, 70, 100);
+          this.Char = new character(this, this.cx, this.cy,this.dir);
           this.physics.world.enable(this.Char);
           this.physics.add.collider(this.Char, this.WallLayer);
           /*var self=this;
@@ -50,8 +52,7 @@ init(data){
             else console.log("No :C");
           }*/
           this.physics.add.overlap(this.Char, this.hitbox1[0], ()=>{
-            if(this.interact == 0) this.scene.start('escenaTilesets2',{obj:this.myObjetoclave});
-            else console.log("No :C");
+            if(this.interact == 0) this.scene.start('escenaTilesets2',{obj:this.myObjetoclave,cx:565, cy:120, dir:3});            
         })
                     
           this.cameras.main.startFollow(this.Char);      
