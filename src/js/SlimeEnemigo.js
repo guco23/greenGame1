@@ -1,5 +1,4 @@
-
-import { Enemigo } from "./Combate JS/Enemigos/Enemigo.js"
+import { RAIZ_IMAGENES } from "./constants.js";
 
 export default class SlimeEnemigo extends Phaser.GameObjects.Sprite {
 	/**
@@ -24,7 +23,7 @@ export default class SlimeEnemigo extends Phaser.GameObjects.Sprite {
 		};
 		this.scene.add.existing(this);
 		scene.physics.add.existing(this);
-        this.image = this.load.image('Slime', RAIZ_IMAGENES + "Slime.png");
+        this.image = scene.load.image('Slime', RAIZ_IMAGENES + "Slime.png");
         this.image.scale = 1;
         
         //Ajustamos el collider del slime

@@ -3,6 +3,8 @@ import character from "./character.js";
 import { RAIZ_IMAGENES } from "./constants.js";
 import dialogo from "./dialogo.js";
 import ObjetoClave from "./ObjetoClave.js";
+import { enemies } from "../../assets/EnemyInfo/Enemies.js";
+import SlimeEnemigo from "./SlimeEnemigo.js"
 
 export class EscenaTilesets extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -75,7 +77,10 @@ export class EscenaTilesets extends Phaser.Scene {
                 this.Texto = true;
             }            
         })
-                    
+
+        //Enemigo de prueba para que Jose se lo goze
+        this.enemigo1 = new SlimeEnemigo(this, 1, 1, "pene de plastico", [enemies.botella, enemies.cocacola, enemies.pollo]);
+
           this.cameras.main.startFollow(this.Char);      
           this.cameras.main.zoom = 2.2;
 
