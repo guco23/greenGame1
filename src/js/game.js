@@ -26,7 +26,7 @@ var config = {
             right: true
         }
     },
-    scene: [CombateEscena, EscenaTilesets, EscenaTilesets2,EscenaTilesets4,EscenaTilesets3], //Probando la escena de combate
+    scene: [EscenaTilesets, EscenaTilesets2,EscenaTilesets4,EscenaTilesets3, CombateEscena], //Probando la escena de combate
     parent: 'espacio-juego' //El elemento de html sobre el que se colocará el "canvas" de Phaser
 };
 
