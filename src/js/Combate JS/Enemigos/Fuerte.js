@@ -32,7 +32,7 @@ export class Fuerte extends Enemigo {
     }
 
     selectAction() {
-        let rand; //Hacer algo random entre 1 y 3
+        let rand = this.getRandomInt(3);
         if(this.currentHP < this.maxHp / 2) {
             if(rand === 0) {
                 this.attack();
@@ -48,6 +48,17 @@ export class Fuerte extends Enemigo {
             else {
                 this.attack();
             }
+        }
+    }
+
+    takeTurn() {
+        if(this.stunned === false) {
+            this.selectAction();
+        }
+        else {
+            this.stunned = false;
+            this.currentCombat.addInfo("stun", 0, this,  null);
+            this.endTurn();
         }
     }
 }

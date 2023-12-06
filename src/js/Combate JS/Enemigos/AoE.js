@@ -35,7 +35,7 @@ export class AoE extends Enemigo {
 
     takeTurn() {
         if(this.stunned === false) {
-            this.attack(this.currentCombat.playerTeam);
+            this.selectAction();
         }
         else {
             this.stunned = false;

@@ -99,50 +99,12 @@ export class CombatManager {
         else if (this.spPoints > this.teamSize) this.spPoints = this.teamSize;
     }
 
-    /*tryTarget(num, dir) {
-        if (this.whereAim) {
-            if (num >= this.teamSize && num < 0) {
-                return false;
-            }
-            else if (this.playerTeam[num].living === true) {
-                this.target = num;
-                return true;
-            }
-            else {
-                return this.tryTarget(num + dir, dir);
-            }
-        }
-        else {
-            if (num >= this.enemySize && num < 0) {
-                return false;
-            }
-            else if (this.enemyTeam[num].living === true) {
-                this.target = num;
-                return true;
-            }
-            else {
-                return this.tryTarget(num + dir, dir);
-            }
-        }
-    }
-
-    setTarget(aim, all) {
-        this.whereAim = aim;
-        this.targetAll = all;
-        this.tryTarget(0);
-    }
-
-    shiftTarget(direction) {
-        this.tryTarget(this.target, direction);
-    }
-
-    cancelTarget() {
-        target = -1;
-    }*/
-
     addInfo(action, value, from, to) {
         if (action === "attack") {
             this.actInfo += from.name + " attacked " + to.name + " for " + value + " damage.\n";
+        }
+        if(action === "aoeHeal") {
+            this.actInfo += from.name + " healed their allies!\n";
         }
         if(action === "crit") {
             this.actInfo += "It was a critical blow!\n";
@@ -160,7 +122,7 @@ export class CombatManager {
             this.actInfo += from.name + " applied " + value + " poison to " + to.name + "\n";
         }
         if (action === "stunned") {
-            this.actInfo += from.name + " became stunned!";
+            this.actInfo += from.name + " became stunned!\n";
         }
         if (action === "stun") {
             this.actInfo += from.name + " was stunned and couldn't act.\n"

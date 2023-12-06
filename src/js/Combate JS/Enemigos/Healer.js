@@ -10,6 +10,7 @@ export class Healer extends Enemigo {
                 current.heal(Math.floor((this.maxHp / 10) + this.def));
             }
         }
+        this.currentCombat.addInfo("aoeHeal", 0, this, null);
     }
 
     teamHealth() {
@@ -32,7 +33,18 @@ export class Healer extends Enemigo {
             this.healing();
         }
         else {
-            this.attack();
+            this.attack(this.currentCombat.playerTeam);
+        }
+    }
+
+    takeTurn() {
+        if(this.stunned === false) {
+            this.selectAction();
+        }
+        else {
+            this.stunned = false;
+            this.currentCombat.addInfo("stun", 0, this,  null);
+            this.endTurn();
         }
     }
 }
