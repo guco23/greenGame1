@@ -30,8 +30,7 @@ export default class ObjetoClave {
             this.Objets[6]={
                 'Nombre': "PlanosPuente",
                 'Pillado': false,            
-            };
-            console.log("AAAAAAAAAA");
+            };            
             this.AñadeObjetoClave = function(aux){
                 console.log("tocame uwu");
                 this.Objets[aux].Pillado = true;

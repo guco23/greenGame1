@@ -16,8 +16,10 @@ constructor(){
     }
 
     init(data){
-        this.myObjetoclave = data.obj;
-        console.log("tu mama 2");
+        this.myObjetoclave = data.obj;      
+        this.cx = data.cx;  
+        this.cy = data.cy;
+        this.dir = data.dir;
 
     }
 
@@ -47,27 +49,19 @@ constructor(){
           this.hitbox3 = this.map.createFromObjects('Transiciones', {id:2});
           this.physics.add.existing(this.hitbox3[0]);
 
-          this.Char = new character(this, 70, 100);
+          this.Char = new character(this, this.cx, this.cy, this.dir);
           this.physics.world.enable(this.Char);
           this.physics.add.collider(this.Char, this.WallLayer);
-          /*var self=this;
-          var onCollision = function(){                   
-            if(self.interact == 0) console.log("Hay colision");
-            else console.log("No :C");
-          }*/
           this.physics.add.overlap(this.Char, this.hitbox1[0], ()=>{
-            if(this.interact == 0) this.scene.start('escenaTilesets',{obj:this.myObjetoclave});
-            else console.log("No :C");
+            if(this.interact == 0) this.scene.start('escenaTilesets',{obj:this.myObjetoclave,cx:105, cy:110, dir:0});            
         })
         this.physics.add.overlap(this.Char, this.hitbox2[0], ()=>{
             
-            this.myObjetoclave.CheckObjetoClave(1);
-            if(this.interact == 0) this.scene.start('escenaTilesets3',{obj:this.myObjetoclave});
-            else console.log("No :C");
+            //this.myObjetoclave.CheckObjetoClave(1);
+            if(this.interact == 0) this.scene.start('escenaTilesets3',{obj:this.myObjetoclave,cx:70, cy:70, dir:3});            
         })
         this.physics.add.overlap(this.Char, this.hitbox3[0], ()=>{
-            if(this.interact == 0) this.scene.start('escenaTilesets4',{obj:this.myObjetoclave});
-            else console.log("No :C");
+            if(this.interact == 0) this.scene.start('escenaTilesets4',{obj:this.myObjetoclave,cx:165, cy:162, dir:1});            
         })
                     
           this.cameras.main.startFollow(this.Char);      

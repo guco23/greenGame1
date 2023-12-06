@@ -4,8 +4,8 @@ export default class character extends Phaser.GameObjects.Sprite {
 	 * @param {number} x - coordenada x
 	 * @param {number} y - coordenada y
 	 */
-	constructor(scene, x, y) {
-		super(scene, x, y, 'character');
+	constructor(scene, x, y, dir) {
+		super(scene, x, y, dir, 'character');
 		this.speed = 140; // Nuestra velocidad de movimiento será 140
 		this.CanMove = true;
 		this.MovingX=0;
@@ -22,6 +22,8 @@ export default class character extends Phaser.GameObjects.Sprite {
 		this.dKey = this.scene.input.keyboard.addKey('D'); //derecha		
         
 		scene.physics.add.existing(this);
+		if(this.scene.anims.existing('idleLeft')) console.log("AAAAAAAAAA");
+		
 		this.scene.anims.create({
 			key: 'idleLeft',
 			frames: scene.anims.generateFrameNumbers('character', {start:6, end:6}),
@@ -70,7 +72,11 @@ export default class character extends Phaser.GameObjects.Sprite {
 			frameRate: 5,
 			repeat: -1
 		});
-		this.play('idleDown');
+		if(dir==0)this.play('idleLeft');
+		else if(dir==1)this.play('idleUp');
+		else if(dir==2)this.play('idleRight');
+		else if(dir==3)this.play('idleDown');
+		else this.play('idleDown');
 		this.anims.stop();
 
 
