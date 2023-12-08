@@ -1,4 +1,4 @@
-import character from "./character.js";
+import Character from "./Character.js";
 import { RAIZ_IMAGENES } from "./constants.js";
 import ObjetosClave from "./ObjetoClave.js";
 export class EscenaTilesets3 extends Phaser.Scene {
@@ -42,19 +42,19 @@ init(data){
           this.hitbox1 = this.map.createFromObjects('Transicion', {id:1});          
           this.physics.add.existing(this.hitbox1[0]);
 
-          this.Char = new character(this, this.cx, this.cy,this.dir);
-          this.physics.world.enable(this.Char);
-          this.physics.add.collider(this.Char, this.WallLayer);
+          this.character = new Character(this, this.cx, this.cy,this.dir);
+          this.physics.world.enable(this.character);
+          this.physics.add.collider(this.character, this.WallLayer);
           /*var self=this;
           var onCollision = function(){                   
             if(self.interact == 0) console.log("Hay colision");
             else console.log("No :C");
           }*/
-          this.physics.add.overlap(this.Char, this.hitbox1[0], ()=>{
+          this.physics.add.overlap(this.character, this.hitbox1[0], ()=>{
             if(this.interact == 0) this.scene.start('escenaTilesets2',{obj:this.myObjetoclave,cx:295, cy:160, dir:1});            
         })
                     
-          this.cameras.main.startFollow(this.Char);      
+          this.cameras.main.startFollow(this.character);      
           this.cameras.main.zoom = 2.2;
 
     }
