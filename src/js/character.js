@@ -1,4 +1,4 @@
-export default class character extends Phaser.GameObjects.Sprite {
+export default class Character extends Phaser.GameObjects.Sprite {
 	/**
 	 * @param {Scene} scene - escena en la que aparece
 	 * @param {number} x - coordenada x
@@ -6,14 +6,21 @@ export default class character extends Phaser.GameObjects.Sprite {
 	 */
 	constructor(scene, x, y, dir) {
 		super(scene, x, y, dir, 'character');
+		this.scene = scene;
+		this.x = x;
+		this.y = y;
+		this.dir = dir;
 		this.speed = 140; // Nuestra velocidad de movimiento será 140
 		this.CanMove = true;
 		this.MovingX=0;
 		this.MovingY=0;
+		
+		var self = this;
 		this.Activate = function(){
 			this.CanMove = !this.CanMove;
 		};
-		this.scene.add.existing(this); //Añadimos el caballero a la escena	        
+
+		self.scene.add.existing(this); //Añadimos el caballero a la escena	      
 
 		// Seteamos las teclas para mover al personaje
 		this.wKey = this.scene.input.keyboard.addKey('W'); //saltar
@@ -21,60 +28,60 @@ export default class character extends Phaser.GameObjects.Sprite {
 		this.sKey = this.scene.input.keyboard.addKey('S'); //parar animación
 		this.dKey = this.scene.input.keyboard.addKey('D'); //derecha		
         
-		scene.physics.add.existing(this);
+		scene.physics.add.existing(this);  
 		
 		this.scene.anims.create({
 			key: 'idleLeft',
-			frames: scene.anims.generateFrameNumbers('character', {start:6, end:6}),
-			frameRate: 5,
+			frames: scene.anims.generateFrameNumbers('character', {start:8, end:8}),
+			frameRate: 10,
 			repeat: 0
 		});
 		this.scene.anims.create({
 			key: 'idleRight',
-			frames: scene.anims.generateFrameNumbers('character', {start:9, end:9}),
-			frameRate: 5,
+			frames: scene.anims.generateFrameNumbers('character', {start:12, end:12}),
+			frameRate: 10,
 			repeat: 0
 		});
 		this.scene.anims.create({
 			key: 'idleUp',
-			frames: scene.anims.generateFrameNumbers('character', {start:3, end:3}),
-			frameRate: 5,
+			frames: scene.anims.generateFrameNumbers('character', {start:4, end:4}),
+			frameRate: 10,
 			repeat: 0
 		});
 		this.scene.anims.create({
 			key: 'idleDown',
 			frames: scene.anims.generateFrameNumbers('character', {start:0, end:0}),
-			frameRate: 5,
+			frameRate: 10,
 			repeat: 0
 		});
 		this.scene.anims.create({
 			key: 'moveLeft',
-			frames: scene.anims.generateFrameNumbers('character', {start:7, end:8}),
-			frameRate: 5,
+			frames: scene.anims.generateFrameNumbers('character', {start:8, end:11}),
+			frameRate: 10,
 			repeat: -1
 		});		
 		this.scene.anims.create({
 			key: 'moveRight',
-			frames: scene.anims.generateFrameNumbers('character', {start:10, end:11}),
-			frameRate: 5,
+			frames: scene.anims.generateFrameNumbers('character', {start:12, end:15}),
+			frameRate: 10,
 			repeat: -1
 		});
 		this.scene.anims.create({
 			key: 'moveUp',
-			frames: scene.anims.generateFrameNumbers('character', {start:4, end:5}),
-			frameRate: 5,
+			frames: scene.anims.generateFrameNumbers('character', {start:4, end:7}),
+			frameRate: 10,
 			repeat: -1
 		});
 		this.scene.anims.create({
 			key: 'moveDown',
-			frames: scene.anims.generateFrameNumbers('character', {start:1, end:2}),
-			frameRate: 5,
+			frames: scene.anims.generateFrameNumbers('character', {start:0, end:3}),
+			frameRate: 10,
 			repeat: -1
 		});
-		if(dir==0)this.play('idleLeft');
-		else if(dir==1)this.play('idleUp');
-		else if(dir==2)this.play('idleRight');
-		else if(dir==3)this.play('idleDown');
+		if(this.dir==0)this.play('idleLeft');
+		else if(this.dir==1)this.play('idleUp');
+		else if(this.dir==2)this.play('idleRight');
+		else if(this.dir==3)this.play('idleDown');
 		else this.play('idleDown');
 		this.anims.stop();
 
@@ -93,6 +100,10 @@ export default class character extends Phaser.GameObjects.Sprite {
 		this.body.width = this.bodyWidth;
 		this.body.height = this.bodyHeight;
 
+	}
+
+	create(){
+		
 	}
 
 	/**

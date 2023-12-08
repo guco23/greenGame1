@@ -11,10 +11,11 @@ export default class SlimeEnemigo extends Phaser.GameObjects.Sprite {
 	 * @param {string} objeto - objeto a dar despues del combate (cambiar a la clase de inventario por favor)
      * @param {Pared} sceneWallLayer - capa de pared que le pasamos desde la escena para las colisiones con estas
      * @param {Player} player - player que le pasamos desde la escena para las colisiones con este
+     * @param {GameData} gameData - instancia de la clase GameData que le pasamos desde la escena para enviar los datos correspondientes a la escena de combate al iniciarse
      * @param {Enemigo[]} enemigos - array con enemigos
 	 */
-	constructor(scene, speed, x, y, PosIx, PosIy, objeto, enemigos, sceneWallLayer, player) {
-		super(scene, speed, x, y, PosIx, PosIy, objeto, enemigos, sceneWallLayer, player, 'Slime');
+	constructor(scene, speed, x, y, PosIx, PosIy, objeto, enemigos, sceneWallLayer, player, gameData) {
+		super(scene, speed, x, y, PosIx, PosIy, objeto, enemigos, sceneWallLayer, player, gameData, 'Slime');
         
         this.speed = speed;
         this.myScene = scene;
@@ -24,6 +25,7 @@ export default class SlimeEnemigo extends Phaser.GameObjects.Sprite {
         this.y = PosIy;
         this.MovingX = 0;
         this.MovingY = 0;
+        this.gameData = gameData;
 
         if (x >= 1) this.MovingX = 1;
         else if (x <= -1) this.MovingX = -1;
@@ -49,7 +51,7 @@ export default class SlimeEnemigo extends Phaser.GameObjects.Sprite {
         });
         scene.physics.add.collider(this, this.Player, ()=>{
             console.log("muereeeee hdp");
-            this.myScene.scene.start('combatScene');
+            this.myScene.scene.start('combatScene',{obj:self.gameData});
         });
         //Ajustamos el collider del slime
         this.bodyOffset = 0;

@@ -1,8 +1,8 @@
 //import {Scene} from 'phaser';
-import character from "./character.js"; 
+import Character from "./Character.js"; 
 import { RAIZ_IMAGENES } from "./constants.js";
 import dialogo from "./dialogo.js";
-import ObjetoClave from "./ObjetoClave.js";
+import GameData from "./GameData.js";
 import { enemies } from "../../assets/EnemyInfo/Enemies.js";
 import SlimeEnemigo from "./SlimeEnemigo.js"
 
@@ -10,14 +10,14 @@ export class EscenaTilesets extends Phaser.Scene {
     //cargar aqui los datos de la escena.
     constructor(){
         super('escenaTilesets')
-        this.myObjetoclave = new ObjetoClave();
+        this.myGameData = new GameData();
         this.cx = 50;  
         this.cy = 110;
         this.dir = 2;
     }
     init(data){
         if (data.obj != null){
-            this.myObjetoclave = data.obj;
+            this.myGameData = data.obj;
             this.cx = data.cx;  
             this.cy = data.cy;       
             this.dir = data.dir;     
@@ -58,9 +58,9 @@ export class EscenaTilesets extends Phaser.Scene {
           this.Hitboxdialogo = this.map.createFromObjects('Dialogo', {id:5});
           this.physics.add.existing(this.Hitboxdialogo[0]);
 
-          this.Char = new character(this, this.cx, this.cy, this.dir);
-          this.physics.world.enable(this.Char);
-          this.physics.add.collider(this.Char, this.WallLayer);
+          this.character = new Character(this, this.cx, this.cy, this.dir);
+          this.physics.world.enable(this.character);
+          this.physics.add.collider(this.character, this.WallLayer);
           this.Texto = false;
           /*var self=this;
           var onCollision = function(){                   
@@ -68,23 +68,23 @@ export class EscenaTilesets extends Phaser.Scene {
             else console.log("No :C");
           }*/
           
-          this.physics.add.overlap(this.Char, this.hitbox[0], ()=>{
+          this.physics.add.overlap(this.character, this.hitbox[0], ()=>{
             if(this.interact == 0){
-                this.scene.start('escenaTilesets2', {obj:this.myObjetoclave, cx:30, cy:110,dir:2});
+                this.scene.start('escenaTilesets2', {obj:this.myGameData, cx:30, cy:110,dir:2});
             } 
         })
-        this.physics.add.overlap(this.Char, this.Hitboxdialogo[0], ()=>{
-            this.myObjetoclave. AñadeObjetoClave(1);
+        this.physics.add.overlap(this.character, this.Hitboxdialogo[0], ()=>{
+            this.myGameData.AñadeObjetoClave(1);
             if(this.interact == 0 && !this.Texto) {                
-                new dialogo(this, this.Char, ["Queso", "Pimiento", "Pimsahbhsahbiento", "Pimientoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]);                
+                new dialogo(this, this.character, ["Queso", "Pimiento", "Pimsahbhsahbiento", "Pimientoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]);                
                 this.Texto = true;
             }            
         })
         
 
-          this.cameras.main.startFollow(this.Char);      
+          this.cameras.main.startFollow(this.character);      
           this.cameras.main.zoom = 2.2;
-
+        this.enemigo1 = new SlimeEnemigo(this, 0, 0, 0, 50, 140, "pene de plastico", [enemies.botella, enemies.cocacola, enemies.pollo], this.WallLayer, this.character, this.myGameData);
        
             
     }

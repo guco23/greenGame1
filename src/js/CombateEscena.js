@@ -9,6 +9,7 @@ import { SelectorPersonajes } from "./HUDElems/SelectorPersonajes.js";
 import { CombatManager } from "./Combate JS/CombatManager.js";
 import { enemies } from "../../assets/EnemyInfo/Enemigos Prueba/Dragon.js";
 import { CharacterArray } from "./HUDElems/ScenePersonaje.js";
+import GameData from "./GameData.js";
 
 export class CombateEscena extends Phaser.Scene {
     //CombatManager combatManager;
@@ -16,6 +17,10 @@ export class CombateEscena extends Phaser.Scene {
     constructor(){
         super('combatScene')
     }
+    init(data){
+        this.gameData = data.obj;
+    }
+    
     preload() {
         //La escena va a recibir combat manager y a partir de sus datos va a crear la escena
         //Primero, tomará un array con los enemigos y los aliados a partir de los cuales creará los objetos en pantalla
@@ -191,6 +196,10 @@ export class CombateEscena extends Phaser.Scene {
         }, this);
 
         this.combatManager.nextTurn();
+    }
+
+    update(){
+        this.gameData.CheckObjetoClave(1);
     }
 
     ActualizarEscena(info) {

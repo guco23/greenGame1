@@ -1,7 +1,8 @@
-export default class ObjetoClave {   
+export default class GameData {   
     
 	constructor() {        
         //this.scene.add.existing(this);
+        //Array de objetos clave
         this.Objets = [];
 		this.Objets[0]={
             'Nombre': "Nota1",

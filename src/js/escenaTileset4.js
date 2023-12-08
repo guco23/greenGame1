@@ -1,6 +1,6 @@
-import character from "./character.js";
+import Character from "./Character.js";
 import { RAIZ_IMAGENES } from "./constants.js";
-import ObjetoClave from "./ObjetoClave.js";
+import GameData from "./GameData.js";
 
 export class EscenaTilesets4 extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -8,7 +8,7 @@ constructor(){
     super('escenaTilesets4')
 }
 init(data){
-    this.myObjetoclave = data.obj;
+    this.myGameData = data.obj;
     this.cx = data.cx;  
     this.cy = data.cy;       
     this.dir = data.dir;  
@@ -43,19 +43,19 @@ init(data){
           this.hitbox1 = this.map.createFromObjects('Transiciones', {id:2});          
           this.physics.add.existing(this.hitbox1[0]);
 
-          this.Char = new character(this, this.cx, this.cy,this.dir);
-          this.physics.world.enable(this.Char);
-          this.physics.add.collider(this.Char, this.WallLayer);
+          this.character = new Character(this, this.cx, this.cy,this.dir);
+          this.physics.world.enable(this.character);
+          this.physics.add.collider(this.character, this.WallLayer);
           /*var self=this;
           var onCollision = function(){                   
             if(self.interact == 0) console.log("Hay colision");
             else console.log("No :C");
           }*/
-          this.physics.add.overlap(this.Char, this.hitbox1[0], ()=>{
-            if(this.interact == 0) this.scene.start('escenaTilesets2',{obj:this.myObjetoclave,cx:565, cy:120, dir:3});            
+          this.physics.add.overlap(this.character, this.hitbox1[0], ()=>{
+            if(this.interact == 0) this.scene.start('escenaTilesets2',{obj:this.myGameData,cx:565, cy:120, dir:3});            
         })
                     
-          this.cameras.main.startFollow(this.Char);      
+          this.cameras.main.startFollow(this.character);      
           this.cameras.main.zoom = 2.2;
 
     }
