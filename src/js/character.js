@@ -21,8 +21,7 @@ export default class character extends Phaser.GameObjects.Sprite {
 		this.sKey = this.scene.input.keyboard.addKey('S'); //parar animación
 		this.dKey = this.scene.input.keyboard.addKey('D'); //derecha		
         
-		scene.physics.add.existing(this);
-		if(this.scene.anims.existing('idleLeft')) console.log("AAAAAAAAAA");
+		scene.physics.add.existing(this);		
 		
 		this.scene.anims.create({
 			key: 'idleLeft',
