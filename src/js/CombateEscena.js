@@ -13,6 +13,9 @@ import { CharacterArray } from "./HUDElems/ScenePersonaje.js";
 export class CombateEscena extends Phaser.Scene {
     //CombatManager combatManager;
     //cargar aqui los datos de la escena.
+    constructor(){
+        super('combatScene')
+    }
     preload() {
         //La escena va a recibir combat manager y a partir de sus datos va a crear la escena
         //Primero, tomará un array con los enemigos y los aliados a partir de los cuales creará los objetos en pantalla

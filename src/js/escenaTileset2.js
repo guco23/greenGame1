@@ -69,11 +69,7 @@ constructor(){
           this.cameras.main.startFollow(this.Char);      
           this.cameras.main.zoom = 2.2;
         
-        this.enemigo1 = new SlimeEnemigo(this, 100, 1, 1, 50, 110, "pene de plastico", [enemies.botella, enemies.cocacola, enemies.pollo], this.WallLayer);
-        var self = this;
-        this.physics.add.collider(this.Char, this.enemigo1, ()=>{
-            console.log('muereeeeeeee');
-        });
+        this.enemigo1 = new SlimeEnemigo(this, 100, 1, 1, 50, 110, "pene de plastico", [enemies.botella, enemies.cocacola, enemies.pollo], this.WallLayer, this.Char);
     }
 
 
