@@ -1,4 +1,4 @@
-export default class Character extends Phaser.GameObjects.Sprite {
+export default class character extends Phaser.GameObjects.Sprite {
 	/**
 	 * @param {Scene} scene - escena en la que aparece
 	 * @param {number} x - coordenada x

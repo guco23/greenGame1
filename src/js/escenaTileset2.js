@@ -1,4 +1,4 @@
-import Character from "./Character.js";
+import character from "./character.js";
 import { RAIZ_IMAGENES } from "./constants.js";
 import ObjetoClave from "./ObjetoClave.js";
 import { enemies } from "../../assets/EnemyInfo/Enemies.js";
@@ -51,26 +51,25 @@ constructor(){
           this.hitbox3 = this.map.createFromObjects('Transiciones', {id:2});
           this.physics.add.existing(this.hitbox3[0]);
 
-          this.character = new Character(this, this.cx, this.cy, this.dir);
-          this.physics.world.enable(this.character);
-          this.physics.add.collider(this.character, this.WallLayer);
-          this.physics.add.overlap(this.character, this.hitbox1[0], ()=>{
+          this.Char = new character(this, this.cx, this.cy, this.dir);
+          this.physics.world.enable(this.Char);
+          this.physics.add.collider(this.Char, this.WallLayer);
+          this.physics.add.overlap(this.Char, this.hitbox1[0], ()=>{
             if(this.interact == 0) this.scene.start('escenaTilesets',{obj:this.myObjetoclave,cx:105, cy:110, dir:0});            
         })
-        this.physics.add.overlap(this.character, this.hitbox2[0], ()=>{
+        this.physics.add.overlap(this.Char, this.hitbox2[0], ()=>{
             
             this.myObjetoclave.CheckObjetoClave(1);
             if(this.interact == 0) this.scene.start('escenaTilesets3',{obj:this.myObjetoclave,cx:70, cy:70, dir:3});            
         })
-        this.physics.add.overlap(this.character, this.hitbox3[0], ()=>{
+        this.physics.add.overlap(this.Char, this.hitbox3[0], ()=>{
             if(this.interact == 0) this.scene.start('escenaTilesets4',{obj:this.myObjetoclave,cx:165, cy:162, dir:1});            
         })
                     
-          this.cameras.main.startFollow(this.character);      
+          this.cameras.main.startFollow(this.Char);      
           this.cameras.main.zoom = 2.2;
         
         this.enemigo1 = new SlimeEnemigo(this, 100, 1, 1, 50, 110, "pene de plastico", [enemies.botella, enemies.cocacola, enemies.pollo], this.WallLayer, this.Char);
-
     }
 
 

@@ -1,4 +1,3 @@
-import { CombateEscena } from "./CombateEscena.js";
 import { RAIZ_IMAGENES } from "./constants.js";
 
 export default class SlimeEnemigo extends Phaser.GameObjects.Sprite {
@@ -68,17 +67,8 @@ export default class SlimeEnemigo extends Phaser.GameObjects.Sprite {
 			repeat: 0
 		});
         
-        //El evento de la colisión entre este enemigo y el character
-        this.scene.physics.add.overlap(this.scene.character, this, this.HitCharacter());
+        
 	}
-
-    /**
-     * Método de uso interno para lanzar la escena de combate en caso de colisión con el character
-     */
-    HitCharacter() {
-        this.scene.scene.add('CombateEscena', CombateEscena);
-        this.scene.scene.start('CombateEscena',{objeto:this.objeto, enmigos:this.enemigos, character: this.scene.character});
-    }
 
 	preUpdate() {
         this.play('idle');  
