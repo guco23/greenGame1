@@ -14,72 +14,46 @@ import GameData from "./GameData.js";
 export class CombateEscena extends Phaser.Scene {
     //CombatManager combatManager;
     //cargar aqui los datos de la escena.
-    constructor(){
+    constructor() {
         super('combatScene')
     }
-    init(data){
-        this.gameData = data.obj;
+    init(data) {
+        this.enemigos = data.enemigos;
+        this.objeto = data.objeto;
+        this.aliados = data.gameData.party;
     }
-    
+
     preload() {
-        //La escena va a recibir combat manager y a partir de sus datos va a crear la escena
-        //Primero, tomará un array con los enemigos y los aliados a partir de los cuales creará los objetos en pantalla
-
-        //Placeholders
         //Es importante que los sprites finales tengan la misma resolución
-        //Esto finalmente deberán ser datos traídos del combat manager
-        let imgenemigos = ['furro.jpg', 'furro.jpg', 'profile.png', 'furro.jpg', 'furro.jpg']; //En la version final sacará esto de combatManager
 
-        //Añade las imagenes a la escena como enemigo/aliado y el numero que ocupan en su array{
-        this.load.image('Diego', RAIZ_IMAGENES + "javier.jpg");
-        this.load.image('Pablo', RAIZ_IMAGENES + "javier.jpg");
-        this.load.image('Jose', RAIZ_IMAGENES + "javier.jpg");
-        this.load.image('Batman', RAIZ_IMAGENES + "javier.jpg");
-
-
-        for (let i = 0; i < imgenemigos.length; i++) {
-            this.load.image('enemigo' + i, RAIZ_IMAGENES + imgenemigos[i]);
-        }
+        //Añade las imagenes de los aliados y enemigos
+        this.enemigos.forEach(enemigo => {
+            this.load.image(enemigo.name, RAIZ_IMAGENES + enemigo.imgLink);
+        });
+        this.aliados.forEach(aliado => {
+            this.load.image(aliado.name, RAIZ_IMAGENES + aliado.imgLink);
+        });
         //Carga el fondo, dependerá de la zona del juego en la que nos encontremos
         this.load.image('background', RAIZ_IMAGENES + "combatBackground/combatBackgroundPlaceholder.png");
-
 
     }
 
     //crear aqui los objetos de la escena
     create() {
-        //this.combatManager = new CombatManager(prueba, equipoBase, this);
         this.graphics = this.add.graphics();
-        //Arrays declarados provisionales para guardar los objetos de la escena
-        //En la version final aliados y enemigos serán de combatManager
-        this.aliados = [];
-        this.aliados.push(new Personaje('Diego', 30, 20, 120, 60, this.combatManager));
-        this.aliados.push(new Personaje('Pablo', 30, 20, 140, 70, this.combatManager));
-        this.aliados.push(new Personaje('Jose', 30, 20, 125, 80, this.combatManager));
-        this.aliados.push(new Personaje('Batman', 30, 20, 120, 23, this.combatManager));
-        this.enemigos = [];
-        /*
-        this.enemigos.push(new Enemigo(0, 30, 20, 120, 110));
-        this.enemigos.push(new Enemigo(1, 30, 20, 120, 110));
-        this.enemigos.push(new Enemigo(2, 30, 20, 120, 110));
-        this.enemigos.push(new Enemigo(3, 30, 20, 120, 110));
-        this.enemigos.push(new Enemigo(4, 30, 20, 120, 110));
-        */
-        this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
-        this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
-        this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
-        this.enemigos.push(new Enemigo(enemies.dragon, this.combatManager));
-        //this.enemigos.push(new Enemigo(RobotCat, this.combatManager));
+        console.log(this.aliados);
+        console.log(this.enemigos);
 
         this.combatManager = new CombatManager(this.enemigos, 3, this.aliados, 4, this);
-        console.log(this.aliados.size);
-        for (let i = 0; i < 4; i++) {
+        //Los aliados ya vienen contruídos desde gameData
+        for (let i = 0; i < this.aliados.length; i++) {
             this.aliados[i].startCombat(this.combatManager);
         }
-        for (let i = 0; i < 3; i++) {
+        //Construye los objetos enemigos y los inicializa en el combatManager
+        for (let i = 0; i < this.enemigos.length; i++) {
+            this.enemigos[i] = new Enemigo(this.enemigos[i], this.combatManager);
             this.enemigos[i].startCombat(this.combatManager);
         }
-
 
         let gameWidth = this.game.config.width;
         let gameHeight = this.game.config.height;
@@ -196,10 +170,6 @@ export class CombateEscena extends Phaser.Scene {
         }, this);
 
         this.combatManager.nextTurn();
-    }
-
-    update(){
-        this.gameData.CheckObjetoClave(1);
     }
 
     ActualizarEscena(info) {

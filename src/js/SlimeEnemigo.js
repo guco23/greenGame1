@@ -51,7 +51,7 @@ export default class SlimeEnemigo extends Phaser.GameObjects.Sprite {
         });
         scene.physics.add.collider(this, this.Player, ()=>{
             console.log("muereeeee hdp");
-            this.myScene.scene.start('combatScene',{obj:self.gameData});
+            this.myScene.scene.start('combatScene',{gameData:self.gameData, enemigos:this.enemigos, objeto:this.objeto});
         });
         //Ajustamos el collider del slime
         this.bodyOffset = 0;
