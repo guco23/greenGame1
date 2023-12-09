@@ -1,5 +1,5 @@
 //import {Scene} from 'phaser';
-import Character from "./Character.js";
+import Character from "./character.js";
 import { RAIZ_IMAGENES } from "./constants.js";
 import dialogo from "./dialogo.js";
 import GameData from "./GameData.js";

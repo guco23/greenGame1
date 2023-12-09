@@ -1,15 +1,12 @@
 import { RAIZ_IMAGENES } from "./constants.js";
 import { Enemigo } from "./Combate JS/Enemigos/Enemigo.js"
-import { Personaje } from "./Combate JS/Personajes/Personaje.js"
 import { BarraVida } from "./HUDElems/BarraVida.js";
 import { TextoVida } from "./HUDElems/TextoVida.js";
 import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
 import { DatosAccion, SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
 import { SelectorPersonajes } from "./HUDElems/SelectorPersonajes.js";
 import { CombatManager } from "./Combate JS/CombatManager.js";
-import { enemies } from "../../assets/EnemyInfo/Enemigos Prueba/Dragon.js";
 import { CharacterArray } from "./HUDElems/ScenePersonaje.js";
-import GameData from "./GameData.js";
 
 export class CombateEscena extends Phaser.Scene {
     //CombatManager combatManager;
@@ -17,10 +14,15 @@ export class CombateEscena extends Phaser.Scene {
     constructor() {
         super('combatScene')
     }
+
     init(data) {
         this.enemigos = data.enemigos;
         this.objeto = data.objeto;
         this.aliados = data.gameData.party;
+        this.cx = data.cx;
+        this.cy = data.cy;
+        this.dir = data.dir;
+        this.returnScene = data.scene;
     }
 
     preload() {
