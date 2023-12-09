@@ -3,6 +3,8 @@ import { CombateEscena } from "./CombateEscena.js";
 import { EscenaTilesets2 } from "./escenaTileset2.js";
 import { EscenaTilesets3 } from "./escenaTileset3.js";
 import { EscenaTilesets4 } from "./escenaTileset4.js";
+import { EscenaMercadona } from "./escenaMercadona.js";
+import {EscenaCajaFuerte } from "./escenaCajaFuerte.js"
 //Configuración inicial del juego
 var config = {
     type: Phaser.AUTO, //Usa WebGL si es posible. En caso contrario, usa canvas 
@@ -26,7 +28,7 @@ var config = {
             right: true
         }
     },
-    scene: [EscenaTilesets, EscenaTilesets2,EscenaTilesets4,EscenaTilesets3, CombateEscena], //Probando la escena de combate
+    scene: [EscenaTilesets, EscenaTilesets2,EscenaTilesets4,EscenaTilesets3, EscenaMercadona, EscenaCajaFuerte,CombateEscena], //Probando la escena de combate
     parent: 'espacio-juego' //El elemento de html sobre el que se colocará el "canvas" de Phaser
 };
 

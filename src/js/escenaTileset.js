@@ -77,8 +77,7 @@ export class EscenaTilesets extends Phaser.Scene {
         this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {
             this.myGameData.AñadeObjetoClave(1);
             if (this.interact == 0 && !this.Texto) {
-                new dialogo(this, this.character, ["Queso", "Pimiento", "Pimsahbhsahbiento", "Pimientoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]);
-                this.Texto = true;
+                new dialogo(this, this.character, ["Queso", "Pimiento", "Pimsahbhsahbiento", "Pimientoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]);                
             }
         })
 
