@@ -1,5 +1,6 @@
 export default class GameData {   
-    
+    party;
+
 	constructor() {        
         //this.scene.add.existing(this);
         //Array de objetos clave
@@ -48,4 +49,8 @@ export default class GameData {
         return this.Objets[aux].Pillado; //ponle true si falla kbron
     }
 
+    //Método provisional para meter equipo en gameData
+    SetParty(party) {
+        this.party = party;
+    }
 }

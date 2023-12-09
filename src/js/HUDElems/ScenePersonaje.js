@@ -40,7 +40,7 @@ export class CharacterArray {
         this.personajes = personajes;
         let eHeight = height / personajes.length;
         for (let i = 0; i < this.personajes.length; i++) {
-            this.array[i] = new ScenePersonaje(scene, x, y + eHeight * i, personajes[i].imgLink);
+            this.array[i] = new ScenePersonaje(scene, x, y + eHeight * i, personajes[i].name);
             console.log(i);
         }
         this.type = type;
