@@ -13,7 +13,8 @@ export class CombatManager {
 
     //Parámetros para trackear los turnos
 
-    endCombat;  //Booleano que comprueba si todo un equipo ha muerto, causando el final del combate. false continua el combate, true lo acaba
+    endCombatVictory;  //Booleano que comprueba si todos los enemigos han muerto, lo que significa que el combate ha terminado como victoria
+    endCombatDerrota;  //Booleano que comprueba si todos los aliados han muerto, lo que significa que el combate ha terminado como derrota
     current;    //Apunta al personaje o enemigo que tiene el turno
     whoseTurn;  //Booleano, true para jugadores y false para enemigos
 
@@ -69,10 +70,14 @@ export class CombatManager {
     constructor(enmyTeam, enmySize, playrTeam, teamSze, scene) {
         this.enemyTeam = enmyTeam;
         this.enemySize = enmySize;
+        this.livingEnemies = this.enemySize;
+
         this.playerTeam = playrTeam;
         this.teamSize = teamSze;
-
-        this.endCombat = false;
+        this.livingParty = this.teamSize;
+        
+        this.endCombatVictory = false;
+        this.endCombatDerrota = false;
         this.current = 0;
         this.whoseTurn = true;
 
@@ -137,7 +142,7 @@ export class CombatManager {
     }
 
     nextTurn() {
-        if (this.endCombat === true) {
+        if (this.endCombatVictory || this.endCombatDerrota) {
             //Método para acabar el combate, dar recompensas, volver a la pantalla principal, etc.
         }
         else {
@@ -146,7 +151,6 @@ export class CombatManager {
                     if (this.playerTeam[this.current].living) {
                         this.combatScene.selectorAcciones.mostrar();
                         this.combatScene.menuActual = this.combatScene.selectorAcciones;
-                        this.livingParty++;
                         this.playerTeam[this.current].takeTurn();
                     }
                     else {
@@ -157,17 +161,12 @@ export class CombatManager {
                 else {
                     this.current = 0;
                     this.whoseTurn = false;
-                    this.livingEnemies = 0;
-                    if (this.livingParty === 0) {
-                        this.endCombat = true;
-                    }
                     this.nextTurn();
                 }
             }
             else {
                 if (this.current < this.enemySize) {
                     if (this.enemyTeam[this.current].living) {
-                        this.livingEnemies++;
                         this.enemyTeam[this.current].takeTurn(this);
                     }
                     else {
@@ -178,12 +177,23 @@ export class CombatManager {
                 else {
                     this.current = 0;
                     this.whoseTurn = true;
-                    this.livingParty = 0;
-                    if (this.livingEnemies === 0) {
-                        this.endCombat = true;
-                    }
                     this.nextTurn();
                 }
+            }
+        }
+    }
+
+    hasDied(friendly) {
+        if(friendly) {
+            this.livingParty--;
+            if(this.livingParty == 0) {
+                this.endCombatDerrota = true;
+            }
+        }
+        else {
+            this.livingEnemies--;
+            if(this.livingEnemies == 0) {
+                this.endCombatVictory = true;
             }
         }
     }

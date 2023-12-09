@@ -109,6 +109,7 @@ export class Personaje {
         if(this.currentHp <= 0) {
             this.currentHp = 0;
             this.living = false;
+            this.currentCombat.hasDied(true);
             this.currentCombat.addInfo("die", 0, this, null);
         }
     }

@@ -72,6 +72,7 @@ export class Enemigo {
         if(this.currentHp <= 0) {
             this.currentHp = 0;
             this.living = false;
+            this.currentCombat.hasDied(false);
             this.currentCombat.addInfo("die", 0, this, null);
         }
     }

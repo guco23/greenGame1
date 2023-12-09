@@ -4,13 +4,15 @@ export default class dialogo extends Phaser.GameObjects.Sprite {
 	 * @param {character} Char - coordenada x
      * @param {string[]} dialogos - array con diálogos
 	 */
-	constructor(scene, Char, texto) {
-		super(scene, Char, texto);
+	constructor(scene, Char, texto, MiFuncion = null) {
+		super(scene, Char, texto);        
         this.myScene = scene;
+        scene.Texto = true;
 		this.PosDialogo = 0;
         this.timer = 0;
         this.dialogos = texto;
         this.end = Char;
+        if(MiFuncion != null) this.LaFuncion = MiFuncion;
         Char.Activate();
 		this.scene.add.existing(this);
         this.image = scene.add.image(Char.x, Char.y+85, 'UI');
@@ -36,6 +38,7 @@ export default class dialogo extends Phaser.GameObjects.Sprite {
         //this.myText = this.myScene.add.text(this.end.x-140, this.end.y+45, this.dialogos[this.PosDialogo], { font: '"Press Start 2P"' });        
     }
     finish(){
+        if(this.LaFuncion != undefined) this.LaFuncion();
         this.DestroyTexts();
         this.myScene.Texto = false;
         this.end.Activate();                            

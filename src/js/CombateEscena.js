@@ -1,15 +1,12 @@
 import { RAIZ_IMAGENES } from "./constants.js";
 import { Enemigo } from "./Combate JS/Enemigos/Enemigo.js"
-import { Personaje } from "./Combate JS/Personajes/Personaje.js"
 import { BarraVida } from "./HUDElems/BarraVida.js";
 import { TextoVida } from "./HUDElems/TextoVida.js";
 import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
 import { DatosAccion, SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
 import { SelectorPersonajes } from "./HUDElems/SelectorPersonajes.js";
 import { CombatManager } from "./Combate JS/CombatManager.js";
-import { enemies } from "../../assets/EnemyInfo/Enemigos Prueba/Dragon.js";
 import { CharacterArray } from "./HUDElems/ScenePersonaje.js";
-import GameData from "./GameData.js";
 
 export class CombateEscena extends Phaser.Scene {
     //CombatManager combatManager;
@@ -17,10 +14,18 @@ export class CombateEscena extends Phaser.Scene {
     constructor() {
         super('combatScene')
     }
+
     init(data) {
+        this.gameData = data.gameData;
         this.enemigos = data.enemigos;
         this.objeto = data.objeto;
         this.aliados = data.gameData.party;
+        //Variables necesarias para volver a la escena y posición en la que se estaba antes del combate
+        this.cx = data.cx;
+        this.cy = data.cy;
+        this.cdir = data.dir;
+        this.returnScene = data.scene;
+        this.slimeId = data.id;
     }
 
     preload() {
@@ -172,25 +177,44 @@ export class CombateEscena extends Phaser.Scene {
         this.combatManager.nextTurn();
     }
 
-    ActualizarEscena(info) {
-        if (this.menuActual != this.textoDescriptivo) {
-            this.menuActual.ocultar()
-            this.menuActual = this.textoDescriptivo;
-        }
-        this.menuActual.aplicarTexto(info);
-        this.menuActual.visible(1);
-        //Actualiza ambas las barras/textos de vida de los enemigos y aliados respectivamente
-        this.vidasEnemigos.forEach(element => {
-            element.actualizarHp();
-        });
-        this.vidasAliados.forEach(element => {
-            element.actualizarHp();
-        });
-        this.selectorAliados.refresh();
-        this.selectorEnemigos.refresh();
-        //Comprueba si el enemigo ha muerto, en cuyo caso oculta la imagen
-        this.sceneAliad.refresh();
-        this.sceneEnem.refresh();
+    /**
+     * A ser llamado cuando el jugador gana el combate. Deberá devolver al jugador al mismo lugar donde estaba antes del combate.
+     */
+    Victory() {
+        this.gameData.AddDefeated(this.slimeId);
+        this.scene.start(this.returnScene, { obj: this.gameData, cx: this.cx, cy: this.cy, dir: this.cdir })
+    }
+    /**
+     * A ser llamado cuando el jugador pierda el combate. Deberá devolver al jugador al último checkpoint.
+     */
+    Defeat() {
 
+    }
+
+    ActualizarEscena(info) {
+        if (this.combatManager.endCombatVictory)
+            this.Victory();
+        else if (this.combatManager.endCombatDerrota)
+            this.Defeat();
+        else {
+            if (this.menuActual != this.textoDescriptivo) {
+                this.menuActual.ocultar()
+                this.menuActual = this.textoDescriptivo;
+            }
+            this.menuActual.aplicarTexto(info);
+            this.menuActual.visible(1);
+            //Actualiza ambas las barras/textos de vida de los enemigos y aliados respectivamente
+            this.vidasEnemigos.forEach(element => {
+                element.actualizarHp();
+            });
+            this.vidasAliados.forEach(element => {
+                element.actualizarHp();
+            });
+            this.selectorAliados.refresh();
+            this.selectorEnemigos.refresh();
+            //Comprueba si el enemigo ha muerto, en cuyo caso oculta la imagen
+            this.sceneAliad.refresh();
+            this.sceneEnem.refresh();
+        }
     }
 };

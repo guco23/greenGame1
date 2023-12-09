@@ -1,5 +1,5 @@
 //import {Scene} from 'phaser';
-import Character from "./Character.js";
+import Character from "./character.js";
 import { RAIZ_IMAGENES } from "./constants.js";
 import dialogo from "./dialogo.js";
 import GameData from "./GameData.js";
@@ -77,16 +77,23 @@ export class EscenaTilesets extends Phaser.Scene {
         this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {
             this.myGameData.AñadeObjetoClave(1);
             if (this.interact == 0 && !this.Texto) {
-                new dialogo(this, this.character, ["Queso", "Pimiento", "Pimsahbhsahbiento", "Pimientoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]);
-                this.Texto = true;
+                new dialogo(this, this.character, ["Queso", "Pimiento", "Pimsahbhsahbiento", "Pimientoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]);                
             }
         })
 
 
         this.cameras.main.startFollow(this.character);
         this.cameras.main.zoom = 2.2;
-        this.enemigo1 = new SlimeEnemigo(this, 0, 0, 0, 50, 140, "pene de plastico", [enemies.botella, enemies.cocacola, enemies.pollo], this.WallLayer, this.character, this.myGameData);
-        
+                
+        let slimes = [
+            new SlimeEnemigo(this, 0, 0, 0, 50, 140, "pene de plastico", [enemies.botella, enemies.cocacola, enemies.pollo], this.WallLayer, this.character, this.myGameData, 'enem1')
+        ];
+        slimes.forEach(slime => {
+            if(this.myGameData.CheckDefeated(slime.slimeId)) {
+                slime.destroy();
+            }
+        });
+
         //Datos de party de prueba
         this.myGameData.party = [
             new Personaje('Diego', 30, 20, 120, 60, this.combatManager),
