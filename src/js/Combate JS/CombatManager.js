@@ -70,9 +70,12 @@ export class CombatManager {
     constructor(enmyTeam, enmySize, playrTeam, teamSze, scene) {
         this.enemyTeam = enmyTeam;
         this.enemySize = enmySize;
+        this.livingEnemies = this.enemySize;
+
         this.playerTeam = playrTeam;
         this.teamSize = teamSze;
-
+        this.livingParty = this.teamSize;
+        
         this.endCombatVictory = false;
         this.endCombatDerrota = false;
         this.current = 0;
@@ -148,7 +151,6 @@ export class CombatManager {
                     if (this.playerTeam[this.current].living) {
                         this.combatScene.selectorAcciones.mostrar();
                         this.combatScene.menuActual = this.combatScene.selectorAcciones;
-                        this.livingParty++;
                         this.playerTeam[this.current].takeTurn();
                     }
                     else {
@@ -159,18 +161,12 @@ export class CombatManager {
                 else {
                     this.current = 0;
                     this.whoseTurn = false;
-                    this.livingEnemies = 0;
-                    if (this.livingParty === 0) {
-                        console.log("deez nuts");
-                        this.endCombatDerrota = true;
-                    }
                     this.nextTurn();
                 }
             }
             else {
                 if (this.current < this.enemySize) {
                     if (this.enemyTeam[this.current].living) {
-                        this.livingEnemies++;
                         this.enemyTeam[this.current].takeTurn(this);
                     }
                     else {
@@ -181,12 +177,23 @@ export class CombatManager {
                 else {
                     this.current = 0;
                     this.whoseTurn = true;
-                    this.livingParty = 0;
-                    if (this.livingEnemies === 0) {
-                        this.endCombatVictory = true;
-                    }
                     this.nextTurn();
                 }
+            }
+        }
+    }
+
+    hasDied(friendly) {
+        if(friendly) {
+            this.livingParty--;
+            if(this.livingParty == 0) {
+                this.endCombatDerrota = true;
+            }
+        }
+        else {
+            this.livingEnemies--;
+            if(this.livingEnemies == 0) {
+                this.endCombatVictory = true;
             }
         }
     }
