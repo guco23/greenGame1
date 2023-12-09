@@ -134,7 +134,6 @@ export class CombateEscena extends Phaser.Scene {
                     this.menuActual.mostrar();
                 }
                 else if (event.code === "Space") {
-                    this.Victory();
                     if (this.menuActual === this.selectorAcciones) {
                         if (this.menuActual.selection === 0) {
                             this.menuActual = this.selectorEnemigos;
@@ -183,7 +182,7 @@ export class CombateEscena extends Phaser.Scene {
      */
     Victory() {
         this.gameData.AddDefeated(this.slimeId);
-        this.scene.start(this.returnScene,{obj:this.gameData,cx:this.cx, cy:this.cy, dir:this.cdir})
+        this.scene.start(this.returnScene, { obj: this.gameData, cx: this.cx, cy: this.cy, dir: this.cdir })
     }
     /**
      * A ser llamado cuando el jugador pierda el combate. Deberá devolver al jugador al último checkpoint.
@@ -193,23 +192,29 @@ export class CombateEscena extends Phaser.Scene {
     }
 
     ActualizarEscena(info) {
-        if (this.menuActual != this.textoDescriptivo) {
-            this.menuActual.ocultar()
-            this.menuActual = this.textoDescriptivo;
+        if (this.combatManager.endCombatVictory)
+            this.Victory();
+        else if (this.combatManager.endCombatDerrota)
+            this.Defeat();
+        else {
+            if (this.menuActual != this.textoDescriptivo) {
+                this.menuActual.ocultar()
+                this.menuActual = this.textoDescriptivo;
+            }
+            this.menuActual.aplicarTexto(info);
+            this.menuActual.visible(1);
+            //Actualiza ambas las barras/textos de vida de los enemigos y aliados respectivamente
+            this.vidasEnemigos.forEach(element => {
+                element.actualizarHp();
+            });
+            this.vidasAliados.forEach(element => {
+                element.actualizarHp();
+            });
+            this.selectorAliados.refresh();
+            this.selectorEnemigos.refresh();
+            //Comprueba si el enemigo ha muerto, en cuyo caso oculta la imagen
+            this.sceneAliad.refresh();
+            this.sceneEnem.refresh();
         }
-        this.menuActual.aplicarTexto(info);
-        this.menuActual.visible(1);
-        //Actualiza ambas las barras/textos de vida de los enemigos y aliados respectivamente
-        this.vidasEnemigos.forEach(element => {
-            element.actualizarHp();
-        });
-        this.vidasAliados.forEach(element => {
-            element.actualizarHp();
-        });
-        this.selectorAliados.refresh();
-        this.selectorEnemigos.refresh();
-        //Comprueba si el enemigo ha muerto, en cuyo caso oculta la imagen
-        this.sceneAliad.refresh();
-        this.sceneEnem.refresh();
     }
 };

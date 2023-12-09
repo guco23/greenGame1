@@ -13,7 +13,8 @@ export class CombatManager {
 
     //Parámetros para trackear los turnos
 
-    endCombat;  //Booleano que comprueba si todo un equipo ha muerto, causando el final del combate. false continua el combate, true lo acaba
+    endCombatVictory;  //Booleano que comprueba si todos los enemigos han muerto, lo que significa que el combate ha terminado como victoria
+    endCombatDerrota;  //Booleano que comprueba si todos los aliados han muerto, lo que significa que el combate ha terminado como derrota
     current;    //Apunta al personaje o enemigo que tiene el turno
     whoseTurn;  //Booleano, true para jugadores y false para enemigos
 
@@ -72,7 +73,8 @@ export class CombatManager {
         this.playerTeam = playrTeam;
         this.teamSize = teamSze;
 
-        this.endCombat = false;
+        this.endCombatVictory = false;
+        this.endCombatDerrota = false;
         this.current = 0;
         this.whoseTurn = true;
 
@@ -137,7 +139,7 @@ export class CombatManager {
     }
 
     nextTurn() {
-        if (this.endCombat === true) {
+        if (this.endCombatVictory || this.endCombatDerrota) {
             //Método para acabar el combate, dar recompensas, volver a la pantalla principal, etc.
         }
         else {
@@ -159,7 +161,8 @@ export class CombatManager {
                     this.whoseTurn = false;
                     this.livingEnemies = 0;
                     if (this.livingParty === 0) {
-                        this.endCombat = true;
+                        console.log("deez nuts");
+                        this.endCombatDerrota = true;
                     }
                     this.nextTurn();
                 }
@@ -180,7 +183,7 @@ export class CombatManager {
                     this.whoseTurn = true;
                     this.livingParty = 0;
                     if (this.livingEnemies === 0) {
-                        this.endCombat = true;
+                        this.endCombatVictory = true;
                     }
                     this.nextTurn();
                 }
