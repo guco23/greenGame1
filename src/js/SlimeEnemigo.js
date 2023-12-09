@@ -11,8 +11,9 @@ export default class SlimeEnemigo extends Phaser.GameObjects.Sprite {
      * @param {Player} player - player que le pasamos desde la escena para las colisiones con este
      * @param {GameData} gameData - instancia de la clase GameData que le pasamos desde la escena para enviar los datos correspondientes a la escena de combate al iniciarse
      * @param {Enemigo[]} enemigos - array con enemigos
+     * @param {slimeId} slimeId - identificador único de este slime en específico
      */
-    constructor(scene, speed, x, y, PosIx, PosIy, objeto, enemigos, sceneWallLayer, player, gameData) {
+    constructor(scene, speed, x, y, PosIx, PosIy, objeto, enemigos, sceneWallLayer, player, gameData, slimeId) {
         super(scene, speed, x, y, PosIx, PosIy, objeto, enemigos, sceneWallLayer, player, gameData, 'Slime');
 
         this.speed = speed;
@@ -24,6 +25,7 @@ export default class SlimeEnemigo extends Phaser.GameObjects.Sprite {
         this.MovingX = 0;
         this.MovingY = 0;
         this.gameData = gameData;
+        this.slimeId = slimeId;
 
         if (x >= 1) this.MovingX = 1;
         else if (x <= -1) this.MovingX = -1;
@@ -41,7 +43,6 @@ export default class SlimeEnemigo extends Phaser.GameObjects.Sprite {
         scene.physics.world.enable(this);
         var self = this;
         scene.physics.add.collider(this, this.WallLayer, () => {
-            console.log("Soy retrasadooo");
             self.MovingX = self.MovingX * -1;
             console.log(self.MovingX);
             self.MovingY = self.MovingY * -1;
@@ -55,7 +56,8 @@ export default class SlimeEnemigo extends Phaser.GameObjects.Sprite {
                 scene: this.scene.scene.key,
                 cx: this.player.x,
                 cy: this.player.y,
-                dir: this.player.dir
+                dir: this.player.dir,
+                id: this.slimeId
             });
         });
         //Ajustamos el collider del slime

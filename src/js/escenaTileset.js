@@ -84,8 +84,16 @@ export class EscenaTilesets extends Phaser.Scene {
 
         this.cameras.main.startFollow(this.character);
         this.cameras.main.zoom = 2.2;
-        this.enemigo1 = new SlimeEnemigo(this, 0, 0, 0, 50, 140, "pene de plastico", [enemies.botella, enemies.cocacola, enemies.pollo], this.WallLayer, this.character, this.myGameData);
-        
+                
+        let slimes = [
+            new SlimeEnemigo(this, 0, 0, 0, 50, 140, "pene de plastico", [enemies.botella, enemies.cocacola, enemies.pollo], this.WallLayer, this.character, this.myGameData, 'enem1')
+        ];
+        slimes.forEach(slime => {
+            if(this.myGameData.CheckDefeated(slime.slimeId)) {
+                slime.destroy();
+            }
+        });
+
         //Datos de party de prueba
         this.myGameData.party = [
             new Personaje('Diego', 30, 20, 120, 60, this.combatManager),

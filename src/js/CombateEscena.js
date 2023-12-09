@@ -16,13 +16,16 @@ export class CombateEscena extends Phaser.Scene {
     }
 
     init(data) {
+        this.gameData = data.gameData;
         this.enemigos = data.enemigos;
         this.objeto = data.objeto;
         this.aliados = data.gameData.party;
+        //Variables necesarias para volver a la escena y posición en la que se estaba antes del combate
         this.cx = data.cx;
         this.cy = data.cy;
-        this.dir = data.dir;
+        this.cdir = data.dir;
         this.returnScene = data.scene;
+        this.slimeId = data.id;
     }
 
     preload() {
@@ -131,6 +134,7 @@ export class CombateEscena extends Phaser.Scene {
                     this.menuActual.mostrar();
                 }
                 else if (event.code === "Space") {
+                    this.Victory();
                     if (this.menuActual === this.selectorAcciones) {
                         if (this.menuActual.selection === 0) {
                             this.menuActual = this.selectorEnemigos;
@@ -174,6 +178,20 @@ export class CombateEscena extends Phaser.Scene {
         this.combatManager.nextTurn();
     }
 
+    /**
+     * A ser llamado cuando el jugador gana el combate. Deberá devolver al jugador al mismo lugar donde estaba antes del combate.
+     */
+    Victory() {
+        this.gameData.AddDefeated(this.slimeId);
+        this.scene.start(this.returnScene,{obj:this.gameData,cx:this.cx, cy:this.cy, dir:this.cdir})
+    }
+    /**
+     * A ser llamado cuando el jugador pierda el combate. Deberá devolver al jugador al último checkpoint.
+     */
+    Defeat() {
+
+    }
+
     ActualizarEscena(info) {
         if (this.menuActual != this.textoDescriptivo) {
             this.menuActual.ocultar()
@@ -193,6 +211,5 @@ export class CombateEscena extends Phaser.Scene {
         //Comprueba si el enemigo ha muerto, en cuyo caso oculta la imagen
         this.sceneAliad.refresh();
         this.sceneEnem.refresh();
-
     }
 };
