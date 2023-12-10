@@ -22,16 +22,11 @@ export class Personaje {
 
     currentCombat;
 
-    status;     //Estado del menu del jugador: 0 es el inicial, 1 es el menú de targeteo del ataque normal, 2 es el menú de targeteo del ataque especial
-    accion;     //Número entre 0 y 2. 0 es atacar, 1 especial, 2 defender.
-
     targetKind; //Determina el tipo de targeteo para la habilidad. 0 un enemigo, 1 un aliado, 2 todo enemigo, 3 todo aliado
-
-    //ableToAct;  //Booleano que le da el control al jugador para que pueda meter input en su turno, en cuyo caso será 0
 
     imgLink;    
 
-    constructor(namer, attk, defs, hpMax, hp) {
+    /*constructor(namer, attk, defs, hpMax, hp) {
         this.name = namer;
         
         this.atk = attk;
@@ -49,11 +44,9 @@ export class Personaje {
         this.targetKind = 0;
 
         this.personality = "Green";
+    }*/
 
-        //this.currentCombat = combatManager;
-    }
-
-    /*constructor(idn) {
+    constructor(idn) {
         this.name = idn.name;
 
         this.atk = idn.atk;
@@ -65,9 +58,9 @@ export class Personaje {
         this.living = true;
         this.stunned = false;
         this.dot = 0;
-        this.status = 0;
-        this.accion = 0;
-    }*/
+
+        this.personality = idn.personality;
+    }
 
     applyDot(value) {
         this.dot += value;
@@ -113,7 +106,6 @@ export class Personaje {
             this.currentCombat.addInfo("die", 0, this, null);
         }
     }
-    
 
     heal(heal) {
         this.currentHp += heal;
