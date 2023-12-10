@@ -16,8 +16,8 @@ init(data){
 }
     preload() {
         this.load.tilemapTiledJSON('SalaMercadona', 'src/json/SalaMercadona.json');
-        this.load.image('tileset_mercadona', 'assets/images/tilesets/tileset_mercadona.png');
-        this.load.spritesheet('character', 'assets/images/spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
+        this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
+        this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
     }
     
     create() {
@@ -30,8 +30,7 @@ init(data){
           this.interact = 1;
           const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
           this.FloorLayer = this.map.createLayer('Suelo', tileset1);
-          this.WallLayer = this.map.createLayer('Paredes', tileset1);
-          this.NoWallLayer = this.map.createLayer('Paredes atravesables', tileset1);          
+          this.WallLayer = this.map.createLayer('Paredes', tileset1);          
           this.DoorJokeLayer = this.map.createLayer('ChisteDeLaPuerta', tileset1);  
           this.WallLayer.setCollisionByExclusion([-1]);     
 
@@ -43,11 +42,16 @@ init(data){
           this.physics.add.existing(this.hitbox3[0]);
           this.hitbox4 = this.map.createFromObjects('Transiciones', {id:4});          
           this.physics.add.existing(this.hitbox4[0]);
+          this.hitbox5 = this.map.createFromObjects('Transiciones', {id:6});          
+          this.physics.add.existing(this.hitbox5[0]);
+          
 
           this.character = new Character(this, this.cx, this.cy,this.dir);
           this.physics.world.enable(this.character);
           this.physics.add.collider(this.character, this.WallLayer);
           this.Texto = false;
+
+          this.NoWallLayer = this.map.createLayer('Paredes atravesables', tileset1); //Esta capa se coloca después para que esté por "encima" del jugador
 
           this.physics.add.overlap(this.character, this.hitbox1[0], ()=>{
             if(this.interact == 0) this.scene.start('escenaTilesets4',{obj:this.myGameData,cx:100, cy:65, dir:3});
@@ -58,12 +62,14 @@ init(data){
         this.physics.add.overlap(this.character, this.hitbox3[0], ()=>{
             if(this.interact == 0) this.scene.start('escenaCajaFuerte',{obj:this.myGameData,cx:485, cy:170, dir:1});
         })
-
+        this.physics.add.overlap(this.character, this.hitbox5[0], ()=>{
+            if(this.interact == 0) this.scene.start('escenaPlaya',{obj:this.myGameData,cx:2285, cy:320, dir:3});
+        })
         var self=this;
         this.physics.add.overlap(this.character, this.hitbox4[0], ()=>{
             if(this.interact == 0 && !this.Texto) {
                 new dialogo(this, this.character, ["Recoges la puerta", "La puerta ha sido añadida a tu inventario"],function(){
-                    self.DoorJokeLayer.visible = false;                    
+                    self.DoorJokeLayer.visible = false;                                        
                 })                
             }
         })

@@ -59,7 +59,7 @@ export default class dialogo extends Phaser.GameObjects.Sprite {
         }
 	}
     Write(string){
-        const maxTamaño = 45;
+        const maxTamaño = 55;
         const array = [...string];
         let x = 0;        
         let k = 0;

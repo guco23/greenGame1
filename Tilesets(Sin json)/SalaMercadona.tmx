@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="57" height="29" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="5">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="57" height="29" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="7">
+ <editorsettings>
+  <export target="../src/json/SalaMercadona.json" format="json"/>
+ </editorsettings>
  <tileset firstgid="1" source="Mercadona.tsx"/>
  <layer id="2" name="Suelo" width="57" height="29">
   <data encoding="csv">
@@ -138,5 +141,7 @@
   <object id="2" x="175.548" y="47.4912" width="16.9611" height="8.48057"/>
   <object id="3" x="608.057" y="48.3392" width="15.265" height="6.78445"/>
   <object id="4" x="880.333" y="48" width="15" height="7.66667"/>
+  <object id="5" x="14.6667" y="46.6667" width="16" height="306"/>
+  <object id="6" x="14.6667" y="46" width="10.6667" height="306.667" visible="0"/>
  </objectgroup>
 </map>

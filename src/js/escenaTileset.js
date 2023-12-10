@@ -29,10 +29,10 @@ export class EscenaTilesets extends Phaser.Scene {
         /*this.load.image('javier', RAIZ_IMAGENES + 'javier.jpg');
         this.upscaleval = 0.001;*/
         this.load.tilemapTiledJSON('Almacen1', 'src/json/Almacen1.json');
-        this.load.image('tileset_mercadona', 'assets/images/tilesets/tileset_mercadona.png');
-        this.load.image('UI', 'assets/images/UI_dialogo.png');
-        this.load.spritesheet('Slime', 'assets/images/Slime.png', { frameWidth: 16, frameHeight: 16 });
-        this.load.spritesheet('character', 'assets/images/spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 })
+        this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
+        this.load.image('UI', RAIZ_IMAGENES+'UI_dialogo.png');
+        this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
+        this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 })
     }
 
     //crear aqui los objetos de la escena
@@ -71,7 +71,8 @@ export class EscenaTilesets extends Phaser.Scene {
 
         this.physics.add.overlap(this.character, this.hitbox[0], () => {
             if (this.interact == 0) {
-                this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });
+                //this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });                
+                if(this.interact == 0) this.scene.start('escenaPlaya',{obj:this.myGameData,cx:2285, cy:320, dir:3});
             }
         })
         this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {
