@@ -23,10 +23,10 @@ export default class Character extends Phaser.GameObjects.Sprite {
 		self.scene.add.existing(this); //Añadimos el caballero a la escena	      
 
 		// Seteamos las teclas para mover al personaje
-		this.wKey = this.scene.input.keyboard.addKey('W'); //saltar
-		this.aKey = this.scene.input.keyboard.addKey('A'); //izquierda
-		this.sKey = this.scene.input.keyboard.addKey('S'); //parar animación
-		this.dKey = this.scene.input.keyboard.addKey('D'); //derecha		
+		this.upKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP); //saltar
+		this.leftKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT); //izquierda
+		this.downKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN); //parar animación
+		this.rightKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT); //derecha		
         
 		scene.physics.add.existing(this);  
 		
@@ -116,7 +116,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
 		super.preUpdate(t, dt);
 
 		// Mientras pulsemos la tecla 'A' movelos el personaje en la X
-		if(this.aKey.isDown && this.CanMove){
+		if(this.leftKey.isDown && this.CanMove){
 			//this.setFlip(true, false)
 			//this.x -= this.speed*dt / 1000;
 			this.body.setVelocityX(-this.speed);
@@ -125,21 +125,21 @@ export default class Character extends Phaser.GameObjects.Sprite {
 		}
 
 		// Mientras pulsemos la tecla 'D' movelos el personaje en la X
-		if(this.dKey.isDown&& this.CanMove){
+		if(this.rightKey.isDown&& this.CanMove){
 			//this.setFlip(false, false)			
 			//this.x += this.speed*dt / 1000;
 			this.body.setVelocityX(this.speed);
 			this.MovingX = 1;
 			if(this.MovingY==0 && this.anims.currentAnim.key !== 'moveRight') this.play('moveRight');
 		}
-        if(this.wKey.isDown&& this.CanMove){
+        if(this.upKey.isDown&& this.CanMove){
 			//this.setFlip(false, false)			
 			//this.y += this.speed*dt / 1000;
 			this.body.setVelocityY(-this.speed);
 			this.MovingY = -1;
 			if(this.anims.currentAnim.key !== 'moveUp')this.play('moveUp');
 		}
-        if(this.sKey.isDown&& this.CanMove){
+        if(this.downKey.isDown&& this.CanMove){
 			//this.setFlip(false, false)			
 			//this.y += this.speed*dt / 1000;
 			this.body.setVelocityY(this.speed);
@@ -147,7 +147,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
 			if(this.anims.currentAnim.key !== 'moveDown') this.play('moveDown');
 		}		
 
-        if((Phaser.Input.Keyboard.JustUp(this.aKey) || Phaser.Input.Keyboard.JustUp(this.dKey)||!this.CanMove)){			
+        if((Phaser.Input.Keyboard.JustUp(this.leftKey) || Phaser.Input.Keyboard.JustUp(this.rightKey)||!this.CanMove)){			
 			this.body.setVelocityX(0);
 			if(this.MovingY == 0){
 				if(this.MovingX ==1) this.play('idleRight');
@@ -155,7 +155,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
 			}
 			this.MovingX = 0;			
 		}
-        if((Phaser.Input.Keyboard.JustUp(this.wKey) || Phaser.Input.Keyboard.JustUp(this.sKey)||!this.CanMove)){			
+        if((Phaser.Input.Keyboard.JustUp(this.upKey) || Phaser.Input.Keyboard.JustUp(this.downKey)||!this.CanMove)){			
 			this.body.setVelocityY(0);
 			if(this.MovingX == 0){
 				if(this.MovingY ==1) this.play('idleDown');
