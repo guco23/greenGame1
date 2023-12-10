@@ -17,8 +17,8 @@ init(data){
         /*this.load.image('javier', RAIZ_IMAGENES + 'javier.jpg');
         this.upscaleval = 0.001;*/
         this.load.tilemapTiledJSON('Almacen4', 'src/json/Almacen4.json');
-        this.load.image('tileset_mercadona', 'assets/images/tilesets/tileset_mercadona.png');
-        this.load.spritesheet('character', 'assets/images/spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
+        this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
+        this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
     }
 
     //crear aqui los objetos de la escena
