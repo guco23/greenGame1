@@ -1,4 +1,4 @@
-import { RAIZ_IMAGENES } from "./constants.js";
+import { RAIZ_IMAGENES, CONTROLES } from "./constants.js";
 import { Enemigo } from "./Combate JS/Enemigos/Enemigo.js"
 import { BarraVida } from "./HUDElems/BarraVida.js";
 import { TextoVida } from "./HUDElems/TextoVida.js";
@@ -122,18 +122,18 @@ export class CombateEscena extends Phaser.Scene {
         this.input.keyboard.on('keydown', function (event) {
             //Control
             if (this.menuActual != this.textoDescriptivo) {
-                if (event.code === "ArrowUp") {
+                if (event.code === CONTROLES.UP) {
                     this.menuActual.anterior();
                 }
-                else if (event.code === "ArrowDown") {
+                else if (event.code === CONTROLES.DOWN) {
                     this.menuActual.siguiente();
                 }
-                else if (event.code === "KeyB") {
+                else if (event.code === CONTROLES.CANCEL) {
                     this.menuActual.ocultar();
                     this.menuActual = this.selectorAcciones;
                     this.menuActual.mostrar();
                 }
-                else if (event.code === "Space") {
+                else if (event.code === CONTROLES.ACCEPT) {
                     if (this.menuActual === this.selectorAcciones) {
                         if (this.menuActual.selection === 0) {
                             this.menuActual = this.selectorEnemigos;
@@ -167,7 +167,7 @@ export class CombateEscena extends Phaser.Scene {
                 }
             }
             else {
-                if (event.code === "Space") {
+                if (event.code === CONTROLES.ACCEPT) {
                     this.textoDescriptivo.aplicarTexto(""); //Vacía el texto
                     this.combatManager.nextTurn();
                 }
