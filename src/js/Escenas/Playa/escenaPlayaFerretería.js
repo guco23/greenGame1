@@ -1,7 +1,7 @@
-import Character from "./character.js";
-import { RAIZ_IMAGENES } from "./constants.js";
-import GameData from "./GameData.js";
-import dialogo from "./dialogo.js";
+import Character from "../../character.js";
+import { RAIZ_IMAGENES } from "../../constants.js";
+import dialogo from "../../dialogo.js";
+
 export class EscenaPlayaFerreteria extends Phaser.Scene {    
 constructor(){
     super('escenaPlayaFerreteria')
@@ -13,7 +13,7 @@ init(data){
     this.dir = data.dir;  
 }
     preload() {        
-        this.load.tilemapTiledJSON('PlayaFerreteria', 'src/json/PlayaInteriorFerreteria.json');
+        this.load.tilemapTiledJSON('PlayaFerreteria', 'assets/json/PlayaInteriorFerreteria.json');
         this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
         //this.load.image('tileset_playa', RAIZ_IMAGENES+'tilesets/tileset_playa.png');
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})

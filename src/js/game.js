@@ -1,13 +1,13 @@
-import {EscenaTilesets} from "./escenaTileset.js"
+import {EscenaTilesets} from "./Escenas/Mercadona/escenaTileset.js"
 import { CombateEscena } from "./CombateEscena.js";
-import { EscenaTilesets2 } from "./escenaTileset2.js";
-import { EscenaTilesets3 } from "./escenaTileset3.js";
-import { EscenaTilesets4 } from "./escenaTileset4.js";
-import { EscenaMercadona } from "./escenaMercadona.js";
-import {EscenaCajaFuerte } from "./escenaCajaFuerte.js";
-import {EscenaPlaya} from "./escenaPlayaExterior.js";
-import {EscenaPlayaBosque} from "./escenaPlayaBosque.js";
-import {EscenaPlayaFerreteria} from "./escenaPlayaFerretería.js";
+import { EscenaTilesets2 } from  "./Escenas/Mercadona/escenaTileset2.js";
+import { EscenaTilesets3 } from "./Escenas/Mercadona/escenaTileset3.js";
+import { EscenaTilesets4 } from "./Escenas/Mercadona/escenaTileset4.js";
+import { EscenaMercadona } from "./Escenas/Mercadona/escenaMercadona.js";
+import {EscenaCajaFuerte } from "./Escenas/Mercadona/escenaCajaFuerte.js";
+import {EscenaPlaya} from "./Escenas/Playa/escenaPlayaExterior.js";
+import {EscenaPlayaBosque} from "./Escenas/Playa/escenaPlayaBosque.js";
+import {EscenaPlayaFerreteria} from "./Escenas/Playa/escenaPlayaFerretería.js";
 //Configuración inicial del juego
 var config = {
     type: Phaser.AUTO, //Usa WebGL si es posible. En caso contrario, usa canvas 
