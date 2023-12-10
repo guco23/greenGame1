@@ -1,8 +1,7 @@
-import Character from "./character.js";
-import { RAIZ_IMAGENES } from "./constants.js";
-import GameData from "./GameData.js";
-import { enemies } from "../../assets/EnemyInfo/Enemies.js";
-import SlimeEnemigo from "./SlimeEnemigo.js"
+import Character from "../../character.js";
+import { RAIZ_IMAGENES } from "../../constants.js";
+import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
+import SlimeEnemigo from "../../SlimeEnemigo.js"
 
 export class EscenaTilesets2 extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -12,7 +11,7 @@ export class EscenaTilesets2 extends Phaser.Scene {
     preload() {
         /*this.load.image('javier', RAIZ_IMAGENES + 'javier.jpg');
         this.upscaleval = 0.001;*/
-        this.load.tilemapTiledJSON('Almacen2', 'src/json/Almacen2.json');
+        this.load.tilemapTiledJSON('Almacen2', 'assets/json/Almacen2.json');
         this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 })
     }

@@ -1,4 +1,4 @@
-import { RAIZ_IMAGENES } from "./constants.js";
+import { RAIZ_IMAGENES } from "../../constants.js";
 
 export class Escena1 extends Phaser.Scene {
     //cargar aqui los datos de la escena.

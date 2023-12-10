@@ -1,7 +1,6 @@
-import Character from "./character.js";
-import { RAIZ_IMAGENES } from "./constants.js";
-import GameData from "./GameData.js";
-import dialogo from "./dialogo.js";
+import Character from "../../character.js";
+import { RAIZ_IMAGENES } from "../../constants.js";
+import dialogo from "../../dialogo.js";
 
 export class EscenaMercadona extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -15,7 +14,7 @@ init(data){
     this.dir = data.dir;  
 }
     preload() {
-        this.load.tilemapTiledJSON('SalaMercadona', 'src/json/SalaMercadona.json');
+        this.load.tilemapTiledJSON('SalaMercadona', 'assets/json/SalaMercadona.json');
         this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
     }

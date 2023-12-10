@@ -1,6 +1,5 @@
-import Character from "./character.js";
-import { RAIZ_IMAGENES } from "./constants.js";
-import GameData from "./GameData.js";
+import Character from "../../character.js";
+import { RAIZ_IMAGENES } from "../../constants.js";
 
 export class EscenaCajaFuerte extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -14,7 +13,7 @@ init(data){
     this.dir = data.dir;  
 }
     preload() {
-        this.load.tilemapTiledJSON('escenaCajaFuerte', 'src/json/AlmacenCajaFuerte.json');
+        this.load.tilemapTiledJSON('escenaCajaFuerte', 'assets/json/AlmacenCajaFuerte.json');
         this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
     }

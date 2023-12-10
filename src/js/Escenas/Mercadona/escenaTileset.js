@@ -1,11 +1,11 @@
 //import {Scene} from 'phaser';
-import Character from "./character.js";
-import { RAIZ_IMAGENES } from "./constants.js";
-import dialogo from "./dialogo.js";
-import GameData from "./GameData.js";
-import { enemies } from "../../assets/EnemyInfo/Enemies.js";
-import SlimeEnemigo from "./SlimeEnemigo.js"
-import { Personaje } from "./Combate JS/Personajes/Personaje.js";
+import Character from "../../character.js";
+import { RAIZ_IMAGENES } from "../../constants.js";
+import dialogo from "../../dialogo.js";
+import GameData from "../../GameData.js";
+import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
+import SlimeEnemigo from "../../SlimeEnemigo.js"
+import { Personaje } from "./../../Combate JS/Personajes/Personaje.js";
 
 export class EscenaTilesets extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -28,7 +28,7 @@ export class EscenaTilesets extends Phaser.Scene {
     preload() {
         /*this.load.image('javier', RAIZ_IMAGENES + 'javier.jpg');
         this.upscaleval = 0.001;*/
-        this.load.tilemapTiledJSON('Almacen1', 'src/json/Almacen1.json');
+        this.load.tilemapTiledJSON('Almacen1', 'assets/json/Almacen1.json');
         this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
         this.load.image('UI', RAIZ_IMAGENES+'UI_dialogo.png');
         this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
