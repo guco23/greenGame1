@@ -62,14 +62,7 @@ export class CombateEscena extends Phaser.Scene {
         let gameHeight = this.game.config.height;
         let uiBoxHeight = gameHeight / 3.2;
         let uiBoxWidth = gameWidth / 3;
-        this.graphics.lineStyle(1, 0xffffff);
-        this.graphics.fillStyle(0x031f4c, 1);
-        this.graphics.strokeRect(0, gameHeight - uiBoxHeight, uiBoxWidth, uiBoxHeight);
-        this.graphics.fillRect(2, 150, 90, 100);
-        this.graphics.strokeRect(95, 150, 90, 100);
-        this.graphics.fillRect(95, 150, 90, 100);
-        this.graphics.strokeRect(188, 150, 130, 100);
-        this.graphics.fillRect(188, 150, 130, 100);
+
         //Coloca el fondo
         this.add.image(gameWidth / 2, gameHeight / 2, 'background');
 

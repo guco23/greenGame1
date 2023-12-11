@@ -8,6 +8,8 @@ import {EscenaCajaFuerte } from "./Escenas/Mercadona/escenaCajaFuerte.js";
 import {EscenaPlaya} from "./Escenas/Playa/escenaPlayaExterior.js";
 import {EscenaPlayaBosque} from "./Escenas/Playa/escenaPlayaBosque.js";
 import {EscenaPlayaFerreteria} from "./Escenas/Playa/escenaPlayaFerretería.js";
+import { MenuEscena } from "./MenuEscena.js";
+
 //Configuración inicial del juego
 var config = {
     type: Phaser.AUTO, //Usa WebGL si es posible. En caso contrario, usa canvas 
@@ -31,8 +33,8 @@ var config = {
             right: true
         }
     },
-    scene: [EscenaTilesets, EscenaTilesets2,EscenaTilesets4,EscenaTilesets3, EscenaMercadona, EscenaCajaFuerte,EscenaPlaya,EscenaPlayaBosque,
-        EscenaPlayaFerreteria,CombateEscena], //Array con todas las escenas
+    scene: [EscenaTilesets, EscenaTilesets2,EscenaTilesets4,EscenaTilesets3, EscenaMercadona, EscenaCajaFuerte, EscenaPlaya, EscenaPlayaBosque,
+        EscenaPlayaFerreteria, CombateEscena, MenuEscena], //Array con todas las escenas
     parent: 'espacio-juego' //El elemento de html sobre el que se colocará el "canvas" de Phaser
 };
 
