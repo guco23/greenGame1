@@ -67,13 +67,13 @@ export class CombatManager {
     }
 */
 
-    constructor(enmyTeam, enmySize, playrTeam, teamSze, scene) {
+    constructor(enmyTeam, playrTeam, scene) {
         this.enemyTeam = enmyTeam;
-        this.enemySize = enmySize;
+        this.enemySize = enmyTeam.length;
         this.livingEnemies = this.enemySize;
 
         this.playerTeam = playrTeam;
-        this.teamSize = teamSze;
+        this.teamSize = playrTeam.length;
         this.livingParty = this.teamSize;
         
         this.endCombatVictory = false;

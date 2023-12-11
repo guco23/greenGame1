@@ -46,10 +46,8 @@ export class CombateEscena extends Phaser.Scene {
     //crear aqui los objetos de la escena
     create() {
         this.graphics = this.add.graphics();
-        console.log(this.aliados);
-        console.log(this.enemigos);
 
-        this.combatManager = new CombatManager(this.enemigos, 3, this.aliados, 4, this);
+        this.combatManager = new CombatManager(this.enemigos, this.aliados, this);
         //Los aliados ya vienen contruídos desde gameData
         for (let i = 0; i < this.aliados.length; i++) {
             this.aliados[i].startCombat(this.combatManager);

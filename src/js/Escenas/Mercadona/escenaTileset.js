@@ -6,6 +6,7 @@ import GameData from "../../GameData.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
 import { Personaje } from "./../../Combate JS/Personajes/Personaje.js";
+import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 
 export class EscenaTilesets extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -96,15 +97,9 @@ export class EscenaTilesets extends Phaser.Scene {
 
         //Datos de party de prueba
         this.myGameData.party = [
-            new Personaje('Diego', 30, 20, 120, 60, this.combatManager),
-            new Personaje('Pablo', 30, 20, 140, 70, this.combatManager),
-            new Personaje('Jose', 30, 20, 125, 80, this.combatManager),
-            new Personaje('Batman', 30, 20, 120, 23, this.combatManager)
+            new Personaje(personajes.protagonista),
         ];
-        this.myGameData.party[0].imgLink = "javier.jpg";
-        this.myGameData.party[1].imgLink = "javier.jpg";
-        this.myGameData.party[2].imgLink = "javier.jpg";
-        this.myGameData.party[3].imgLink = "javier.jpg";
+
     }
 
 

@@ -31,6 +31,7 @@ export class Personaje {
 
     imgLink;    
 
+    /*
     constructor(namer, attk, defs, hpMax, hp) {
         this.name = namer;
         
@@ -52,22 +53,23 @@ export class Personaje {
 
         //this.currentCombat = combatManager;
     }
-
-    /*constructor(idn) {
+*/
+    constructor(idn) {
         this.name = idn.name;
 
         this.atk = idn.atk;
         this.def = idn.def;
         this.maxHp = idn.maxHp;
-        this.currentHp = idn.currentHp;
-
+        this.currentHp = idn.maxHp;
+        this.imgLink = idn.imgLink;
+        
         this.escudo = 0;
         this.living = true;
         this.stunned = false;
         this.dot = 0;
         this.status = 0;
         this.accion = 0;
-    }*/
+    }
 
     applyDot(value) {
         this.dot += value;
