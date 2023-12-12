@@ -7,7 +7,7 @@ import { EscenaMercadona } from "./Escenas/Mercadona/escenaMercadona.js";
 import {EscenaCajaFuerte } from "./Escenas/Mercadona/escenaCajaFuerte.js";
 import {EscenaPlaya} from "./Escenas/Playa/escenaPlayaExterior.js";
 import {EscenaPlayaBosque} from "./Escenas/Playa/escenaPlayaBosque.js";
-import {EscenaPlayaFerreteria} from "./Escenas/Playa/escenaPlayaFerretería.js";
+import {EscenaPlayaFerreteria} from "./Escenas/Playa/escenaPlayaFerreteria.js";
 import {EscenaPlayaSalaSecreta} from "./Escenas/Playa/escenaPlayaCuartoSecreto.js"
 import {EscenaNuevosMinisterios} from "./Escenas/NuevosMinisterios/escenaNuevosMinisterios.js"
 //Configuración inicial del juego
