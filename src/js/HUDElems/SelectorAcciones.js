@@ -1,3 +1,5 @@
+import { RAIZ_IMAGENES } from "../constants.js";
+
 class AccionText extends Phaser.GameObjects.Container {
     /**
      * Clase de uso interno que contiene un elemento de la lista, su indicador y los metodos para cambiar su aspecto
@@ -11,24 +13,25 @@ class AccionText extends Phaser.GameObjects.Container {
         this.textoDescriptivo = datos.descripcion;
         this.textElem = scene.add.text(x, y, datos.nombre);
         //Aún necesitamos un sprite de flechita para esto
-        this.rect = scene.add.rectangle(x - 8, y + 8, 10, 10, 0xFFFF00);
-        this.rect.visible = false;
+        console.log(RAIZ_IMAGENES + 'seleccionAccion.png');
+        this.icon = scene.add.image(x - 16, y + 8, 'selectorAccion').setScale(2);
+        this.icon.visible = false;
     }
 
     selected() {
         this.textElem.setTint(0xFFFF00);
-        this.rect.visible = true;
+        this.icon.visible = true;
     }
 
     unselect() {
         this.textElem.setTint(0xFFFFFF);
-        this.rect.visible = false;
+        this.icon.visible = false;
     }
 
     visible(t) {
         this.textElem.visible = t;
         if (!t)
-            this.rect.visible = false;
+            this.icon.visible = false;
     }
 
 }

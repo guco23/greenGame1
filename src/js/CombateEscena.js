@@ -40,7 +40,8 @@ export class CombateEscena extends Phaser.Scene {
         });
         //Carga el fondo, dependerá de la zona del juego en la que nos encontremos
         this.load.image('background', RAIZ_IMAGENES + "combatBackground/combatBackgroundPlaceholder.png");
-
+        this.load.image("selectorAccion", RAIZ_IMAGENES + 'seleccionAccion.png');
+        this.load.image("selectorPersonaje", RAIZ_IMAGENES + 'seleccionPersonaje.png');
     }
 
     //crear aqui los objetos de la escena
@@ -99,7 +100,7 @@ export class CombateEscena extends Phaser.Scene {
         new DatosAccion("Defender", "Reduce el daño recibido hasta el siguiente turno")];
 
         this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
-        this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 300, 440, 40, datosAcciones);
+        this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 310, 440, 40, datosAcciones);
         this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.sceneEnem.array);
         this.selectorAliados = new SelectorPersonajes(this, this.aliados, this.sceneAliad.array);
 

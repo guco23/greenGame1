@@ -3,11 +3,10 @@ Se encarga de construir las frases de descripción que aparecen en la batalla de
 Ej. "Pablo ha curado a Diego, Jose y Javier" "Plátano ha atacado a Diego!"
 */
 export class TextoDescriptivo extends Phaser.GameObjects.Container {
-    constructor(scene, x, y) {
+    constructor(scene, x, y, texto = "") {
         //Construir el objeto en la escena
         super(scene);
-        this.textElem = scene.add.text(x, y, "prueba");
-        console.log("funciona");
+        this.textElem = scene.add.text(x, y, texto);
     }
 
     /**
