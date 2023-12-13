@@ -64,12 +64,12 @@ export class EscenaMercadona extends Phaser.Scene {
         this.physics.add.overlap(this.character, this.hitbox5[0], () => {
             if (this.interact == 0) this.scene.start('escenaPlaya', { obj: this.myGameData, cx: 2285, cy: 320, dir: 3 });
         })
-        var self = this;
-        this.physics.add.overlap(this.character, this.hitbox4[0], () => {
-            if (this.interact == 0 && !this.Texto) {
-                new dialogo(this, this.character, ["Recoges la puerta", "La puerta ha sido añadida a tu inventario"], function () {
-                    self.DoorJokeLayer.visible = false;
-                })
+        var self=this;
+        this.physics.add.overlap(this.character, this.hitbox4[0], ()=>{
+            if(this.interact == 0 && !this.Texto) {
+                new dialogo(this, this.character, 1,function(){
+                    self.DoorJokeLayer.visible = false;                                        
+                })                
             }
         })
 

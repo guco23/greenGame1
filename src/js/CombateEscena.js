@@ -185,10 +185,12 @@ export class CombateEscena extends Phaser.Scene {
     }
 
     ActualizarEscena(info) {
-        if (this.combatManager.endCombatVictory)
-            this.Victory();
-        else if (this.combatManager.endCombatDerrota)
-            this.Defeat();
+        if(this.combatManager.endCombat) {
+            if (this.combatManager.endCombatVictory)
+                this.Victory();
+            else if (this.combatManager.endCombatDerrota)
+                this.Defeat();
+        }
         else {
             if (this.menuActual != this.textoDescriptivo) {
                 this.menuActual.ocultar()

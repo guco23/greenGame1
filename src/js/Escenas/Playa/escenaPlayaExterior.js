@@ -34,7 +34,7 @@ init(data){
           this.WallLayer = this.map.createLayer('Paredes', tileset2);
           this.WallLayer.setCollisionByExclusion([-1]);     
           this.AguaPuente = this.map.createLayer('CapaDeAguaPuenteRoto', tileset2);
-          this.AguaPuente.setCollisionByExclusion([-1]);  
+          //this.AguaPuente.setCollisionByExclusion([-1]);  
           
           this.hitbox1 = this.map.createFromObjects('Transiciones', {id:8});          
           this.physics.add.existing(this.hitbox1[0]);
@@ -56,7 +56,7 @@ init(data){
 
 
           this.physics.add.overlap(this.character, this.hitbox1[0], ()=>{
-            if(this.interact == 0) this.scene.start('escenaTilesets3',{obj:this.myGameData,cx:295, cy:160, dir:1});            
+            if(this.interact == 0) this.scene.start('escenaNuevosMinisterios',{obj:this.myGameData,cx:1820, cy:985, dir:0});            
         })
         this.physics.add.overlap(this.character, this.hitbox2[0], ()=>{
             this.scene.start('escenaPlayaBosque',{obj:this.myGameData,cx:800, cy:884, dir:1});                        
@@ -69,8 +69,8 @@ init(data){
         })
         var self=this;
         this.physics.add.overlap(this.character, this.hitbox5[0], ()=>{
-            if(!this.Texto)new dialogo(this, this.character, ["Notas que hay una puerta en el lateral del Mercadona TM", "Decides atravesarla"],function(){
-                self.scene.start('escenaMercadona',{obj:this.myGameData,cx:40, cy:200, dir:2});
+            if(!this.Texto)new dialogo(this, this.character, 2,function(){
+                self.scene.start('escenaPlayaSalaSecreta',{obj:this.myGameData,cx:40, cy:85, dir:2});
             })     
         })
                     
