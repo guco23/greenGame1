@@ -34,7 +34,7 @@ var config = {
         }
     },
     scene: [EscenaTilesets, EscenaTilesets2,EscenaTilesets4,EscenaTilesets3, EscenaMercadona, EscenaCajaFuerte,EscenaPlaya,EscenaPlayaBosque,
-        EscenaPlayaFerreteria,EscenaPlayaSalaSecreta,EscenaNuevosMinisterios,CombateEscena], //Array con todas las escenas
+        EscenaPlayaFerreteria,EscenaPlayaSalaSecreta,EscenaNuevosMinisterios,CombateEscena, MenuEscena], //Array con todas las escenas
     parent: 'espacio-juego' //El elemento de html sobre el que se colocará el "canvas" de Phaser
 };
 
