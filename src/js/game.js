@@ -10,6 +10,8 @@ import {EscenaPlayaBosque} from "./Escenas/Playa/escenaPlayaBosque.js";
 import {EscenaPlayaFerreteria} from "./Escenas/Playa/escenaPlayaFerreteria.js";
 import {EscenaPlayaSalaSecreta} from "./Escenas/Playa/escenaPlayaCuartoSecreto.js"
 import {EscenaNuevosMinisterios} from "./Escenas/NuevosMinisterios/escenaNuevosMinisterios.js"
+import {MenuEscena} from "./MenuEscena.js"
+
 //Configuración inicial del juego
 var config = {
     type: Phaser.AUTO, //Usa WebGL si es posible. En caso contrario, usa canvas 
