@@ -1,4 +1,4 @@
-import { RAIZ_IMAGENES, CONTROLES } from "./constants.js";
+import { RAIZ_IMAGENES, CONTROLES, RAIZ_IMGS_PJS } from "./constants.js";
 import { Enemigo } from "./Combate JS/Enemigos/Enemigo.js"
 import { BarraVida } from "./HUDElems/BarraVida.js";
 import { TextoVida } from "./HUDElems/TextoVida.js";
@@ -33,10 +33,11 @@ export class CombateEscena extends Phaser.Scene {
 
         //Añade las imagenes de los aliados y enemigos
         this.enemigos.forEach(enemigo => {
-            this.load.image(enemigo.name, RAIZ_IMAGENES + enemigo.imgLink);
+            this.load.image(enemigo.name, RAIZ_IMAGENES + RAIZ_IMGS_PJS + enemigo.imgLink);
         });
         this.aliados.forEach(aliado => {
-            this.load.image(aliado.name, RAIZ_IMAGENES + aliado.imgLink);
+            console.log(RAIZ_IMAGENES + RAIZ_IMGS_PJS + aliado.imgLink);
+            this.load.image(aliado.name, RAIZ_IMAGENES + RAIZ_IMGS_PJS + aliado.imgLink);
         });
         //Carga el fondo, dependerá de la zona del juego en la que nos encontremos
         this.load.image('background', RAIZ_IMAGENES + "combatBackground/combatBackgroundPlaceholder.png");
@@ -90,7 +91,7 @@ export class CombateEscena extends Phaser.Scene {
 
         this.vidasEnemigos = [];
         for (let i = 0; i < this.enemigos.length; i++) {
-            this.vidasEnemigos.push(new BarraVida(this, this.sceneEnem.array[i].img.x - 2, this.sceneEnem.array[i].img.y - 10, 80, 18, this.enemigos[i]))
+            this.vidasEnemigos.push(new BarraVida(this, this.sceneEnem.array[i].img.x + this.sceneEnem.array[i].img.width / 2 + 2, this.sceneEnem.array[i].img.y - 10, 80, 18, this.enemigos[i]))
         }
         //Prueba de la barra de vida
         this.vidasEnemigos[2].actualizarHp(25);

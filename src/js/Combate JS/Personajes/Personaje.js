@@ -29,7 +29,8 @@ export class Personaje {
 
     //ableToAct;  //Booleano que le da el control al jugador para que pueda meter input en su turno, en cuyo caso será 0
 
-    imgLink;    
+    imgLink; //La imagen del personaje durante el combate
+    idleImageLink; //La imagen del personaje en el menú de selección
 
     /*
     constructor(namer, attk, defs, hpMax, hp) {
@@ -62,7 +63,7 @@ export class Personaje {
         this.maxHp = idn.maxHp;
         this.currentHp = idn.maxHp;
         this.imgLink = idn.imgLink;
-        
+        this.idleImageLink = idn.idleImageLink;
         this.escudo = 0;
         this.living = true;
         this.stunned = false;
