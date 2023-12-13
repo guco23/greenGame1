@@ -51,6 +51,11 @@ export class Enemigo {
         this.currentCombat = combatManager;
     }
 
+    modifyStat(atkmod, defmod) {
+        this.atk = this.atk * atkmod;
+        this.def = this.def * defmod;
+    }
+
     startCombat(combatManager) {
         this.currentCombat = combatManager;
     }

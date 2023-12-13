@@ -66,6 +66,11 @@ export class Personaje {
         this.dot += value;
     }
 
+    modifyStat(atkmod, defmod) {
+        this.atk = this.atk * atkmod;
+        this.def = this.def * defmod;
+    }
+    
     stun() {
         this.stunned = true;
         this.currentCombat.addInfo("stunned", 0, this, null);
