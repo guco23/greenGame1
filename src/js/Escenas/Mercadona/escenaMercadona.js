@@ -67,7 +67,7 @@ init(data){
         var self=this;
         this.physics.add.overlap(this.character, this.hitbox4[0], ()=>{
             if(this.interact == 0 && !this.Texto) {
-                new dialogo(this, this.character, ["Recoges la puerta", "La puerta ha sido añadida a tu inventario"],function(){
+                new dialogo(this, this.character, 1,function(){
                     self.DoorJokeLayer.visible = false;                                        
                 })                
             }

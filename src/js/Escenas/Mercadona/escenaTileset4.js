@@ -13,21 +13,12 @@ init(data){
     this.cy = data.cy;       
     this.dir = data.dir;  
 }
-    preload() {
-        this.load.image('Frikol', RAIZ_IMAGENES+'OverworldCharacters/Frikol.png');
-        this.load.tilemapTiledJSON('Almacen4', 'assets/json/Almacen4.json');
-        this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
-        this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
+    preload() {        
+        this.load.tilemapTiledJSON('Almacen4', 'assets/json/Almacen4.json');        
     }
 
     //crear aqui los objetos de la escena
-    create() {/*
-        let screenWidth = this.game.config.width;
-        let screenHeight = this.game.config.height;
-        //Imagen 1
-        this.image = this.add.image(screenWidth, screenHeight, 'javier'); //omg so sexy
-        this.image.setScale(0.3);
-        this.image.setPosition(screenWidth / 2, screenHeight / 2);*/
+    create() {        
         this.map = this.make.tilemap({ 
             key: 'Almacen4', 
             tileWidth: 16, 
@@ -45,8 +36,8 @@ init(data){
           this.physics.add.existing(this.hitbox2[0]);
 
           this.hitboxFrikol = this.map.createFromObjects('Personajes', {id:3});   
-          this.physics.add.existing(this.hitboxFrikol[0]);          
-          this.Frikol = this.map.createFromObjects('Personajes', {name: "Frikol", key: 'Frikol' });                    
+          this.physics.add.existing(this.hitboxFrikol[0]);                    
+          this.Frikol = this.add.image(231.5, 97.5, 'Frikol');                    
 
           this.character = new Character(this, this.cx, this.cy,this.dir);
           this.physics.world.enable(this.character);
@@ -61,13 +52,8 @@ init(data){
         })
         this.physics.add.overlap(this.character, this.hitboxFrikol[0], ()=>{
             var self = this;
-            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character, ["Frikol: Em... Disculpa señor, pero este es un área restringida a los clientes...",
-        "Judini: ¿Qué está pasando?", "Judini: Había una especie de monstruo en el almacén...", "Frikol: Ah, sí, esos bichos...", "Frikol:Desde que empezó el apocalipsis esos bichos han ido apareciendo y tomando el control del establecimiento", 
-        "Frikol: Mis compañeros se han largado, pero yo sé muy bien que no recibimos nuestros 5 minutos de descanso hasta dentro de 30 minutos", "Frikol: Se lo diré al encargado cuando vuelva", 
-        "Judini: Maldición, si quiero salvar el mundo tendré que abrirme paso entre todos esos monstruos, pero no se si podré hacerlo solo...", "Judini: Oye... ¿Me podrías ayudar a evitar el apocalipsis y salvar a la humanidad?",
-        "Frikol: De hecho, somos judías, no humanos", "Judini: ...", "Judini: ¿Vas a venir o no?", "Frikol: Vale, supongo que no tengo nada mejor que hacer", "Frikol se ha unido al grupo"],
-            function(){
-                self.Frikol.visible = false;                
+            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character, 0, function(){
+                self.Frikol.destroy();                
             })     
         })
         

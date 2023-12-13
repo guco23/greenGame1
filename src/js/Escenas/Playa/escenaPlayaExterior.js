@@ -65,11 +65,11 @@ init(data){
             if(this.interact == 0) this.scene.start('escenaPlayaFerreteria',{obj:this.myGameData,cx:715, cy:1090, dir:1});            
         })
         this.physics.add.overlap(this.character, this.hitbox4[0], ()=>{
-            if(this.interact == 0) this.scene.start('escenaPlayaSalaSecreta',{obj:this.myGameData,cx:40, cy:40, dir:2});            
+            if(this.interact == 0) this.scene.start('escenaMercadona',{obj:this.myGameData,cx:40, cy:200, dir:2});            
         })
         var self=this;
         this.physics.add.overlap(this.character, this.hitbox5[0], ()=>{
-            if(!this.Texto)new dialogo(this, this.character, ["Notas que hay una puerta en el lateral del         Mercadona TM", "Decides atravesarla"],function(){
+            if(!this.Texto)new dialogo(this, this.character, 2,function(){
                 self.scene.start('escenaPlayaSalaSecreta',{obj:this.myGameData,cx:40, cy:85, dir:2});
             })     
         })
