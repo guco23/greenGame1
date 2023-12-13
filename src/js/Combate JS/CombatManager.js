@@ -15,6 +15,7 @@ export class CombatManager {
 
     endCombatVictory;  //Booleano que comprueba si todos los enemigos han muerto, lo que significa que el combate ha terminado como victoria
     endCombatDerrota;  //Booleano que comprueba si todos los aliados han muerto, lo que significa que el combate ha terminado como derrota
+    endCombat;          //Booleano que indica el final del combate
     current;    //Apunta al personaje o enemigo que tiene el turno
     whoseTurn;  //Booleano, true para jugadores y false para enemigos
 
@@ -67,13 +68,13 @@ export class CombatManager {
     }
 */
 
-    constructor(enmyTeam, enmySize, playrTeam, teamSze, scene) {
+    constructor(enmyTeam, playrTeam, scene) {
         this.enemyTeam = enmyTeam;
-        this.enemySize = enmySize;
+        this.enemySize = enmyTeam.length;
         this.livingEnemies = this.enemySize;
 
         this.playerTeam = playrTeam;
-        this.teamSize = teamSze;
+        this.teamSize = playrTeam.length;
         this.livingParty = this.teamSize;
         
         this.endCombatVictory = false;
@@ -143,7 +144,7 @@ export class CombatManager {
 
     nextTurn() {
         if (this.endCombatVictory || this.endCombatDerrota) {
-            //Método para acabar el combate, dar recompensas, volver a la pantalla principal, etc.
+            this.endCombat = true;
         }
         else {
             if (this.whoseTurn === true) {

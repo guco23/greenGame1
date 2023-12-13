@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="21" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="3">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="21" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="5">
  <tileset firstgid="1" source="Mercadona.tsx"/>
  <layer id="2" name="Suelo" width="21" height="13">
   <data encoding="csv">
@@ -38,5 +38,11 @@
  <objectgroup id="5" name="Transiciones">
   <object id="1" x="95.9197" y="47.8036" width="15.6221" height="5.9364"/>
   <object id="2" x="159.97" y="185.59" width="15.3097" height="6.56128"/>
+ </objectgroup>
+ <objectgroup id="6" name="Personajes">
+  <object id="3" name="Frikol" x="231.5" y="97.5">
+   <point/>
+  </object>
+  <object id="4" name="InteractHitbox" x="209" y="73" width="46.5" height="41"/>
  </objectgroup>
 </map>

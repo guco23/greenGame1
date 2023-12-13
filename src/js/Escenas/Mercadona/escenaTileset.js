@@ -6,6 +6,7 @@ import GameData from "../../GameData.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
 import { Personaje } from "./../../Combate JS/Personajes/Personaje.js";
+import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 
 export class EscenaTilesets extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -30,6 +31,7 @@ export class EscenaTilesets extends Phaser.Scene {
         this.upscaleval = 0.001;*/
         this.load.tilemapTiledJSON('Almacen1', 'assets/json/Almacen1.json');
         this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
+        this.load.image('Frikol', RAIZ_IMAGENES+'OverworldCharacters/Frikol.png');
         this.load.image('UI', RAIZ_IMAGENES+'UI_dialogo.png');
         this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 })
@@ -72,12 +74,12 @@ export class EscenaTilesets extends Phaser.Scene {
         this.physics.add.overlap(this.character, this.hitbox[0], () => {
             if (this.interact == 0) {
                 this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });                                
+                //this.scene.start('escenaPlaya',{obj:this.myGameData,cx:2285, cy:320, dir:3});
             }
         })
         this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {
             this.myGameData.AñadeObjetoClave(1);
-            if (this.interact == 0 && !this.Texto) {
-                new dialogo(this, this.character, ["Queso", "Pimiento", "Pimsahbhsahbiento", "Pimientoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]);                
+            if (this.interact == 0) {                
             }
         })
 
@@ -96,15 +98,9 @@ export class EscenaTilesets extends Phaser.Scene {
 
         //Datos de party de prueba
         this.myGameData.party = [
-            new Personaje('Diego', 30, 20, 120, 60, this.combatManager),
-            new Personaje('Pablo', 30, 20, 140, 70, this.combatManager),
-            new Personaje('Jose', 30, 20, 125, 80, this.combatManager),
-            new Personaje('Batman', 30, 20, 120, 23, this.combatManager)
+            new Personaje(personajes.protagonista),
         ];
-        this.myGameData.party[0].imgLink = "javier.jpg";
-        this.myGameData.party[1].imgLink = "javier.jpg";
-        this.myGameData.party[2].imgLink = "javier.jpg";
-        this.myGameData.party[3].imgLink = "javier.jpg";
+
     }
 
 
