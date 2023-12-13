@@ -54,7 +54,7 @@ export class Personaje {
         this.name = idn.name;
 
         this.atk = idn.atk;
-        this.def = idn.def;
+        this.def = (100 - idn.def) / 100;
         this.maxHp = idn.maxHp;
         this.currentHp = idn.maxHp;
         this.imgLink = idn.imgLink;
