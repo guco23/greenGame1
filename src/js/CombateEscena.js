@@ -20,6 +20,7 @@ export class CombateEscena extends Phaser.Scene {
         this.enemigos = data.enemigos;
         this.objeto = data.objeto;
         this.aliados = data.gameData.party;
+        this.partySize = data.gameData.partySize;
         //Variables necesarias para volver a la escena y posición en la que se estaba antes del combate
         this.cx = data.cx;
         this.cy = data.cy;
@@ -49,7 +50,7 @@ export class CombateEscena extends Phaser.Scene {
     create() {
         this.graphics = this.add.graphics();
 
-        this.combatManager = new CombatManager(this.enemigos, this.aliados, this);
+        this.combatManager = new CombatManager(this.enemigos, this.aliados, this.partySize, this);
         //Los aliados ya vienen contruídos desde gameData
         for (let i = 0; i < this.aliados.length; i++) {
             this.aliados[i].startCombat(this.combatManager);

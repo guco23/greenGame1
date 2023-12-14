@@ -1,7 +1,7 @@
 import { RAIZ_IMAGENES, CONTROLES } from "./constants.js";
 import { SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
 import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
-import { DatosAccion  } from "./HUDElems/SelectorAcciones.js";
+import { DatosAccion } from "./HUDElems/SelectorAcciones.js";
 
 export class MenuEscena extends Phaser.Scene {
 
@@ -14,11 +14,7 @@ export class MenuEscena extends Phaser.Scene {
         this.returnScene = data.scene;
     }
 
-    //Para cerrar el menu y volver a la escena anterior
-    CerrarMenu() {
-        this.returnScene.scene.setActive(true);
-        this.scene.sleep();
-    }
+
 
     preload() {
         this.load.image("selectorAccion", RAIZ_IMAGENES + 'seleccionAccion.png');
@@ -34,7 +30,7 @@ export class MenuEscena extends Phaser.Scene {
         var hudBox2 = this.graphics.fillRoundedRect(275, 50, 600, 400, { tl: 12, tr: 12, bl: 12, br: 12 });
 
         this.cursors = this.input.keyboard.createCursorKeys();
-        this.input.keyboard.on('keydown',(event) => {
+        this.input.keyboard.on('keydown', (event) => {
             if (event.code === CONTROLES.CANCEL) {
                 this.CerrarMenu();
             }
@@ -58,7 +54,7 @@ export class MenuEscena extends Phaser.Scene {
          * Si seleccionas "seleccion de grupo" se despliega un menú con todos los sprites y al pasar por encima de ellos, se muestra su información
          * Si seleccionas equipamiento se despliega un menú con todos los objetos y según pasas pore ellos 
          */
-        
+
         this.cursors = this.input.keyboard.createCursorKeys();
         this.input.keyboard.on('keydown', (event) => {
             if (event.code === CONTROLES.UP) {
@@ -67,6 +63,16 @@ export class MenuEscena extends Phaser.Scene {
             else if (event.code === CONTROLES.DOWN) {
                 this.menuActual.siguiente();
             }
-         });
+        });
+    }
+
+    //Para cerrar el menu y volver a la escena anterior
+    CerrarMenu() {
+        this.returnScene.scene.setActive(true);
+        this.scene.sleep();
+    }
+
+    ActualizarEscena() {
+        
     }
 }
