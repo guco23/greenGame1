@@ -56,7 +56,7 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
     }
 
     /**
-     * Cambia la selección de accion a la siguiente
+     * Cambia la selección de personaje a la siguiente
      */
     siguiente() {
         //Condición para evitar que se salga del array
@@ -68,7 +68,7 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
     }
 
     /**
-     * Cambia la selección de accion a la anterior
+     * Cambia la selección de personaje a la anterior
      */
     anterior() {
         //Condición para evitar que se salga del array

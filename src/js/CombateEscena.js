@@ -101,7 +101,7 @@ export class CombateEscena extends Phaser.Scene {
         new DatosAccion("Defender", "Reduce el daño recibido hasta el siguiente turno")];
 
         this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
-        this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 310, 440, 40, datosAcciones);
+        this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 310, 440, 40, datosAcciones, true);
         this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.sceneEnem.array);
         this.selectorAliados = new SelectorPersonajes(this, this.aliados, this.sceneAliad.array);
 

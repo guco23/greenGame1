@@ -1,11 +1,20 @@
-import { BarraVida } from "./BarraVida.js";
-import { RAIZ_IMAGENES } from "../constants.js";
 
 class PersonajeMenu {
     constructor(scene, character, x, y) {
         scene.add.image(x, y, character.name).setScale(4);
+        this.selectIcon = scene.add.image(x - 48, y, 'selectorPersonaje').setScale(2.8);
+        this.unselect();
     }
 
+    //Cambia la visibilidad de la flechita indicadora a que no se vea
+    select() {
+        this.selectIcon.visible = true;
+    }
+
+    //Cambia la visibilidad de la flechita indicadora  a que si se vea
+    unselect() {
+        this.selectIcon.visible = false;
+    }
 }
 
 export class SelectorPersonajesMenu extends Phaser.GameObjects.Container {
@@ -19,13 +28,50 @@ export class SelectorPersonajesMenu extends Phaser.GameObjects.Container {
      * @param {num} padY El espacio en px entre elementos en vertical (filas)
      * @param {num} padX El espacio en px entre elementos en horizontal (columnas)
      */
-    
+
     constructor(scene, characters, x, y, nFila, padY, padX) {
         super(scene);
         this.characters = characters;
-        this.imgsChars = [];
-        for(let i = 0; i < characters.length; i++) {
-            this.imgsChars.push(new PersonajeMenu(this.scene, characters[i], x + padX * i, y));
+        this.opciones = [];
+        this.selection = 0;
+        for (let i = 0; i < characters.length; i++) {
+            this.opciones.push(new PersonajeMenu(this.scene, characters[i], x + padX * i, y));
+        }
+    }
+
+    mostrar() {
+        this.opciones[this.selection].select();
+    }
+
+    ocultar() {
+        this.opciones.forEach(element => {
+            element.unselect();
+        });
+    }
+
+    /**
+    * Cambia la selección de accion a la siguiente
+    */
+    siguiente() {
+        console.log(this.selection);
+
+        //Condición para evitar que se salga del array
+        if (this.selection < this.opciones.length - 1) {
+            this.opciones[this.selection].unselect();
+            this.selection = this.selection + 1;
+            this.opciones[this.selection].select();
+        }
+    }
+
+    /**
+     * Cambia la selección de accion a la anterior
+     */
+    anterior() {
+        //Condición para evitar que se salga del array
+        if (this.selection > 0) {
+            this.opciones[this.selection].unselect();
+            this.selection = this.selection - 1;
+            this.opciones[this.selection].select();
         }
     }
 }
