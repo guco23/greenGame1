@@ -35,6 +35,8 @@ init(data){
           this.physics.add.existing(this.hitbox1[0]);
           this.hitbox2 = this.map.createFromObjects('Transiciones', {id:2});          
           this.physics.add.existing(this.hitbox2[0]);
+          this.hitbox3 = this.map.createFromObjects('CajaFuerte', {id:3});          
+          this.physics.add.existing(this.hitbox3[0]);
 
           this.character = new Character(this, this.cx, this.cy,this.dir);
           this.physics.world.enable(this.character);
@@ -46,6 +48,16 @@ init(data){
         })
         this.physics.add.overlap(this.character, this.hitbox2[0], ()=>{
             if(this.interact == 0) this.scene.start('escenaMercadona',{obj:this.myGameData,cx:610, cy:65, dir:1});
+        })
+        this.physics.add.overlap(this.character, this.hitbox2[0], ()=>{
+            if(this.interact == 0) {
+                if(this.myGameData.Interactablehitboxes[0] == true){
+
+                }else{
+                    this.myGameData.Interactablehitboxes[0] = true;
+                    
+                }
+            }
         })
                     
           this.cameras.main.startFollow(this.character);      

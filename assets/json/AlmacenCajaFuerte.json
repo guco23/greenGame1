@@ -27,6 +27,28 @@
          "y":0
         }, 
         {
+         "draworder":"topdown",
+         "id":5,
+         "name":"CajaFuerte",
+         "objects":[
+                {
+                 "height":15.6698353814051,
+                 "id":3,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":false,
+                 "width":41.6230002318572,
+                 "x":203.707859958266,
+                 "y":42.1126825875261
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 4, 7, 7, 7, 7, 11, 33, 34, 11, 7, 7, 7, 10, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 4, 7, 8, 7, 7, 7, 50, 51, 7, 7, 7, 7, 7, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -56,26 +78,26 @@
          "name":"Transiciones",
          "objects":[
                 {
-                 "height":3.92784080342199,
+                 "height":3.92784,
                  "id":1,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":false,
-                 "width":15.2203831132602,
-                 "x":48.1160498419193,
-                 "y":187.5543983634
+                 "width":15.2204,
+                 "x":48.116,
+                 "y":187.554
                 }, 
                 {
-                 "height":4.41882090384973,
+                 "height":4.41882,
                  "id":2,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":false,
-                 "width":14.7294030128324,
-                 "x":480.178538218337,
-                 "y":186.572438162544
+                 "width":14.7294,
+                 "x":480.179,
+                 "y":186.572
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -83,17 +105,17 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":5,
- "nextobjectid":3,
+ "nextlayerid":6,
+ "nextobjectid":4,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.10.2",
+ "tiledversion":"1.10.1",
  "tileheight":16,
  "tilesets":[
         {
          "columns":17,
          "firstgid":1,
-         "image":"..\/..\/assets\/images\/tilesets\/tileset_mercadona.png",
+         "image":"..\/images\/tilesets\/tileset_mercadona.png",
          "imageheight":150,
          "imagewidth":300,
          "margin":1,
