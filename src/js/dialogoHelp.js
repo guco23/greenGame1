@@ -10,7 +10,7 @@ export default class dialogoHelp {
         this.dialogos[2] = ["Notas que hay una puerta en el lateral del         Mercadona TM", "Decides atravesarla"];
         this.dialogos[3] = ["Oh, por fin. Un empleado", "Discúlpame, ¿le importaría decirme dónde está la   sección de toallas?", "Oye, ¿No será usted Judio César, emperador del     Imperio Romano?",
         "Em... ¿Nos conocemos de algo?", "Estamos intentando detener el apocalipsis, y tu    ayuda podría venirnos muy bien", "Ah, eso suena importante", "Está bien, os ayudaré", "Judio César se ha unido al grupo"];
-        this.dialogos[4] = ["EN EL VÍDEO DE HOY HE COMPRADO UN                  MERCADONA, Y LO HE LLENADO DE DINAMITA", "¡Oh! ¡Madre mía! ¡Es Mister Bean!", "¡Estoy subscrito al canal! ¡Dame dinero!",
+        this.dialogos[4] = ["EN EL VÍDEO DE HOY HE COMPRADO UN                  MERCADONA, Y LO HE LLENADO DE DINAMITA", "¡Oh Dios mío! ¡Es Mister Bean!", "¡Estoy subscrito al canal! ¡Dame dinero!",
         "Em... lo siento, pero ahora estoy grabando un      vídeo...", "Discúlpale, no suele conportarse así", "Es igual. De todas formas estos monstruos que      aparecieron desde que empezó el apocalipsis no me  dejan grabar en paz",
         "Hey, nosotros estamos luchando contra ellos,       intentando detener el apocalipsis", "Cuanto antes acabemos, antes podrás ponerte con    el vídeo. ¿Nos hechas un cable?", "Vale. Suena razonable", "Mr.Bean se ha unido al grupo"]
 
