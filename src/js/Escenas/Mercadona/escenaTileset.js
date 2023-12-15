@@ -1,7 +1,6 @@
 //import {Scene} from 'phaser';
 import Character from "../../character.js";
 import { RAIZ_IMAGENES } from "../../constants.js";
-import dialogo from "../../dialogo.js";
 import GameData from "../../GameData.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
@@ -32,6 +31,7 @@ export class EscenaTilesets extends Phaser.Scene {
         this.load.tilemapTiledJSON('Almacen1', 'assets/json/Almacen1.json');
         this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
         this.load.image('Frikol', RAIZ_IMAGENES+'OverworldCharacters/Frikol.png');
+        this.load.image('Judini', RAIZ_IMAGENES+'OverworldCharacters/Judini.png');
         this.load.image('UI', RAIZ_IMAGENES+'UI_dialogo.png');
         this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 })
