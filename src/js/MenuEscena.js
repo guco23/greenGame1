@@ -1,4 +1,4 @@
-import { RAIZ_IMAGENES, CONTROLES, RAIZ_IMGS_PJS } from "./constants.js";
+import { RAIZ_IMAGENES, CONTROLES, RAIZ_IMGS_PJS, RAIZ_IMGS_OVERWORLD } from "./constants.js";
 import { SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
 import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
 import { DatosAccion } from "./HUDElems/SelectorAcciones.js";
@@ -20,10 +20,10 @@ export class MenuEscena extends Phaser.Scene {
         this.load.image("selectorAccion", RAIZ_IMAGENES + 'seleccionAccion.png');
         //Carga las imágenes de los aliados en la party y fuera de ella
         this.gameData.allies.forEach(ally => {
-            this.load.image(ally.name, RAIZ_IMAGENES + RAIZ_IMGS_PJS + ally.idleImageLink);
+            this.load.image(ally.name, RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + ally.idleImageLink);
         });
         this.gameData.party.forEach(ally => {
-            this.load.image(ally.name, RAIZ_IMAGENES + RAIZ_IMGS_PJS + ally.idleImageLink);
+            this.load.image(ally.name, RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + ally.idleImageLink);
         });
     }
 

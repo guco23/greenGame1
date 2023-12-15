@@ -1,3 +1,4 @@
+import { TextoDescriptivo } from "./TextoDescriptivo.js";
 
 class PersonajeMenu {
     constructor(scene, character, x, y) {
@@ -27,9 +28,10 @@ export class SelectorPersonajesMenu extends Phaser.GameObjects.Container {
      * @param {num} nFila La cantidad de personajes mostrados por fila
      * @param {num} padY El espacio en px entre elementos en vertical (filas)
      * @param {num} padX El espacio en px entre elementos en horizontal (columnas)
+     * @param {TextoDescriptivo} descripcion El objeto de texto descriptivo donde mostrar la información del personaje
      */
 
-    constructor(scene, characters, x, y, nFila, padY, padX) {
+    constructor(scene, characters, x, y, nFila, padY, padX, descripcion) {
         super(scene);
         this.characters = characters;
         this.opciones = [];

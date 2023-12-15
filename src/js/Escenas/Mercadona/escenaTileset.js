@@ -98,7 +98,7 @@ export class EscenaTilesets extends Phaser.Scene {
 
         //Datos de party de prueba
         this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
-        this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
+        this.myGameData.AddCharacter(new Personaje(personajes.frikol));
         this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
         this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
         this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
