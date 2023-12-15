@@ -43,7 +43,12 @@ export class EscenaMercadona extends Phaser.Scene {
         this.physics.add.existing(this.hitbox4[0]);
         this.hitbox5 = this.map.createFromObjects('Transiciones', { id: 6 });
         this.physics.add.existing(this.hitbox5[0]);
-
+        this.JudioCesar = this.map.createFromObjects('Personajes', { id: 7 });
+        this.physics.add.existing(this.JudioCesar[0]);
+        this.JudioCaesarImage = this.add.image(735, 168, 'JudioCaesar');
+        this.MrBean = this.map.createFromObjects('Personajes', { id: 8 });
+        this.physics.add.existing(this.MrBean[0]);
+        this.MrBeanImage = this.add.image(190, 210, 'MrBean');
 
         this.character = new Character(this, this.cx, this.cy, this.dir);
         this.physics.world.enable(this.character);
@@ -71,6 +76,20 @@ export class EscenaMercadona extends Phaser.Scene {
                     self.DoorJokeLayer.visible = false;                                        
                 })                
             }
+        })
+        this.physics.add.overlap(this.character, this.MrBean[0], ()=>{
+            var self = this;
+            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character, 4, function(){
+                self.MrBeanImage.destroy();   
+               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+            })     
+        })
+        this.physics.add.overlap(this.character, this.JudioCesar[0], ()=>{
+            var self = this;
+            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character, 3, function(){
+                self.JudioCaesarImage.destroy();   
+               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+            })     
         })
 
         this.cameras.main.startFollow(this.character);
