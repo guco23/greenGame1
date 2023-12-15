@@ -121,4 +121,9 @@ export class SelectorAcciones extends Phaser.GameObjects.Container {
             this.select();
         }
     }
+
+    updateAction(idn, newName, newDesc) {
+        this.opciones[idn].textoDescriptivo = newDesc;
+        this.opciones[idn].textElem.setText(newName);
+    }
 }

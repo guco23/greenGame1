@@ -97,14 +97,13 @@ export class CombateEscena extends Phaser.Scene {
         this.vidasEnemigos[2].actualizarHp(25);
         //Los datos para crear la lista del selector acciones
         let datosAcciones = [new DatosAccion("Atacar", "Ataque básico a un objetivo"),
-        new DatosAccion("Habilidad", "TODO: depende del personaje"),
+        new DatosAccion("Habilidad", ""), //Esta cambiará en cada turno (mostrando la descripción de la habilidad del personaje)
         new DatosAccion("Defender", "Reduce el daño recibido hasta el siguiente turno")];
 
         this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
         this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 310, 440, 40, datosAcciones, true);
         this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.sceneEnem.array);
         this.selectorAliados = new SelectorPersonajes(this, this.aliados, this.sceneAliad.array);
-
 
         this.selectorAliados.ocultar();
         this.selectorEnemigos.ocultar();
@@ -166,7 +165,7 @@ export class CombateEscena extends Phaser.Scene {
                 }
             }
         }, this);
-
+        this.ActualizarEscena();
         this.combatManager.nextTurn();
     }
 
@@ -210,6 +209,9 @@ export class CombateEscena extends Phaser.Scene {
             //Comprueba si el enemigo ha muerto, en cuyo caso oculta la imagen
             this.sceneAliad.refresh();
             this.sceneEnem.refresh();
+            let current = this.combatManager.current;
+            if(current < this.partySize)
+            this.selectorAcciones.updateAction(1, "Habilidad", this.aliados[current].descripcionHabilidad);
         }
     }
 };
