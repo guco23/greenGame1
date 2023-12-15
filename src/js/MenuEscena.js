@@ -46,9 +46,9 @@ export class MenuEscena extends Phaser.Scene {
 
         this.menuActual = this.opcionPrimaria;
 
-        this.selectorParty = new SelectorPersonajesMenu(this, this.gameData.party, 450, 110, 4, 100, 100);
+        this.selectorParty = new SelectorPersonajesMenu(this, this.gameData.party, 390, 110, 4, 100, 100);
 
-        this.selectorAllies = new SelectorPersonajesMenu(this, this.gameData.allies, 300, 300, 4, 100, 100);
+        this.selectorAllies = new SelectorPersonajesMenu(this, this.gameData.allies, 300, 300, 3, 100, 100);
 
         /**
          * Lo primero es un selector arriba, probablemente en horizontal en el que puedas escoger modificar el equipo o equipar objetos
