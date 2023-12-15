@@ -1,7 +1,8 @@
-import { RAIZ_IMAGENES, CONTROLES } from "./constants.js";
+import { RAIZ_IMAGENES, CONTROLES, RAIZ_IMGS_PJS } from "./constants.js";
 import { SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
 import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
 import { DatosAccion } from "./HUDElems/SelectorAcciones.js";
+import { SelectorPersonajesMenu } from "./HUDElems/SelectorPersonajesMenu.js";
 
 export class MenuEscena extends Phaser.Scene {
 
@@ -10,14 +11,19 @@ export class MenuEscena extends Phaser.Scene {
     }
 
     init(data) {
-        this.myGameData = data.obj;
+        this.gameData = data.obj;
         this.returnScene = data.scene;
     }
 
-
-
     preload() {
         this.load.image("selectorAccion", RAIZ_IMAGENES + 'seleccionAccion.png');
+        //Carga las imágenes de los aliados en la party y fuera de ella
+        this.gameData.allies.forEach(ally => {
+            this.load.image(ally.name, RAIZ_IMAGENES + RAIZ_IMGS_PJS + ally.imgLink);
+        });
+        this.gameData.party.forEach(ally => {
+            this.load.image(ally.name, RAIZ_IMAGENES + RAIZ_IMGS_PJS + ally.imgLink);
+        });
     }
 
     create() {
@@ -46,6 +52,10 @@ export class MenuEscena extends Phaser.Scene {
 
         this.menuActual = this.opcionPrimaria;
 
+        this.selectorParty = new SelectorPersonajesMenu(this, this.gameData.party, 450, 110, 4, 100, 80);
+
+        this.selectorAllies = new SelectorPersonajesMenu(this, this.gameData.allies, 300, 300, 4, 100, 80);
+
         /**
          * Lo primero es un selector arriba, probablemente en horizontal en el que puedas escoger modificar el equipo o equipar objetos
          * A la derecha se mostrará el equipo actual (sprites), su vida actual y el nombre del objeto que tienen equipado
@@ -64,6 +74,7 @@ export class MenuEscena extends Phaser.Scene {
                 this.menuActual.siguiente();
             }
         });
+        this.ActualizarEscena();
     }
 
     //Para cerrar el menu y volver a la escena anterior
@@ -73,6 +84,7 @@ export class MenuEscena extends Phaser.Scene {
     }
 
     ActualizarEscena() {
-        
+
+
     }
 }

@@ -37,7 +37,6 @@ export class CombateEscena extends Phaser.Scene {
             this.load.image(enemigo.name, RAIZ_IMAGENES + RAIZ_IMGS_PJS + enemigo.imgLink);
         });
         this.aliados.forEach(aliado => {
-            console.log(RAIZ_IMAGENES + RAIZ_IMGS_PJS + aliado.imgLink);
             this.load.image(aliado.name, RAIZ_IMAGENES + RAIZ_IMGS_PJS + aliado.imgLink);
         });
         //Carga el fondo, dependerá de la zona del juego en la que nos encontremos

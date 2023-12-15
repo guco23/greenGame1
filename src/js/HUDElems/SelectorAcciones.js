@@ -13,7 +13,6 @@ class AccionText extends Phaser.GameObjects.Container {
         this.textoDescriptivo = datos.descripcion;
         this.textElem = scene.add.text(x, y, datos.nombre);
         //Aún necesitamos un sprite de flechita para esto
-        console.log(RAIZ_IMAGENES + 'seleccionAccion.png');
         this.icon = scene.add.image(x - 16, y + 8, 'selectorAccion').setScale(2);
         this.icon.visible = false;
     }
