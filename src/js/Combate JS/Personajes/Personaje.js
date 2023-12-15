@@ -111,7 +111,6 @@ export class Personaje {
             this.currentCombat.addInfo("defend", shield, this, null);
             this.escudo += shield;
         }
-        this.endTurn();
     }
     
     checkAlive() {
@@ -170,6 +169,7 @@ export class Personaje {
 
     defend() {
         this.gainShield(this.def);
+        this.endTurn();
     }
 
     takeTurn() {

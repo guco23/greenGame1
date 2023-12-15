@@ -12,6 +12,7 @@ export class Logista extends Personaje {
 
     special(target) {
         let extra = this.defMod * this.def;
+        this.currentCombat.addInfo("special", this.name + " está ayudando a sus aliados a organizar sus defensas.\n");
         for(i = 0; i < this.currentCombat.teamSize; i++) {
             let boost = this.currentCombat.playerTeam[i];
             if(boost.living) {

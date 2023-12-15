@@ -16,6 +16,6 @@ export class Emprendedor extends Personaje {
         let myTarget = this.currentCombat.enemyTeam[target];
         this.currentCombat.addInfo("attack", myTarget.sufferDamage(this.atk * this.attakMod), this, myTarget);
         this.atk = this.atk * this.growth;
-        this.currentCombat.addInfo("special", this.name + " hyped up and increased their attack!", this, null);
+        this.currentCombat.addInfo("special", this.name + " hyped up and increased their attack!\n", this, null);
     }
 }
