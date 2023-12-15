@@ -1,21 +1,21 @@
 import { Personaje } from "./Personaje.js";
 
-export class Ejecutivo extends Personaje {
+export class Logista extends Personaje {
 
-    grwoth;
+    defMod;
 
     constructor(idn) {
         super(idn);
         this.targetKind = 3;
-        this.grwoth = 1.05;
+        this.defMod = 0.1;
     }
 
     special(target) {
-        this.currentCombat.addInfo("special", this.name + " ordered their allies to square up!");
+        let extra = this.defMod * this.def;
         for(i = 0; i < this.currentCombat.teamSize; i++) {
             let boost = this.currentCombat.playerTeam[i];
             if(boost.living) {
-                boost.modifyStat(true, this.grwoth, 1);
+                boost.modifyStat(false, 0, extra);
             }
         }
     }

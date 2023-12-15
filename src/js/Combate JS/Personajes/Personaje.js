@@ -71,9 +71,15 @@ export class Personaje {
         this.dot += value;
     }
 
-    modifyStat(atkmod, defmod) {
-        this.atk = this.atk * atkmod;
-        this.def = this.def * defmod;
+    modifyStat(mode, atkmod, defmod) {
+        if (mode) {
+            this.atk = this.atk * atkmod;
+            this.def = this.def * defmod;
+        }
+        else {
+            this.atk += atkmod;
+            this.def += defmod;
+        }
     }
     
     stun() {

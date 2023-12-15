@@ -206,7 +206,8 @@ export class CombatManager {
     }
 
     specialRequestInfo() {
-        return this.playerTeam[this.current].targetKind;
+        return this.playerTeam[this.current].targetKind; //Targeteo para la habilidad. 0 un enemigo, 1 un aliado, 2 todo enemigo, 3 todo aliado
+
     }
 
     doAction(action, target) {
