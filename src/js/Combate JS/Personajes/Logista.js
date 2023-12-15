@@ -19,5 +19,6 @@ export class Logista extends Personaje {
                 boost.modifyStat(false, 0, extra);
             }
         }
+        this.endTurn();
     }
 }

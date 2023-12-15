@@ -1,27 +1,25 @@
 import { Personaje } from "./Personaje.js";
 
-export class Comandante extends Personaje {
-    areaMod;
-    debufMod;
+export class Logico extends Personaje {
+    dotAplly;
 
     constructor(idn) {
         super(idn);
-        this.areaMod = 0.8;
-        this.debuffMod = 0.95;
+        this.dotAplly = Math.floor(this.atk / 5);
         this.targetKind = 2;
     }
 
     special(target) {
         let total = 0;
-        this.currentCombat.addInfo("special", this.name + " ordered a march!\n", this, null);
+        this.currentCombat.addInfo("special", this.name + " encontro una debilidad de los enemigos.\n", this, null);
         for(i = 0; i < this.currentCombat.enemySize; i++) {
             let thisTarg = this.currentCombat.enemyTeam[i];
             if(thisTarg.living) {
                 total += thisTarg.sufferDamage(this.atk);
-                thisTarg.modifyStat(true, this.debufMod, 1);
+                thisTarg.applyDot(this.dotAplly);
             }
         }
-        this.currentCombat.addInfo("special", this.name + " dealt a total of " + total + " damage and scared the enemies!\n");
+        this.currentCombat.addInfo("special", this.name + " hizo un total de " + total + " daño y causó efectos perjudiciales.\n");
         this.endTurn();
     }
 }

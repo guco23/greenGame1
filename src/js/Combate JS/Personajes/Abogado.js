@@ -1,6 +1,6 @@
 import { Personaje } from "./Personaje.js";
 
-export class Logista extends Personaje {
+export class Abogado extends Personaje {
 
     healMod;
 
@@ -16,5 +16,6 @@ export class Logista extends Personaje {
         ally.gainShield(this.def);
         ally.heal(this.maxHp * this.healMod);
         this.currentCombat.addInfo("special", "Thanks to them " + ally.name + " is now feeling better.\n", this, null);
+        this.endTurn();
     }
 }

@@ -81,6 +81,10 @@ export class Personaje {
             this.def += defmod;
         }
     }
+
+    getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
     
     stun() {
         this.stunned = true;

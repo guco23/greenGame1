@@ -18,5 +18,6 @@ export class Ejecutivo extends Personaje {
                 boost.modifyStat(true, this.grwoth, 1);
             }
         }
+        this.endTurn();
     }
 }
