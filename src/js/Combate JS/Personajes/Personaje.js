@@ -29,6 +29,8 @@ export class Personaje {
     imgLink; //La imagen del personaje durante el combate
     idleImageLink; //La imagen del personaje en el menú de selección
 
+    MBTI; //El titulo de su personalidad segun el test MBTI
+    descripcion; //Una pequeña descripción del personaje
     /*
     constructor(namer, attk, defs, hpMax, hp) {
         this.name = namer;
@@ -64,6 +66,9 @@ export class Personaje {
         this.stunned = false;
         this.dot = 0;
         this.personality = idn.personality;
+        this.MBTI = idn.MBTI;
+        this.descripcion = idn.descripcion;
+        this.descripcionHabilidad = idn.descripcionHabilidad;
 
     }
 

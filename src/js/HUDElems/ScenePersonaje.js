@@ -6,7 +6,7 @@ const statusIconSize = {
 class ScenePersonaje extends Phaser.GameObjects.Container {
     constructor(scene, x, y, img) {
         super(scene);
-        this.img = scene.add.image(x, y, img).setScale(4);
+        this.img = scene.add.image(x, y, img + "C").setScale(4);
         this.img.setOrigin(0, 0);
         //Esto será un sprite cuando esté hecho
         this.stun = scene.add.rectangle(x + this.img.displayWidth - statusIconSize.x, y + this.img.displayHeight - statusIconSize.y, statusIconSize.x, statusIconSize.y, 0xFFFF00).setOrigin(0, 0);

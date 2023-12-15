@@ -20,6 +20,7 @@ export class CombateEscena extends Phaser.Scene {
         this.enemigos = data.enemigos;
         this.objeto = data.objeto;
         this.aliados = data.gameData.party;
+        this.partySize = data.gameData.partySize;
         //Variables necesarias para volver a la escena y posición en la que se estaba antes del combate
         this.cx = data.cx;
         this.cy = data.cy;
@@ -33,11 +34,10 @@ export class CombateEscena extends Phaser.Scene {
 
         //Añade las imagenes de los aliados y enemigos
         this.enemigos.forEach(enemigo => {
-            this.load.image(enemigo.name, RAIZ_IMAGENES + RAIZ_IMGS_PJS + enemigo.imgLink);
+            this.load.image(enemigo.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_PJS + enemigo.imgLink);
         });
         this.aliados.forEach(aliado => {
-            console.log(RAIZ_IMAGENES + RAIZ_IMGS_PJS + aliado.imgLink);
-            this.load.image(aliado.name, RAIZ_IMAGENES + RAIZ_IMGS_PJS + aliado.imgLink);
+            this.load.image(aliado.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_PJS + aliado.imgLink);
         });
         //Carga el fondo, dependerá de la zona del juego en la que nos encontremos
         this.load.image('background', RAIZ_IMAGENES + "combatBackground/combatBackgroundPlaceholder.png");
@@ -49,7 +49,7 @@ export class CombateEscena extends Phaser.Scene {
     create() {
         this.graphics = this.add.graphics();
 
-        this.combatManager = new CombatManager(this.enemigos, this.aliados, this);
+        this.combatManager = new CombatManager(this.enemigos, this.aliados, this.partySize, this);
         //Los aliados ya vienen contruídos desde gameData
         for (let i = 0; i < this.aliados.length; i++) {
             this.aliados[i].startCombat(this.combatManager);
@@ -101,7 +101,7 @@ export class CombateEscena extends Phaser.Scene {
         new DatosAccion("Defender", "Reduce el daño recibido hasta el siguiente turno")];
 
         this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
-        this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 310, 440, 40, datosAcciones);
+        this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 310, 440, 40, datosAcciones, true);
         this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.sceneEnem.array);
         this.selectorAliados = new SelectorPersonajes(this, this.aliados, this.sceneAliad.array);
 
