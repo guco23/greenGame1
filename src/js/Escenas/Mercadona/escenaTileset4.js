@@ -1,6 +1,7 @@
 import Character from "../../character.js";
 import dialogo from "../../dialogo.js";
 import { RAIZ_IMAGENES } from "../../constants.js";
+import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 
 export class EscenaTilesets4 extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -53,7 +54,8 @@ init(data){
         this.physics.add.overlap(this.character, this.hitboxFrikol[0], ()=>{
             var self = this;
             if(!this.Texto&&this.interact == 0)new dialogo(this, this.character, 0, function(){
-                self.Frikol.destroy();                
+                self.Frikol.destroy();   
+               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
             })     
         })
         
