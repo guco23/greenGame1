@@ -1,5 +1,6 @@
 import Character from "../../character.js";
 import { RAIZ_IMAGENES } from "../../constants.js";
+import dialogo from "../../dialogo.js";
 
 export class EscenaCajaFuerte extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -49,13 +50,19 @@ init(data){
         this.physics.add.overlap(this.character, this.hitbox2[0], ()=>{
             if(this.interact == 0) this.scene.start('escenaMercadona',{obj:this.myGameData,cx:610, cy:65, dir:1});
         })
-        this.physics.add.overlap(this.character, this.hitbox2[0], ()=>{
-            if(this.interact == 0) {
-                if(this.myGameData.Interactablehitboxes[0] == true){
-
+        this.physics.add.overlap(this.character, this.hitbox3[0], ()=>{
+            if(this.interact == 0 && !this.Texto) {
+                if(this.myGameData.CheckObjetoclave(0)&&this.myGameData.CheckObjetoclave(1)&&this.myGameData.CheckObjetoclave(2)){
+                    new dialogo(this, this.character, 1,function(){
+                        self.DoorJokeLayer.visible = false;                                        
+                    }) 
                 }else{
-                    this.myGameData.Interactablehitboxes[0] = true;
-                    
+                    if(this.myGameData.Interactablehitboxes[0]){
+                        new dialogo(this, this.character, 6) 
+                    }else{                                        
+                        this.myGameData.Interactablehitboxes[0] = true;
+                        new dialogo(this, this.character, 5) 
+                    }
                 }
             }
         })

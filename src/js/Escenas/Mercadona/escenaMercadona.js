@@ -5,7 +5,7 @@ import dialogo from "../../dialogo.js";
 export class EscenaMercadona extends Phaser.Scene {
     //cargar aqui los datos de la escena.
     constructor() {
-        super('escenaMercadona')
+        super('escenaMercadona')        		
     }
     init(data) {
         this.myGameData = data.obj;
@@ -30,7 +30,7 @@ export class EscenaMercadona extends Phaser.Scene {
         const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
         this.FloorLayer = this.map.createLayer('Suelo', tileset1);
         this.WallLayer = this.map.createLayer('Paredes', tileset1);
-        this.DoorJokeLayer = this.map.createLayer('ChisteDeLaPuerta', tileset1);
+        if(!this.myGameData.Interactablehitboxes[1])this.DoorJokeLayer = this.map.createLayer('ChisteDeLaPuerta', tileset1);
         this.WallLayer.setCollisionByExclusion([-1]);
 
         this.hitbox1 = this.map.createFromObjects('Transiciones', { id: 1 });
@@ -72,9 +72,15 @@ export class EscenaMercadona extends Phaser.Scene {
         var self=this;
         this.physics.add.overlap(this.character, this.hitbox4[0], ()=>{
             if(this.interact == 0 && !this.Texto) {
-                new dialogo(this, this.character, 1,function(){
-                    self.DoorJokeLayer.visible = false;                                        
-                })                
+                if(this.myGameData.Interactablehitboxes[1]){
+                    new dialogo(this, this.character, 7) 
+                }else{
+                    new dialogo(this, this.character, 1,function(){
+                        self.DoorJokeLayer.visible = false;                                                                
+                    }) 
+                    this.myGameData.Interactablehitboxes[1] = true;
+                }
+                               
             }
         })
         this.physics.add.overlap(this.character, this.MrBean[0], ()=>{

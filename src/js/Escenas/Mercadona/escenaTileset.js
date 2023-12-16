@@ -26,9 +26,7 @@ export class EscenaTilesets extends Phaser.Scene {
         }
     }
 
-    preload() {
-        /*this.load.image('javier', RAIZ_IMAGENES + 'javier.jpg');
-        this.upscaleval = 0.001;*/
+    preload() {        
         this.load.tilemapTiledJSON('Almacen1', 'assets/json/Almacen1.json');
         this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
         this.load.image('Frikol', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/Frikol.png');

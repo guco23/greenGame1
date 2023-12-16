@@ -48,7 +48,9 @@ export default class GameData {
         this.CheckObjetoClave = function (aux) {
             console.log(this.objects[aux].Pillado);
         }
-        this.Interactablehitboxes = []; //1 es el max
+        this.Interactablehitboxes = [];
+        this.Interactablehitboxes[0] = false;
+        this.Interactablehitboxes[1] = false;
     }
 
     AñadeObjetoClave(aux) {
