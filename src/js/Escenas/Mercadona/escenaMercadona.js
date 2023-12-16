@@ -43,6 +43,14 @@ export class EscenaMercadona extends Phaser.Scene {
         this.physics.add.existing(this.hitbox4[0]);
         this.hitbox5 = this.map.createFromObjects('Transiciones', { id: 6 });
         this.physics.add.existing(this.hitbox5[0]);
+        this.hitbox6 = this.map.createFromObjects('Bloqueo', { id: 9 });
+        this.physics.add.existing(this.hitbox6[0]);
+        this.Nota1 = this.map.createFromObjects('Items', { id: 10 });
+        this.physics.add.existing(this.Nota1[0]);
+        this.Nota2 = this.map.createFromObjects('Items', { id: 11 });
+        this.physics.add.existing(this.Nota2[0]);
+        this.Nota3 = this.map.createFromObjects('Items', { id: 12 });
+        this.physics.add.existing(this.Nota3[0]);
         this.JudioCesar = this.map.createFromObjects('Personajes', { id: 7 });
         this.physics.add.existing(this.JudioCesar[0]);
         this.JudioCaesarImage = this.add.image(735, 168, 'JudioCaesar');
@@ -57,6 +65,7 @@ export class EscenaMercadona extends Phaser.Scene {
 
         this.NoWallLayer = this.map.createLayer('Paredes atravesables', tileset1); //Esta capa se coloca después para que esté por "encima" del jugador
 
+        var self=this;
         this.physics.add.overlap(this.character, this.hitbox1[0], () => {
             if (this.interact == 0) this.scene.start('escenaTilesets4', { obj: this.myGameData, cx: 100, cy: 65, dir: 3 });
         })
@@ -69,7 +78,17 @@ export class EscenaMercadona extends Phaser.Scene {
         this.physics.add.overlap(this.character, this.hitbox5[0], () => {
             if (this.interact == 0) this.scene.start('escenaPlaya', { obj: this.myGameData, cx: 2285, cy: 320, dir: 3 });
         })
-        var self=this;
+        this.physics.add.overlap(this.character, this.hitbox6[0], () => {
+            if(!this.Texto){
+                if(this.myGameData.CheckObjetoclave(3)){
+                    //Aquí va el combate con libra y todo eso...
+                }else{                    
+                    new dialogo(this, this.character, 8,function(){
+                        self.character.x = self.character.x + 5;
+                    }) 
+                }
+            }
+        })
         this.physics.add.overlap(this.character, this.hitbox4[0], ()=>{
             if(this.interact == 0 && !this.Texto) {
                 if(this.myGameData.Interactablehitboxes[1]){
@@ -81,6 +100,24 @@ export class EscenaMercadona extends Phaser.Scene {
                     this.myGameData.Interactablehitboxes[1] = true;
                 }
                                
+            }
+        })
+        this.physics.add.overlap(this.character, this.Nota1[0], () => {
+            if (this.interact == 0 && !this.myGameData.CheckObjetoclave(0)) {
+                new dialogo(this, this.character, 10);
+                this.myGameData.AñadeObjetoClave(0);
+            }
+        })
+        this.physics.add.overlap(this.character, this.Nota2[0], () => {
+            if (this.interact == 0 && !this.myGameData.CheckObjetoclave(1)) {
+                new dialogo(this, this.character, 10);
+                this.myGameData.AñadeObjetoClave(1);
+            }
+        })
+        this.physics.add.overlap(this.character, this.Nota3[0], () => {
+            if (this.interact == 0 && !this.myGameData.CheckObjetoclave(2)) {
+                new dialogo(this, this.character, 10);
+                this.myGameData.AñadeObjetoClave(2);
             }
         })
         this.physics.add.overlap(this.character, this.MrBean[0], ()=>{

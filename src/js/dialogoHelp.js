@@ -17,6 +17,11 @@ export default class dialogoHelp {
         "Intentas abrirla, pero la puerta no cede", "Observas un poco, y compruebas que se podría abrir con un código de nueve dígitos", "Tal vez haya alguna pista en el establecimiento conla que adivinar este número..."]
         this.dialogos[6] = ["Insertas, por probar, un número aleatorio de nueve cifras", "...", "No funciona", "Decides no perder el tiempo y buscar pistar en el  supermercado"]
         this.dialogos[7] = ["Hay una alfombra con forma de flecha apuntando a lapared", "Qué raro"]
+        this.dialogos[8] = ["¡Espera un momento!", "¿Qué pasa?", "No podemos irnos todavía", "Aún no hemos pagado", "...", "Frikol...", "¡Tienes toda la razón!", "No podemos irnos sin pagar. ¿Qué ejemplo           estaríamos dando si no?",
+        "Pero no tengo dinero", "Tendremos que encontrar algo con lo que pagar      entonces..."]
+        this.dialogos[9] = ["Introduces el código completo: 111-111-111", "La puerta se abre, mostrando el interior de la cajafuerte, completamente vacía, con la excepción de unpapel en el suelo...",
+        "En el pone: 'Cupon de 100% de descuento'", "Decides que con eso será suficiente para pagar", "Cierras de nuevo la puerta, para que no haya       corriente"]
+        this.dialogos[10] = ["Te encuentras una nota en el suelo, a la que le    faltan otros dos pedazos", "En ella pone: '111'", "Puede que sea parte de una contraseña..."]
 
         this.images = [];
         this.images[0] = ["Frikol", "Judini","Judini","Frikol","Frikol","Frikol","Frikol","Judini","Judini","Frikol","Judini","Frikol","Judini","Frikol","-"]
@@ -27,6 +32,9 @@ export default class dialogoHelp {
         this.images[5] = ["-","-", "-", "-", "-"]
         this.images[6] = ["-","-", "-", "-"]
         this.images[7] = ["-", "-"]
+        this.images[8] = ["Frikol", "Judini", "Frikol", "Frikol", "Judini", "Judini", "Judini", "Judini", "Judini", "Judini", "Judini"]
+        this.images[9] = ["-","-","-","-","-","-","-"]
+        this.images[10] = ["-","-","-","-","-","-","-"]
 
         this.ReturnDialogo = function (i) {
             return this.dialogos[i];

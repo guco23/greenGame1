@@ -51,6 +51,7 @@ export default class GameData {
         this.Interactablehitboxes = [];
         this.Interactablehitboxes[0] = false;
         this.Interactablehitboxes[1] = false;
+        this.Interactablehitboxes[2] = false;
     }
 
     AñadeObjetoClave(aux) {

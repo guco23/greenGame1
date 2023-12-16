@@ -53,9 +53,11 @@ init(data){
         this.physics.add.overlap(this.character, this.hitbox3[0], ()=>{
             if(this.interact == 0 && !this.Texto) {
                 if(this.myGameData.CheckObjetoclave(0)&&this.myGameData.CheckObjetoclave(1)&&this.myGameData.CheckObjetoclave(2)){
-                    new dialogo(this, this.character, 1,function(){
-                        self.DoorJokeLayer.visible = false;                                        
-                    }) 
+                    if(!this.myGameData.Interactablehitboxes[2]){
+                        this.myGameData.Interactablehitboxes[2] = true;
+                        new dialogo(this, this.character, 9)
+                        this.myGameData.AñadeObjetoClave(3);
+                    }                  
                 }else{
                     if(this.myGameData.Interactablehitboxes[0]){
                         new dialogo(this, this.character, 6) 
