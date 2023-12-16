@@ -1,5 +1,6 @@
 import Character from "../../character.js";
 import { RAIZ_IMAGENES } from "../../constants.js";
+import {RAIZ_IMGS_OBJETOS} from "../../constants.js";
 import dialogo from "../../dialogo.js";
 
 export class EscenaMercadona extends Phaser.Scene {
@@ -16,6 +17,7 @@ export class EscenaMercadona extends Phaser.Scene {
     preload() {
         this.load.tilemapTiledJSON('SalaMercadona', 'assets/json/SalaMercadona.json');
         this.load.image('tileset_mercadona', RAIZ_IMAGENES + 'tilesets/tileset_mercadona.png');
+        this.load.image('Notas', RAIZ_IMAGENES + RAIZ_IMGS_OBJETOS+'Notas.png');
         this.load.spritesheet('character', RAIZ_IMAGENES + 'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 })
     }
 
@@ -30,8 +32,12 @@ export class EscenaMercadona extends Phaser.Scene {
         const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
         this.FloorLayer = this.map.createLayer('Suelo', tileset1);
         this.WallLayer = this.map.createLayer('Paredes', tileset1);
-        if(!this.myGameData.Interactablehitboxes[1])this.DoorJokeLayer = this.map.createLayer('ChisteDeLaPuerta', tileset1);
         this.WallLayer.setCollisionByExclusion([-1]);
+        if(!this.myGameData.Interactablehitboxes[1])this.DoorJokeLayer = this.map.createLayer('ChisteDeLaPuerta', tileset1);
+        if(!this.myGameData.CheckObjetoclave(0)) this.Nota1Im = this.add.image(364, 340, 'Notas');
+        if(!this.myGameData.CheckObjetoclave(1)) this.Nota2Im = this.add.image(131, 340, 'Notas');
+        if(!this.myGameData.CheckObjetoclave(2)) this.Nota3Im = this.add.image(353, 85, 'Notas');
+
 
         this.hitbox1 = this.map.createFromObjects('Transiciones', { id: 1 });
         this.physics.add.existing(this.hitbox1[0]);
@@ -106,18 +112,21 @@ export class EscenaMercadona extends Phaser.Scene {
             if (this.interact == 0 && !this.myGameData.CheckObjetoclave(0)) {
                 new dialogo(this, this.character, 10);
                 this.myGameData.AñadeObjetoClave(0);
+                this.Nota1Im.destroy();
             }
         })
         this.physics.add.overlap(this.character, this.Nota2[0], () => {
             if (this.interact == 0 && !this.myGameData.CheckObjetoclave(1)) {
                 new dialogo(this, this.character, 10);
                 this.myGameData.AñadeObjetoClave(1);
+                this.Nota2Im.destroy();
             }
         })
         this.physics.add.overlap(this.character, this.Nota3[0], () => {
             if (this.interact == 0 && !this.myGameData.CheckObjetoclave(2)) {
                 new dialogo(this, this.character, 10);
                 this.myGameData.AñadeObjetoClave(2);
+                this.Nota3Im.destroy();
             }
         })
         this.physics.add.overlap(this.character, this.MrBean[0], ()=>{
