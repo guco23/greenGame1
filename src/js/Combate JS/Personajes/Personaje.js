@@ -22,13 +22,15 @@ export class Personaje {
 
     currentCombat;
 
-    targetKind; //Determina el tipo de targeteo para la habilidad. 0 un enemigo, 1 un aliado, 2 todo enemigo, 3 todo aliado
+    targetKind; //Determina el tipo de targeteo para la habilidad. 0 un enemigo, 1 un aliado, 2 todo enemigo, 3 todo aliado, 4 es a sí mismo
 
     //ableToAct;  //Booleano que le da el control al jugador para que pueda meter input en su turno, en cuyo caso será 0
 
     imgLink; //La imagen del personaje durante el combate
     idleImageLink; //La imagen del personaje en el menú de selección
 
+    MBTI; //El titulo de su personalidad segun el test MBTI
+    descripcion; //Una pequeña descripción del personaje
     /*
     constructor(namer, attk, defs, hpMax, hp) {
         this.name = namer;
@@ -54,7 +56,7 @@ export class Personaje {
         this.name = idn.name;
 
         this.atk = idn.atk;
-        this.def = (100 - idn.def) / 100;
+        this.def = idn.def;
         this.maxHp = idn.maxHp;
         this.currentHp = idn.maxHp;
         this.imgLink = idn.imgLink;
@@ -64,6 +66,9 @@ export class Personaje {
         this.stunned = false;
         this.dot = 0;
         this.personality = idn.personality;
+        this.MBTI = idn.MBTI;
+        this.descripcion = idn.descripcion;
+        this.descripcionHabilidad = idn.descripcionHabilidad;
 
     }
 
@@ -71,9 +76,22 @@ export class Personaje {
         this.dot += value;
     }
 
-    modifyStat(atkmod, defmod) {
-        this.atk = this.atk * atkmod;
-        this.def = this.def * defmod;
+    modifyStat(mode, atkmod, defmod) {
+        if (mode) {
+            this.atk = this.atk * atkmod;
+            this.def = this.def * defmod;
+        }
+        else {
+            this.atk += atkmod;
+            this.def += defmod;
+        }
+        if(this.def >= 100) {
+            this.def = 99;
+        }
+    }
+
+    getRandomInt(max) {
+        return Math.floor(Math.random() * max);
     }
     
     stun() {
@@ -86,10 +104,17 @@ export class Personaje {
     }
 
     endTurn() {
-        if(this.dot != 0) {
+        if(this.dot > 0) {
             this.currentHp -= this.dot;
             this.currentCombat.addInfo("dot", this.dot, this, null);
             this.checkAlive();    
+        }
+        else{
+            this.currentHp -= this.dot;
+            if(this.currentHp > this.maxHp) {
+                this.currentHp = this.maxHp;
+            }
+            this.currentCombat.addInfo("regen", this.dot, this, null);
         }
         this.status = 0;
         this.accion = 0;
@@ -105,7 +130,6 @@ export class Personaje {
             this.currentCombat.addInfo("defend", shield, this, null);
             this.escudo += shield;
         }
-        this.endTurn();
     }
     
     checkAlive() {
@@ -118,14 +142,14 @@ export class Personaje {
     }
 
     heal(heal) {
-        this.currentHp += heal;
+        this.currentHp += Math.floor(heal);
         if(this.currentHp > this.maxHp) {
             this.currentHp = this.maxHp;
         }
     }
 
     sufferDamage(dmg) {
-        let damage = Math.floor(dmg * this.def)
+        let damage = Math.floor(dmg * ((100 - this.def) / 100))
         if(damage < 1) {
             if(this.escudo > 0) {
                 this.escudo--;
@@ -164,6 +188,7 @@ export class Personaje {
 
     defend() {
         this.gainShield(this.def);
+        this.endTurn();
     }
 
     takeTurn() {

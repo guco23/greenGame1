@@ -160,7 +160,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
 			this.MovingY = 0;
 		}
 		if (this.menuKey.isDown) {
-			this.scene.scene.launch('MenuEscena', { obj: this.scene.gameData, scene: this.scene });
+			this.scene.scene.launch('MenuEscena', { obj: this.scene.myGameData, scene: this.scene });
 			this.scene.scene.setActive(false);
 		}
 	}

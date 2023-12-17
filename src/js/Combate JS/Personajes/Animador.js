@@ -1,23 +1,23 @@
 import { Personaje } from "./Personaje.js";
 
-export class Emprendedor extends Personaje {
+export class Animador extends Personaje {
 
-    attakMod;
-    growth;
+    stunChance;
 
     constructor(idn) {
         super(idn);
         this.targetKind = 0;
-        this.attakMod = 1.5;
-        this.growth = 1.1;
+        this.stunChance = 70;
     }
 
     special(target) {
         let myTarget = this.currentCombat.enemyTeam[target];
+        this.currentCombat.addInfo("special", this.name + " está than entusiasmada que no para de bailar.\n", this, null);
         this.currentCombat.addInfo("attack", myTarget.sufferDamage(this.atk * this.attakMod), this, myTarget);
+        if(this.getRandomInt(100) < this.stunChance) {
+            myTarget.stun();
+        }
         myTarget.checkAlive();
-        this.atk = this.atk * this.growth;
-        this.currentCombat.addInfo("special", this.name + " se motivó tanto que aumentó su ataque.\n", this, null);
         this.endTurn();
     }
 }

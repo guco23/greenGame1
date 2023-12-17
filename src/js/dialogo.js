@@ -74,9 +74,9 @@ export default class dialogo extends Phaser.GameObjects.Sprite {
         let aux = true;
         let y =0;
         if(this.TextImages[this.PosDialogo] != "-"){                        
-            this.tempImage = this.myScene.add.image(this.end.x-125, this.end.y+80, this.TextImages[this.PosDialogo]); 
+            this.tempImage = this.myScene.add.image(this.end.x-115, this.end.y+80, this.TextImages[this.PosDialogo]); 
             this.tempImage.scale = 2;
-            q = 40;
+            q = 50;
         }
         
         while(x<array.length && aux){

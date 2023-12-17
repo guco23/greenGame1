@@ -1,12 +1,18 @@
 export default class GameData {
-    party;     //El equipo actual
+    party; //Los personajes activos, sólo puede haber cuatro
+    partySize; //Indica el tamaño de la party
     defeated; //Array con los ids de los enemigos que ya han sido derrotados
     objects;  //Array de objetos clave
-
+    allies; //Todos los personajes desbloqueados, se irán añadiendo según progrese el juego
+    
     constructor() {
         //this.scene.add.existing(this);
         this.defeated = [];  //Array de enemigos derrotados (empieza vacío)
         this.objects = [];
+        this.party = [];
+        this.allies = [];
+        this.partySize = 0;
+
         this.objects[0] = {
             'Nombre': "Nota1",
             'Pillado': false,
@@ -42,11 +48,16 @@ export default class GameData {
         this.CheckObjetoClave = function (aux) {
             console.log(this.objects[aux].Pillado);
         }
+        this.Interactablehitboxes = [];
+        this.Interactablehitboxes[0] = false;
+        this.Interactablehitboxes[1] = false;
+        this.Interactablehitboxes[2] = false;
     }
 
     AñadeObjetoClave(aux) {
         this.objects[aux].Pillado = true;
     }
+
     CheckObjetoclave(aux) {
         return this.objects[aux].Pillado; //ponle true si falla kbron
     }
@@ -83,5 +94,14 @@ export default class GameData {
 
     VaciarListaDefeated() {
         this.defeated = [];
+    }
+    
+    AddCharacter(personaje) {
+        if(this.partySize < 4) {
+            this.party[this.partySize] = personaje;
+            this.partySize++;
+        }
+        this.allies.push(personaje);
+        console.log(this.allies);
     }
 }

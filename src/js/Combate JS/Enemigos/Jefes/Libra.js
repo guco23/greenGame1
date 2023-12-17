@@ -18,7 +18,7 @@ export class Libra extends Enemigo {
     judgement() {
         let target = currentCombat.playerTeam;
         let damage = (this.currentHp - this.balance.currentHp) + this.atk;
-        this.currentCombat.addInfo("special", "You will be judged for your sins!\n", this, null);
+        this.currentCombat.addInfo("special", "'¡Sereis juzgados por vuestros pecados!'\n", this, null);
         for(i = 0; i < currentCombat.teamSize; i++) {
             if(target.living) {
                 this.currentCombat.addInfo("attack", target[i].sufferDamage(damage), this, target[i]);
