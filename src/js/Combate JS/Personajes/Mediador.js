@@ -22,5 +22,4 @@ export class Mediador extends Personaje {
         this.currentCombat.addInfo("special", ally.name + " se siente tan bien que ahora también cuida de sí mismo", this, null);
         this.endTurn();
     }
-
 }

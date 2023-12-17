@@ -54,7 +54,7 @@ export class Personaje {
         this.name = idn.name;
 
         this.atk = idn.atk;
-        this.def = (100 - idn.def) / 100;
+        this.def = idn.def;
         this.maxHp = idn.maxHp;
         this.currentHp = idn.maxHp;
         this.imgLink = idn.imgLink;
@@ -79,6 +79,9 @@ export class Personaje {
         else {
             this.atk += atkmod;
             this.def += defmod;
+        }
+        if(this.def >= 100) {
+            this.def = 99;
         }
     }
 
@@ -134,7 +137,7 @@ export class Personaje {
     }
 
     sufferDamage(dmg) {
-        let damage = Math.floor(dmg * this.def)
+        let damage = Math.floor(dmg * ((100 - this.def) / 100))
         if(damage < 1) {
             if(this.escudo > 0) {
                 this.escudo--;
