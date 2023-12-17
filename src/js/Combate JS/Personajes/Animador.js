@@ -17,6 +17,7 @@ export class Animador extends Personaje {
         if(this.getRandomInt(100) < this.stunChance) {
             myTarget.stun();
         }
+        myTarget.checkAlive();
         this.endTurn();
     }
 }

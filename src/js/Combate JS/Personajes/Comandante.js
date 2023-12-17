@@ -19,6 +19,7 @@ export class Comandante extends Personaje {
             if(thisTarg.living) {
                 total += thisTarg.sufferDamage(this.atk);
                 thisTarg.modifyStat(true, this.debufMod, 1);
+                thisTarg.checkAlive();
             }
         }
         this.currentCombat.addInfo("special", this.name + " dealt a total of " + total + " damage and scared the enemies!\n");

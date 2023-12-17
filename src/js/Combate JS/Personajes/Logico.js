@@ -17,6 +17,7 @@ export class Logico extends Personaje {
             if(thisTarg.living) {
                 total += thisTarg.sufferDamage(this.atk);
                 thisTarg.applyDot(this.dotAplly);
+                thisTarg.checkAlive();
             }
         }
         this.currentCombat.addInfo("special", this.name + " hizo un total de " + total + " daño y causó efectos perjudiciales.\n");
