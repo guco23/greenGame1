@@ -13,7 +13,7 @@ export class Comandante extends Personaje {
 
     special(target) {
         let total = 0;
-        this.currentCombat.addInfo("special", this.name + " ordered a march!\n", this, null);
+        this.currentCombat.addInfo("special", this.name + " ordena a sus aliados avanzar\n", this, null);
         for(i = 0; i < this.currentCombat.enemySize; i++) {
             let thisTarg = this.currentCombat.enemyTeam[i];
             if(thisTarg.living) {
@@ -22,7 +22,7 @@ export class Comandante extends Personaje {
                 thisTarg.checkAlive();
             }
         }
-        this.currentCombat.addInfo("special", this.name + " dealt a total of " + total + " damage and scared the enemies!\n");
+        this.currentCombat.addInfo("special", this.name + " hizo un total de " + total + " daño y aterrorizó a los enemigos.\n");
         this.endTurn();
     }
 }

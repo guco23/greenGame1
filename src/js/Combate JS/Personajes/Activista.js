@@ -12,7 +12,7 @@ export class Activista extends Personaje {
 
     special(target) {
         let ally = this.currentCombat.playerTeam[target];
-        this.currentCombat.addInfo("special", this.name + " está aumentando la moral de su equip.\n", this, null);
+        this.currentCombat.addInfo("special", this.name + " está aumentando la moral de su equipo.\n", this, null);
         for(i = 0; i < this.currentCombat.teamSize; i++) {
             let ally = this.currentCombat.playerTeam[i];
             if(ally.living) {

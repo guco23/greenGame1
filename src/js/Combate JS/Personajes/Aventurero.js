@@ -16,6 +16,7 @@ export class Consul extends Personaje {
         this.currentCombat.addInfo("special", this.name + " va a experimentar un poco con un" + myTarget.name + ".\n", this, null);
         this.currentCombat.addInfo("attack", myTarget.sufferDamage(this.atk * this.attakMod), this, myTarget);
         thisTarg.applyDot(this.dotAplly);
+        thisTarg.checkAlive();
         this.currentCombat.addInfo("poison", this.dotAplly, this, myTarget);
         this.endTurn();
     }

@@ -11,7 +11,7 @@ export class Ejecutivo extends Personaje {
     }
 
     special(target) {
-        this.currentCombat.addInfo("special", this.name + " ordered their allies to square up!\n");
+        this.currentCombat.addInfo("special", this.name + " llamó a sus aliados para que se prepasen.\n");
         for(i = 0; i < this.currentCombat.teamSize; i++) {
             let boost = this.currentCombat.playerTeam[i];
             if(boost.living) {

@@ -12,10 +12,10 @@ export class Abogado extends Personaje {
 
     special(target) {
         let ally = this.currentCombat.playerTeam[target];
-        this.currentCombat.addInfo("special", this.name + " is making sure " + ally.name + " is okay!\n", this, null);
+        this.currentCombat.addInfo("special", this.name + " está comprobando si " + ally.name + " está bien.\n", this, null);
         ally.gainShield(this.def);
         ally.heal(this.maxHp * this.healMod);
-        this.currentCombat.addInfo("special", "Thanks to them " + ally.name + " is now feeling better.\n", this, null);
+        this.currentCombat.addInfo("special", "Gracias a " + this.name + ", " + ally.name + " se siente mucho mejor.\n", this, null);
         this.endTurn();
     }
 }

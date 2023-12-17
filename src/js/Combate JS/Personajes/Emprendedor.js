@@ -17,7 +17,7 @@ export class Emprendedor extends Personaje {
         this.currentCombat.addInfo("attack", myTarget.sufferDamage(this.atk * this.attakMod), this, myTarget);
         myTarget.checkAlive();
         this.atk = this.atk * this.growth;
-        this.currentCombat.addInfo("special", this.name + " hyped up and increased their attack!\n", this, null);
+        this.currentCombat.addInfo("special", this.name + " se motivó tanto que aumentó su ataque.\n", this, null);
         this.endTurn();
     }
 }
