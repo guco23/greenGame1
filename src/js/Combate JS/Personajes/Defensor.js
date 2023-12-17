@@ -14,10 +14,10 @@ export class Defensor extends Personaje {
 
     special(target) {
         let ally = this.currentCombat.playerTeam[target];
-        this.currentCombat.addInfo("special", this.name + " está dando un cursillo rápido a " + ally.name, this, null);
+        this.currentCombat.addInfo("special", this.name + " está dando un cursillo rápido a " + ally.name + ".\n", this, null);
         ally.modifyStat(false, 0, this.def * this.buffMod);
         ally.gainShield(this.def * this.shieldMod);
-        this.currentCombat.addInfo("special", ally.name + " is now ready for battle thanks for their help", this, null);
+        this.currentCombat.addInfo("special", ally.name + " is now ready for battle thanks for their help.\n", this, null);
         this.endTurn();
     }
 }

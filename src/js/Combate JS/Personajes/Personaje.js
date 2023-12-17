@@ -22,7 +22,7 @@ export class Personaje {
 
     currentCombat;
 
-    targetKind; //Determina el tipo de targeteo para la habilidad. 0 un enemigo, 1 un aliado, 2 todo enemigo, 3 todo aliado
+    targetKind; //Determina el tipo de targeteo para la habilidad. 0 un enemigo, 1 un aliado, 2 todo enemigo, 3 todo aliado, 4 es a sí mismo
 
     //ableToAct;  //Booleano que le da el control al jugador para que pueda meter input en su turno, en cuyo caso será 0
 
@@ -99,10 +99,17 @@ export class Personaje {
     }
 
     endTurn() {
-        if(this.dot != 0) {
+        if(this.dot > 0) {
             this.currentHp -= this.dot;
             this.currentCombat.addInfo("dot", this.dot, this, null);
             this.checkAlive();    
+        }
+        else{
+            this.currentHp -= this.dot;
+            if(this.currentHp > this.maxHp) {
+                this.currentHp = this.maxHp;
+            }
+            this.currentCombat.addInfo("regen", this.dot, this, null);
         }
         this.status = 0;
         this.accion = 0;
@@ -130,7 +137,7 @@ export class Personaje {
     }
 
     heal(heal) {
-        this.currentHp += heal;
+        this.currentHp += Math.floor(heal);
         if(this.currentHp > this.maxHp) {
             this.currentHp = this.maxHp;
         }

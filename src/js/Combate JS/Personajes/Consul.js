@@ -12,9 +12,9 @@ export class Consul extends Personaje {
 
     special(target) {
         let ally = this.currentCombat.playerTeam[target];
-        this.currentCombat.addInfo("special", this.name + " está dando un cursillo rápido a " + ally.name, this, null);
+        this.currentCombat.addInfo("special", this.name + " está dando un cursillo rápido a " + ally.name + ".\n", this, null);
         ally.modifyStat(false, this.atk * this.buffMod, this.def * this.buffMod);
-        this.currentCombat.addInfo("special", ally.name + " is now ready for battle thanks for their help", this, null);
+        this.currentCombat.addInfo("special", ally.name + " está listo para la batalla gracias a su ayuda.\n", this, null);
         this.endTurn();
     }
 }

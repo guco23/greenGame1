@@ -124,6 +124,9 @@ export class CombatManager {
         if (action === "dot") {
             this.actInfo += from.name + " suffered " + value + " damage due to negative effects.\n"
         }
+        if (action === "regen") {
+            this.actInfo += from.name + " recuperó vida gracias a efectos regenerativos.\n";
+        }
         if (action === "poison") {
             this.actInfo += from.name + " applied " + value + " poison to " + to.name + "\n";
         }
