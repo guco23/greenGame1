@@ -56,35 +56,69 @@
          "name":"Transiciones",
          "objects":[
                 {
-                 "height":5.93639575971731,
+                 "height":5.9364,
                  "id":1,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":false,
-                 "width":15.6220941045192,
-                 "x":95.9196578017482,
-                 "y":47.8036079598289
+                 "width":15.6221,
+                 "x":95.9197,
+                 "y":47.8036
                 }, 
                 {
-                 "height":6.56127952389807,
+                 "height":6.56128,
                  "id":2,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":false,
-                 "width":15.3096522224289,
-                 "x":159.970243630277,
-                 "y":185.590477961689
+                 "width":15.3097,
+                 "x":159.97,
+                 "y":185.59
                 }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":6,
+         "name":"Personajes",
+         "objects":[
+                {
+                 "height":0,
+                 "id":3,
+                 "name":"Frikol",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":false,
+                 "width":0,
+                 "x":231.5,
+                 "y":97.5
+                }, 
+                {
+                 "height":41,
+                 "id":4,
+                 "name":"InteractHitbox",
+                 "rotation":0,
+                 "type":"",
+                 "visible":false,
+                 "width":46.5,
+                 "x":209,
+                 "y":73
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":false,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":6,
- "nextobjectid":3,
+ "nextlayerid":7,
+ "nextobjectid":5,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
@@ -93,7 +127,7 @@
         {
          "columns":17,
          "firstgid":1,
-         "image":"..\/..\/assets\/images\/tilesets\/tileset_mercadona.png",
+         "image":"..\/images\/tilesets\/tileset_mercadona.png",
          "imageheight":150,
          "imagewidth":300,
          "margin":1,

@@ -1,4 +1,4 @@
-class Selector extends Phaser.GameObjects.Container {
+export class Selector extends Phaser.GameObjects.Container {
     /**
      * 
      * @param {La ecena en la que se va a pintar} scene 
@@ -9,7 +9,7 @@ class Selector extends Phaser.GameObjects.Container {
     constructor(scene, x, y, indic) {
         super(scene);
         //Construye un rectángulo hasta que tengamos un sprite de flecha
-        this.rect = scene.add.rectangle(x, y, 50, 50, 0xffffff);
+        this.icon = scene.add.image(x, y, 'selectorPersonaje').setScale(4.3);
         this.unselect();
         //El indice en el array de personajes del personaje que señala este selector
         this.indPersAsociado = indic;
@@ -17,12 +17,12 @@ class Selector extends Phaser.GameObjects.Container {
 
     //Cambia la visibilidad de el objeto a que no se vea
     select() {
-        this.rect.visible = true;
+        this.icon.visible = true;
     }
 
     //Cambia la visibilidad de el objeto a que si se vea
     unselect() {
-        this.rect.visible = false;
+        this.icon.visible = false;
     }
 
 }
@@ -33,8 +33,12 @@ const Estados = {
     SELECCION_COMPLETA: "seleccion_completa" //Se muestra la seleccion del equipo aliado entero
 }
 
+/**
+ * Un selector de personajes durante el combate
+ */
 export class SelectorPersonajes extends Phaser.GameObjects.Container {
     /**
+     * Importante: el sprite seleccionPersonaje.png debe cargado en la escena 
      * 
      * @param {La ecena en la que se va a pintar} scene 
      * @param {El array de personajes} personajes 
@@ -52,7 +56,7 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
     }
 
     /**
-     * Cambia la selección de accion a la siguiente
+     * Cambia la selección de personaje a la siguiente
      */
     siguiente() {
         //Condición para evitar que se salga del array
@@ -64,7 +68,7 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
     }
 
     /**
-     * Cambia la selección de accion a la anterior
+     * Cambia la selección de personaje a la anterior
      */
     anterior() {
         //Condición para evitar que se salga del array

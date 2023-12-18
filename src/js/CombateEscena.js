@@ -1,4 +1,4 @@
-import { RAIZ_IMAGENES, CONTROLES } from "./constants.js";
+import { RAIZ_IMAGENES, CONTROLES, RAIZ_IMGS_COMBAT } from "./constants.js";
 import { Enemigo } from "./Combate JS/Enemigos/Enemigo.js"
 import { BarraVida } from "./HUDElems/BarraVida.js";
 import { TextoVida } from "./HUDElems/TextoVida.js";
@@ -20,6 +20,7 @@ export class CombateEscena extends Phaser.Scene {
         this.enemigos = data.enemigos;
         this.objeto = data.objeto;
         this.aliados = data.gameData.party;
+        this.partySize = data.gameData.partySize;
         //Variables necesarias para volver a la escena y posición en la que se estaba antes del combate
         this.cx = data.cx;
         this.cy = data.cy;
@@ -33,23 +34,22 @@ export class CombateEscena extends Phaser.Scene {
 
         //Añade las imagenes de los aliados y enemigos
         this.enemigos.forEach(enemigo => {
-            this.load.image(enemigo.name, RAIZ_IMAGENES + enemigo.imgLink);
+            this.load.image(enemigo.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_COMBAT + enemigo.imgLink);
         });
         this.aliados.forEach(aliado => {
-            this.load.image(aliado.name, RAIZ_IMAGENES + aliado.imgLink);
+            this.load.image(aliado.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_COMBAT + aliado.imgLink);
         });
         //Carga el fondo, dependerá de la zona del juego en la que nos encontremos
         this.load.image('background', RAIZ_IMAGENES + "combatBackground/combatBackgroundPlaceholder.png");
-
+        this.load.image("selectorAccion", RAIZ_IMAGENES + 'seleccionAccion.png');
+        this.load.image("selectorPersonaje", RAIZ_IMAGENES + 'seleccionPersonaje.png');
     }
 
     //crear aqui los objetos de la escena
     create() {
         this.graphics = this.add.graphics();
-        console.log(this.aliados);
-        console.log(this.enemigos);
 
-        this.combatManager = new CombatManager(this.enemigos, 3, this.aliados, 4, this);
+        this.combatManager = new CombatManager(this.enemigos, this.aliados, this.partySize, this);
         //Los aliados ya vienen contruídos desde gameData
         for (let i = 0; i < this.aliados.length; i++) {
             this.aliados[i].startCombat(this.combatManager);
@@ -64,14 +64,7 @@ export class CombateEscena extends Phaser.Scene {
         let gameHeight = this.game.config.height;
         let uiBoxHeight = gameHeight / 3.2;
         let uiBoxWidth = gameWidth / 3;
-        this.graphics.lineStyle(1, 0xffffff);
-        this.graphics.fillStyle(0x031f4c, 1);
-        this.graphics.strokeRect(0, gameHeight - uiBoxHeight, uiBoxWidth, uiBoxHeight);
-        this.graphics.fillRect(2, 150, 90, 100);
-        this.graphics.strokeRect(95, 150, 90, 100);
-        this.graphics.fillRect(95, 150, 90, 100);
-        this.graphics.strokeRect(188, 150, 130, 100);
-        this.graphics.fillRect(188, 150, 130, 100);
+
         //Coloca el fondo
         this.add.image(gameWidth / 2, gameHeight / 2, 'background');
 
@@ -98,7 +91,7 @@ export class CombateEscena extends Phaser.Scene {
 
         this.vidasEnemigos = [];
         for (let i = 0; i < this.enemigos.length; i++) {
-            this.vidasEnemigos.push(new BarraVida(this, this.sceneEnem.array[i].img.x - 2, this.sceneEnem.array[i].img.y - 10, 80, 18, this.enemigos[i]))
+            this.vidasEnemigos.push(new BarraVida(this, this.sceneEnem.array[i].img.x + this.sceneEnem.array[i].img.width / 2 + 2, this.sceneEnem.array[i].img.y - 10, 80, 18, this.enemigos[i]))
         }
         //Prueba de la barra de vida
         this.vidasEnemigos[2].actualizarHp(25);
@@ -108,7 +101,7 @@ export class CombateEscena extends Phaser.Scene {
         new DatosAccion("Defender", "Reduce el daño recibido hasta el siguiente turno")];
 
         this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
-        this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 300, 440, 40, datosAcciones);
+        this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 310, 440, 40, datosAcciones, true);
         this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.sceneEnem.array);
         this.selectorAliados = new SelectorPersonajes(this, this.aliados, this.sceneAliad.array);
 
@@ -192,10 +185,12 @@ export class CombateEscena extends Phaser.Scene {
     }
 
     ActualizarEscena(info) {
-        if (this.combatManager.endCombatVictory)
-            this.Victory();
-        else if (this.combatManager.endCombatDerrota)
-            this.Defeat();
+        if(this.combatManager.endCombat) {
+            if (this.combatManager.endCombatVictory)
+                this.Victory();
+            else if (this.combatManager.endCombatDerrota)
+                this.Defeat();
+        }
         else {
             if (this.menuActual != this.textoDescriptivo) {
                 this.menuActual.ocultar()

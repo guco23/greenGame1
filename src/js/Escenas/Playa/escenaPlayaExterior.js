@@ -47,6 +47,25 @@ init(data){
           this.hitbox5 = this.map.createFromObjects('Transiciones', {id:12});          
           this.physics.add.existing(this.hitbox5[0]);
 
+          this.BealonMusk = this.map.createFromObjects('Personajes', { id: 18 });
+          this.physics.add.existing(this.BealonMusk[0]);
+          this.BealonMuskImage = this.add.image(3595, 1990, 'BealonMusk');
+          this.Emmet = this.map.createFromObjects('Personajes', { id: 17 });
+          this.physics.add.existing(this.Emmet[0]);
+          this.EmmetImage = this.add.image(2379, 2253, 'Emmet');
+          this.MarianoRajoy = this.map.createFromObjects('Personajes', { id: 13 });
+          this.physics.add.existing(this.MarianoRajoy[0]);
+          this.MarianoRajoyImage = this.add.image(303, 543, 'Rajoy');
+          this.Greta = this.map.createFromObjects('Personajes', { id: 14 });
+          this.physics.add.existing(this.Greta[0]);
+          this.GretaImage = this.add.image(2567, 263, 'Greta');
+          this.Gato = this.map.createFromObjects('Personajes', { id: 15 });
+          this.physics.add.existing(this.Gato[0]);
+          this.GatoImage = this.add.image(1037, 1006, 'Gato');
+          this.Selena = this.map.createFromObjects('Personajes', { id: 16 });
+          this.physics.add.existing(this.Selena[0]);
+          this.SelenaImage = this.add.image(2122, 1355, 'Selena');
+
           this.character = new Character(this, this.cx, this.cy,this.dir);
           this.physics.world.enable(this.character);
           this.physics.add.collider(this.character, this.WallLayer);
@@ -65,14 +84,59 @@ init(data){
             if(this.interact == 0) this.scene.start('escenaPlayaFerreteria',{obj:this.myGameData,cx:715, cy:1090, dir:1});            
         })
         this.physics.add.overlap(this.character, this.hitbox4[0], ()=>{
-            if(this.interact == 0) this.scene.start('escenaPlayaSalaSecreta',{obj:this.myGameData,cx:40, cy:40, dir:2});            
+            if(this.interact == 0) this.scene.start('escenaMercadona',{obj:this.myGameData,cx:40, cy:200, dir:2});            
         })
         var self=this;
         this.physics.add.overlap(this.character, this.hitbox5[0], ()=>{
-            if(!this.Texto)new dialogo(this, this.character, ["Notas que hay una puerta en el lateral del         Mercadona TM", "Decides atravesarla"],function(){
+            if(!this.Texto)new dialogo(this, this.character, 2,function(){
                 self.scene.start('escenaPlayaSalaSecreta',{obj:this.myGameData,cx:40, cy:85, dir:2});
             })     
         })
+        this.physics.add.overlap(this.character, this.BealonMusk[0], ()=>{
+            var self = this;
+            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,11, function(){
+                self.BealonMuskImage.destroy();   
+               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+            })     
+        })
+        this.physics.add.overlap(this.character, this.Gato[0], ()=>{
+            var self = this;
+            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,12, function(){
+                self.GatoImage.destroy();   
+               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+            })     
+        })
+        this.physics.add.overlap(this.character, this.Emmet[0], ()=>{
+            var self = this;
+            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,13, function(){
+                self.EmmetImage.destroy();   
+               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+            })     
+        })
+        this.physics.add.overlap(this.character, this.MarianoRajoy[0], ()=>{
+            var self = this;
+            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,14, function(){
+                self.MarianoRajoyImage.destroy();   
+               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+            })     
+        })
+        this.physics.add.overlap(this.character, this.Greta[0], ()=>{
+            var self = this;
+            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,15, function(){
+                self.GretaImage.destroy();   
+               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+            })     
+        })
+        this.physics.add.overlap(this.character, this.Selena[0], ()=>{
+            var self = this;
+            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,16  , function(){
+                self.SelenaImage.destroy();   
+               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+            })     
+        })
+        
+
+
                     
           this.cameras.main.startFollow(this.character);      
           this.cameras.main.zoom = 2.2;
