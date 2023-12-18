@@ -33,7 +33,7 @@ init(data){
             tileWidth: 16, 
             tileHeight: 16 
           });
-          this.interactKey = this.input.keyboard.addKey('E');
+          this.interactKey = this.input.keyboard.addKey('Z');
           this.interact = 1;
           const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
           this.FloorLayer = this.map.createLayer('Suelo', tileset1);

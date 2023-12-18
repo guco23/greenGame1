@@ -40,7 +40,7 @@ init(data){
 
         
 
-          this.interactKey = this.input.keyboard.addKey('E');
+          this.interactKey = this.input.keyboard.addKey('Z');
           this.interact = 1;
           const tileset1 = this.map.addTilesetImage('tileset_nm', 'tileset_nm');          
           this.LavaLayer = this.map.createLayer('Lava', tileset1);          
