@@ -39,16 +39,19 @@ export class MenuEscena extends Phaser.Scene {
         //Establece las opciones primarias de la escena
         let accionesBase = [
             new DatosAccion("Grupo", "Escoge los personajes para combatir"),
-            new DatosAccion("Equipamiento", "Equipa objetos a tus personajes")
+            new DatosAccion("Equipamiento", "Equipa objetos a tus personajes"),
         ];
-        this.opcionPrimaria = new SelectorAcciones(this, this.descripcion, 66, 70, 30, accionesBase, false);
-
+        let listaAccionObjetos = [];
+        this.gameData.items.forEach(item => {
+            listaAccionObjetos.push(new DatosAccion(item.nombre, item.descripcion));
+        });
+        this.opcionPrimaria = new SelectorAcciones(this, this.descripcion, 66, 70, 30, accionesBase);
         this.menuActual = this.opcionPrimaria;
-
         this.selectorParty = new SelectorPersonajesMenu(this, this.gameData.party, 390, 110, 4, 100, 100);
-
         this.selectorAllies = new SelectorPersonajesMenu(this, this.gameData.allies, 300, 300, 3, 100, 100);
-
+        this.selectorObjetos = new SelectorAcciones(this, this.descripcion, 180, 70, 30, listaAccionObjetos);
+        this.selectorObjetos.ocultar();
+        this.opcionPrimaria.activar();
         /**
          * Lo primero es un selector arriba, probablemente en horizontal en el que puedas escoger modificar el equipo o equipar objetos
          * A la derecha se mostrará el equipo actual (sprites), su vida actual y el nombre del objeto que tienen equipado
@@ -83,10 +86,16 @@ export class MenuEscena extends Phaser.Scene {
         switch (this.menuActual) {
             case this.opcionPrimaria:
                 if (this.opcionPrimaria.selection === 0) {
-                    this.opcionPrimaria.ocultar();
+                    this.opcionPrimaria.desactivar();
                     this.menuActual = this.selectorParty;
                     this.selectorParty.mostrar();
                     this.descripcion.aplicarTexto("X para inspeccionar otros aliados.")
+                }
+                else if (this.opcionPrimaria.selection === 1) {
+                    this.opcionPrimaria.desactivar();
+                    this.menuActual = this.selectorObjetos;
+                    this.selectorObjetos.mostrar();
+                    this.selectorObjetos.activar();
                 }
                 break;
         }
@@ -105,7 +114,12 @@ export class MenuEscena extends Phaser.Scene {
             case this.selectorAllies:
                 this.selectorAllies.ocultar();
                 this.menuActual = this.opcionPrimaria;
-                this.opcionPrimaria.mostrar();
+                this.opcionPrimaria.activar();
+                break;
+            case this.selectorObjetos:
+                this.selectorObjetos.ocultar();
+                this.menuActual = this.opcionPrimaria;
+                this.opcionPrimaria.activar();
                 break;
         }
     }
@@ -118,15 +132,17 @@ export class MenuEscena extends Phaser.Scene {
         }
         switch (this.menuActual) {
             case this.opcionPrimaria:
-                if(this.opcionPrimaria.selection === 1) {
+                if (this.opcionPrimaria.selection === 1) {
                     //Seleccion de objetos
                     this.selectorParty.hide();
                     this.selectorAllies.hide();
+                    this.selectorObjetos.mostrar();
 
-                } else if(this.opcionPrimaria.selection === 0) {
+                } else if (this.opcionPrimaria.selection === 0) {
                     //Selección de personajes
                     this.selectorParty.show();
                     this.selectorAllies.show();
+                    this.selectorObjetos.ocultar();
                 }
                 break;
         }
