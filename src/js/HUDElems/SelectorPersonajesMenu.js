@@ -2,7 +2,7 @@ import { TextoDescriptivo } from "./TextoDescriptivo.js";
 
 class PersonajeMenu {
     constructor(scene, personaje, x, y, descripcion) {
-        scene.add.image(x, y, personaje.name).setScale(4);
+        this.image = scene.add.image(x, y, personaje.name).setScale(4);
         this.selectIcon = scene.add.image(x - 48, y, 'selectorPersonaje').setScale(2.8);
         this.unselect();
         this.descripcion = descripcion;
@@ -21,6 +21,15 @@ class PersonajeMenu {
 
     describir() {
         //TODO
+    }
+
+    ocultar() {
+        this.selectIcon.visible = false;
+        this.image.visible = false;
+    }
+
+    mostrar() {
+        this.image.visible = true;
     }
 }
 
@@ -87,5 +96,17 @@ export class SelectorPersonajesMenu extends Phaser.GameObjects.Container {
             this.selection = this.selection - 1;
             this.opciones[this.selection].select();
         }
+    }
+
+    hide() {
+        this.opciones.forEach(element => {
+            element.ocultar();
+        });
+    }
+
+    show() {
+        this.opciones.forEach(element => {
+            element.mostrar();
+        });
     }
 }
