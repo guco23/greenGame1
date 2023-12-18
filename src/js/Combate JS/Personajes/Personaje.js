@@ -31,6 +31,8 @@ export class Personaje {
 
     MBTI; //El titulo de su personalidad segun el test MBTI
     descripcion; //Una pequeña descripción del personaje
+    item; //El objeto que tienen equipado
+
     /*
     constructor(namer, attk, defs, hpMax, hp) {
         this.name = namer;
@@ -69,7 +71,7 @@ export class Personaje {
         this.MBTI = idn.MBTI;
         this.descripcion = idn.descripcion;
         this.descripcionHabilidad = idn.descripcionHabilidad;
-
+        this.item = -1; //Item es -1 si no tiene item equipado
     }
 
     applyDot(value) {
@@ -197,5 +199,26 @@ export class Personaje {
             this.currentCombat.addInfo("stun", 0, this,  null);
             this.endTurn();
         }
+    }
+
+    /**
+     * Equipa un item. Desequipa el anterior si hay.
+     * @param {Item} item el item a equipar
+     */
+    equipItem(item) {
+        if(this.item !== -1) {
+            this.removeItem();
+        }
+        this.item = item;
+        this.maxHp += item.vidaEx;
+        this.atk += item.ataqEx;
+    }
+
+    /**
+     * Desequipa el item
+     */
+    removeItem() {
+        this.maxHp -= this.item.vidaEx;
+        this.atk -= this.item.ataqEx;
     }
 }
