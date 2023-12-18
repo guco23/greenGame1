@@ -38,7 +38,13 @@ export class EscenaTilesets extends Phaser.Scene {
         this.load.image('BealonMusk', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/BealonMusk.png');
         this.load.image('Greta', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/GretaJudberg.png');
         this.load.image('Rajoy', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/MarianoRajoy.png');
-        this.load.image('Selena', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/SelenaBeamez.png');       
+        this.load.image('Selena', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/SelenaBeamez.png');
+        this.load.image('Albert', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/AlbertBeanstein.png');       
+        this.load.image('Donald', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/DonaldBean.png');       
+        this.load.image('Indiana', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/IndianaBeans.png');       
+        this.load.image('Jhonny', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/JhonnyBean.png');       
+        this.load.image('SambaDoJudia', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/SambaDoJudia.png');       
+        this.load.image('SaulJudman', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/SaulJudman.png');       
         this.load.image('UI', RAIZ_IMAGENES+'UI_dialogo.png');
         this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 })
@@ -80,8 +86,9 @@ export class EscenaTilesets extends Phaser.Scene {
 
         this.physics.add.overlap(this.character, this.hitbox[0], () => {
             if (this.interact == 0) {
-                //this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });                                
-                this.scene.start('escenaPlaya',{obj:this.myGameData,cx:2285, cy:320, dir:3});
+                this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });                                
+                //this.scene.start('escenaPlaya',{obj:this.myGameData,cx:2285, cy:320, dir:3});
+                //this.scene.start('escenaNuevosMinisterios',{obj:this.myGameData,cx:1820, cy:985, dir:0});            
             }
         })
         this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {

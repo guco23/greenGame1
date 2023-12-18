@@ -54,9 +54,26 @@ export default class dialogoHelp {
         "Oh, pues contad conmigo en ese caso", "Greta Judberg se ha unido al grupo"]
         //Mensaje cuando te encuentras con Selena Beamez
         this.dialogos[16] = ["Hola, yo soy Selena Beamez", "Y estás viendo Disney Channel", "*dibuja un ratón con el dedo", "...", "Selena Beamez se ha unido al grupo"]
+        //Mensaje cuando te encuentras con Albert Beanstein
+        this.dialogos[17] = ["¿Necesitas ayuda para pasar por la puerta de metro de Nuevos Ministerios? No te preocupes, ahora te   hecho un cable", "Para abrir la puerta necesitas comprar un ticket,y para conseguir un ticket tienes que ir a una de lasmáquinas de aquí arriba y comrarlo",
+        "Para pagarlo tendrás que recolectar dinero, eso sí.El dinero lo podrás encontrar por ahí, tirado por  el suelo, y también lo conseguirás al derrotar     enemigos de esta zona", "Bueno, gracias por la explicación, pero no es el   momento de tutoriales",
+        "Tenemos que detener el apocalipsis, y cada vez nos queda menos tiempo...", "El tiempo es relativo", "Albert Beanstein se ha unido al grupo"]
+        //Mensaje cuando te encuentras con Donald Bean
+        this.dialogos[18] = ["Cuack", "...", "Cuack, cuack", "Esta judía está gritando la onomatopeya 'cuack' en voz alta, como si fuera un pato", "Decidís ignorarla, pero aun así esta os sigue",
+        "Donald Bean se ha unido al grupo"]
+        //Mensaje cuando te encuentras a Indiana Beans
+        this.dialogos[19] = ["Alto ahí", "El camino que hay a continuación es demasiado      peligroso para avanzar sin la ayuda de un          aventurero", "Mecachis", "¿Ahora dónde vamos a encontrar un aventurero?", ">:(",
+        "Por cierto, ¿sabes por dónde está la salida? Este  sitio es como un laberinto", "Sí. Bajando por este pasillo en línea recta está lasalida", "Pero hay que conseguir suficientes monedas para    comprar un ticket y salir",
+        "Qué cosas", "Indiana Beans se ha unido al grupo"]
+        //Mensaje cuando te encuentras con Jhonny Bean
+        this.dialogos[20] = ["Hola, soy Johnny Bean", "Por si no lo has pillado, mi nombre es una         inteligente referencia al popular actor 'Johnny Depp', con un 'Bean' al final porque soy una judía", "Vaya, eso es hilarante",
+        "Claro que sí", "De esta interacción se podría sacar un RPG muy     divertido", "No lo dudo", "En fin, ahora te ayudaré en tu aventura", "Johnny Bean se ha unido al grupo"]
+        //Mensaje cuando te encuentras con SambaDeJudía
+        this.dialogos[21] = ["¡Vamos! ¡Fiesta! ¡Chacachá!", "Guau, tú si que lo petas en las fiestas, ¿me      equivoco?", "Nop. Soy el alma de la fiesta :D", "Samba do Judía se ha unido al grupo"]
+        //Mensaje cuando te encuentras con Saul Judman
+        this.dialogos[22] = ["Hola, soy Saul Judman", "¿Sabías que tienes derechos?", "La constitución dice que sí", "Saul Judman se ha unido al grupo"]
 
 
-        
         this.images = [];
         this.images[0] = ["Frikol", "Judini","Judini","Frikol","Frikol","Frikol","Frikol","Judini","Judini","Frikol","Judini","Frikol","Judini","Frikol","-"]
         this.images[1] = ["-","-"]
@@ -75,6 +92,12 @@ export default class dialogoHelp {
         this.images[14] = ["Rajoy","Judini","Rajoy","Judini","Judini","Rajoy", "-"]
         this.images[15] = ["Greta", "Greta", "Judini", "Judini", "Judini", "Greta", "-"]
         this.images[16] = ["Selena", "Selena", "Selena", "Judini", "-"]
+        this.images[17] = ["Albert","Albert","Albert","Judini","Judini","Albert","-"]
+        this.images[18] = ["Donald", "Judini", "Donald", "-", "-", "-"]
+        this.images[19] = ["Indiana","Indiana","Judini","Judini","Indiana","Judini","Indiana","Indiana","Judini","-"]
+        this.images[20] = ["Jhonny","Jhonny","Judini","Jhonny","Jhonny","Judini","Jhonny", "-"]
+        this.images[21] = ["SambaDoJudia","Judini","SambaDoJudia","-"]
+        this.images[22] = ["SaulJudman","SaulJudman","SaulJudman","-"]
 
         this.ReturnDialogo = function (i) {
             return this.dialogos[i];
