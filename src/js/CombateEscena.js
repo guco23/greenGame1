@@ -56,7 +56,8 @@ export class CombateEscena extends Phaser.Scene {
         }
         //Construye los objetos enemigos y los inicializa en el combatManager
         for (let i = 0; i < this.enemigos.length; i++) {
-            this.enemigos[i] = new Enemigo(this.enemigos[i], this.combatManager);
+            let myClass = this.enemigos[i].class;
+            this.enemigos[i] = new myClass(this.enemigos[i], this.combatManager);
             this.enemigos[i].startCombat(this.combatManager);
         }
 

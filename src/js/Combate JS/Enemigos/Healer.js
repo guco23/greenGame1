@@ -1,5 +1,4 @@
-import { enemies } from "../../../../assets/EnemyInfo/Enemies.js";
-import { Enemigo } from "./Enemigos/Enemigo.js";
+import { Enemigo } from "./Enemigo.js";
 
 export class Healer extends Enemigo {
 

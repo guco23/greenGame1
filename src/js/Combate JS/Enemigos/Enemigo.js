@@ -122,9 +122,10 @@ export class Enemigo {
     }
 
     //Mover a cada enemigo individual
-    attack(playerTeam) {
+    attack() {
         let length = 0;
-        console.log(playerTeam[0].name);
+        let playerTeam = this.currentCombat.playerTeam;
+        //console.log(playerTeam[0].name);
         let selecion = new Array(8);
         for(let i = 0; i < playerTeam.length; i++) {
             if(playerTeam[i].living) {
@@ -138,7 +139,6 @@ export class Enemigo {
             }
         }
         let target = this.getRandomInt(length);
-        //En target se genera un número aleatorio
         console.log(selecion[target].name);
         if(this.getCrit()) {
             this.currentCombat.addInfo("attack", selecion[target].sufferDamage(this.atk * 3), this, selecion[target]);
@@ -154,7 +154,7 @@ export class Enemigo {
 
     takeTurn() {
         if(this.stunned === false) {
-            this.attack(this.currentCombat.playerTeam);
+            this.attack();
         }
         else {
             this.stunned = false;

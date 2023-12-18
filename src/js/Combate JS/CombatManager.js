@@ -125,7 +125,7 @@ export class CombatManager {
             this.actInfo += from.name + " sufrió " + value + " de daño debido a efectos dañinos.\n"
         }
         if (action === "regen") {
-            this.actInfo += from.name + " recuperó vida gracias a efectos regenerativos.\n";
+            this.actInfo += from.name + " regeneró vida.\n";
         }
         if (action === "poison") {
             this.actInfo += from.name + " aplicó " + value + " de efectos dañinos a " + to.name + ".\n";

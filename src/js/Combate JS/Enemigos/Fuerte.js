@@ -1,4 +1,4 @@
-import { Enemigo } from "./Enemigos/Enemigo.js";
+import { Enemigo } from "./Enemigo.js";
 
 export class Fuerte extends Enemigo {
     strongAttack() {
