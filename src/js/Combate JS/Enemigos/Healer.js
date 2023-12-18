@@ -3,9 +3,9 @@ import { Enemigo } from "./Enemigo.js";
 export class Healer extends Enemigo {
 
     healing() {
-        for(i = 0; i < this.currentCombat.enemySize; i++) {
+        for(let i = 0; i < this.currentCombat.enemySize; i++) {
             let current = this.currentCombat.enemyTeam[i];
-            if(current.isLiving) {
+            if(current.living) {
                 current.heal(Math.floor((this.maxHp / 10) + this.def));
             }
         }
@@ -16,10 +16,10 @@ export class Healer extends Enemigo {
     teamHealth() {
         let wario = 0;
         let waluigi = 0;
-        for(i = 0; i < this.currentCombat.enemySize; i++) {
+        for(let i = 0; i < this.currentCombat.enemySize; i++) {
             let current = this.currentCombat.enemyTeam[i];
-            if(current.isLiving){
-                if(current.currentHP < current.maxHp / 2) {
+            if(current.living){
+                if(current.currentHp < (current.maxHp / 2)) {
                     waluigi++;
                 }
                 wario++;

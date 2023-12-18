@@ -7,11 +7,7 @@ import {Aturdidor} from "../../src/js/Combate JS/Enemigos/Aturdidor.js"
 import { Libra } from "../../src/js/Combate JS/Enemigos/Jefes/Libra.js"
 
 export var enemies = {
-    /*botella: {build: function(cM) {
-        new Enemigo({name:"Flipper", maxHp:60, atk: 30, def: 15, prefType: "", imgLink: "enemigoMercadonaBotella.png", crit: 10}, cM)
-    }, name:"Flipper", imgLink: "enemigoMercadonaBotella.png"},*/
-
-    botella: {class: Enemigo, name:"Flipper", maxHp:60, atk: 30, def: 15, prefType: "", imgLink: "enemigoMercadonaBotella.png", crit: 10},
+    botella: {class: Enemigo, name:"Flipper", maxHp:100, atk: 30, def: 15, prefType: "", imgLink: "enemigoMercadonaBotella.png", crit: 10},
 
     calamar: {class: Veneno, name:"H", maxHp:70, atk: 20, def: 10, prefType: "", imgLink: ""}, crit: 10,
 
@@ -27,7 +23,7 @@ export var enemies = {
 
     platano: {class: Enemigo, name:"Estaaa", maxHp:60, atk: 30, def: 15, prefType: "", imgLink: "", crit: 10},
 
-    pollo: {class: AoE, name:"Poyo", maxHp:400, atk: 30, def: 5, prefType: "", imgLink: "enemigoMercadonaBotella.png", crit: 15},
+    pollo: {class: AoE, name:"Poyo", maxHp:100, atk: 30, def: 5, prefType: "", imgLink: "enemigoMercadonaBotella.png", crit: 15},
 
     salchicha: {class: Fuerte, name:"Salchineitor", maxHp:50, atk: 40, def: 5, prefType: "", imgLink: "", crit: 10},
 

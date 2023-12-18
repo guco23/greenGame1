@@ -19,12 +19,10 @@ export class Veneno extends Enemigo {
                     length++;
                 }
                 selecion[length] = playerTeam[i];
-                console.log(playerTeam[i].name + " " + selecion[length].name);
                 length++;
             }
         }
         let target =  this.getRandomInt(length);
-        console.log(selecion[target].name);
         if(this.getCrit()) {
             this.currentCombat.addInfo("attack", selecion[target].sufferDamage(this.atk * 3), this, selecion[target]);
             selecion[target].applyDot(this.poison * 3);

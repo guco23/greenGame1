@@ -122,7 +122,7 @@ export class CombatManager {
             this.actInfo += "¡" + from.name + " murió!\n"
         }
         if (action === "dot") {
-            this.actInfo += from.name + " sufrió " + value + " de daño debido a efectos dañinos.\n"
+            this.actInfo += from.name + " sufrió " + value + " de daño por efectos dañinos.\n"
         }
         if (action === "regen") {
             this.actInfo += from.name + " regeneró vida.\n";
