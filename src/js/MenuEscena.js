@@ -1,4 +1,4 @@
-import { RAIZ_IMAGENES, CONTROLES, RAIZ_IMGS_PJS, RAIZ_IMGS_OVERWORLD } from "./constants.js";
+import { RAIZ_IMAGENES, CONTROLES, RAIZ_IMGS_OVERWORLD } from "./constants.js";
 import { SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
 import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
 import { DatosAccion } from "./HUDElems/SelectorAcciones.js";

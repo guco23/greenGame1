@@ -4,14 +4,16 @@ export default class GameData {
     defeated; //Array con los ids de los enemigos que ya han sido derrotados
     objects;  //Array de objetos clave
     allies; //Todos los personajes desbloqueados, se irán añadiendo según progrese el juego
-    
+
     constructor() {
         //this.scene.add.existing(this);
         this.defeated = [];  //Array de enemigos derrotados (empieza vacío)
         this.objects = [];
+        this.items = [];
         this.party = [];
         this.allies = [];
         this.partySize = 0;
+        this.NMCoins = 0; //Contador de monedas de nuevos ministerios
 
         this.objects[0] = {
             'Nombre': "Nota1",
@@ -41,21 +43,64 @@ export default class GameData {
             'Nombre': "PlanosPuente",
             'Pillado': false,
         };
+        this.objects[7] = {
+            'Nombre': "BilleteTren1",
+            'Pillado': false,
+        };
+        this.objects[8] = {
+            'Nombre': "BilleteTren2",
+            'Pillado': false,
+        };
+
         this.AñadeObjetoClave = function (aux) {
             console.log("tocame uwu");
             this.objects[aux].Pillado = true;
         }
         this.CheckObjetoClave = function (aux) {
-            console.log(this.objects[aux].Pillado);
+            //console.log(this.objects[aux].Pillado);
+            return this.objects[aux].Pillado;
         }
+        this.Interactablehitboxes = [];
+        this.Interactablehitboxes[0] = false;
+        this.Interactablehitboxes[1] = false;
+        this.Interactablehitboxes[2] = false;
     }
+
+    //Metodos que añaden o desbloquean objetos
 
     AñadeObjetoClave(aux) {
         this.objects[aux].Pillado = true;
     }
 
-    CheckObjetoclave(aux) {
-        return this.objects[aux].Pillado; //ponle true si falla kbron
+    /**
+     * Añade un item a la lista de items
+     * @param {Item} item 
+     * @returns {boolean} devuelve true si lo ha añadido y false si ya estaba y por tanto no lo ha añadido
+     */
+    AñadeItemEquipable(item) {
+        let encontrado = this.items.includes(item);
+        if (!encontrado) {
+            this.items.push(item);
+        }
+        return encontrado;
+    }
+
+    AñadeMonedasNM() {
+        this.NMCoins++;
+    }
+
+    //Metodos que comprueban estado de los objetos
+
+    CheckObjetoClave(aux) {
+        return this.objects[aux].Pillado;
+    }
+
+    CheckItemEquipable(aux) {
+        return this.itemsEquip[aux].Pillado;
+    }
+
+    CheckMonedasNM(aux) {
+        return this.NMCoins > aux;
     }
 
     //Método provisional para meter equipo en gameData
@@ -87,13 +132,13 @@ export default class GameData {
         }
         return encontrado;
     }
-
+    
     VaciarListaDefeated() {
         this.defeated = [];
     }
-    
+
     AddCharacter(personaje) {
-        if(this.partySize < 4) {
+        if (this.partySize < 4) {
             this.party[this.partySize] = personaje;
             this.partySize++;
         }

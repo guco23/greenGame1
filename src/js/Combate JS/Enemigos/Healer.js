@@ -11,6 +11,7 @@ export class Healer extends Enemigo {
             }
         }
         this.currentCombat.addInfo("aoeHeal", 0, this, null);
+        this.endTurn();
     }
 
     teamHealth() {

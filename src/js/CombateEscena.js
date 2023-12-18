@@ -1,4 +1,4 @@
-import { RAIZ_IMAGENES, CONTROLES, RAIZ_IMGS_PJS } from "./constants.js";
+import { RAIZ_IMAGENES, CONTROLES, RAIZ_IMGS_COMBAT } from "./constants.js";
 import { Enemigo } from "./Combate JS/Enemigos/Enemigo.js"
 import { BarraVida } from "./HUDElems/BarraVida.js";
 import { TextoVida } from "./HUDElems/TextoVida.js";
@@ -34,10 +34,10 @@ export class CombateEscena extends Phaser.Scene {
 
         //Añade las imagenes de los aliados y enemigos
         this.enemigos.forEach(enemigo => {
-            this.load.image(enemigo.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_PJS + enemigo.imgLink);
+            this.load.image(enemigo.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_COMBAT + enemigo.imgLink);
         });
         this.aliados.forEach(aliado => {
-            this.load.image(aliado.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_PJS + aliado.imgLink);
+            this.load.image(aliado.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_COMBAT + aliado.imgLink);
         });
         //Carga el fondo, dependerá de la zona del juego en la que nos encontremos
         this.load.image('background', RAIZ_IMAGENES + "combatBackground/combatBackgroundPlaceholder.png");

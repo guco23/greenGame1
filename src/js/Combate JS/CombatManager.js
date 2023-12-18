@@ -107,31 +107,34 @@ export class CombatManager {
 
     addInfo(action, value, from, to) {
         if (action === "attack") {
-            this.actInfo += from.name + " attacked " + to.name + " for " + value + " damage.\n";
+            this.actInfo += from.name + " atacó a " + to.name + " e hizo " + value + " de daño.\n";
         }
         if(action === "aoeHeal") {
-            this.actInfo += from.name + " healed their allies!\n";
+            this.actInfo += from.name + " curó a sus aliados.\n";
         }
         if(action === "crit") {
-            this.actInfo += "It was a critical blow!\n";
+            this.actInfo += "¡Fue un impacto crítico!\n";
         }
         if (action === "defend") {
-            this.actInfo += from.name + " defended and added " + value + " shield.\n";
+            this.actInfo += from.name + " defendió y ganó " + value + " de escudo.\n";
         }
         if (action === "die") {
-            this.actInfo += from.name + " died!\n"
+            this.actInfo += "¡" + from.name + " murió!\n"
         }
         if (action === "dot") {
-            this.actInfo += from.name + " suffered " + value + " damage due to negative effects.\n"
+            this.actInfo += from.name + " sufrió " + value + " de daño debido a efectos dañinos.\n"
+        }
+        if (action === "regen") {
+            this.actInfo += from.name + " recuperó vida gracias a efectos regenerativos.\n";
         }
         if (action === "poison") {
-            this.actInfo += from.name + " applied " + value + " poison to " + to.name + "\n";
+            this.actInfo += from.name + " aplicó " + value + " de efectos dañinos a " + to.name + ".\n";
         }
         if (action === "stunned") {
-            this.actInfo += from.name + " became stunned!\n";
+            this.actInfo += from.name + " fue confundido.\n";
         }
         if (action === "stun") {
-            this.actInfo += from.name + " was stunned and couldn't act.\n"
+            this.actInfo += from.name + " estaba tan confuso que no pudo actuar.\n"
         }
         if (action === "special") {
             this.actInfo += value;
@@ -206,7 +209,8 @@ export class CombatManager {
     }
 
     specialRequestInfo() {
-        return this.playerTeam[this.current].targetKind;
+        return this.playerTeam[this.current].targetKind; //Targeteo para la habilidad. 0 un enemigo, 1 un aliado, 2 todo enemigo, 3 todo aliado
+
     }
 
     doAction(action, target) {
