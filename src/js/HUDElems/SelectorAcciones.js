@@ -1,4 +1,3 @@
-import { RAIZ_IMAGENES } from "../constants.js";
 
 class AccionText extends Phaser.GameObjects.Container {
     /**
@@ -29,8 +28,10 @@ class AccionText extends Phaser.GameObjects.Container {
 
     visible(t) {
         this.textElem.visible = t;
-        if (!t)
+        if (!t) {
             this.icon.visible = false;
+            this.textElem.setTint(0xFFFFFF);
+        }
     }
 
 }
@@ -52,23 +53,21 @@ export class SelectorAcciones extends Phaser.GameObjects.Container {
      * @param {Posición vertical donde colocar el menu (esquina superior izquierda)} y 
      * @param {El espacio entre cada elemento de la lista} padding
      * @param {Array con objetos de tipo DatosAccion con los elementos de la lista} datosAcciones
-     * @param {Si quieres que se oculte todo el texto (true) o solo el indicador (false)} hiddingOption
      */
-    constructor(scene, textoDescriptivo, x, y, padding, datosAcciones, hiddingOption) {
+    constructor(scene, textoDescriptivo, x, y, padding, datosAcciones) {
         super(scene);
-        this.hiddingOption = hiddingOption;
         this.selection = 0;
         this.textoDescriptivo = textoDescriptivo;
         this.opciones = [];
         for (let i = 0; i < datosAcciones.length; i++) {
             this.opciones.push(new AccionText(scene, x, y + i * padding, datosAcciones[i]));
         }
-        this.select();
     }
 
     /**Marca la selección actual y actualiza el texto descriptivo */
     select() {
         this.opciones[this.selection].selected();
+        console.log(this.opciones[this.selection].textoDescriptivo);
         this.textoDescriptivo.aplicarTexto(this.opciones[this.selection].textoDescriptivo);
     }
 
@@ -100,25 +99,27 @@ export class SelectorAcciones extends Phaser.GameObjects.Container {
      * Oculta el menu de las acciones
      */
     ocultar() {
-        if (this.hiddingOption) {
-            this.opciones.forEach(opcion => opcion.visible(false));
-        } else {
-            this.opciones.forEach(opcion => opcion.unselect());
-        }
-        this.textoDescriptivo.aplicarTexto("");
-
+        this.opciones.forEach(opcion => opcion.visible(false));
     }
 
     /**
      * Muestra el menu de las acciones
      */
     mostrar() {
-        if (this.hiddingOption) {
-            this.opciones.forEach(opcion => opcion.visible(true));
-            this.textoDescriptivo.visible(true);
-            this.select();
-        } else {
-            this.select();
-        }
+        this.opciones.forEach(opcion => opcion.visible(true));
+        this.textoDescriptivo.visible(true);
+    }
+
+    updateAction(idn, newName, newDesc) {
+        this.opciones[idn].textoDescriptivo = newDesc;
+        this.opciones[idn].textElem.setText(newName);
+    }
+
+    activar() {
+        this.select();
+    }
+
+    desactivar() {
+        this.opciones.forEach(opcion => opcion.unselect());
     }
 }
