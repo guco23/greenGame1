@@ -122,6 +122,7 @@ export class EscenaTilesets extends Phaser.Scene {
 
     update() {
         if (this.interactKey.isDown) {
+            this.scene.start('escenaNuevosMinisterios',{obj:this.myGameData,cx:1820, cy:985, dir:0});  
             this.interact = 0;
         } else {
             this.interact = 1;
