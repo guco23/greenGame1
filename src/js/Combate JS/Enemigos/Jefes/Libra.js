@@ -7,20 +7,21 @@ export class Libra extends Enemigo {
 
     healing(){
         let healAmount = (this.balance.currentHp - this.currentHp);
-        for(i = 0; i < this.currentCombat.enemySize; i++) {
+        for(let i = 0; i < this.currentCombat.enemySize; i++) {
             if(this.allies[i].living) {
                 this.allies[i].heal(healAmount);
             }
         }
         this.currentCombat.addInfo("aoeHeal", 0, this, null);
+        this.endTurn();
     }
 
     judgement() {
-        let target = currentCombat.playerTeam;
-        let damage = (this.currentHp - this.balance.currentHp) + this.atk;
+        let target = this.currentCombat.playerTeam;
+        let damage = Math.floor((this.currentHp - this.balance.currentHp)/5) + this.atk;
         this.currentCombat.addInfo("special", "'¡Sereis juzgados por vuestros pecados!'\n", this, null);
-        for(i = 0; i < currentCombat.teamSize; i++) {
-            if(target.living) {
+        for(let i = 0; i < this.currentCombat.teamSize; i++) {
+            if(target[i].living) {
                 this.currentCombat.addInfo("attack", target[i].sufferDamage(damage), this, target[i]);
                 target[i].checkAlive();
             }
@@ -29,12 +30,12 @@ export class Libra extends Enemigo {
     }
 
     takeTurn() {
-        if(this.currentHp > this.balance.currentHp) {
-            if(this.currentHp < this.maxHp / 2) {
+        if(this.currentHp >= this.balance.currentHp) {
+            if(this.currentHp < (this.maxHp / 2)) {
                 this.judgement();
             }
             else {
-                let rand = this.getRandomInt(2)
+                let rand = this.getRandomInt(3)
                 if(rand === 0) {
                     this.judgement();
                 }
@@ -44,11 +45,11 @@ export class Libra extends Enemigo {
             }
         }
         else {
-            if(this.currentHp < this.maxHp / 2) {
+            if(this.currentHp < (this.maxHp / 2)) {
                 this.healing();
             }
             else {
-                let rand = this.getRandomInt(2)
+                let rand = this.getRandomInt(3)
                 if(rand === 0) {
                     this.healing();
                 }
@@ -60,9 +61,10 @@ export class Libra extends Enemigo {
     }
 
     searchBalance() {
-        for(i = 0; i < this.currentCombat.enemySize; i++) {
-            if(this.allies[i].name == this.name) {
+        for(let i = 0; i < this.currentCombat.enemySize; i++) {
+            if(this.allies[i].name == this.name && this != this.allies[i]) {
                 this.balance = this.allies[i];
+                console.log(this.balance);
             }
         }
     }

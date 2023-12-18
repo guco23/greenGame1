@@ -15,7 +15,7 @@ export var enemies = {
         
     dragon: {class: Enemigo, name:"Doragon", maxHP:60, atk:20, def: 15, prefType:"",  imgLink: "", crit: 10},
 
-    libra: {class: Libra, name:"Libra", maxHp:500, atk: 45, def: 30, prefType: "", imgLink: "", crit: 5},
+    libra: {class: Libra, name:"Libra", maxHp:500, atk: 10, def: 30, prefType: "", imgLink: "", crit: 5},
 
     magdalena: {class: Healer, name:"María Magdalena", maxHp:80, atk: 20, def: 15, prefType: "", imgLink: "", crit: 10},
     
@@ -27,5 +27,5 @@ export var enemies = {
 
     salchicha: {class: Fuerte, name:"Salchineitor", maxHp:50, atk: 40, def: 5, prefType: "", imgLink: "", crit: 10},
 
-    sardina: {class: Aturdidor, name:"Cap. Sardinez", maxHp:600, atk: 20, def: 10, prefType: "", imgLink: "", crit: 5}
+    sardina: {class: Aturdidor, name:"Cap. Sardinez", maxHp:60, atk: 20, def: 10, prefType: "", imgLink: "", crit: 5}
 }

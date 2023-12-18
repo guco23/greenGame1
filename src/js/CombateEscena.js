@@ -58,6 +58,8 @@ export class CombateEscena extends Phaser.Scene {
         for (let i = 0; i < this.enemigos.length; i++) {
             let myClass = this.enemigos[i].class;
             this.enemigos[i] = new myClass(this.enemigos[i], this.combatManager);
+        }
+        for (let i = 0; i < this.enemigos.length; i++) {
             this.enemigos[i].startCombat(this.combatManager);
         }
 
@@ -92,8 +94,6 @@ export class CombateEscena extends Phaser.Scene {
         for (let i = 0; i < this.enemigos.length; i++) {
             this.vidasEnemigos.push(new BarraVida(this, this.sceneEnem.array[i].img.x + this.sceneEnem.array[i].img.width / 2 + 2, this.sceneEnem.array[i].img.y - 10, 80, 18, this.enemigos[i]))
         }
-        //Prueba de la barra de vida
-        this.vidasEnemigos[2].actualizarHp(25);
         //Los datos para crear la lista del selector acciones
         let datosAcciones = [new DatosAccion("Atacar", "Ataque básico a un objetivo"),
         new DatosAccion("Habilidad", ""), //Esta cambiará en cada turno (mostrando la descripción de la habilidad del personaje)
