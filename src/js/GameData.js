@@ -60,6 +60,14 @@ export default class GameData {
             //console.log(this.objects[aux].Pillado);
             return this.objects[aux].Pillado;
         }
+        this.AñadeMonedasNM = function (aux) {
+            //console.log(this.objects[aux].Pillado);
+            this.NMCoins = this.NMcoins + aux;
+        }
+        this.GetMonedasNM = function () {
+            //console.log(this.objects[aux].Pillado);
+            return this.NMCoins;
+        }
         this.Interactablehitboxes = [];
         this.Interactablehitboxes[0] = false;
         this.Interactablehitboxes[1] = false;
@@ -86,10 +94,13 @@ export default class GameData {
         return encontrado;
     }
 
-    AñadeMonedasNM() {
-        this.NMCoins++;
+    AñadeMonedasNM(aux) {
+        this.NMCoins = this.NMcoins + aux;
     }
 
+    GetMonedasNM(){
+        return this.NMCoins;
+    }
     //Metodos que comprueban estado de los objetos
 
     CheckObjetoClave(aux) {

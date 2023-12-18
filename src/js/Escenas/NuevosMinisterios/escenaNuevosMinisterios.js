@@ -17,7 +17,7 @@ init(data){
         this.load.tilemapTiledJSON('NuevosMinisterios', 'assets/json/NuevosMinisterios.json');
         this.load.image('tileset_nm', RAIZ_IMAGENES+'tilesets/tileset_nm.png');
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26});
-        this.load.spritesheet('coin',  RAIZ_IMAGENES+'Objetos/Notas.png', {frameWidth: 16, frameHeight: 16})
+        this.load.spritesheet('coin',  RAIZ_IMAGENES+'Objetos/Coins.png', {frameWidth: 16, frameHeight: 16})
     }
 
     //crear aqui los objetos de la escena
@@ -75,17 +75,21 @@ init(data){
 		this.anims.play('spin', coinsNM);
 		
 		let groupCoinsNM = this.add.group();
-		groupCoinsNM.addMultiple(coinsNM)
+		groupCoinsNM.addMultiple(coinsNM);
 		coinsNM.forEach(obj => {
 			console.log("uwu");
 			this.physics.add.existing(obj);
 		});
 
-          this.character = new Character(this, this.cx, this.cy,this.dir);
-          this.physics.world.enable(this.character);
-          this.physics.add.collider(this.character, this.WallLayer);
-          this.physics.add.collider(this.character, groupCoinsNM);
-          
+        this.character = new Character(this, this.cx, this.cy,this.dir);
+        this.physics.world.enable(this.character);
+        this.physics.add.collider(this.character, this.WallLayer);
+        this.physics.add.collider(this.character, groupCoinsNM, (character, coin) => {
+            console.log( this.myGameData.GetMonedasNM())
+            this.myGameData.AñadeMonedasNM(1);
+            coin.destroy();
+        });
+
           this.NoWallLayer = this.map.createLayer('ParedesSobrepuestas', tileset1); //Esta capa se coloca después para que esté por "encima" del jugador
 
           this.physics.add.overlap(this.character, this.hitbox1[0], ()=>{
