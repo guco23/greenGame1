@@ -175,7 +175,6 @@ export class Personaje {
     }
 
     attack(target) {
-        //this.ableToAct = false;
         let myTarget = this.currentCombat.enemyTeam[target];
         this.currentCombat.addInfo("attack", myTarget.sufferDamage(this.atk), this, myTarget);
         myTarget.checkAlive();
@@ -193,8 +192,9 @@ export class Personaje {
 
     takeTurn() {
         if(this.stunned === true) {
+            console.log("balls");
             this.stunned = false;
-            combatManager.addInfo("stun", 0, this,  null);
+            this.currentCombat.addInfo("stun", 0, this,  null);
             this.endTurn();
         }
     }

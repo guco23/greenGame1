@@ -144,21 +144,31 @@ export default class GameData {
         }
         return encontrado;
     }
-    
+
     VaciarListaDefeated() {
         this.defeated = [];
     }
 
     AddCharacter(personaje) {
-        if (this.partySize < 4) {
-            this.party[this.partySize] = personaje;
-            this.partySize++;
+        if (!this.CheckCharacter(personaje)) {
+            if (this.partySize < 4) {
+                this.party[this.partySize] = personaje;
+                this.partySize++;
+            }
+            this.allies.push(personaje);
         }
-        this.allies.push(personaje);
-        console.log(this.allies);
     }
 
     CheckCharacter(personaje) {
-        return this.allies.includes(personaje);
+        let i = 0;
+        let encontrado = false;
+        while (!encontrado && i < this.allies.length) {
+            if (this.allies[i].name === personaje.name){
+                encontrado = true;
+
+            }
+            i++;
+        }
+        return encontrado;
     }
 }
