@@ -16,16 +16,28 @@ init(data){
     preload() {        
         this.load.tilemapTiledJSON('NuevosMinisterios', 'assets/json/NuevosMinisterios.json');
         this.load.image('tileset_nm', RAIZ_IMAGENES+'tilesets/tileset_nm.png');
-        this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
+        this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26});
+        this.load.spritesheet('coin',  RAIZ_IMAGENES+'Objetos/Notas.png', {frameWidth: 16, frameHeight: 16})
     }
 
     //crear aqui los objetos de la escena
     create() {
+
+        this.anims.create({
+			key: 'spin',
+			frames: this.anims.generateFrameNumbers('coin', { start: 0, end: 0 }),
+			frameRate: 16,
+			repeat: -1
+		});
+
         this.map = this.make.tilemap({ 
             key: 'NuevosMinisterios', 
             tileWidth: 16, 
             tileHeight: 16 
           });
+
+        
+
           this.interactKey = this.input.keyboard.addKey('E');
           this.interact = 1;
           const tileset1 = this.map.addTilesetImage('tileset_nm', 'tileset_nm');          
@@ -59,9 +71,20 @@ init(data){
           this.physics.add.existing(this.SaulJudman[0]);
           this.SaulJudmanImage = this.add.image(1368, 2592, 'SaulJudman');
 
+          let coinsNM = this.map.createFromObjects('Monedas', {name: "coin", key: 'coin' });
+		this.anims.play('spin', coinsNM);
+		
+		let groupCoinsNM = this.add.group();
+		groupCoinsNM.addMultiple(coinsNM)
+		coinsNM.forEach(obj => {
+			console.log("uwu");
+			this.physics.add.existing(obj);
+		});
+
           this.character = new Character(this, this.cx, this.cy,this.dir);
           this.physics.world.enable(this.character);
           this.physics.add.collider(this.character, this.WallLayer);
+          this.physics.add.collider(this.character, groupCoinsNM);
           
           this.NoWallLayer = this.map.createLayer('ParedesSobrepuestas', tileset1); //Esta capa se coloca después para que esté por "encima" del jugador
 

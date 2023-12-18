@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="200" height="320" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="10">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="200" height="320" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="98">
  <editorsettings>
   <export target="../assets/json/NuevosMinisterios.json" format="json"/>
  </editorsettings>
@@ -1963,4 +1963,226 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="10" name="Objetos">
+  <object id="19" name="coin" x="1585.33" y="961.667" width="14.6667" height="14.6667">
+   <ellipse/>
+  </object>
+  <object id="20" name="coin" x="1204.33" y="1000" width="15.6667" height="16">
+   <ellipse/>
+  </object>
+  <object id="21" name="coin" x="1500" y="1259.67" width="18" height="17.6667">
+   <ellipse/>
+  </object>
+  <object id="22" name="coin" x="1192.33" y="1249.33" width="17" height="16.3333">
+   <ellipse/>
+  </object>
+  <object id="23" name="coin" x="1251.33" y="1633" width="14.3333" height="14.3333">
+   <ellipse/>
+  </object>
+  <object id="24" name="coin" x="1648" y="1630.67" width="16.3333" height="16">
+   <ellipse/>
+  </object>
+  <object id="25" name="coin" x="1660.33" y="1920" width="16.3333" height="16.3333">
+   <ellipse/>
+  </object>
+  <object id="26" name="coin" x="1659" y="2111.67" width="18" height="17">
+   <ellipse/>
+  </object>
+  <object id="27" name="coin" x="1809.33" y="2044.33" width="16" height="16.6667">
+   <ellipse/>
+  </object>
+  <object id="28" name="coin" x="1504.33" y="2049" width="16.6667" height="16.3333">
+   <ellipse/>
+  </object>
+  <object id="34" name="coin" x="1654.33" y="2341.67" width="13.3333" height="14.3333">
+   <ellipse/>
+  </object>
+  <object id="35" name="coin" x="1358" y="2328.67" width="16" height="16">
+   <ellipse/>
+  </object>
+  <object id="36" name="coin" x="1081.67" y="2249" width="16.6667" height="17">
+   <ellipse/>
+  </object>
+  <object id="37" name="coin" x="822" y="2256" width="18.6667" height="16.6667">
+   <ellipse/>
+  </object>
+  <object id="38" name="coin" x="682.333" y="2240" width="13.6667" height="14">
+   <ellipse/>
+  </object>
+  <object id="39" name="coin" x="672.667" y="1951.67" width="14.6667" height="14.6667">
+   <ellipse/>
+  </object>
+  <object id="40" name="coin" x="624" y="1711.67" width="16" height="15.3333">
+   <ellipse/>
+  </object>
+  <object id="41" name="coin" x="366" y="1951.67" width="17" height="16">
+   <ellipse/>
+  </object>
+  <object id="42" name="coin" x="538.333" y="2662" width="16.6667" height="16.6667">
+   <ellipse/>
+  </object>
+  <object id="43" name="coin" x="539.333" y="2899.67" width="16" height="16">
+   <ellipse/>
+  </object>
+  <object id="44" name="coin" x="286.667" y="2672.67" width="17" height="17">
+   <ellipse/>
+  </object>
+  <object id="45" name="coin" x="281" y="2913.67" width="16" height="15.6667">
+   <ellipse/>
+  </object>
+  <object id="46" name="coin" x="285.667" y="3102.67" width="17" height="16">
+   <ellipse/>
+  </object>
+  <object id="47" name="coin" x="541.333" y="3101" width="16" height="16.3333">
+   <ellipse/>
+  </object>
+  <object id="48" name="coin" x="543.667" y="3472.67" width="18.3333" height="16.6667">
+   <ellipse/>
+  </object>
+  <object id="49" name="coin" x="825" y="3443" width="16.6667" height="15.6667">
+   <ellipse/>
+  </object>
+  <object id="50" name="coin" x="1137.67" y="3471.67" width="17" height="17.3333">
+   <ellipse/>
+  </object>
+  <object id="51" name="coin" x="1377" y="3454.33" width="16.6667" height="16.6667">
+   <ellipse/>
+  </object>
+  <object id="52" name="coin" x="1658" y="3470" width="18" height="16.3333">
+   <ellipse/>
+  </object>
+  <object id="53" name="coin" x="1296" y="3984.33" width="15.6667" height="16">
+   <ellipse/>
+  </object>
+  <object id="54" name="coin" x="993.333" y="3744" width="15.3333" height="15">
+   <ellipse/>
+  </object>
+  <object id="55" name="coin" x="1948.67" y="3459.33" width="14.3333" height="16">
+   <ellipse/>
+  </object>
+  <object id="56" name="coin" x="2202.67" y="3489" width="15" height="15">
+   <ellipse/>
+  </object>
+  <object id="57" name="coin" x="2573.33" y="3463" width="14.6667" height="14.3333">
+   <ellipse/>
+  </object>
+  <object id="58" name="coin" x="2786.67" y="3470.67" width="16.6667" height="16">
+   <ellipse/>
+  </object>
+  <object id="59" name="coin" x="2126.67" y="3746" width="15.3333" height="15">
+   <ellipse/>
+  </object>
+  <object id="60" name="coin" x="2434" y="3984.67" width="14.3333" height="15">
+   <ellipse/>
+  </object>
+  <object id="61" name="coin" x="2128.33" y="3986.33" width="13" height="14.3333">
+   <ellipse/>
+  </object>
+  <object id="62" name="coin" x="694.5" y="2861" width="16" height="16">
+   <ellipse/>
+  </object>
+  <object id="63" name="coin" x="831.5" y="2635" width="18" height="17">
+   <ellipse/>
+  </object>
+  <object id="64" name="coin" x="1103" y="2584" width="19.5" height="17.5">
+   <ellipse/>
+  </object>
+  <object id="65" name="coin" x="1353" y="2806" width="19" height="17">
+   <ellipse/>
+  </object>
+  <object id="66" name="coin" x="1096" y="2806" width="18" height="17">
+   <ellipse/>
+  </object>
+  <object id="67" name="coin" x="1102.5" y="3172" width="18" height="16.5">
+   <ellipse/>
+  </object>
+  <object id="68" name="coin" x="1363.5" y="2982" width="17.5" height="16.5">
+   <ellipse/>
+  </object>
+  <object id="69" name="coin" x="849" y="3085" width="20" height="17">
+   <ellipse/>
+  </object>
+  <object id="70" name="coin" x="1664.5" y="2991.5" width="17" height="16.5">
+   <ellipse/>
+  </object>
+  <object id="71" name="coin" x="1950.5" y="2986.5" width="18.5" height="18.5">
+   <ellipse/>
+  </object>
+  <object id="72" name="coin" x="2213.5" y="3157.5" width="17.5" height="17.5">
+   <ellipse/>
+  </object>
+  <object id="73" name="coin" x="2207.5" y="2977" width="15.5" height="16">
+   <ellipse/>
+  </object>
+  <object id="74" name="coin" x="2436" y="3137" width="14.5" height="15.5">
+   <ellipse/>
+  </object>
+  <object id="75" name="coin" x="2765.5" y="3139.5" width="17" height="16">
+   <ellipse/>
+  </object>
+  <object id="76" name="coin" x="3044" y="3142" width="17" height="16">
+   <ellipse/>
+  </object>
+  <object id="77" name="coin" x="3059" y="2875.5" width="16" height="16.5">
+   <ellipse/>
+  </object>
+  <object id="78" name="coin" x="3039.5" y="2703" width="16.5" height="18">
+   <ellipse/>
+  </object>
+  <object id="79" name="coin" x="2800.5" y="2705.5" width="16" height="14.5">
+   <ellipse/>
+  </object>
+  <object id="80" name="coin" x="2766.5" y="2915.5" width="17.5" height="16">
+   <ellipse/>
+  </object>
+  <object id="81" name="coin" x="2481" y="2906.5" width="18" height="17.5">
+   <ellipse/>
+  </object>
+  <object id="82" name="coin" x="2453.5" y="2460.5" width="17.5" height="18">
+   <ellipse/>
+  </object>
+  <object id="83" name="coin" x="2218.5" y="2462.5" width="17" height="16">
+   <ellipse/>
+  </object>
+  <object id="84" name="coin" x="2194" y="2623.33" width="18" height="19.3333">
+   <ellipse/>
+  </object>
+  <object id="85" name="coin" x="1951.33" y="2323.33" width="17.3333" height="17.3333">
+   <ellipse/>
+  </object>
+  <object id="86" name="coin" x="1930" y="2542.67" width="18" height="18">
+   <ellipse/>
+  </object>
+  <object id="87" name="coin" x="1952.67" y="2659.33" width="16" height="16">
+   <ellipse/>
+  </object>
+  <object id="88" name="coin" x="1662.5" y="2525.5" width="17" height="19">
+   <ellipse/>
+  </object>
+  <object id="89" name="coin" x="1122" y="2033" width="15.5" height="14.5">
+   <ellipse/>
+  </object>
+  <object id="90" name="coin" x="833" y="2063" width="14.5" height="14.5">
+   <ellipse/>
+  </object>
+  <object id="91" name="coin" x="2115.33" y="2033.33" width="14.6667" height="14.6667">
+   <ellipse/>
+  </object>
+  <object id="92" name="coin" x="2472" y="2058" width="15.3333" height="17.3333">
+   <ellipse/>
+  </object>
+  <object id="93" name="coin" x="2617.33" y="1857.33" width="17.3333" height="18.6667">
+   <ellipse/>
+  </object>
+  <object id="94" name="coin" x="2770" y="1971.33" width="17.3333" height="16.6667">
+   <ellipse/>
+  </object>
+  <object id="95" name="coin" x="2788" y="2212" width="20" height="18.6667">
+   <ellipse/>
+  </object>
+  <object id="96" x="3328" y="1844">
+   <ellipse/>
+  </object>
+  <object id="97" name="coin" x="1642" y="950.667"/>
+ </objectgroup>
 </map>
