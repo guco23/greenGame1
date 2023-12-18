@@ -1,11 +1,11 @@
-import { Enemigo } from "./Enemigos/Enemigo.js";
+import { Enemigo } from "./Enemigo.js";
 
 export class AoE extends Enemigo {
 
     areaAttack() {
-        let target = currentCombat.playerTeam;
-        for(i = 0; i < currentCombat.teamSize; i++) {
-            if(target.living) {
+        let target = this.currentCombat.playerTeam;
+        for(let i = 0; i < this.currentCombat.teamSize; i++) {
+            if(target[i].living) {
                 this.currentCombat.addInfo("attack", target[i].sufferDamage(this.atk / 2), this, target[i]);
                 target[i].checkAlive();
             }
@@ -14,8 +14,8 @@ export class AoE extends Enemigo {
     }
 
     selectAction() {
-        let rand; //Hacer algo random entre 1 y 3
-        if(this.currentHP < this.maxHp / 2) {
+        let rand = this.getRandomInt(3);
+        if(this.currentHp < (this.maxHp / 2)) {
             if(rand === 0) {
                 this.attack();
             }

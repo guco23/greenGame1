@@ -1,4 +1,4 @@
-import { Enemigo } from "./Enemigos/Enemigo.js";
+import { Enemigo } from "./Enemigo.js";
 
 export class Aturdidor extends Enemigo {
     

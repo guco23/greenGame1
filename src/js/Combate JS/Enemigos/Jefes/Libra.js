@@ -1,4 +1,4 @@
-import { Enemigo } from "./Enemigos/Enemigo.js";
+import { Enemigo } from "../Enemigo.js";
 
 export class Libra extends Enemigo {
 
@@ -70,5 +70,6 @@ export class Libra extends Enemigo {
     startCombat(combatManager) {
         this.currentCombat = combatManager;
         this.allies = this.currentCombat.enemyTeam;
+        this.searchBalance();
     }
 }

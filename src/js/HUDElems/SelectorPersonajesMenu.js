@@ -1,14 +1,16 @@
 import { TextoDescriptivo } from "./TextoDescriptivo.js";
 
 class PersonajeMenu {
-    constructor(scene, character, x, y) {
-        scene.add.image(x, y, character.name).setScale(4);
+    constructor(scene, personaje, x, y, descripcion) {
+        this.image = scene.add.image(x, y, personaje.name).setScale(4);
         this.selectIcon = scene.add.image(x - 48, y, 'selectorPersonaje').setScale(2.8);
         this.unselect();
+        this.descripcion = descripcion;
     }
 
     //Cambia la visibilidad de la flechita indicadora a que no se vea
     select() {
+        this.describir();
         this.selectIcon.visible = true;
     }
 
@@ -16,13 +18,26 @@ class PersonajeMenu {
     unselect() {
         this.selectIcon.visible = false;
     }
+
+    describir() {
+        //TODO
+    }
+
+    ocultar() {
+        this.selectIcon.visible = false;
+        this.image.visible = false;
+    }
+
+    mostrar() {
+        this.image.visible = true;
+    }
 }
 
 export class SelectorPersonajesMenu extends Phaser.GameObjects.Container {
     /**
      * 
-     * @param {scene} scene 
-     * @param {Personaje[]} characters 
+     * @param {scene} scene La escena donde se construira el elemento
+     * @param {Personaje[]} personajes Los personajes a añadir
      * @param {num} x La posición horizontal donde comenzará la lista de personajes
      * @param {num} y La posición vertical donde comenzará la lista de personajes
      * @param {num} nFila La cantidad de personajes mostrados por fila
@@ -31,13 +46,21 @@ export class SelectorPersonajesMenu extends Phaser.GameObjects.Container {
      * @param {TextoDescriptivo} descripcion El objeto de texto descriptivo donde mostrar la información del personaje
      */
 
-    constructor(scene, characters, x, y, nFila, padY, padX, descripcion) {
+    constructor(scene, personajes, x, y, nFila, padY, padX, descripcion) {
         super(scene);
-        this.characters = characters;
+        this.personajes = personajes;
         this.opciones = [];
         this.selection = 0;
-        for (let i = 0; i < characters.length; i++) {
-            this.opciones.push(new PersonajeMenu(this.scene, characters[i], x + padX * i, y));
+        let fila = 0;
+        let col = 0;
+        for (let i = 0; i < personajes.length; i++) {
+            this.opciones.push(new PersonajeMenu(this.scene, personajes[i], x + col, y + padY * fila, descripcion));
+            if(i != 0 && i % nFila == 0) {
+                fila++;
+                col = 0;
+            } else {
+                col += padX;
+            }
         }
     }
 
@@ -55,8 +78,6 @@ export class SelectorPersonajesMenu extends Phaser.GameObjects.Container {
     * Cambia la selección de accion a la siguiente
     */
     siguiente() {
-        console.log(this.selection);
-
         //Condición para evitar que se salga del array
         if (this.selection < this.opciones.length - 1) {
             this.opciones[this.selection].unselect();
@@ -75,5 +96,17 @@ export class SelectorPersonajesMenu extends Phaser.GameObjects.Container {
             this.selection = this.selection - 1;
             this.opciones[this.selection].select();
         }
+    }
+
+    hide() {
+        this.opciones.forEach(element => {
+            element.ocultar();
+        });
+    }
+
+    show() {
+        this.opciones.forEach(element => {
+            element.mostrar();
+        });
     }
 }

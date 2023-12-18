@@ -109,7 +109,7 @@ export class Personaje {
             this.currentCombat.addInfo("dot", this.dot, this, null);
             this.checkAlive();    
         }
-        else{
+        else if (this.dot < 0) {
             this.currentHp -= this.dot;
             if(this.currentHp > this.maxHp) {
                 this.currentHp = this.maxHp;

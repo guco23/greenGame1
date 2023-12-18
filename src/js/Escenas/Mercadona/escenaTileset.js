@@ -7,6 +7,8 @@ import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
 import { Personaje } from "./../../Combate JS/Personajes/Personaje.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
+import { Item } from "../../Item.js"
+import { items } from "../../../../assets/EquipItemDATA.js";
 
 export class EscenaTilesets extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -102,7 +104,7 @@ export class EscenaTilesets extends Phaser.Scene {
         this.cameras.main.zoom = 2.2;
                 
         let slimes = [
-            new SlimeEnemigo(this, 0, 0, 0, 50, 140, "pene de plastico", [enemies.botella, enemies.cocacola, enemies.pollo], this.WallLayer, this.character, this.myGameData, 'enem1')
+            new SlimeEnemigo(this, 0, 0, 0, 50, 140, "pene de plastico", [enemies.magdalena, enemies.botella, enemies.pollo], this.WallLayer, this.character, this.myGameData, 'enem1')
         ];
         slimes.forEach(slime => {
             if(this.myGameData.CheckDefeated(slime.slimeId)) {
@@ -117,6 +119,7 @@ export class EscenaTilesets extends Phaser.Scene {
         this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
         this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
 
+        this.myGameData.AñadeItemEquipable(items.armaduraBronce);
     }
 
 

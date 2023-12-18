@@ -2,6 +2,8 @@ import Character from "../../character.js";
 import { RAIZ_IMAGENES } from "../../constants.js";
 import {RAIZ_IMGS_OBJETOS} from "../../constants.js";
 import dialogo from "../../dialogo.js";
+import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
+import { Personaje } from "../../Combate JS/Personajes/Personaje.js";
 
 export class EscenaMercadona extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -133,14 +135,14 @@ export class EscenaMercadona extends Phaser.Scene {
             var self = this;
             if(!this.Texto&&this.interact == 0)new dialogo(this, this.character, 4, function(){
                 self.MrBeanImage.destroy();   
-               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+                self.myGameData.AddCharacter(new Personaje(personajes.MrBean));
             })     
         })
         this.physics.add.overlap(this.character, this.JudioCesar[0], ()=>{
             var self = this;
             if(!this.Texto&&this.interact == 0)new dialogo(this, this.character, 3, function(){
                 self.JudioCaesarImage.destroy();   
-               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+                self.myGameData.AddCharacter(new Personaje(personajes.judioCesar));
             })     
         })
 

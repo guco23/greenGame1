@@ -11,6 +11,7 @@ init(data){
     this.cx = data.cx;  
     this.cy = data.cy;       
     this.dir = data.dir;  
+    this.Texto = false;
 }
     preload() {        
         this.load.tilemapTiledJSON('PlayaSala', 'assets/json/PlayaSalaSecreta.json');

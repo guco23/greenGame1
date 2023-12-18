@@ -39,7 +39,7 @@ export class Enemigo {
         this.maxHp = idn.maxHp;
         this.currentHp = idn.maxHp;
         this.atk = idn.atk;
-        this.def = (100 - idn.def) / 100;
+        this.def = idn.def;
         this.prefType = idn.prefType;
         this.imgLink = idn.imgLink;
 
@@ -103,7 +103,7 @@ export class Enemigo {
     }
 
     sufferDamage(dmg) {
-        let damage = Math.floor(dmg * this.def);
+        let damage = Math.floor(dmg * ((100 - this.def) / 100));
         if(damage < 1) {
             this.currentHp--;
             return 1;
@@ -122,9 +122,9 @@ export class Enemigo {
     }
 
     //Mover a cada enemigo individual
-    attack(playerTeam) {
+    attack() {
         let length = 0;
-        console.log(playerTeam[0].name);
+        let playerTeam = this.currentCombat.playerTeam;
         let selecion = new Array(8);
         for(let i = 0; i < playerTeam.length; i++) {
             if(playerTeam[i].living) {
@@ -133,13 +133,10 @@ export class Enemigo {
                     length++;
                 }
                 selecion[length] = playerTeam[i];
-                console.log(playerTeam[i].name + " " + selecion[length].name);
                 length++;
             }
         }
         let target = this.getRandomInt(length);
-        //En target se genera un número aleatorio
-        console.log(selecion[target].name);
         if(this.getCrit()) {
             this.currentCombat.addInfo("attack", selecion[target].sufferDamage(this.atk * 3), this, selecion[target]);
             this.currentCombat.addInfo("crit", 0, this, null);
@@ -154,7 +151,7 @@ export class Enemigo {
 
     takeTurn() {
         if(this.stunned === false) {
-            this.attack(this.currentCombat.playerTeam);
+            this.attack();
         }
         else {
             this.stunned = false;

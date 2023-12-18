@@ -122,10 +122,10 @@ export class CombatManager {
             this.actInfo += "¡" + from.name + " murió!\n"
         }
         if (action === "dot") {
-            this.actInfo += from.name + " sufrió " + value + " de daño debido a efectos dañinos.\n"
+            this.actInfo += from.name + " sufrió " + value + " de daño por efectos dañinos.\n"
         }
         if (action === "regen") {
-            this.actInfo += from.name + " recuperó vida gracias a efectos regenerativos.\n";
+            this.actInfo += from.name + " regeneró vida.\n";
         }
         if (action === "poison") {
             this.actInfo += from.name + " aplicó " + value + " de efectos dañinos a " + to.name + ".\n";
@@ -148,12 +148,15 @@ export class CombatManager {
     nextTurn() {
         if (this.endCombatVictory || this.endCombatDerrota) {
             this.endCombat = true;
+            this.endTurn();
         }
         else {
             if (this.whoseTurn === true) {
                 if (this.current < this.teamSize) {
                     if (this.playerTeam[this.current].living) {
+                        //Está feo el manipular la escena desde aquí 
                         this.combatScene.selectorAcciones.mostrar();
+                        this.combatScene.selectorAcciones.activar();
                         this.combatScene.menuActual = this.combatScene.selectorAcciones;
                         this.playerTeam[this.current].takeTurn();
                     }
