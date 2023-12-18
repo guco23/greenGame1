@@ -154,7 +154,9 @@ export class CombatManager {
             if (this.whoseTurn === true) {
                 if (this.current < this.teamSize) {
                     if (this.playerTeam[this.current].living) {
+                        //Está feo el manipular la escena desde aquí 
                         this.combatScene.selectorAcciones.mostrar();
+                        this.combatScene.selectorAcciones.activar();
                         this.combatScene.menuActual = this.combatScene.selectorAcciones;
                         this.playerTeam[this.current].takeTurn();
                     }

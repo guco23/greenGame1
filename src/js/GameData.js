@@ -64,6 +64,7 @@ export default class GameData {
         this.Interactablehitboxes[0] = false;
         this.Interactablehitboxes[1] = false;
         this.Interactablehitboxes[2] = false;
+        this.Interactablehitboxes[3] = 0;
     }
 
     //Metodos que añaden o desbloquean objetos
@@ -144,5 +145,9 @@ export default class GameData {
         }
         this.allies.push(personaje);
         console.log(this.allies);
+    }
+
+    CheckCharacter(personaje) {
+        return this.allies.includes(personaje);
     }
 }

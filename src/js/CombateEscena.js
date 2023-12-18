@@ -63,8 +63,6 @@ export class CombateEscena extends Phaser.Scene {
 
         let gameWidth = this.game.config.width;
         let gameHeight = this.game.config.height;
-        let uiBoxHeight = gameHeight / 3.2;
-        let uiBoxWidth = gameWidth / 3;
 
         //Coloca el fondo
         this.add.image(gameWidth / 2, gameHeight / 2, 'background');
@@ -80,8 +78,8 @@ export class CombateEscena extends Phaser.Scene {
         //Creación de los cuadros del HUD
         this.graphics = this.add.graphics();
         this.graphics.fillStyle(0x0033cc, 1);
-        var hudBox1 = this.graphics.fillRoundedRect(2, gameHeight - 180, 270, 180, { tl: 12, tr: 12, bl: 0, br: 0 });
-        var hudBox2 = this.graphics.fillRoundedRect(275, gameHeight - 180, 600, 180, { tl: 12, tr: 12, bl: 12, br: 12 });
+        let hudBox1 = this.graphics.fillRoundedRect(2, gameHeight - 180, 270, 180, { tl: 12, tr: 12, bl: 0, br: 0 });
+        let hudBox2 = this.graphics.fillRoundedRect(275, gameHeight - 180, 600, 180, { tl: 12, tr: 12, bl: 12, br: 12 });
 
         this.vidasAliados = [];
         for (let i = 0; i < this.aliados.length; i++) {
@@ -98,17 +96,19 @@ export class CombateEscena extends Phaser.Scene {
         this.vidasEnemigos[2].actualizarHp(25);
         //Los datos para crear la lista del selector acciones
         let datosAcciones = [new DatosAccion("Atacar", "Ataque básico a un objetivo"),
-        new DatosAccion("Habilidad", "TODO: depende del personaje"),
+        new DatosAccion("Habilidad", ""), //Esta cambiará en cada turno (mostrando la descripción de la habilidad del personaje)
         new DatosAccion("Defender", "Reduce el daño recibido hasta el siguiente turno")];
 
         this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
-        this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 310, 440, 40, datosAcciones, true);
+        this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 310, 440, 40, datosAcciones);
         this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.sceneEnem.array);
         this.selectorAliados = new SelectorPersonajes(this, this.aliados, this.sceneAliad.array);
 
-
         this.selectorAliados.ocultar();
         this.selectorEnemigos.ocultar();
+        this.selectorAcciones.mostrar();
+        this.selectorAcciones.activar();
+
         this.menuActual = this.selectorAcciones;
 
         //Controles en combate
@@ -126,9 +126,11 @@ export class CombateEscena extends Phaser.Scene {
                     this.menuActual.ocultar();
                     this.menuActual = this.selectorAcciones;
                     this.menuActual.mostrar();
+                    this.menuActual.activar();
                 }
                 else if (event.code === CONTROLES.ACCEPT) {
                     if (this.menuActual === this.selectorAcciones) {
+                        this.selectorAcciones.ocultar();
                         if (this.menuActual.selection === 0) {
                             this.menuActual = this.selectorEnemigos;
                             this.menuActual.mostrar();
@@ -167,7 +169,6 @@ export class CombateEscena extends Phaser.Scene {
                 }
             }
         }, this);
-
         this.combatManager.nextTurn();
     }
 
@@ -186,7 +187,7 @@ export class CombateEscena extends Phaser.Scene {
     }
 
     ActualizarEscena(info) {
-        if(this.combatManager.endCombat) {
+        if (this.combatManager.endCombat) {
             if (this.combatManager.endCombatVictory)
                 this.Victory();
             else if (this.combatManager.endCombatDerrota)
@@ -194,7 +195,7 @@ export class CombateEscena extends Phaser.Scene {
         }
         else {
             if (this.menuActual != this.textoDescriptivo) {
-                this.menuActual.ocultar()
+                this.menuActual.ocultar();
                 this.menuActual = this.textoDescriptivo;
             }
             this.menuActual.aplicarTexto(info);
@@ -211,6 +212,9 @@ export class CombateEscena extends Phaser.Scene {
             //Comprueba si el enemigo ha muerto, en cuyo caso oculta la imagen
             this.sceneAliad.refresh();
             this.sceneEnem.refresh();
+            let current = this.combatManager.current;
+            if (current < this.partySize)
+                this.selectorAcciones.updateAction(1, "Habilidad", this.aliados[current].descripcionHabilidad);
         }
     }
 };
