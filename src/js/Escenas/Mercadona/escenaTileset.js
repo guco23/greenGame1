@@ -87,11 +87,11 @@ export class EscenaTilesets extends Phaser.Scene {
         }*/
 
         this.physics.add.overlap(this.character, this.hitbox[0], () => {
-            if (this.interact == 0) {
+            if (this.interact == 0) {                
                 this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });                                
                 //this.scene.start('escenaPlaya',{obj:this.myGameData,cx:2285, cy:320, dir:3});
                 //this.scene.start('escenaNuevosMinisterios',{obj:this.myGameData,cx:1820, cy:985, dir:0});            
-            }
+            }            
         })
         this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {
             this.myGameData.AñadeObjetoClave(1);
@@ -111,12 +111,7 @@ export class EscenaTilesets extends Phaser.Scene {
                 slime.destroy();
             }
         });
-
-        //Datos de party de prueba
-        this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
-        this.myGameData.AddCharacter(new Personaje(personajes.frikol));
-        this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
-        this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
+        
         this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
 
         this.myGameData.AñadeItemEquipable(items.armaduraBronce);
@@ -124,8 +119,7 @@ export class EscenaTilesets extends Phaser.Scene {
 
 
     update() {
-        if (this.interactKey.isDown) {
-            this.scene.start('escenaNuevosMinisterios',{obj:this.myGameData,cx:1820, cy:985, dir:0});  
+        if (this.interactKey.isDown) {            
             this.interact = 0;
         } else {
             this.interact = 1;

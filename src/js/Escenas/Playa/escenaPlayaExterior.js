@@ -1,6 +1,8 @@
 import Character from "../../character.js";
 import { RAIZ_IMAGENES } from "../../constants.js";
 import dialogo from "../../dialogo.js";
+import { Personaje	 } from "../../Combate JS/Personajes/Personaje.js";
+import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 export class EscenaPlaya extends Phaser.Scene {    
 constructor(){
     super('escenaPlaya')
@@ -48,24 +50,36 @@ init(data){
           this.hitbox5 = this.map.createFromObjects('Transiciones', {id:12});          
           this.physics.add.existing(this.hitbox5[0]);
 
-          this.BealonMusk = this.map.createFromObjects('Personajes', { id: 18 });
-          this.physics.add.existing(this.BealonMusk[0]);
-          this.BealonMuskImage = this.add.image(3595, 1990, 'BealonMusk');
-          this.Emmet = this.map.createFromObjects('Personajes', { id: 17 });
-          this.physics.add.existing(this.Emmet[0]);
-          this.EmmetImage = this.add.image(2379, 2253, 'Emmet');
-          this.MarianoRajoy = this.map.createFromObjects('Personajes', { id: 13 });
-          this.physics.add.existing(this.MarianoRajoy[0]);
-          this.MarianoRajoyImage = this.add.image(303, 543, 'Rajoy');
-          this.Greta = this.map.createFromObjects('Personajes', { id: 14 });
-          this.physics.add.existing(this.Greta[0]);
-          this.GretaImage = this.add.image(2567, 263, 'Greta');
-          this.Gato = this.map.createFromObjects('Personajes', { id: 15 });
-          this.physics.add.existing(this.Gato[0]);
-          this.GatoImage = this.add.image(1037, 1006, 'Gato');
-          this.Selena = this.map.createFromObjects('Personajes', { id: 16 });
-          this.physics.add.existing(this.Selena[0]);
-          this.SelenaImage = this.add.image(2122, 1355, 'Selena');
+          if(!this.myGameData.CheckCharacter(personajes.bealonMusk)){
+              this.BealonMusk = this.map.createFromObjects('Personajes', { id: 18 });
+              this.physics.add.existing(this.BealonMusk[0]);
+              this.BealonMuskImage = this.add.image(3595, 1990, 'BealonMusk');
+          }
+          if(!this.myGameData.CheckCharacter(personajes.emmet)){            
+              this.Emmet = this.map.createFromObjects('Personajes', { id: 17 });
+              this.physics.add.existing(this.Emmet[0]);
+              this.EmmetImage = this.add.image(2379, 2253, 'Emmet');
+          }
+          if(!this.myGameData.CheckCharacter(personajes.rajoy)){
+              this.MarianoRajoy = this.map.createFromObjects('Personajes', { id: 13 });
+              this.physics.add.existing(this.MarianoRajoy[0]);
+              this.MarianoRajoyImage = this.add.image(303, 543, 'Rajoy');
+          }
+          if(!this.myGameData.CheckCharacter(personajes.greta)){            
+              this.Greta = this.map.createFromObjects('Personajes', { id: 14 });
+              this.physics.add.existing(this.Greta[0]);
+              this.GretaImage = this.add.image(2567, 263, 'Greta');
+          }
+          if(!this.myGameData.CheckCharacter(personajes.frijolConBotas)){            
+              this.Gato = this.map.createFromObjects('Personajes', { id: 15 });
+              this.physics.add.existing(this.Gato[0]);
+              this.GatoImage = this.add.image(1037, 1006, 'Gato');
+          }
+          if(!this.myGameData.CheckCharacter(personajes.selena)){            
+              this.Selena = this.map.createFromObjects('Personajes', { id: 16 });
+              this.physics.add.existing(this.Selena[0]);
+              this.SelenaImage = this.add.image(2122, 1355, 'Selena');
+          }
 
           this.character = new Character(this, this.cx, this.cy,this.dir);
           this.physics.world.enable(this.character);
@@ -95,44 +109,44 @@ init(data){
         })
         this.physics.add.overlap(this.character, this.BealonMusk[0], ()=>{
             var self = this;
-            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,11, function(){
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.bealonMusk))new dialogo(this, this.character,11, function(){
                 self.BealonMuskImage.destroy();   
-               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+                self.myGameData.AddCharacter(new Personaje(personajes.bealonMusk));
             })     
         })
         this.physics.add.overlap(this.character, this.Gato[0], ()=>{
             var self = this;
-            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,12, function(){
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.frijolConBotas))new dialogo(this, this.character,12, function(){
                 self.GatoImage.destroy();   
-               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+                self.myGameData.AddCharacter(new Personaje(personajes.frijolConBotas));
             })     
         })
         this.physics.add.overlap(this.character, this.Emmet[0], ()=>{
             var self = this;
-            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,13, function(){
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.emmet))new dialogo(this, this.character,13, function(){
                 self.EmmetImage.destroy();   
-               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+                self.myGameData.AddCharacter(new Personaje(personajes.emmet));
             })     
         })
         this.physics.add.overlap(this.character, this.MarianoRajoy[0], ()=>{
             var self = this;
-            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,14, function(){
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.rajoy))new dialogo(this, this.character,14, function(){
                 self.MarianoRajoyImage.destroy();   
-               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+                self.myGameData.AddCharacter(new Personaje(personajes.rajoy));
             })     
         })
         this.physics.add.overlap(this.character, this.Greta[0], ()=>{
             var self = this;
-            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,15, function(){
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.greta))new dialogo(this, this.character,15, function(){
                 self.GretaImage.destroy();   
-               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+                self.myGameData.AddCharacter(new Personaje(personajes.greta));
             })     
         })
         this.physics.add.overlap(this.character, this.Selena[0], ()=>{
             var self = this;
-            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,16  , function(){
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.selena))new dialogo(this, this.character,16  , function(){
                 self.SelenaImage.destroy();   
-               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+                self.myGameData.AddCharacter(new Personaje(personajes.selena));
             })     
         })
         

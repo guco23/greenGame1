@@ -1,6 +1,8 @@
 import Character from "../../character.js";
 import dialogo from "../../dialogo.js";
 import { RAIZ_IMAGENES } from "../../constants.js";
+import { Personaje } from "../../Combate JS/Personajes/Personaje.js";
+import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 
 export class EscenaNuevosMinisterios extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -51,25 +53,37 @@ init(data){
           this.physics.add.existing(this.hitbox1[0]);
           this.hitbox2 = this.map.createFromObjects('Transiciones', {id:2});          
           this.physics.add.existing(this.hitbox2[0]);
-                                              
-          this.Albert = this.map.createFromObjects('Personajes', { id: 4 });
-          this.physics.add.existing(this.Albert[0]);
-          this.AlbertImage = this.add.image(1587, 1008, 'Albert');
-          this.Donald = this.map.createFromObjects('Personajes', { id: 7 });
-          this.physics.add.existing(this.Donald[0]);
-          this.DonaldImage = this.add.image(395, 1717, 'Donald');
-          this.Indiana = this.map.createFromObjects('Personajes', { id: 5 });
-          this.physics.add.existing(this.Indiana[0]);
-          this.IndianaImage = this.add.image(1615, 2066, 'Indiana');
-          this.Jhonny = this.map.createFromObjects('Personajes', { id: 8 });
-          this.physics.add.existing(this.Jhonny[0]);
-          this.JhonnyImage = this.add.image(3065, 2636, 'Jhonny');
-          this.SambaDoJudia = this.map.createFromObjects('Personajes', { id: 6 });
-          this.physics.add.existing(this.SambaDoJudia[0]);
-          this.SambaDoJudiaImage = this.add.image(1095, 4002, 'SambaDoJudia');
-          this.SaulJudman = this.map.createFromObjects('Personajes', { id: 9 });
-          this.physics.add.existing(this.SaulJudman[0]);
-          this.SaulJudmanImage = this.add.image(1368, 2592, 'SaulJudman');
+              
+          if(!this.myGameData.CheckCharacter(personajes.albert)){
+              this.Albert = this.map.createFromObjects('Personajes', { id: 4 });
+              this.physics.add.existing(this.Albert[0]);
+              this.AlbertImage = this.add.image(1587, 1008, 'Albert');
+          }
+          if(!this.myGameData.CheckCharacter(personajes.donald)){
+              this.Donald = this.map.createFromObjects('Personajes', { id: 7 });
+              this.physics.add.existing(this.Donald[0]);
+              this.DonaldImage = this.add.image(395, 1717, 'Donald');
+          }
+          if(!this.myGameData.CheckCharacter(personajes.indiana)){
+              this.Indiana = this.map.createFromObjects('Personajes', { id: 5 });
+              this.physics.add.existing(this.Indiana[0]);
+              this.IndianaImage = this.add.image(1615, 2066, 'Indiana');          
+          }
+          if(!this.myGameData.CheckCharacter(personajes.johnny)){            
+              this.Jhonny = this.map.createFromObjects('Personajes', { id: 8 });
+              this.physics.add.existing(this.Jhonny[0]);
+              this.JhonnyImage = this.add.image(3065, 2636, 'Jhonny');
+          }
+          if(!this.myGameData.CheckCharacter(personajes.samba)){            
+              this.SambaDoJudia = this.map.createFromObjects('Personajes', { id: 6 });
+              this.physics.add.existing(this.SambaDoJudia[0]);
+              this.SambaDoJudiaImage = this.add.image(1095, 4002, 'SambaDoJudia');
+          }
+          if(!this.myGameData.CheckCharacter(personajes.saulJudman)){            
+              this.SaulJudman = this.map.createFromObjects('Personajes', { id: 9 });
+              this.physics.add.existing(this.SaulJudman[0]);
+              this.SaulJudmanImage = this.add.image(1368, 2592, 'SaulJudman');
+          }
 
           let coinsNM = this.map.createFromObjects('Monedas', {name: "coin", key: 'coin' });
 		this.anims.play('spin', coinsNM);
@@ -101,44 +115,44 @@ init(data){
 
         this.physics.add.overlap(this.character, this.Albert[0], ()=>{
             var self = this;
-            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,17, function(){
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.albert))new dialogo(this, this.character,17, function(){
                 self.AlbertImage.destroy();   
-               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+                self.myGameData.AddCharacter(new Personaje(personajes.albert));
             })     
         })
         this.physics.add.overlap(this.character, this.Donald[0], ()=>{
             var self = this;
-            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,18, function(){
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.donald))new dialogo(this, this.character,18, function(){
                 self.DonaldImage.destroy();   
-               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+                self.myGameData.AddCharacter(new Personaje(personajes.donald));
             })     
         })
         this.physics.add.overlap(this.character, this.Indiana[0], ()=>{
             var self = this;
-            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,19, function(){
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.indiana))new dialogo(this, this.character,19, function(){
                 self.IndianaImage.destroy();   
-               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+                self.myGameData.AddCharacter(new Personaje(personajes.indiana));
             })     
         })
         this.physics.add.overlap(this.character, this.Jhonny[0], ()=>{
             var self = this;
-            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,20, function(){
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.johnny))new dialogo(this, this.character,20, function(){
                 self.JhonnyImage.destroy();   
-               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+                self.myGameData.AddCharacter(new Personaje(personajes.johnny));
             })     
         })
         this.physics.add.overlap(this.character, this.SambaDoJudia[0], ()=>{
             var self = this;
-            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,21, function(){
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.samba))new dialogo(this, this.character,21, function(){
                 self.SambaDoJudiaImage.destroy();   
-               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+                self.myGameData.AddCharacter(new Personaje(personajes.samba));
             })     
         })
         this.physics.add.overlap(this.character, this.SaulJudman[0], ()=>{
             var self = this;
-            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character,22 , function(){
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.saulJudman))new dialogo(this, this.character,22 , function(){
                 self.SaulJudmanImage.destroy();   
-               // self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+                self.myGameData.AddCharacter(new Personaje(personajes.saulJudman));
             })     
         })
 

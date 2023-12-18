@@ -59,12 +59,16 @@ export class EscenaMercadona extends Phaser.Scene {
         this.physics.add.existing(this.Nota2[0]);
         this.Nota3 = this.map.createFromObjects('Items', { id: 12 });
         this.physics.add.existing(this.Nota3[0]);
-        this.JudioCesar = this.map.createFromObjects('Personajes', { id: 7 });
-        this.physics.add.existing(this.JudioCesar[0]);
-        this.JudioCaesarImage = this.add.image(735, 168, 'JudioCaesar');
-        this.MrBean = this.map.createFromObjects('Personajes', { id: 8 });
-        this.physics.add.existing(this.MrBean[0]);
-        this.MrBeanImage = this.add.image(190, 210, 'MrBean');
+        if(!this.myGameData.CheckCharacter(personajes.judioCesar)){
+            this.JudioCesar = this.map.createFromObjects('Personajes', { id: 7 });
+            this.physics.add.existing(this.JudioCesar[0]);
+            this.JudioCaesarImage = this.add.image(735, 168, 'JudioCaesar');
+        }
+        if(!this.myGameData.CheckCharacter(personajes.MrBean)){
+            this.MrBean = this.map.createFromObjects('Personajes', { id: 8 });
+            this.physics.add.existing(this.MrBean[0]);
+            this.MrBeanImage = this.add.image(190, 210, 'MrBean');
+        }
 
         this.character = new Character(this, this.cx, this.cy, this.dir);
         this.physics.world.enable(this.character);
@@ -133,14 +137,14 @@ export class EscenaMercadona extends Phaser.Scene {
         })
         this.physics.add.overlap(this.character, this.MrBean[0], ()=>{
             var self = this;
-            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character, 4, function(){
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.MrBean))new dialogo(this, this.character, 4, function(){
                 self.MrBeanImage.destroy();   
                 self.myGameData.AddCharacter(new Personaje(personajes.MrBean));
             })     
         })
         this.physics.add.overlap(this.character, this.JudioCesar[0], ()=>{
             var self = this;
-            if(!this.Texto&&this.interact == 0)new dialogo(this, this.character, 3, function(){
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.judioCesar))new dialogo(this, this.character, 3, function(){
                 self.JudioCaesarImage.destroy();   
                 self.myGameData.AddCharacter(new Personaje(personajes.judioCesar));
             })     
