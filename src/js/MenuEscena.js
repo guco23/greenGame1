@@ -49,7 +49,7 @@ export class MenuEscena extends Phaser.Scene {
         this.menuActual = this.opcionPrimaria;
         this.selectorParty = new SelectorPersonajesMenu(this, this.gameData.party, 390, 110, 4, 100, 100);
         this.selectorAllies = new SelectorPersonajesMenu(this, this.gameData.allies, 300, 300, 3, 100, 100);
-        this.selectorObjetos = new SelectorAcciones(this, this.descripcion, 180, 70, 30, listaAccionObjetos);
+        this.selectorObjetos = new SelectorAcciones(this, this.descripcion, 270, 70, 30, listaAccionObjetos);
         this.selectorObjetos.ocultar();
         this.opcionPrimaria.activar();
         /**
@@ -117,7 +117,7 @@ export class MenuEscena extends Phaser.Scene {
                 this.opcionPrimaria.activar();
                 break;
             case this.selectorObjetos:
-                this.selectorObjetos.ocultar();
+                this.selectorObjetos.desactivar();
                 this.menuActual = this.opcionPrimaria;
                 this.opcionPrimaria.activar();
                 break;

@@ -146,4 +146,8 @@ export default class GameData {
         this.allies.push(personaje);
         console.log(this.allies);
     }
+
+    CheckCharacter(personaje) {
+        return this.allies.includes(personaje);
+    }
 }
