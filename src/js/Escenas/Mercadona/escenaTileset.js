@@ -33,6 +33,12 @@ export class EscenaTilesets extends Phaser.Scene {
         this.load.image('Judini', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/Judini.png');
         this.load.image('JudioCaesar', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/JudioCaesar.png');
         this.load.image('MrBean', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/MrBean.png');
+        this.load.image('Emmet', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/EmmetBeanckowski.png');
+        this.load.image('Gato', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/FrijolConBotas.png');
+        this.load.image('BealonMusk', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/BealonMusk.png');
+        this.load.image('Greta', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/GretaJudberg.png');
+        this.load.image('Rajoy', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/MarianoRajoy.png');
+        this.load.image('Selena', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/SelenaBeamez.png');       
         this.load.image('UI', RAIZ_IMAGENES+'UI_dialogo.png');
         this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 })
@@ -74,8 +80,8 @@ export class EscenaTilesets extends Phaser.Scene {
 
         this.physics.add.overlap(this.character, this.hitbox[0], () => {
             if (this.interact == 0) {
-                this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });                                
-                //this.scene.start('escenaPlaya',{obj:this.myGameData,cx:2285, cy:320, dir:3});
+                //this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });                                
+                this.scene.start('escenaPlaya',{obj:this.myGameData,cx:2285, cy:320, dir:3});
             }
         })
         this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {

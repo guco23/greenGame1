@@ -52,7 +52,7 @@ init(data){
         })
         this.physics.add.overlap(this.character, this.hitbox3[0], ()=>{
             if(this.interact == 0 && !this.Texto) {
-                if(this.myGameData.CheckObjetoclave(0)&&this.myGameData.CheckObjetoclave(1)&&this.myGameData.CheckObjetoclave(2)){
+                if(this.myGameData.CheckObjetoClave(0)&&this.myGameData.CheckObjetoClave(1)&&this.myGameData.CheckObjetoClave(2)){
                     if(!this.myGameData.Interactablehitboxes[2]){
                         this.myGameData.Interactablehitboxes[2] = true;
                         new dialogo(this, this.character, 9)

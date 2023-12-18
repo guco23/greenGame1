@@ -175,7 +175,8 @@ export default class GameData {
             this.objects[aux].Pillado = true;
         }
         this.CheckObjetoClave = function (aux) {
-            console.log(this.objects[aux].Pillado);
+            //console.log(this.objects[aux].Pillado);
+            return this.objects[aux].Pillado;
         }
         this.Interactablehitboxes = [];
         this.Interactablehitboxes[0] = false;

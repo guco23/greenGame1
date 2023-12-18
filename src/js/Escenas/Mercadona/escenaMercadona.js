@@ -34,9 +34,9 @@ export class EscenaMercadona extends Phaser.Scene {
         this.WallLayer = this.map.createLayer('Paredes', tileset1);
         this.WallLayer.setCollisionByExclusion([-1]);
         if(!this.myGameData.Interactablehitboxes[1])this.DoorJokeLayer = this.map.createLayer('ChisteDeLaPuerta', tileset1);
-        if(!this.myGameData.CheckObjetoclave(0)) this.Nota1Im = this.add.image(364, 340, 'Notas');
-        if(!this.myGameData.CheckObjetoclave(1)) this.Nota2Im = this.add.image(131, 340, 'Notas');
-        if(!this.myGameData.CheckObjetoclave(2)) this.Nota3Im = this.add.image(353, 85, 'Notas');
+        if(!this.myGameData.CheckObjetoClave(0)) this.Nota1Im = this.add.image(364, 340, 'Notas');
+        if(!this.myGameData.CheckObjetoClave(1)) this.Nota2Im = this.add.image(131, 340, 'Notas');
+        if(!this.myGameData.CheckObjetoClave(2)) this.Nota3Im = this.add.image(353, 85, 'Notas');
 
 
         this.hitbox1 = this.map.createFromObjects('Transiciones', { id: 1 });
@@ -86,7 +86,7 @@ export class EscenaMercadona extends Phaser.Scene {
         })
         this.physics.add.overlap(this.character, this.hitbox6[0], () => {
             if(!this.Texto){
-                if(this.myGameData.CheckObjetoclave(3)){
+                if(this.myGameData.CheckObjetoClave(3)){
                     //Aquí va el combate con libra y todo eso...
                 }else{                    
                     new dialogo(this, this.character, 8,function(){
@@ -109,21 +109,21 @@ export class EscenaMercadona extends Phaser.Scene {
             }
         })
         this.physics.add.overlap(this.character, this.Nota1[0], () => {
-            if (this.interact == 0 && !this.myGameData.CheckObjetoclave(0)) {
+            if (this.interact == 0 && !this.myGameData.CheckObjetoClave(0)) {
                 new dialogo(this, this.character, 10);
                 this.myGameData.AñadeObjetoClave(0);
                 this.Nota1Im.destroy();
             }
         })
         this.physics.add.overlap(this.character, this.Nota2[0], () => {
-            if (this.interact == 0 && !this.myGameData.CheckObjetoclave(1)) {
+            if (this.interact == 0 && !this.myGameData.CheckObjetoClave(1)) {
                 new dialogo(this, this.character, 10);
                 this.myGameData.AñadeObjetoClave(1);
                 this.Nota2Im.destroy();
             }
         })
         this.physics.add.overlap(this.character, this.Nota3[0], () => {
-            if (this.interact == 0 && !this.myGameData.CheckObjetoclave(2)) {
+            if (this.interact == 0 && !this.myGameData.CheckObjetoClave(2)) {
                 new dialogo(this, this.character, 10);
                 this.myGameData.AñadeObjetoClave(2);
                 this.Nota3Im.destroy();
