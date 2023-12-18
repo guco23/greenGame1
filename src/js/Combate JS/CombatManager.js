@@ -148,6 +148,7 @@ export class CombatManager {
     nextTurn() {
         if (this.endCombatVictory || this.endCombatDerrota) {
             this.endCombat = true;
+            this.endTurn();
         }
         else {
             if (this.whoseTurn === true) {
