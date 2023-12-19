@@ -4,10 +4,9 @@ const statusIconSize = {
 }
 
 class ScenePersonaje extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, img) {
+    constructor(scene, x, y, img, scale) {
         super(scene);
-        this.img = scene.add.image(x, y, img + "C").setScale(4);
-        this.img.setOrigin(0, 0);
+        this.img = scene.add.image(x, y, img + "C").setScale(scale);
         //Esto será un sprite cuando esté hecho
         this.stun = scene.add.rectangle(x + this.img.displayWidth - statusIconSize.x, y + this.img.displayHeight - statusIconSize.y, statusIconSize.x, statusIconSize.y, 0xFFFF00).setOrigin(0, 0);
         this.poison = scene.add.rectangle(x + this.img.displayWidth - statusIconSize.x * 2, y + this.img.displayHeight - statusIconSize.y, statusIconSize.x, statusIconSize.y, 0x9402fc).setOrigin(0, 0);
@@ -35,12 +34,12 @@ class ScenePersonaje extends Phaser.GameObjects.Container {
  * Muestra los sprites de enemigos o aliados y gestiona su visibilidad y los estados
  */
 export class CharacterArray {
-    constructor(scene, x, y, height, type, personajes) {
+    constructor(scene, x, y, height, type, personajes, scale) {
         this.array = [];
         this.personajes = personajes;
         let eHeight = height / personajes.length;
         for (let i = 0; i < this.personajes.length; i++) {
-            this.array[i] = new ScenePersonaje(scene, x, y + eHeight * i, personajes[i].name);
+            this.array[i] = new ScenePersonaje(scene, x, y + eHeight * i, personajes[i].name, scale);
             console.log(i);
         }
         this.type = type;

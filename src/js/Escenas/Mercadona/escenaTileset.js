@@ -167,6 +167,7 @@ export class EscenaTilesets extends Phaser.Scene {
         this.myGameData.AñadeItemEquipable(items.armaduraBronce);
         this.myGameData.AñadeItemEquipable(items.armaduraDiamante);
 */
+
         if(!this.myGameData.Interactablehitboxes[8]){
             new dialogo(this, this.character,44) //Comentad si no queréis que os moleste durante el desarrollo
             this.myGameData.Interactablehitboxes[8] = true;

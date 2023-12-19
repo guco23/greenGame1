@@ -52,9 +52,9 @@ export class CombateEscena extends Phaser.Scene {
     create() {
         this.sound.stopAll();
         if(this.BossFightTheme){
-            this.MainTheme = this.sound.add('musicCombateBoss')
+            this.MainTheme = this.sound.add('musicCombateBoss');
         }
-        else this.MainTheme = this.sound.add('musicCombateSimple')
+        else this.MainTheme = this.sound.add('musicCombateSimple');
         this.MainTheme.play();
         this.graphics = this.add.graphics();
 
@@ -83,14 +83,14 @@ export class CombateEscena extends Phaser.Scene {
             this.aliados[i].imgLink = this.aliados[i].name;
         }
         //Coloca los sprites de los enemigos en la escena, en la versión final los personajes contienen sprites y su funcionalidad
-        this.sceneAliad = new CharacterArray(this, gameWidth / 9, 15, 400, false, this.aliados);
-        this.sceneEnem = new CharacterArray(this, gameWidth - (gameWidth / 5), 30, 400, false, this.enemigos);
+        this.sceneAliad = new CharacterArray(this, gameWidth / 9, 200, 400, false, this.aliados, 4);
+        this.sceneEnem = new CharacterArray(this, gameWidth - (gameWidth / 5), 100, 400, false, this.enemigos, 3);
 
         //Creación de los cuadros del HUD
         this.graphics = this.add.graphics();
         this.graphics.fillStyle(0x0033cc, 1);
-        let hudBox1 = this.graphics.fillRoundedRect(2, gameHeight - 180, 270, 180, { tl: 12, tr: 12, bl: 0, br: 0 });
-        let hudBox2 = this.graphics.fillRoundedRect(275, gameHeight - 180, 600, 180, { tl: 12, tr: 12, bl: 12, br: 12 });
+        this.graphics.fillRoundedRect(2, gameHeight - 180, 270, 180, { tl: 12, tr: 12, bl: 0, br: 0 });
+        this.graphics.fillRoundedRect(275, gameHeight - 180, 600, 180, { tl: 12, tr: 12, bl: 12, br: 12 });
 
         this.vidasAliados = [];
         for (let i = 0; i < this.aliados.length; i++) {
@@ -101,7 +101,7 @@ export class CombateEscena extends Phaser.Scene {
 
         this.vidasEnemigos = [];
         for (let i = 0; i < this.enemigos.length; i++) {
-            this.vidasEnemigos.push(new BarraVida(this, this.sceneEnem.array[i].img.x + this.sceneEnem.array[i].img.width / 2 + 2, this.sceneEnem.array[i].img.y - 10, 80, 18, this.enemigos[i]))
+            this.vidasEnemigos.push(new BarraVida(this, this.sceneEnem.array[i].img, 80, 18, this.enemigos[i]));
         }
         //Los datos para crear la lista del selector acciones
         let datosAcciones = [new DatosAccion("Atacar", "Ataque básico a un objetivo"),
