@@ -236,7 +236,7 @@ init(data){
                     console.log("objeto conseguido");   
                     }
                     else 
-                    new dialogo(this, this.character,48); 
+                    if(this.timer == 0)new dialogo(this, this.character,48); 
     
                 }
                 else if (cofre.name == "cofre3"){
@@ -247,7 +247,7 @@ init(data){
                     console.log("objeto conseguido");   
                     }
                     else 
-                    new dialogo(this, this.character,48);
+                    if(this.timer == 0)new dialogo(this, this.character,48);
                 }
                 else if (cofre.name == "cofre4"){
                     if(!self.myGameData.AñadeItemEquipable(items.escudoDiamante))
@@ -257,7 +257,7 @@ init(data){
                     console.log("objeto conseguido");   
                     }
                     else 
-                    new dialogo(this, this.character,48);
+                    if(this.timer == 0)new dialogo(this, this.character,48);
                 }
                 else if (cofre.name == "cofre5"){
                     if(!self.myGameData.AñadeItemEquipable(items.guanteDiamante))
@@ -267,7 +267,7 @@ init(data){
                     console.log("objeto conseguido");   
                     }
                     else 
-                    new dialogo(this, this.character,48);
+                    if(this.timer == 0)new dialogo(this, this.character,48);
                 }
                 else if (cofre.name == "cofre6"){
                     if(!self.myGameData.AñadeItemEquipable(items.chalecoDiamante))
@@ -277,7 +277,7 @@ init(data){
                     console.log("objeto conseguido");   
                     }
                     else 
-                    new dialogo(this, this.character,48);
+                    if(this.timer == 0)new dialogo(this, this.character,48);
                 }
                 this.anims.play('cofreAbierto', cofre);
             }

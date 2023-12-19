@@ -98,7 +98,7 @@ init(data){
                 else
                 {
                        
-                    new dialogo(this, this.character,48);
+                    if(this.timer == 0)new dialogo(this, this.character,48);
                     console.log("vacio");  
                 }
                 }
