@@ -5,17 +5,17 @@ export class Arquitecto extends Personaje {
 
     constructor(idn) {
         super(idn);
-        this.atkMod = 0.2;
+        this.atkMod = 0.25;
         this.targetKind = 0;
     }
 
     special(target) {
         let total = 0;
-        let myTarget = this.currentCombat.enemyTeam[i];
-        this.currentCombat.addInfo("attack", myTarget.sufferDamage(this.atk * this.attakMod), this, myTarget);
+        let myTarget = this.currentCombat.enemyTeam[target];
+        this.currentCombat.addInfo("attack", myTarget.sufferDamage(this.atk * this.atkMod), this, myTarget);
         myTarget.checkAlive();
         this.currentCombat.addInfo("special", this.name + " ha planteado una emboscada.\n", this, null);
-        for(i = 0; i < this.currentCombat.enemySize; i++) {
+        for(let i = 0; i < this.currentCombat.enemySize; i++) {
             let thisTarg = this.currentCombat.enemyTeam[i];
             if(thisTarg.living) {
                 total += thisTarg.sufferDamage(this.atk);

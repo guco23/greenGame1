@@ -32,15 +32,4 @@ export class AoE extends Enemigo {
             }
         }
     }
-
-    takeTurn() {
-        if(this.stunned === false) {
-            this.selectAction();
-        }
-        else {
-            this.stunned = false;
-            this.currentCombat.addInfo("stun", 0, this,  null);
-            this.endTurn();
-        }
-    }
 }

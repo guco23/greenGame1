@@ -110,7 +110,6 @@ export default class dialogoHelp {
         "Tendré que arriesgarme"]
 
 
-
         this.images = [];
         this.images[0] = ["Frikol", "Judini","Judini","Frikol","Frikol","Frikol","Frikol","Judini","Judini","Frikol","Judini","Frikol","Judini","Frikol","-"]
         this.images[1] = ["-","-"]

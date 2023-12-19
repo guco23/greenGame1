@@ -1,6 +1,9 @@
 import Character from "../../character.js";
 import { RAIZ_IMAGENES } from "../../constants.js";
 import { CONTROLES_OVERWORLD } from "../../constants.js";
+import dialogo from "../../dialogo.js";
+import { Item } from "../../Item.js"
+import { items } from "../../../../assets/EquipItemDATA.js";
 
 export class EscenaTilesets3 extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -66,7 +69,7 @@ init(data){
 
           //Cofres
           let groupCofres = this.add.group();
-          let cofre1 = this.map.createFromObjects('Cofres', {name: "cofre1", key: 'cofre', item: "item1" });
+          let cofre1 = this.map.createFromObjects('Cofres', {name: "cofre1", key: 'cofre', item: items.escudoMadera });
           this.anims.play('cofreCerrado', cofre1);
           groupCofres.addMultiple(cofre1);
           cofre1.forEach(obj => {
@@ -76,7 +79,14 @@ init(data){
 
           this.physics.add.overlap(this.character, groupCofres, (character, cofre) => {
             if(this.interact == 0){
-                
+                if(!this.myGameData.AddItemEquipable(cofre.item))
+                {
+                    console.log("objeto conseguido");   
+                }
+                else
+                {
+                    console.log("vacio");  
+                }
                 this.anims.play('cofreAbierto', cofre);
             }
         });

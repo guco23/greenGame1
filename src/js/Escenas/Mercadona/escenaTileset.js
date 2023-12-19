@@ -6,6 +6,7 @@ import GameData from "../../GameData.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
 import { Personaje } from "./../../Combate JS/Personajes/Personaje.js";
+import { Protagonista } from "./../../Combate JS/Personajes/Protagonista.js"; //NTS ES AQUÍ EL CAMBIO
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { Item } from "../../Item.js"
 import { items } from "../../../../assets/EquipItemDATA.js";
@@ -122,6 +123,7 @@ export class EscenaTilesets extends Phaser.Scene {
                 this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });                                
                 //this.scene.start('escenaPlaya',{obj:this.myGameData,cx:2285, cy:320, dir:3});
                 //this.scene.start('escenaNuevosMinisterios',{obj:this.myGameData,cx:1820, cy:985, dir:0});            
+                //this.scene.start('zonaFinal', { obj: this.myGameData, cx: 270, cy: 20, dir: 3 });                                
             }            
         })
         this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {            
@@ -143,13 +145,13 @@ export class EscenaTilesets extends Phaser.Scene {
             }
         });
         
-        this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
+        this.myGameData.AddCharacter(new Protagonista(personajes.protagonista)); //No te olvides de cambiarlo de vuelta al final
 
         this.myGameData.AñadeItemEquipable(items.armaduraBronce);
         this.myGameData.AñadeItemEquipable(items.armaduraDiamante);
 
         if(!this.myGameData.Interactablehitboxes[8]){
-            //new dialogo(this, this.character,44)
+            new dialogo(this, this.character,44) //Comentad si no queréis que os moleste durante el desarrollo
             this.myGameData.Interactablehitboxes[8] = true;
         }
         

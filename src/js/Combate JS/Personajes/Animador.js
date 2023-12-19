@@ -3,11 +3,13 @@ import { Personaje } from "./Personaje.js";
 export class Animador extends Personaje {
 
     stunChance;
+    attakMod;
 
     constructor(idn) {
         super(idn);
         this.targetKind = 0;
-        this.stunChance = 70;
+        this.stunChance = 75;
+        this.attakMod = 1.2;
     }
 
     special(target) {

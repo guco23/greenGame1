@@ -56,7 +56,16 @@ export class Enemigo {
         else {
             this.atk += atkmod;
             this.def += defmod;
-        };
+        }
+        if(this.def >= 100) {
+            this.def = 99;
+        }
+        if(this.def < 1) {
+            this.def = 1;
+        }
+        if(this.atk < 1) {
+            this.atk = 1;
+        }
     }
     
     getRandomInt(max) {
@@ -134,9 +143,13 @@ export class Enemigo {
         this.endTurn();
     }
 
+    selectAction() {
+        this.attack();
+    }
+
     takeTurn() {
         if(this.stunned === false) {
-            this.attack();
+            this.selectAction();
         }
         else {
             this.stunned = false;

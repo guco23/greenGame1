@@ -63,6 +63,15 @@ export default class GameData {
         this.CheckObjetoClave = function (aux) {            
             return this.objects[aux].Pillado;
         }
+        this.AddItemEquipable = function(item) {
+            let encontrado = this.items.includes(item);
+            if (!encontrado) {
+                this.items.push(item);
+            }
+            return encontrado;
+        }
+
+
         this.AñadeMonedasNM = function (aux) {            
             coins += aux;
         }
