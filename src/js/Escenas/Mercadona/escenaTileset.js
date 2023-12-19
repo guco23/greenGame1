@@ -11,6 +11,7 @@ import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js"
 import { Item } from "../../Item.js"
 import { items } from "../../../../assets/EquipItemDATA.js";
 import { CONTROLES_OVERWORLD } from "../../constants.js";
+import dialogo from "../../dialogo.js";
 
 export class EscenaTilesets extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -51,7 +52,8 @@ export class EscenaTilesets extends Phaser.Scene {
         this.load.image('SaulJudman', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/SaulJudman.png');       
         this.load.image('UI', RAIZ_IMAGENES+'UI_dialogo.png');
         this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
-        this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 })
+        this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 });
+        this.load.spritesheet('checkPoint',  RAIZ_IMAGENES+'Objetos/CheckPoint.png', {frameWidth: 32, frameHeight: 32});
     }
 
     //crear aqui los objetos de la escena
@@ -62,6 +64,21 @@ export class EscenaTilesets extends Phaser.Scene {
         this.image = this.add.image(screenWidth, screenHeight, 'javier'); //omg so sexy
         this.image.setScale(0.3);
         this.image.setPosition(screenWidth / 2, screenHeight / 2);*/
+        
+        this.anims.create({
+			key: 'banderaRoja',
+			frames: this.anims.generateFrameNumbers('checkPoint', { start: 0, end: 0 }),
+			frameRate: 16,
+			repeat: -1
+		});
+
+        this.anims.create({
+			key: 'banderaVerde',
+			frames: this.anims.generateFrameNumbers('checkPoint', { start: 1, end: 1 }),
+			frameRate: 16,
+			repeat: -1
+		});
+        
         this.map = this.make.tilemap({
             key: 'Almacen1',
             tileWidth: 16,
@@ -83,22 +100,35 @@ export class EscenaTilesets extends Phaser.Scene {
         this.physics.world.enable(this.character);
         this.physics.add.collider(this.character, this.WallLayer);
         this.Texto = false;
-        /*var self=this;
-        var onCollision = function(){                   
-          if(self.interact == 0) console.log("Hay colision");
-          else console.log("No :C");
-        }*/
+
+
+        //CheckPoints
+        let groupCheckPoints = this.add.group();
+        let check = this.map.createFromObjects('CheckPoints', {name: "checkPoint", key: 'checkPoint'});
+        this.anims.play('banderaRoja', check);
+        groupCheckPoints.addMultiple(check);
+        check.forEach(obj => {
+			console.log("uwu");
+			this.physics.add.existing(obj);
+		});
+
+
+        this.physics.add.overlap(this.character, groupCheckPoints, (character, checkPoint) => {
+            this.myGameData.UpdateCheckPoint(this, this.character.x, this.character.y);
+            this.anims.play('banderaVerde', checkPoint);
+        });
 
         this.physics.add.overlap(this.character, this.hitbox[0], () => {
             if (this.interact == 0) {                
                 this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });                                
                 //this.scene.start('escenaPlaya',{obj:this.myGameData,cx:2285, cy:320, dir:3});
                 //this.scene.start('escenaNuevosMinisterios',{obj:this.myGameData,cx:1820, cy:985, dir:0});            
+                //this.scene.start('zonaFinal', { obj: this.myGameData, cx: 270, cy: 20, dir: 3 });                                
             }            
         })
-        this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {
-            this.myGameData.AñadeObjetoClave(1);
+        this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {            
             if (this.interact == 0) {                
+                
             }
         })
 
@@ -120,6 +150,11 @@ export class EscenaTilesets extends Phaser.Scene {
         this.myGameData.AñadeItemEquipable(items.armaduraBronce);
         this.myGameData.AñadeItemEquipable(items.armaduraDiamante);
 
+        if(!this.myGameData.Interactablehitboxes[8]){
+            new dialogo(this, this.character,44) //Comentad si no queréis que os moleste durante el desarrollo
+            this.myGameData.Interactablehitboxes[8] = true;
+        }
+        
     }
 
 

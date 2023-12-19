@@ -46,6 +46,10 @@ export class EscenaTilesets2 extends Phaser.Scene {
         this.physics.add.existing(this.hitbox2[0]);
         this.hitbox3 = this.map.createFromObjects('Transiciones', { id: 2 });
         this.physics.add.existing(this.hitbox3[0]);
+        this.cinemat1 = this.map.createFromObjects('Cinematicas', { id: 12 });
+        this.physics.add.existing(this.cinemat1[0]);
+        this.cinemat2 = this.map.createFromObjects('Cinematicas', { id: 13 });
+        this.physics.add.existing(this.cinemat2[0]);
         this.hitbox4 = this.map.createFromObjects('TransicionesFalsas', { id: 5 });
         this.physics.add.existing(this.hitbox4[0]);
         this.hitbox5 = this.map.createFromObjects('TransicionesFalsas', { id: 6 });
@@ -74,6 +78,25 @@ export class EscenaTilesets2 extends Phaser.Scene {
         this.physics.add.overlap(this.character, this.hitbox2[0], () => {            
             if (!this.Texto && this.interact == 0) {                
                 this.scene.start('escenaTilesets3', { obj: this.myGameData, cx: 70, cy: 70, dir: 3 });
+            }
+        })
+
+        this.physics.add.overlap(this.character, this.hitbox2[0], () => {            
+            if (!this.Texto && this.interact == 0) {                
+                this.scene.start('escenaTilesets3', { obj: this.myGameData, cx: 70, cy: 70, dir: 3 });
+            }
+        })
+        
+        this.physics.add.overlap(this.character, this.cinemat1[0], () => {            
+            if (!this.Texto&&!this.myGameData.Interactablehitboxes[10] ) {                                
+                this.myGameData.Interactablehitboxes[10] = true;
+                new dialogo(this, this.character,45);                                      
+            }
+        })
+
+        this.physics.add.overlap(this.character, this.cinemat2[0], () => {            
+            if (!this.myGameData.Interactablehitboxes[9] ) {                                
+                this.myGameData.Interactablehitboxes[9] = true;                                                      
             }
         })
         this.physics.add.overlap(this.character, this.hitbox4[0], () => {
@@ -150,14 +173,18 @@ export class EscenaTilesets2 extends Phaser.Scene {
         this.cameras.main.startFollow(this.character);
         this.cameras.main.zoom = 2.2;
 
+        if(!this.myGameData.Interactablehitboxes[9]){
+            new SlimeEnemigo(this, 100,0,0,500,120,"item de prueba", [enemies.botella], this.WallLayer, this.character, this.myGameData, 'slimeTutorial')
+        }
+        /*
         let slimes = [
-            new SlimeEnemigo(this, 100, 1, 1, 50, 110, "item de prueba", [enemies.botella, enemies.cocacola, enemies.pollo], this.WallLayer, this.character, this.myGameData, 'enem2')
+            new SlimeEnemigo(this, 100, 1, 1, 427, 117, "item de prueba", [enemies.botella], this.WallLayer, this.character, this.myGameData, 'enem1')
         ];
         slimes.forEach(slime => {
             if(this.myGameData.CheckDefeated(slime.slimeId)) {
                 slime.destroy();
             }
-        });
+        });*/
     }
 
 

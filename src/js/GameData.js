@@ -13,8 +13,12 @@ export default class GameData {
         this.party = [];
         this.allies = [];
         this.partySize = 0;
+        this.sceneRetrunDead;
+        this.returnDeadX = 0;
+        this.returnDeadY = 0;
         this.NMCoins = 0; //Contador de monedas de nuevos ministerios
         let coins = this.NMCoins;
+
 
         this.objects[0] = {
             'Nombre': "Nota1",
@@ -53,21 +57,36 @@ export default class GameData {
             'Pillado': false,
         };
 
-        this.AñadeObjetoClave = function (aux) {
-            console.log("tocame uwu");
+        this.AñadeObjetoClave = function (aux) {            
             this.objects[aux].Pillado = true;
         }
-        this.CheckObjetoClave = function (aux) {
-            //console.log(this.objects[aux].Pillado);
+        this.CheckObjetoClave = function (aux) {            
             return this.objects[aux].Pillado;
         }
-        this.AñadeMonedasNM = function (aux) {
-            //console.log(this.objects[aux].Pillado);
-            coins = coins + aux;
+        this.AddItemEquipable = function(item) {
+            let encontrado = this.items.includes(item);
+            if (!encontrado) {
+                this.items.push(item);
+            }
+            return encontrado;
         }
-        this.GetMonedasNM = function () {
-            //console.log(this.objects[aux].Pillado);
+
+
+        this.AñadeMonedasNM = function (aux) {            
+            coins += aux;
+        }
+        this.GetMonedasNM = function () {            
             return coins;
+        }
+
+        this.UpdateCheckPoint = function (auxScene, auxX, auxY) {
+            //console.log(this.objects[aux].Pillado);
+            this.sceneRetrunDead = auxScene;
+            this.returnDeadX = auxX;
+            this.returnDeadY = auxY;
+            console.log(this.sceneRetrunDead);
+            console.log(this.returnDeadX);
+            console.log(this.returnDeadY);
         }
         this.Interactablehitboxes = [];
         this.Interactablehitboxes[0] = false;
@@ -75,6 +94,12 @@ export default class GameData {
         this.Interactablehitboxes[2] = false;
         this.Interactablehitboxes[3] = 0;
         this.Interactablehitboxes[4] = false;
+        this.Interactablehitboxes[5] = false;
+        this.Interactablehitboxes[6] = false;
+        this.Interactablehitboxes[7] = false;
+        this.Interactablehitboxes[8] = false;
+        this.Interactablehitboxes[9] = false;
+        this.Interactablehitboxes[10] = false;
     }
 
     //Metodos que añaden o desbloquean objetos
@@ -100,7 +125,7 @@ export default class GameData {
         NMCoins = NMcoins + aux;
     }
 
-    GetMonedasNM(){
+    GetMonedasNM() {
         return this.NMCoins;
     }
     //Metodos que comprueban estado de los objetos
@@ -115,11 +140,6 @@ export default class GameData {
 
     CheckMonedasNM(aux) {
         return this.NMCoins > aux;
-    }
-
-    //Método provisional para meter equipo en gameData
-    SetParty(party) {
-        this.party = party;
     }
 
     /**
@@ -147,10 +167,17 @@ export default class GameData {
         return encontrado;
     }
 
+    /**
+     * Limpia la lista de personajes derrotados. Por tanto "revive" a todos los enemigos.
+     */
     VaciarListaDefeated() {
         this.defeated = [];
     }
 
+    /**
+     * Añade un personaje a los aliados comprobando si ya está (en cuyo caso no lo añade)
+     * @param {*} personaje El personaje a añadir
+     */
     AddCharacter(personaje) {
         if (!this.CheckCharacter(personaje)) {
             if (this.partySize < 4) {
@@ -161,16 +188,60 @@ export default class GameData {
         }
     }
 
+    /**
+     * Comprueba si el personaje ya está en la lista de personajes añadidos.
+     * @param {*} personaje El personaje buscado
+     * @returns true si el personaje está ya entre los aliados. False en caso contrario.
+     */
     CheckCharacter(personaje) {
         let i = 0;
         let encontrado = false;
         while (!encontrado && i < this.allies.length) {
-            if (this.allies[i].name === personaje.name){
+            if (this.allies[i].name === personaje.name) {
                 encontrado = true;
-
             }
             i++;
         }
         return encontrado;
+    }
+
+    /**
+     * Comprueba si el personaje está en la party y devuelve su índice
+     * @returns El indice del personaje en la party, -1 si no está en la party
+     */
+    IsInParty(personaje) {
+        let i = 0;
+        let encontrado = false;
+        while (!encontrado && i < this.party.length) {
+            if (this.party[i].name === personaje.name) {
+                encontrado = true;
+            } else {
+                i++;
+            }
+        }
+        if (encontrado)
+            return i;
+        else
+            return -1;
+    }
+
+    /**
+     * Cambia la posición de un personaje, ya sea del menu de aliados a la party o de la party por otro de la party
+     * @param {*} first El índice personaje seleccionado de la party
+     * @param {*} second El índice personaje seleccionado de los allies
+     */
+    SwapCharacter(first, second) {
+        let partyIndex = this.IsInParty(this.allies[second]);
+        if (partyIndex === -1) {
+            this.party[first] = this.allies[second];
+        } else {
+            let aux = this.party[first];
+            this.party[first] = this.party[partyIndex];
+            this.party[partyIndex] = aux;
+        }
+        console.log(partyIndex);
+        console.log(first);
+        console.log(second);
+        console.log(this.party);
     }
 }

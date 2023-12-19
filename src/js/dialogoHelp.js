@@ -90,6 +90,25 @@ export default class dialogoHelp {
         //Diálogos cuando se construye el puente
         this.dialogos[34] = ["Bueno, creo que esos son todos los materiales que  necesitábamos", "Ahora toca construir el puente", "..."]
         this.dialogos[35] = ["Y ya está. Puente construido", "Vaya, eso ha sido rápido", "Bueno, por algo me llaman 'Maestro Constructor'", "Bien hecho, ahora tenemos que seguir avanzando"]
+        //Diálogos de Nuevos ministerios con la terminal 1
+        this.dialogos[36] = ["Es una máquina de billetes de metro. Fabrica       billetes de metro", "En su pantalla se puede leer: 'Introduzca una      moneda'", "Si tan solo tuvieras una moneda..."]
+        this.dialogos[37] = ["Introduces la moneda por la ranura de billetes", "La máquina empieza a agitarse, mientras suenan     sonidos que provocarían pesadillas a cualquier críode siete u ocho años",
+        "Finalmente los ruidos acaban, y de la máquina sale un pequeño ticket de metro", "La puerta que antes te bloqueaba el paso desaparecepor arte de magia"]
+        this.dialogos[38] = ["En la pantalla de la máquina de billetes puedes verel equivalente a la pantalla azul de la muerte en  un cacharro de billetes del metro", "No vas a conseguir más billetes de aquí"]
+        //Diálogos de Nuevos ministerios con la terminal 2
+        this.dialogos[39] = ["Es como la máquina de billetes de metro de arriba, pero esta todavía funciona, y es de color rojo", "En su pantalla se puede leer: 'Introduzca 65       monedas'", "Sí que aumenta rápidamente la inflación durante el apocalipsis..."]
+        this.dialogos[40] = ["Le haces un bizum a la máquina con las 65 monedas  que te pedía, consiguiendo así el ticket", "Le salen patas a la puerta que te bloqueaba el pasoy sale corriendo"]
+        this.dialogos[41] = ["La máquina sigue funcionando perfectamente, lo cuales bastante inútil, siendo sinceros", "Es decir, no vas a pedir un segundo billete,       ¿verdad?", 
+        "Tendrías que recolectar otras 65 monedas más, y    nadie va a gastar su tiempo en ello...", "¿Verdad?"]
+        this.dialogos[42] = ["Mientras vuelves a pagar otras 65 monedas más,     notas como si una puerta en algún punto de         Nuevos Ministerios se hubiese abierto..."]
+        this.dialogos[43] = ["La máquina no funciona"]
+        //Diálogo nada más empezar la escena 1
+        this.dialogos[44] = ["...", "¿Eh?", "¿Qué ha pasado?", "...", "Ah, ya recuerdo", "Judas… ella inició el apocalipsis", "Intenté detenerla, pero era demasiado fuerte…", "Me lanzó por los aires y me estrellé aquí, en este sótano",
+        "Tengo, que volver a intentar detenerla", "Pero… no estoy seguro de que sea lo                suficientemente fuerte yo solo…"]
+        //Cinemática inicial de antes de combate
+        this.dialogos[45] = ["¿Qué es eso?", "Es una especie de monstruo", "Maldita sea... Está bloqueando la única salida", "Si me acerco a lo mejor me ataca, pero está        enfrente de la única salida", 
+        "Tendré que arriesgarme"]
+
 
         this.images = [];
         this.images[0] = ["Frikol", "Judini","Judini","Frikol","Frikol","Frikol","Frikol","Judini","Judini","Frikol","Judini","Frikol","Judini","Frikol","-"]
@@ -128,7 +147,16 @@ export default class dialogoHelp {
         this.images[33] = ["-", "-"] 
         this.images[34] = ["Emmet","Emmet", "-"]
         this.images[35] = ["Emmet", "Judini", "Emmet", "Judini"]
-
+        this.images[36] = ["-","-","-","-","-","-","-"]
+        this.images[37] = ["-","-","-","-","-","-","-"]
+        this.images[38] = ["-","-","-","-","-","-","-"]
+        this.images[39] = ["-","-","-","-","-","-","-"]
+        this.images[40] = ["-","-","-","-","-","-","-"]
+        this.images[41] = ["-","-","-","-","-","-","-"]
+        this.images[42] = ["-","-","-","-","-","-","-"]
+        this.images[43] = ["-","-","-","-","-","-","-"]
+        this.images[44] = ["-","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini"]
+        this.images[45] = ["Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini"]        
 
         this.ReturnDialogo = function (i) {
             return this.dialogos[i];

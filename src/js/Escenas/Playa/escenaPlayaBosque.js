@@ -2,6 +2,8 @@ import Character from "../../character.js";
 import { RAIZ_IMAGENES } from "../../constants.js";
 import dialogo from "../../dialogo.js";
 import { CONTROLES_OVERWORLD } from "../../constants.js";
+import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
+import SlimeEnemigo from "../../SlimeEnemigo.js"
 
 export class EscenaPlayaBosque extends Phaser.Scene {    
 constructor(){
@@ -17,7 +19,8 @@ init(data){
         this.load.tilemapTiledJSON('PlayaBosque', 'assets/json/PlayaInteriorBosque.json');
         this.load.image('Madera', RAIZ_IMAGENES+'Objetos/Madera.png');
         this.load.image('tileset_playa', RAIZ_IMAGENES+'tilesets/tileset_playa.png');
-        this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
+        this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26});
+        this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
     }
 
     //crear aqui los objetos de la escena
@@ -65,6 +68,15 @@ init(data){
                     
           this.cameras.main.startFollow(this.character);      
           this.cameras.main.zoom = 2.2;
+
+          let slimes = [
+            new SlimeEnemigo(this, 100, 1, 0, 800, 696, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem54'),
+            ];
+            slimes.forEach(slime => {
+                if(this.myGameData.CheckDefeated(slime.slimeId)) {
+                    slime.destroy();
+                }
+            });
 
     }
 
