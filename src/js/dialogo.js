@@ -1,4 +1,5 @@
 import dialogoHelp from "./dialogoHelp.js";
+import { CONTROLES_OVERWORLD } from "./constants.js";
 
 export default class dialogo extends Phaser.GameObjects.Sprite {
 	/**
@@ -22,7 +23,7 @@ export default class dialogo extends Phaser.GameObjects.Sprite {
         this.image = scene.add.image(Char.x, Char.y+85, 'UI');
         this.image.scale = 1.8;
 		// Seteamos las teclas para mover al personaje
-		this.InteractKey = this.scene.input.keyboard.addKey('Z'); //interact        
+		this.InteractKey = this.scene.input.keyboard.addKey(CONTROLES_OVERWORLD.ACCEPT); //interact        
         //this.myText = this.myScene.add.text(this.end.x-140, this.end.y+45, this.dialogos[this.PosDialogo], { font: '"Press Start 2P"' });        
         this.Write();
         this.PosDialogo++;
