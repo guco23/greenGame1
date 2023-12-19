@@ -6,11 +6,12 @@ import GameData from "../../GameData.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
 import { Personaje } from "./../../Combate JS/Personajes/Personaje.js";
-import { Animador } from "./../../Combate JS/Personajes/Animador.js"; //NTS ES AQUÍ EL CAMBIO
+import { Protagonista } from "./../../Combate JS/Personajes/Protagonista.js"; //NTS ES AQUÍ EL CAMBIO
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { Item } from "../../Item.js"
 import { items } from "../../../../assets/EquipItemDATA.js";
 import { CONTROLES_OVERWORLD } from "../../constants.js";
+import { Defensor } from "../../Combate JS/Personajes/Defensor.js";
 
 export class EscenaTilesets extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -115,7 +116,7 @@ export class EscenaTilesets extends Phaser.Scene {
             }
         });
         
-        this.myGameData.AddCharacter(new Animador(personajes.protagonista)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Defensor(personajes.protagonista)); //No te olvides de cambiarlo de vuelta al final
 
         this.myGameData.AñadeItemEquipable(items.armaduraBronce);
         this.myGameData.AñadeItemEquipable(items.armaduraDiamante);
