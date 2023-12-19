@@ -10,6 +10,7 @@ import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js"
 import { Item } from "../../Item.js"
 import { items } from "../../../../assets/EquipItemDATA.js";
 import { CONTROLES_OVERWORLD } from "../../constants.js";
+import dialogo from "../../dialogo.js";
 
 export class EscenaTilesets extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -98,11 +99,7 @@ export class EscenaTilesets extends Phaser.Scene {
         this.physics.world.enable(this.character);
         this.physics.add.collider(this.character, this.WallLayer);
         this.Texto = false;
-        /*var self=this;
-        var onCollision = function(){                   
-          if(self.interact == 0) console.log("Hay colision");
-          else console.log("No :C");
-        }*/
+
 
         //CheckPoints
         let groupCheckPoints = this.add.group();
@@ -127,9 +124,9 @@ export class EscenaTilesets extends Phaser.Scene {
                 //this.scene.start('escenaNuevosMinisterios',{obj:this.myGameData,cx:1820, cy:985, dir:0});            
             }            
         })
-        this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {
-            this.myGameData.AñadeObjetoClave(1);
+        this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {            
             if (this.interact == 0) {                
+                
             }
         })
 
@@ -151,6 +148,11 @@ export class EscenaTilesets extends Phaser.Scene {
         this.myGameData.AñadeItemEquipable(items.armaduraBronce);
         this.myGameData.AñadeItemEquipable(items.armaduraDiamante);
 
+        if(!this.myGameData.Interactablehitboxes[8]){
+            //new dialogo(this, this.character,44)
+            this.myGameData.Interactablehitboxes[8] = true;
+        }
+        
     }
 
 
