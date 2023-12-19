@@ -23,6 +23,7 @@ init(data){
 
     //crear aqui los objetos de la escena
     create() {
+        this.timer = 0;
         this.map = this.make.tilemap({ 
             key: 'PlayaSala', 
             tileWidth: 16, 
@@ -56,12 +57,14 @@ init(data){
     }
 
 
-    update() {   
-        if(this.interactKey.isDown){
-            this.interact = 0;
-            
-        }else{
-            this.interact = 1;            
+    update() {
+        if (this.interactKey.isDown) {
+            if(this.timer==0)this.interact = 0;
+            if(this.Texto)this.timer = 25;
+        } else {
+            this.interact = 1;
+            if(this.timer >0 && !this.Texto) this.timer--;
         }        
-    }    
+        
+    }      
 };
