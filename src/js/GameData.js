@@ -100,7 +100,7 @@ export default class GameData {
         NMCoins = NMcoins + aux;
     }
 
-    GetMonedasNM(){
+    GetMonedasNM() {
         return this.NMCoins;
     }
     //Metodos que comprueban estado de los objetos
@@ -115,11 +115,6 @@ export default class GameData {
 
     CheckMonedasNM(aux) {
         return this.NMCoins > aux;
-    }
-
-    //Método provisional para meter equipo en gameData
-    SetParty(party) {
-        this.party = party;
     }
 
     /**
@@ -147,10 +142,17 @@ export default class GameData {
         return encontrado;
     }
 
+    /**
+     * Limpia la lista de personajes derrotados. Por tanto "revive" a todos los enemigos.
+     */
     VaciarListaDefeated() {
         this.defeated = [];
     }
 
+    /**
+     * Añade un personaje a los aliados comprobando si ya está (en cuyo caso no lo añade)
+     * @param {*} personaje El personaje a añadir
+     */
     AddCharacter(personaje) {
         if (!this.CheckCharacter(personaje)) {
             if (this.partySize < 4) {
@@ -161,16 +163,56 @@ export default class GameData {
         }
     }
 
+    /**
+     * Comprueba si el personaje ya está en la lista de personajes añadidos.
+     * @param {*} personaje El personaje buscado
+     * @returns true si el personaje está ya entre los aliados. False en caso contrario.
+     */
     CheckCharacter(personaje) {
         let i = 0;
         let encontrado = false;
         while (!encontrado && i < this.allies.length) {
-            if (this.allies[i].name === personaje.name){
+            if (this.allies[i].name === personaje.name) {
                 encontrado = true;
-
             }
             i++;
         }
         return encontrado;
+    }
+
+    /**
+     * Comprueba si el personaje está en la party y devuelve su índice
+     * @returns El indice del personaje en la party, -1 si no está en la party
+     */
+    IsInParty(personaje) {
+        let i = 0;
+        let encontrado = false;
+        while (!encontrado && i < this.party.length) {
+            if (this.party[i].name === personaje.name) {
+                encontrado = true;
+            }
+            i++;
+        }
+        if (encontrado)
+            return i;
+        else
+            return -1;
+    }
+
+    /**
+     * Cambia la posición de un personaje, ya sea del menu de aliados a la party o de la party por otro de la party
+     * @param {*} first El índice personaje seleccionado de la party
+     * @param {*} second El índice personaje seleccionado de los allies
+     */
+    SwapCharacter(first, second) {
+        let partyIndex = this.IsInParty(this.allies[second]);
+        if (partyIndex === -1) {
+            this.party[first] = this.allies[second];
+        } else {
+            let aux = this.party[first];
+            this.party[first] = this.party[second];
+            this.party[second] = aux;
+        }
+        console.log(this.party);
     }
 }
