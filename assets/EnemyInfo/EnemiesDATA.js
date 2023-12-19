@@ -44,7 +44,7 @@ export var enemies = {
 
     platanoMaduro: {class: Enemigo, name:"Banana Master", maxHp:80, atk: 35, def: 15, prefType: "", imgLink: "", crit: 10},
 
-    piraña: {class: AoE, name:"Piraña", maxHp:90, atk: 35, def: 5, prefType: "", imgLink: "enemigoMercadonaBotella.png", crit: 15},
+    pirania: {class: AoE, name:"Piraña", maxHp:90, atk: 35, def: 5, prefType: "", imgLink: "enemigoMercadonaBotella.png", crit: 15},
 
     langosta: {class: Fuerte, name:"Tiririiiii", maxHp:90, atk: 35, def: 5, prefType: "", imgLink: "", crit: 10},
 
