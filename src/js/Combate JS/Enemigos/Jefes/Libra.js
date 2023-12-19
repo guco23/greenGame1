@@ -29,7 +29,7 @@ export class Libra extends Enemigo {
         this.endTurn();
     }
 
-    takeTurn() {
+    selectAction() {
         if(this.currentHp >= this.balance.currentHp) {
             if(this.currentHp < (this.maxHp / 2)) {
                 this.judgement();
@@ -59,7 +59,7 @@ export class Libra extends Enemigo {
             }
         }
     }
-
+    
     searchBalance() {
         for(let i = 0; i < this.currentCombat.enemySize; i++) {
             if(this.allies[i].name == this.name && this != this.allies[i]) {

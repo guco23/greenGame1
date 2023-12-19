@@ -26,7 +26,9 @@ init(data){
     }
 
     //crear aqui los objetos de la escena
-    create() {/*
+    create() {
+        this.sound.stopAll();
+        /*
         let screenWidth = this.game.config.width;
         let screenHeight = this.game.config.height;
         //Imagen 1

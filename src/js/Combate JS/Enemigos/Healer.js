@@ -36,15 +36,4 @@ export class Healer extends Enemigo {
             this.attack(this.currentCombat.playerTeam);
         }
     }
-
-    takeTurn() {
-        if(this.stunned === false) {
-            this.selectAction();
-        }
-        else {
-            this.stunned = false;
-            this.currentCombat.addInfo("stun", 0, this,  null);
-            this.endTurn();
-        }
-    }
 }

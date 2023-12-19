@@ -116,8 +116,6 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
      */
     seleccionNormal() {
         this.estado = Estados.SELECCION_INDIVIDUAL;
-        this.ocultar();
-        this.mostrar();
     }
 
     /**

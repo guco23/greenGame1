@@ -3,6 +3,7 @@ import dialogo from "../../dialogo.js";
 import { RAIZ_IMAGENES } from "../../constants.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { Personaje } from "../../Combate JS/Personajes/Personaje.js";
+import { Logista } from "../../Combate JS/Personajes/Logista.js";
 import { CONTROLES_OVERWORLD } from "../../constants.js";
 
 export class EscenaTilesets4 extends Phaser.Scene {
@@ -21,7 +22,8 @@ init(data){
     }
 
     //crear aqui los objetos de la escena
-    create() {        
+    create() {  
+        this.sound.stopAll();      
         this.map = this.make.tilemap({ 
             key: 'Almacen4', 
             tileWidth: 16, 
@@ -61,7 +63,7 @@ init(data){
             var self = this;
             if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.frikol))new dialogo(this, this.character, 0, function(){
                 self.Frikol.destroy();   
-                self.myGameData.AddCharacter(new Personaje(personajes.frikol));
+                self.myGameData.AddCharacter(new Logista(personajes.frikol));
             })     
         })
         
