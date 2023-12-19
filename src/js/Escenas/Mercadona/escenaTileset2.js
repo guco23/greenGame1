@@ -28,6 +28,7 @@ export class EscenaTilesets2 extends Phaser.Scene {
 
     //crear aqui los objetos de la escena
     create() {
+        this.sound.stopAll();
         this.map = this.make.tilemap({
             key: 'Almacen2',
             tileWidth: 16,

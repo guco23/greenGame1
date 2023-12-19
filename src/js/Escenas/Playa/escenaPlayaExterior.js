@@ -1,5 +1,6 @@
 import Character from "../../character.js";
 import { RAIZ_IMAGENES } from "../../constants.js";
+import {RAIZ_SOUNDS,RAIZ_SOUNDS_MUSICA} from "../../constants.js";
 import dialogo from "../../dialogo.js";
 import { Personaje	 } from "../../Combate JS/Personajes/Personaje.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
@@ -26,10 +27,14 @@ init(data){
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26});
         this.load.spritesheet('cofre',  RAIZ_IMAGENES+'Objetos/Cofres.png', {frameWidth: 16, frameHeight: 16});
         this.load.spritesheet('checkPoint',  RAIZ_IMAGENES+'Objetos/CheckPoint.png', {frameWidth: 32, frameHeight: 32});
+        this.load.audio('musicPlaya', RAIZ_SOUNDS+RAIZ_SOUNDS_MUSICA+'Playa.mp3')
     }
 
     //crear aqui los objetos de la escena
     create() {        
+        this.sound.stopAll();
+        this.MainTheme = this.sound.add('musicPlaya')
+        this.MainTheme.play();
         this.timer = 0;
 
         this.anims.create({

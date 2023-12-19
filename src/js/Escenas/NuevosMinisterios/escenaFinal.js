@@ -1,5 +1,6 @@
 import Character from "../../character.js";
 import dialogo from "../../dialogo.js";
+import {RAIZ_SOUNDS,RAIZ_SOUNDS_MUSICA} from "../../constants.js";
 import { RAIZ_IMAGENES,RAIZ_IMGS_COMBAT } from "../../constants.js";
 import { Personaje } from "../../Combate JS/Personajes/Personaje.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
@@ -25,10 +26,14 @@ init(data){
         this.load.image('tileset_nm', RAIZ_IMAGENES+'tilesets/tileset_nm.png');        
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26});                
         this.load.spritesheet('checkPoint',  RAIZ_IMAGENES+'Objetos/CheckPoint.png', {frameWidth: 32, frameHeight: 32});
+        this.load.audio('musicNM', RAIZ_SOUNDS+RAIZ_SOUNDS_MUSICA+'Nuevos ministerios.mp3')
     }
 
     //crear aqui los objetos de la escena
     create() {
+        this.sound.stopAll();
+        this.MainTheme = this.sound.add('musicNM')
+        this.MainTheme.play();
         this.Final = false;
         this.Texto = false;
         this.imageBoss;
@@ -85,6 +90,7 @@ init(data){
         
         this.physics.add.overlap(this.character, this.hitboxFinal[0], () => {            
             if(!this.HaLlegadoAlFinal){
+                this.sound.stopAll();   
                 this.HaLlegadoAlFinal = true;        
                 this.PosBoss = 150;
                 this.imageBoss = this.add.image(270, 0, 'jefeFinal');                           
@@ -92,7 +98,7 @@ init(data){
             
         })
 
-        this.physics.add.overlap(this.character, this.hitboxFinal2[0], () => {            
+        this.physics.add.overlap(this.character, this.hitboxFinal2[0], () => {                     
             if(this.HaLlegadoAlFinal){
                 this.HaLlegadoAlFinal = false;
                 this.character.Activate();                

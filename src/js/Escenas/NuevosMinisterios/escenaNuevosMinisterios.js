@@ -1,6 +1,7 @@
 import Character from "../../character.js";
 import dialogo from "../../dialogo.js";
 import { RAIZ_IMAGENES } from "../../constants.js";
+import {RAIZ_SOUNDS,RAIZ_SOUNDS_MUSICA} from "../../constants.js";
 import { Personaje } from "../../Combate JS/Personajes/Personaje.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
@@ -26,10 +27,14 @@ init(data){
         this.load.spritesheet('coin',  RAIZ_IMAGENES+'Objetos/Coins.png', {frameWidth: 16, frameHeight: 16});
         this.load.spritesheet('cofre',  RAIZ_IMAGENES+'Objetos/Cofres.png', {frameWidth: 16, frameHeight: 16});
         this.load.spritesheet('checkPoint',  RAIZ_IMAGENES+'Objetos/CheckPoint.png', {frameWidth: 32, frameHeight: 32});
+        this.load.audio('musicNM', RAIZ_SOUNDS+RAIZ_SOUNDS_MUSICA+'Nuevos ministerios.mp3')
     }
 
     //crear aqui los objetos de la escena
     create() {
+        this.sound.stopAll();
+        this.MainTheme = this.sound.add('musicNM')
+        this.MainTheme.play();
         this.timer = 0;
         this.anims.create({
 			key: 'spin',

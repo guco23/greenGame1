@@ -1,6 +1,6 @@
 import Character from "../../character.js";
-import { RAIZ_IMAGENES } from "../../constants.js";
-import {RAIZ_IMGS_OBJETOS} from "../../constants.js";
+import { RAIZ_IMAGENES ,RAIZ_IMGS_OBJETOS} from "../../constants.js";
+import {RAIZ_SOUNDS,RAIZ_SOUNDS_MUSICA} from "../../constants.js";
 import dialogo from "../../dialogo.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { Personaje } from "../../Combate JS/Personajes/Personaje.js";
@@ -28,10 +28,15 @@ export class EscenaMercadona extends Phaser.Scene {
         this.load.image('Notas', RAIZ_IMAGENES + RAIZ_IMGS_OBJETOS+'Notas.png');
         this.load.spritesheet('character', RAIZ_IMAGENES + 'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 })
         this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
+        this.load.audio('musicMercadona', RAIZ_SOUNDS+RAIZ_SOUNDS_MUSICA+'Mercadona.mp3')
     }
 
     create() {
+        this.sound.stopAll();
+
         this.timer = 0;
+        this.MainTheme = this.sound.add('musicMercadona')
+        this.MainTheme.play();
         this.map = this.make.tilemap({
             key: 'SalaMercadona',
             tileWidth: 16,

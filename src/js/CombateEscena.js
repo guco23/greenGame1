@@ -1,5 +1,6 @@
 import { RAIZ_IMAGENES, CONTROLES, RAIZ_IMGS_COMBAT } from "./constants.js";
 import { BarraVida } from "./HUDElems/BarraVida.js";
+import {RAIZ_SOUNDS,RAIZ_SOUNDS_MUSICA} from "./constants.js";
 import { TextoVida } from "./HUDElems/TextoVida.js";
 import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
 import { DatosAccion, SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
@@ -42,10 +43,13 @@ export class CombateEscena extends Phaser.Scene {
         this.load.image('background', RAIZ_IMAGENES + "combatBackground/combatBackgroundPlaceholder.png");
         this.load.image("selectorAccion", RAIZ_IMAGENES + 'seleccionAccion.png');
         this.load.image("selectorPersonaje", RAIZ_IMAGENES + 'seleccionPersonaje.png');
-    }
+        this.load.audio('musicCombateSimple', RAIZ_SOUNDS+RAIZ_SOUNDS_MUSICA+'Combate contra enemigos.mp3')    }
 
     //crear aqui los objetos de la escena
     create() {
+        this.sound.stopAll();
+        this.MainTheme = this.sound.add('musicCombateSimple')
+        this.MainTheme.play();
         this.graphics = this.add.graphics();
 
         this.combatManager = new CombatManager(this.enemigos, this.aliados, this.partySize, this);
