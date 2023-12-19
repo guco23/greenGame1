@@ -31,10 +31,11 @@ export class CombateEscena extends Phaser.Scene {
 
     preload() {
         //Es importante que los sprites finales tengan la misma resolución
-
+        this.BossFightTheme= false;
         //Añade las imagenes de los aliados y enemigos
         this.enemigos.forEach(enemigo => {
             this.load.image(enemigo.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_COMBAT + enemigo.imgLink);
+            if(enemigo.name =="Libra" || enemigo.name == "acuarius" || enemigo.name == "finalBoss") this.BossFightTheme = true;
         });
         this.aliados.forEach(aliado => {
             this.load.image(aliado.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_COMBAT + aliado.imgLink);
@@ -43,12 +44,17 @@ export class CombateEscena extends Phaser.Scene {
         this.load.image('background', RAIZ_IMAGENES + "combatBackground/combatBackgroundPlaceholder.png");
         this.load.image("selectorAccion", RAIZ_IMAGENES + 'seleccionAccion.png');
         this.load.image("selectorPersonaje", RAIZ_IMAGENES + 'seleccionPersonaje.png');
-        this.load.audio('musicCombateSimple', RAIZ_SOUNDS+RAIZ_SOUNDS_MUSICA+'Combate contra enemigos.mp3')    }
+        this.load.audio('musicCombateSimple', RAIZ_SOUNDS+RAIZ_SOUNDS_MUSICA+'Combate contra enemigos.mp3')    
+        this.load.audio('musicCombateBoss', RAIZ_SOUNDS+RAIZ_SOUNDS_MUSICA+'Combate contra jefes.mp3')    
+    }
 
     //crear aqui los objetos de la escena
     create() {
         this.sound.stopAll();
-        this.MainTheme = this.sound.add('musicCombateSimple')
+        if(this.BossFightTheme){
+            this.MainTheme = this.sound.add('musicCombateBoss')
+        }
+        else this.MainTheme = this.sound.add('musicCombateSimple')
         this.MainTheme.play();
         this.graphics = this.add.graphics();
 
