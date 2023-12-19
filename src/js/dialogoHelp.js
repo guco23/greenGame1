@@ -100,6 +100,16 @@ export default class dialogoHelp {
         this.dialogos[40] = ["Le haces un bizum a la máquina con las 65 monedas  que te pedía, consiguiendo así el ticket", "Le salen patas a la puerta que te bloqueaba el pasoy sale corriendo"]
         this.dialogos[41] = ["La máquina sigue funcionando perfectamente, lo cuales bastante inútil, siendo sinceros", "Es decir, no vas a pedir un segundo billete,       ¿verdad?", 
         "Tendrías que recolectar otras 65 monedas más, y    nadie va a gastar su tiempo en ello...", "¿Verdad?"]
+        this.dialogos[42] = ["Mientras vuelves a pagar otras 65 monedas más,     notas como si una puerta en algún punto de         Nuevos Ministerios se hubiese abierto..."]
+        this.dialogos[43] = ["La máquina no funciona"]
+        //Diálogo nada más empezar la escena 1
+        this.dialogos[44] = ["...", "¿Eh?", "¿Qué ha pasado?", "...", "Ah, ya recuerdo", "Judas… ella inició el apocalipsis", "Intenté detenerla, pero era demasiado fuerte…", "Me lanzó por los aires y me estrellé aquí, en este sótano",
+        "Tengo, que volver a intentar detenerla", "Pero… no estoy seguro de que sea lo                suficientemente fuerte yo solo…"]
+        //Cinemática inicial de antes de combate
+        this.dialogos[45] = ["¿Qué es eso?", "Es una especie de monstruo", "Maldita sea... Está bloqueando la única salida", "Si me acerco a lo mejor me ataca, pero está        enfrente de la única salida", 
+        "Tendré que arriesgarme"]
+
+
 
         this.images = [];
         this.images[0] = ["Frikol", "Judini","Judini","Frikol","Frikol","Frikol","Frikol","Judini","Judini","Frikol","Judini","Frikol","Judini","Frikol","-"]
@@ -144,6 +154,10 @@ export default class dialogoHelp {
         this.images[39] = ["-","-","-","-","-","-","-"]
         this.images[40] = ["-","-","-","-","-","-","-"]
         this.images[41] = ["-","-","-","-","-","-","-"]
+        this.images[42] = ["-","-","-","-","-","-","-"]
+        this.images[43] = ["-","-","-","-","-","-","-"]
+        this.images[44] = ["-","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini"]
+        this.images[45] = ["Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini"]        
 
         this.ReturnDialogo = function (i) {
             return this.dialogos[i];

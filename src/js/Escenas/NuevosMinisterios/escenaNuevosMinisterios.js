@@ -260,18 +260,29 @@ init(data){
         this.physics.add.overlap(this.character, this.Caja2[0], ()=>{
             if(!this.Texto&&this.interact == 0){
                 let self = this;
-                if(this.myGameData.Interactablehitboxes[6]){
-                    new dialogo(this,this.character,41);
-                }else{
-                    if(this.myGameData.GetMonedasNM() >= 65){                        
-                        new dialogo(this, this.character,40, function(){
-                            self.myGameData.Interactablehitboxes[6] = true;
-                            self.Puerta2.visible = false;                  
-                            self.Puerta2Collider.destroy();
-                        })     
+                if(!this.myGameData.Interactablehitboxes[7]){
+                    if(this.myGameData.Interactablehitboxes[6]){
+                        if(this.myGameData.GetMonedasNM() >= 130){                        
+                            new dialogo(this, this.character,42, function(){
+                                self.myGameData.Interactablehitboxes[7] = true;
+                                //Puerta secreta
+                            })     
+                        }else{
+                            new dialogo(this,this.character,41);                        
+                        }
                     }else{
-                        new dialogo(this,this.character,39);
+                        if(this.myGameData.GetMonedasNM() >= 65){                        
+                            new dialogo(this, this.character,40, function(){
+                                self.myGameData.Interactablehitboxes[6] = true;
+                                self.Puerta2.visible = false;                  
+                                self.Puerta2Collider.destroy();
+                            })     
+                        }else{
+                            new dialogo(this,this.character,39);
+                        }
                     }
+                }else{
+                    new dialogo(this,this.character,43); 
                 }
             }
         })   
