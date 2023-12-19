@@ -117,7 +117,7 @@ init(data){
           this.character = new Character(this, this.cx, this.cy,this.dir);
           this.physics.world.enable(this.character);
           this.physics.add.collider(this.character, this.WallLayer);
-          this.AguaPuenteCollider = this.physics.add.collider(this.character, this.AguaPuente);
+          if(!this.myGameData.Interactablehitboxes[4])this.AguaPuenteCollider = this.physics.add.collider(this.character, this.AguaPuente);
           
           this.TopWallLayer = this.map.createLayer('ParedesSobrepuestas', tileset2);
 
@@ -196,7 +196,7 @@ init(data){
         })
         var self=this;
         this.physics.add.overlap(this.character, this.hitbox6[0], ()=>{  
-            if(this.myGameData.CheckObjetoClave(4)&&this.myGameData.CheckObjetoClave(5)&&this.myGameData.CheckObjetoClave(6))          
+            //if(this.myGameData.CheckObjetoClave(4)&&this.myGameData.CheckObjetoClave(5)&&this.myGameData.CheckObjetoClave(6))          
             if(!this.Texto && !this.myGameData.Interactablehitboxes[4])new dialogo(this, this.character, 34,function(){                                
                 self.myGameData.Interactablehitboxes[4] = true;                
                 self.AguaPuente.visible = false;                  
