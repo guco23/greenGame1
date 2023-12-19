@@ -5,13 +5,14 @@ export class Acuarius extends Enemigo {
     allies;
     resurect;
     startingAtk;
-    second = false;
+    second;
 
     startCombat(combatManager) {
         this.currentCombat = combatManager;
         this.allies = this.currentCombat.enemyTeam;
         this.resurect = true;
         this.startingAtk = this.atk;
+        this.second = false;
     }
 
     areaAttack() {
