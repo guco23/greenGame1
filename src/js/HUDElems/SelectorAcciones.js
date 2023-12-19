@@ -67,7 +67,6 @@ export class SelectorAcciones extends Phaser.GameObjects.Container {
     /**Marca la selección actual y actualiza el texto descriptivo */
     select() {
         this.opciones[this.selection].selected();
-        console.log(this.opciones[this.selection].textoDescriptivo);
         this.textoDescriptivo.aplicarTexto(this.opciones[this.selection].textoDescriptivo);
     }
 
@@ -110,9 +109,9 @@ export class SelectorAcciones extends Phaser.GameObjects.Container {
         this.textoDescriptivo.visible(true);
     }
 
-    updateAction(idn, newName, newDesc) {
-        this.opciones[idn].textoDescriptivo = newDesc;
-        this.opciones[idn].textElem.setText(newName);
+    updateAction(i, newName, newDesc) {
+        this.opciones[i].textoDescriptivo = newDesc;
+        this.opciones[i].textElem.setText(newName);
     }
 
     activar() {

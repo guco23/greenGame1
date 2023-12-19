@@ -49,8 +49,10 @@ export class MenuEscena extends Phaser.Scene {
         this.menuActual = this.opcionPrimaria;
         this.selectorParty = new SelectorPersonajesMenu(this, this.gameData.party, 390, 110, 4, 100, 100);
         this.selectorAllies = new SelectorPersonajesMenu(this, this.gameData.allies, 300, 300, 3, 100, 100);
+        this.equipadorPersonajes = new SelectorPersonajesMenu(this, this.gameData.party, 670, 130, 2, 80, 100);
         this.selectorObjetos = new SelectorAcciones(this, this.descripcion, 270, 70, 30, listaAccionObjetos);
         this.selectorObjetos.ocultar();
+        this.equipadorPersonajes.hide();
         this.opcionPrimaria.activar();
         /**
          * Lo primero es un selector arriba, probablemente en horizontal en el que puedas escoger modificar el equipo o equipar objetos
@@ -94,9 +96,19 @@ export class MenuEscena extends Phaser.Scene {
                 else if (this.opcionPrimaria.selection === 1) {
                     this.opcionPrimaria.desactivar();
                     this.menuActual = this.selectorObjetos;
-                    this.selectorObjetos.mostrar();
                     this.selectorObjetos.activar();
                 }
+                break;
+            case this.selectorObjetos:
+                this.selectorObjetos.desactivar();
+                this.menuActual = this.equipadorPersonajes;
+                this.equipadorPersonajes.mostrar();
+                break;
+            case this.equipadorPersonajes:
+                this.equipadorPersonajes.ocultar();
+                this.menuActual = this.selectorObjetos;
+                this.selectorObjetos.activar();
+                //Equipar el objero y actualizar la interfaz
                 break;
         }
     }
@@ -121,6 +133,11 @@ export class MenuEscena extends Phaser.Scene {
                 this.menuActual = this.opcionPrimaria;
                 this.opcionPrimaria.activar();
                 break;
+            case this.equipadorPersonajes:
+                this.equipadorPersonajes.ocultar();
+                this.menuActual = this.selectorObjetos;
+                this.selectorObjetos.activar();
+                break;
         }
     }
 
@@ -137,12 +154,13 @@ export class MenuEscena extends Phaser.Scene {
                     this.selectorParty.hide();
                     this.selectorAllies.hide();
                     this.selectorObjetos.mostrar();
-
+                    this.equipadorPersonajes.show();
                 } else if (this.opcionPrimaria.selection === 0) {
                     //Selección de personajes
                     this.selectorParty.show();
                     this.selectorAllies.show();
                     this.selectorObjetos.ocultar();
+                    this.equipadorPersonajes.hide();
                 }
                 break;
         }

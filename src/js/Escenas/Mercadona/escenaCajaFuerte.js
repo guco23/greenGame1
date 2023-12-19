@@ -21,6 +21,7 @@ init(data){
     }
     
     create() {
+        this.timer = 0;
         this.map = this.make.tilemap({ 
             key: 'escenaCajaFuerte', 
             tileWidth: 16, 

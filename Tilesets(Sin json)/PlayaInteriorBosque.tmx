@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="2">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="3">
  <tileset firstgid="1" name="tileset_playa" tilewidth="16" tileheight="16" spacing="1" margin="1" tilecount="253" columns="23">
   <image source="../assets/images/tilesets/tileset_playa.png" width="400" height="200"/>
  </tileset>
@@ -109,6 +109,9 @@
  </layer>
  <objectgroup id="5" name="Transiciones">
   <object id="1" x="776.25" y="901.5" width="48.25" height="10.25"/>
+ </objectgroup>
+ <objectgroup id="6" name="Items">
+  <object id="2" x="784" y="561" width="31.5" height="30.5"/>
  </objectgroup>
  <layer id="2" name="Paredes" width="100" height="100">
   <data encoding="csv">

@@ -117,6 +117,8 @@ export class EscenaTilesets extends Phaser.Scene {
         this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
 
         this.myGameData.AñadeItemEquipable(items.armaduraBronce);
+        this.myGameData.AñadeItemEquipable(items.armaduraDiamante);
+
     }
 
 
