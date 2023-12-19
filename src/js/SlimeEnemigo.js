@@ -43,10 +43,8 @@ export default class SlimeEnemigo extends Phaser.GameObjects.Sprite {
         scene.physics.world.enable(this);
         var self = this;
         scene.physics.add.collider(this, this.WallLayer, () => {
-            self.MovingX = self.MovingX * -1;
-            console.log(self.MovingX);
-            self.MovingY = self.MovingY * -1;
-            console.log(self.MovingY);
+            self.MovingX = self.MovingX * -1;            
+            self.MovingY = self.MovingY * -1;            
         });
         scene.physics.add.collider(this, this.player, () => {
             this.myScene.scene.start('combatScene', {

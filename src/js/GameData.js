@@ -74,6 +74,7 @@ export default class GameData {
         this.Interactablehitboxes[1] = false;
         this.Interactablehitboxes[2] = false;
         this.Interactablehitboxes[3] = 0;
+        this.Interactablehitboxes[4] = false;
     }
 
     //Metodos que añaden o desbloquean objetos

@@ -67,12 +67,18 @@ init(data){
           this.WallLayer = this.map.createLayer('Paredes', tileset1);
           this.WallLayer.setCollisionByExclusion([-1]);          
           this.Puerta1 = this.map.createLayer('Puerta1', tileset1);
+
           this.Puerta2 = this.map.createLayer('Puerta2', tileset1);
+          
           this.hitbox1 = this.map.createFromObjects('Transiciones', {id:1});          
           this.physics.add.existing(this.hitbox1[0]);
           this.hitbox2 = this.map.createFromObjects('Transiciones', {id:2});          
           this.physics.add.existing(this.hitbox2[0]);
-              
+          this.Caja1 =this.map.createFromObjects('CajasRegistradoras', {id:138});          
+          this.physics.add.existing(this.Caja1[0]);    
+          this.Caja2 =this.map.createFromObjects('CajasRegistradoras', {id:139});          
+          this.physics.add.existing(this.Caja2[0]);    
+
           if(!this.myGameData.CheckCharacter(personajes.albert)){
               this.Albert = this.map.createFromObjects('Personajes', { id: 4 });
               this.physics.add.existing(this.Albert[0]);
