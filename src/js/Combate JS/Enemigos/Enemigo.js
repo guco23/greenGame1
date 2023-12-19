@@ -19,62 +19,6 @@ export class Enemigo {
 
     imgLink; //String con un link a la imagen
     
-    /*constructor(iden, hpMax, atk, def, type, iLink, combatManager) {
-        this.id = iden;
-        this.maxHp = hpMax;
-        this.currentHp = this.maxHp;
-        this.atk = atk;
-        this.def = def;
-        this.prefType = type;
-        this.imgLink = iLink;
-
-        this.living = true;
-        this.stunned = false;
-
-        this.currentCombat = combatManager;
-    }*/
-
-    constructor(idn, combatManager) {
-        this.name = idn.name;
-        this.maxHp = idn.maxHp;
-        this.currentHp = idn.maxHp;
-        this.atk = idn.atk;
-        this.def = idn.def;
-        this.prefType = idn.prefType;
-        this.imgLink = idn.imgLink;
-
-        this.living = true;
-        this.stunned = false;
-        this.dot = 0;
-        this.critChance = idn.crit;
-
-        this.currentCombat = combatManager;
-    }
-
-    modifyStat(mode, atkmod, defmod) {
-        if (mode) {
-            this.atk = this.atk * atkmod;
-            this.def = this.def * defmod;
-        }
-        else {
-            this.atk += atkmod;
-            this.def += defmod;
-        };
-    }
-
-    startCombat(combatManager) {
-        this.currentCombat = combatManager;
-    }
-
-    getRandomInt(max) {
-        return Math.floor(Math.random() * max);
-    }
-
-    getCrit() {
-        let crit = this.getRandomInt(100);
-        return (crit < this.critChance);
-    }
-
     applyDot(value) {
         this.dot += value;
     }
@@ -88,6 +32,43 @@ export class Enemigo {
         }
     }
 
+    constructor(idn) {
+        this.name = idn.name;
+        this.maxHp = idn.maxHp;
+        this.currentHp = idn.maxHp;
+        this.atk = idn.atk;
+        this.def = idn.def;
+        this.prefType = idn.prefType;
+        this.imgLink = idn.imgLink;
+
+        this.living = true;
+        this.stunned = false;
+        this.dot = 0;
+        this.critChance = idn.crit;
+    }
+
+    
+    modifyStat(mode, atkmod, defmod) {
+        if (mode) {
+            this.atk = this.atk * atkmod;
+            this.def = this.def * defmod;
+        }
+        else {
+            this.atk += atkmod;
+            this.def += defmod;
+        };
+    }
+    
+    getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+    
+    getCrit() {
+        let crit = this.getRandomInt(100);
+        return (crit < this.critChance);
+    }
+    
+    
     endTurn() {
         if(this.dot != 0) {
             this.currentHp -= this.dot;
@@ -97,11 +78,15 @@ export class Enemigo {
         this.currentCombat.endTurn();
     }
 
+    startCombat(combatManager) {
+        this.currentCombat = combatManager;
+    }
+    
     stun() {
         this.stunned = true;
         this.currentCombat.addInfo("stunned", 0, this, null);
     }
-
+    
     sufferDamage(dmg) {
         let damage = Math.floor(dmg * ((100 - this.def) / 100));
         if(damage < 1) {

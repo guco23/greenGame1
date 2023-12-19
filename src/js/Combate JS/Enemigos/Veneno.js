@@ -3,8 +3,8 @@ import { Enemigo } from "./Enemigo.js";
 export class Veneno extends Enemigo {
     poison; //Valor de veneno que aplica al atacar
 
-    constructor(idn, combatManager) {
-        super(idn, combatManager);
+    constructor(idn) {
+        super(idn);
         this.poison = Math.floor(this.atk / 5);
     }
 
