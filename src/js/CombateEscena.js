@@ -195,6 +195,12 @@ export class CombateEscena extends Phaser.Scene {
      */
     Victory() {
         this.gameData.AddDefeated(this.slimeId);
+        if(this.returnScene == 'escenaNuevosMinisterios') {
+            this.gameData.AñadeMonedasNM(5);
+        }
+        if(this.objeto !== undefined) {
+            this.gameData.AñadeItemEquipable(this.objeto);
+        }
         this.scene.start(this.returnScene, { obj: this.gameData, cx: this.cx, cy: this.cy, dir: this.cdir });
     }
     /**

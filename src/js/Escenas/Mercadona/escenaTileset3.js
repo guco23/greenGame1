@@ -89,23 +89,22 @@ init(data){
             if(this.interact == 0){
                 if (cofre.name == "cofre1"){
                     if(!self.myGameData.AñadeItemEquipable(items.chalecoCuero))
-                {
+                {   
+                       
+                    new dialogo(this, this.character,47);                 
                     console.log("Nombre del ítem:", items.chalecoCuero.nombre);
-                    console.log("objeto conseguido");   
+                    console.log("objeto conseguido");
                 }
                 else
                 {
+                       
+                    if(this.timer == 0)new dialogo(this, this.character,48);
                     console.log("vacio");  
                 }
                 }
                 this.anims.play('cofreAbierto', cofre);
             }
         });
-          /*var self=this;
-          var onCollision = function(){                   
-            if(self.interact == 0) console.log("Hay colision");
-            else console.log("No :C");
-          }*/
           this.physics.add.overlap(this.character, this.hitbox1[0], ()=>{
             if(this.interact == 0) this.scene.start('escenaTilesets2',{obj:this.myGameData,cx:295, cy:160, dir:1});            
         })
@@ -118,7 +117,10 @@ init(data){
 
     update() {
         if (this.interactKey.isDown) {
-            if(this.timer==0)this.interact = 0;
+            if(this.timer==0){
+                this.interact = 0;
+                this.timer =0;
+            }
             if(this.Texto)this.timer = 25;
         } else {
             this.interact = 1;

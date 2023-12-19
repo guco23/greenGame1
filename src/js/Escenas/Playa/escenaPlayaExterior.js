@@ -195,28 +195,34 @@ init(data){
             if(this.interact == 0){
                 if (cofre.name == "cofre1"){
                     if(!self.myGameData.AñadeItemEquipable(items.escudoBronce))
-                    {
+                    {   
+                    new dialogo(this, this.character,47);
                     console.log("Nombre del ítem:", items.escudoBronce.nombre);
                     console.log("objeto conseguido");   
                     }
-                    else console.log("vacio");  
+                    else    
+                    if(this.timer == 0)new dialogo(this, this.character,48);  
     
                 }
                 else if (cofre.name == "cofre3"){
                     if(!self.myGameData.AñadeItemEquipable(items.guanteCueroPlus))
-                    {
+                    {  
+                    new dialogo(this, this.character,47);
                     console.log("Nombre del ítem:", items.guanteCueroPlus.nombre);
                     console.log("objeto conseguido");   
                     }
-                    else console.log("vacio");
+                    else    
+                    if(this.timer == 0)new dialogo(this, this.character,48);
                 }
                 else if (cofre.name == "cofre4"){
                     if(!self.myGameData.AñadeItemEquipable(items.escudoBronce))
-                    {
+                    {   
+                    new dialogo(this, this.character,47);
                     console.log("Nombre del ítem:", items.escudoBronce.nombre);
                     console.log("objeto conseguido");   
                     }
-                    else console.log("vacio");
+                    else    
+                    new dialogo(this, this.character,48);
                 }
                 this.anims.play('cofreAbierto', cofre);
             }
@@ -309,28 +315,28 @@ init(data){
           this.cameras.main.zoom = 2.2;
 
         let slimes = [
-            new SlimeEnemigo(this, 100, 0, 1, 1439, 328, "nada", [enemies.botella2, enemies.platanoMaduro, enemies.platanoMaduro], this.WallLayer, this.character, this.myGameData, 'enem8'),
-            new SlimeEnemigo(this, 100, 1, 1, 964, 500, "nada", [enemies.pepsi, enemies.pepsi, enemies.platanoMaduro], this.WallLayer, this.character, this.myGameData, 'enem9'),
-            new SlimeEnemigo(this, 100, 1, 0, 958, 774, "nada", [enemies.pirania, enemies.langosta, enemies.pezPayaso], this.WallLayer, this.character, this.myGameData, 'enem10'),
+            new SlimeEnemigo(this, 100, 0, 1, 1439, 328, undefined, [enemies.botella2, enemies.platanoMaduro, enemies.platanoMaduro], this.WallLayer, this.character, this.myGameData, 'enem8'),
+            new SlimeEnemigo(this, 100, 1, 1, 964, 500, undefined, [enemies.pepsi, enemies.pepsi, enemies.platanoMaduro], this.WallLayer, this.character, this.myGameData, 'enem9'),
+            new SlimeEnemigo(this, 100, 1, 0, 958, 774, undefined, [enemies.pirania, enemies.langosta, enemies.pezPayaso], this.WallLayer, this.character, this.myGameData, 'enem10'),
 
-            new SlimeEnemigo(this, 70, 1, 0, 2283, 792, "Chaleco de bronce", [enemies.pirania, enemies.pezGlobo], this.WallLayer, this.character, this.myGameData, 'enem11'),
-            new SlimeEnemigo(this, 100, 0, 1, 2625, 1366, "nada", [enemies.botella2, enemies.pepsi, enemies.pepsi, enemies.platanoMaduro], this.WallLayer, this.character, this.myGameData, 'enem12'),
-            new SlimeEnemigo(this, 70, 1, 0, 2295, 1919, "Chaleco de bronce", [enemies.cangrejo, enemies.platanoMaduro, enemies.platanoMaduro, enemies.platanoMaduro], this.WallLayer, this.character, this.myGameData, 'enem13'),
+            new SlimeEnemigo(this, 70, 1, 0, 2283, 792, items.chalecoBronce, [enemies.pirania, enemies.pezGlobo], this.WallLayer, this.character, this.myGameData, 'enem11'),
+            new SlimeEnemigo(this, 100, 0, 1, 2625, 1366, undefined, [enemies.botella2, enemies.pepsi, enemies.pepsi, enemies.platanoMaduro], this.WallLayer, this.character, this.myGameData, 'enem12'),
+            new SlimeEnemigo(this, 70, 1, 0, 2295, 1919, items.chalecoBronce, [enemies.cangrejo, enemies.platanoMaduro, enemies.platanoMaduro, enemies.platanoMaduro], this.WallLayer, this.character, this.myGameData, 'enem13'),
 
-            new SlimeEnemigo(this, 100, 1, 0, 2294, 1142, "nada", [enemies.cangrejo, enemies.langosta], this.WallLayer, this.character, this.myGameData, 'enem14'),
-            new SlimeEnemigo(this, 50, 1, 1, 2000, 2192, "nada", [enemies.medusa, enemies.langosta, enemies.medusa], this.WallLayer, this.character, this.myGameData, 'enem15'),
-            new SlimeEnemigo(this, 100, 1, 1, 1586, 2152, "Chaleco de bronce", [enemies.pezGlobo, enemies.pezGlobo, enemies.pirania, enemies.pirania], this.WallLayer, this.character, this.myGameData, 'enem16'),
+            new SlimeEnemigo(this, 100, 1, 0, 2294, 1142, undefined, [enemies.cangrejo, enemies.langosta], this.WallLayer, this.character, this.myGameData, 'enem14'),
+            new SlimeEnemigo(this, 50, 1, 1, 2000, 2192, undefined, [enemies.medusa, enemies.langosta, enemies.medusa], this.WallLayer, this.character, this.myGameData, 'enem15'),
+            new SlimeEnemigo(this, 100, 1, 1, 1586, 2152, items.chalecoBronce, [enemies.pezGlobo, enemies.pezGlobo, enemies.pirania, enemies.pirania], this.WallLayer, this.character, this.myGameData, 'enem16'),
 
-            new SlimeEnemigo(this, 50, 1, 1, 903, 1966, "nada", [enemies.cangrejo, enemies.botella2, enemies.langosta], this.WallLayer, this.character, this.myGameData, 'enem17'),
-            new SlimeEnemigo(this, 50, 0, 1, 966, 1709, "nada", [enemies.pezPayaso, enemies.pepsi, enemies.pepsi, enemies.medusa], this.WallLayer, this.character, this.myGameData, 'enem18'),
-            new SlimeEnemigo(this, 50, 1, 0, 1060, 1301, "Escudo de hierro", [enemies.pezPayaso, enemies.pezPayaso, enemies.pezPayaso, enemies.pezPayaso], this.WallLayer, this.character, this.myGameData, 'enem19'),
+            new SlimeEnemigo(this, 50, 1, 1, 903, 1966, undefined, [enemies.cangrejo, enemies.botella2, enemies.langosta], this.WallLayer, this.character, this.myGameData, 'enem17'),
+            new SlimeEnemigo(this, 50, 0, 1, 966, 1709, undefined, [enemies.pezPayaso, enemies.pepsi, enemies.pepsi, enemies.medusa], this.WallLayer, this.character, this.myGameData, 'enem18'),
+            new SlimeEnemigo(this, 50, 1, 0, 1060, 1301, items.escudoHierro, [enemies.pezPayaso, enemies.pezPayaso, enemies.pezPayaso, enemies.pezPayaso], this.WallLayer, this.character, this.myGameData, 'enem19'),
 
-            new SlimeEnemigo(this, 50, 1, -1, 2896, 2178, "Guante de cuero +", [enemies.langosta, enemies.pezPayaso, enemies.langosta], this.WallLayer, this.character, this.myGameData, 'enem20'),
-            new SlimeEnemigo(this, 100, 1, 0, 3526, 2103, "Escudo de hierro", [enemies.cangrejo, enemies.cangrejo, enemies.pepsi], this.WallLayer, this.character, this.myGameData, 'enem21'),
-            new SlimeEnemigo(this, 50, 0, 1, 3430, 2036, "nada", [enemies.calamar, enemies.cangrejo, enemies.calamar], this.WallLayer, this.character, this.myGameData, 'enem22'),
+            new SlimeEnemigo(this, 50, 1, -1, 2896, 2178, items.guanteCueroPlus, [enemies.langosta, enemies.pezPayaso, enemies.langosta], this.WallLayer, this.character, this.myGameData, 'enem20'),
+            new SlimeEnemigo(this, 100, 1, 0, 3526, 2103, items.escudoHierro, [enemies.cangrejo, enemies.cangrejo, enemies.pepsi], this.WallLayer, this.character, this.myGameData, 'enem21'),
+            new SlimeEnemigo(this, 50, 0, 1, 3430, 2036, undefined, [enemies.calamar, enemies.cangrejo, enemies.calamar], this.WallLayer, this.character, this.myGameData, 'enem22'),
 
-            new SlimeEnemigo(this, 50, 0, 1, 3430, 1925, "nada", [enemies.pezGlobo, enemies.medusa, enemies.pepsi, enemies.pepsi], this.WallLayer, this.character, this.myGameData, 'enem23'),
-            new SlimeEnemigo(this, 100, 0, 1, 3624, 2003, "nada", [enemies.pezGlobo, enemies.medusa, enemies.pezPayaso], this.WallLayer, this.character, this.myGameData, 'enem24')
+            new SlimeEnemigo(this, 50, 0, 1, 3430, 1925, undefined, [enemies.pezGlobo, enemies.medusa, enemies.pepsi, enemies.pepsi], this.WallLayer, this.character, this.myGameData, 'enem23'),
+            new SlimeEnemigo(this, 100, 0, 1, 3624, 2003, undefined, [enemies.pezGlobo, enemies.medusa, enemies.pezPayaso], this.WallLayer, this.character, this.myGameData, 'enem24')
         ];
         slimes.forEach(slime => {
             if(this.myGameData.CheckDefeated(slime.slimeId)) {
