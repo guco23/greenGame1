@@ -81,10 +81,15 @@ init(data){
           this.FloorLayer = this.map.createLayer('Suelo', tileset1);
           this.WallLayer = this.map.createLayer('Paredes', tileset1);
           this.WallLayer.setCollisionByExclusion([-1]);          
-          this.Puerta1 = this.map.createLayer('Puerta1', tileset1);
-
-          this.Puerta2 = this.map.createLayer('Puerta2', tileset1);
           
+          if(!this.myGameData.Interactablehitboxes[5]){
+              this.Puerta1 = this.map.createLayer('Puerta1', tileset1);
+              this.Puerta1.setCollisionByExclusion([-1]);
+          }
+          if(!this.myGameData.Interactablehitboxes[6]){
+              this.Puerta2 = this.map.createLayer('Puerta2', tileset1);
+              this.Puerta2.setCollisionByExclusion([-1]);   
+          }
           this.hitbox1 = this.map.createFromObjects('Transiciones', {id:1});          
           this.physics.add.existing(this.hitbox1[0]);
           this.hitbox2 = this.map.createFromObjects('Transiciones', {id:2});          
@@ -194,6 +199,8 @@ init(data){
         this.character = new Character(this, this.cx, this.cy,this.dir);
         this.physics.world.enable(this.character);
         this.physics.add.collider(this.character, this.WallLayer);
+        if(!this.myGameData.Interactablehitboxes[5])this.Puerta1Collider = this.physics.add.collider(this.character, this.Puerta1);
+        if(!this.myGameData.Interactablehitboxes[6])this.Puerta2Collider = this.physics.add.collider(this.character, this.Puerta2);
         this.physics.add.collider(this.character, groupCoinsNM, (character, coin) => {
             this.myGameData.AñadeMonedasNM(1);
             console.log(this.myGameData.GetMonedasNM())
@@ -231,7 +238,43 @@ init(data){
         })
         this.physics.add.overlap(this.character, this.hitbox2[0], ()=>{
             //Poner qué pasa si se supera la sección de nuevos ministerios 
-        })          
+        })   
+        this.physics.add.overlap(this.character, this.Caja1[0], ()=>{
+            if(!this.Texto&&this.interact == 0){
+                let self = this;
+                if(this.myGameData.Interactablehitboxes[5]){
+                    new dialogo(this,this.character,38);
+                }else{
+                    if(this.myGameData.GetMonedasNM() >= 1){                        
+                        new dialogo(this, this.character,37, function(){
+                            self.myGameData.Interactablehitboxes[5] = true;
+                            self.Puerta1.visible = false;                  
+                            self.Puerta1Collider.destroy();
+                        })     
+                    }else{
+                        new dialogo(this,this.character,36);
+                    }
+                }
+            }
+        })       
+        this.physics.add.overlap(this.character, this.Caja2[0], ()=>{
+            if(!this.Texto&&this.interact == 0){
+                let self = this;
+                if(this.myGameData.Interactablehitboxes[6]){
+                    new dialogo(this,this.character,41);
+                }else{
+                    if(this.myGameData.GetMonedasNM() >= 65){                        
+                        new dialogo(this, this.character,40, function(){
+                            self.myGameData.Interactablehitboxes[6] = true;
+                            self.Puerta2.visible = false;                  
+                            self.Puerta2Collider.destroy();
+                        })     
+                    }else{
+                        new dialogo(this,this.character,39);
+                    }
+                }
+            }
+        })   
 
         this.physics.add.overlap(this.character, this.Albert[0], ()=>{
             var self = this;

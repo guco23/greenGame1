@@ -19,6 +19,7 @@ export default class GameData {
         this.NMCoins = 0; //Contador de monedas de nuevos ministerios
         let coins = this.NMCoins;
 
+
         this.objects[0] = {
             'Nombre': "Nota1",
             'Pillado': false,
@@ -56,20 +57,16 @@ export default class GameData {
             'Pillado': false,
         };
 
-        this.AñadeObjetoClave = function (aux) {
-            console.log("tocame uwu");
+        this.AñadeObjetoClave = function (aux) {            
             this.objects[aux].Pillado = true;
         }
-        this.CheckObjetoClave = function (aux) {
-            //console.log(this.objects[aux].Pillado);
+        this.CheckObjetoClave = function (aux) {            
             return this.objects[aux].Pillado;
         }
-        this.AñadeMonedasNM = function (aux) {
-            //console.log(this.objects[aux].Pillado);
-            coins = coins + aux;
+        this.AñadeMonedasNM = function (aux) {            
+            coins += aux;
         }
-        this.GetMonedasNM = function () {
-            //console.log(this.objects[aux].Pillado);
+        this.GetMonedasNM = function () {            
             return coins;
         }
 
@@ -88,6 +85,8 @@ export default class GameData {
         this.Interactablehitboxes[2] = false;
         this.Interactablehitboxes[3] = 0;
         this.Interactablehitboxes[4] = false;
+        this.Interactablehitboxes[5] = false;
+        this.Interactablehitboxes[6] = false;
     }
 
     //Metodos que añaden o desbloquean objetos
