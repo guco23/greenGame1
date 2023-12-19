@@ -114,6 +114,9 @@ export class MenuEscena extends Phaser.Scene {
                 this.menuActual = this.selectorObjetos;
                 this.selectorObjetos.activar();
                 //Equipar el objero y actualizar la interfaz
+                this.gameData.party[this.equipadorPersonajes.selection].equipItem(
+                    this.gameData.items[this.selectorObjetos.selection]
+                )
                 break;
             case this.selectorParty:
                 //Establece el estado cambio personaje para cambiar el funcionamiento consiguiente
@@ -207,7 +210,7 @@ export class MenuEscena extends Phaser.Scene {
                     this.selectorParty.hide();
                     this.selectorAllies.hide();
                     this.selectorObjetos.mostrar();
-                    this.equipadorPersonajes.show();
+                    this.equipadorPersonajes.refresh();
                 } else if (this.opcionPrimaria.selection === 0) {
                     //Selección de personajes
                     this.selectorParty.show();

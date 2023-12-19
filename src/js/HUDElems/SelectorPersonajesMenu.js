@@ -29,10 +29,10 @@ class PersonajeMenu {
         if(this.personaje.item === -1) {
             itemName = "SIN EQUIPAR"
         } else {
-            itemName = this.personaje.item.name;
+            itemName = this.personaje.item.nombre;
         }
         this.descripcion.aplicarTexto(this.personaje.name + "\n" + this.personaje.MBTI + "\n" + this.personaje.descripcion + 
-        "\n" + itemName);
+        "\n" + "Item: " + itemName);
     }
 
     ocultar() {
