@@ -144,9 +144,24 @@ export class EscenaTilesets extends Phaser.Scene {
                 slime.destroy();
             }
         });
-        
+  /*      
         this.myGameData.AddCharacter(new Protagonista(personajes.protagonista)); //No te olvides de cambiarlo de vuelta al final
-
+        this.myGameData.AddCharacter(new Protagonista(personajes.MrBean)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.albert)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.frikol)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.donald)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.emmet)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.greta)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.bealonMusk)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.indiana)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.johnny)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.judioCesar)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.frijolConBotas)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.samba)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.saulJudman)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.selena)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.rajoy)); //No te olvides de cambiarlo de vuelta al final
+*/
         this.myGameData.AñadeItemEquipable(items.armaduraBronce);
         this.myGameData.AñadeItemEquipable(items.armaduraDiamante);
 
