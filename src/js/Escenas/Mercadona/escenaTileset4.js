@@ -22,7 +22,8 @@ init(data){
     }
 
     //crear aqui los objetos de la escena
-    create() {        
+    create() {  
+        this.sound.stopAll();      
         this.map = this.make.tilemap({ 
             key: 'Almacen4', 
             tileWidth: 16, 

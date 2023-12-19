@@ -26,7 +26,9 @@ init(data){
     }
 
     //crear aqui los objetos de la escena
-    create() {/*
+    create() {
+        this.sound.stopAll();
+        /*
         let screenWidth = this.game.config.width;
         let screenHeight = this.game.config.height;
         //Imagen 1
@@ -69,7 +71,11 @@ init(data){
 
           //Cofres
           let groupCofres = this.add.group();
-          let cofre1 = this.map.createFromObjects('Cofres', {name: "cofre1", key: 'cofre', item: items.escudoMadera });
+          let cofre1 = this.map.createFromObjects('Cofres', {name: "cofre1", itemID: 0, key: 'cofre'});
+          // Asegúrate de que cofres sea un array
+            if (!Array.isArray(cofre1)) {
+                cofre1 = [cofre1];
+            }
           this.anims.play('cofreCerrado', cofre1);
           groupCofres.addMultiple(cofre1);
           cofre1.forEach(obj => {
@@ -77,15 +83,20 @@ init(data){
               this.physics.add.existing(obj);
           });
 
+          let self = this;
           this.physics.add.overlap(this.character, groupCofres, (character, cofre) => {
+            
             if(this.interact == 0){
-                if(!this.myGameData.AddItemEquipable(cofre.item))
+                if (cofre.name == "cofre1"){
+                    if(!self.myGameData.AñadeItemEquipable(items.chalecoCuero))
                 {
+                    console.log("Nombre del ítem:", items.chalecoCuero.nombre);
                     console.log("objeto conseguido");   
                 }
                 else
                 {
                     console.log("vacio");  
+                }
                 }
                 this.anims.play('cofreAbierto', cofre);
             }

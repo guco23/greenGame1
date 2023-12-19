@@ -58,6 +58,7 @@ export class EscenaTilesets extends Phaser.Scene {
 
     //crear aqui los objetos de la escena
     create() {
+        this.sound.stopAll();
         /*let screenWidth = this.game.config.width;
         let screenHeight = this.game.config.height;
         //Imagen 1
@@ -144,8 +145,9 @@ export class EscenaTilesets extends Phaser.Scene {
                 slime.destroy();
             }
         });
-  /*      
+
         this.myGameData.AddCharacter(new Protagonista(personajes.protagonista)); //No te olvides de cambiarlo de vuelta al final
+        /*
         this.myGameData.AddCharacter(new Protagonista(personajes.MrBean)); //No te olvides de cambiarlo de vuelta al final
         this.myGameData.AddCharacter(new Protagonista(personajes.albert)); //No te olvides de cambiarlo de vuelta al final
         this.myGameData.AddCharacter(new Protagonista(personajes.frikol)); //No te olvides de cambiarlo de vuelta al final
@@ -161,10 +163,10 @@ export class EscenaTilesets extends Phaser.Scene {
         this.myGameData.AddCharacter(new Protagonista(personajes.saulJudman)); //No te olvides de cambiarlo de vuelta al final
         this.myGameData.AddCharacter(new Protagonista(personajes.selena)); //No te olvides de cambiarlo de vuelta al final
         this.myGameData.AddCharacter(new Protagonista(personajes.rajoy)); //No te olvides de cambiarlo de vuelta al final
-*/
+
         this.myGameData.AñadeItemEquipable(items.armaduraBronce);
         this.myGameData.AñadeItemEquipable(items.armaduraDiamante);
-
+*/
         if(!this.myGameData.Interactablehitboxes[8]){
             new dialogo(this, this.character,44) //Comentad si no queréis que os moleste durante el desarrollo
             this.myGameData.Interactablehitboxes[8] = true;

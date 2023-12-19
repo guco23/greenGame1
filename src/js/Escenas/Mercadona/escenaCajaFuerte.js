@@ -21,6 +21,7 @@ init(data){
     }
     
     create() {
+        this.sound.stopAll();
         this.timer = 0;
         this.map = this.make.tilemap({ 
             key: 'escenaCajaFuerte', 
