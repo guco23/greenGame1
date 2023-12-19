@@ -70,7 +70,7 @@ export default class SlimeEnemigo extends Phaser.GameObjects.Sprite {
         this.body.height = this.bodyHeight;
 
         this.scene.anims.create({
-            key: 'idle',
+            key: 'idleSlime',
             frames: scene.anims.generateFrameNumbers('Slime', { start: 0, end: 0 }),
             frameRate: 5,
             repeat: 0
@@ -80,7 +80,7 @@ export default class SlimeEnemigo extends Phaser.GameObjects.Sprite {
     }
 
     preUpdate() {
-        this.play('idle');
+        this.play('idleSlime');
         this.body.setVelocityX(this.speed * this.MovingX);
         this.body.setVelocityY(this.speed * this.MovingY);
     }

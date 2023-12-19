@@ -14,6 +14,7 @@ export default class GameData {
         this.allies = [];
         this.partySize = 0;
         this.NMCoins = 0; //Contador de monedas de nuevos ministerios
+        let coins = this.NMCoins;
 
         this.objects[0] = {
             'Nombre': "Nota1",
@@ -62,11 +63,11 @@ export default class GameData {
         }
         this.AñadeMonedasNM = function (aux) {
             //console.log(this.objects[aux].Pillado);
-            this.NMCoins = this.NMcoins + aux;
+            coins = coins + aux;
         }
         this.GetMonedasNM = function () {
             //console.log(this.objects[aux].Pillado);
-            return this.NMCoins;
+            return coins;
         }
         this.Interactablehitboxes = [];
         this.Interactablehitboxes[0] = false;
@@ -95,7 +96,7 @@ export default class GameData {
     }
 
     AñadeMonedasNM(aux) {
-        this.NMCoins = this.NMcoins + aux;
+        NMCoins = NMcoins + aux;
     }
 
     GetMonedasNM(){

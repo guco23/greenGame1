@@ -3,6 +3,9 @@ import { RAIZ_IMAGENES } from "../../constants.js";
 import dialogo from "../../dialogo.js";
 import { Personaje	 } from "../../Combate JS/Personajes/Personaje.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
+import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
+import SlimeEnemigo from "../../SlimeEnemigo.js"
+
 export class EscenaPlaya extends Phaser.Scene {    
 constructor(){
     super('escenaPlaya')
@@ -17,12 +20,27 @@ init(data){
     preload() {        
         this.load.tilemapTiledJSON('Playa', 'assets/json/PlayaExterior.json');
         //this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
+        this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
         this.load.image('tileset_playa', RAIZ_IMAGENES+'tilesets/tileset_playa.png');
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
+        this.load.spritesheet('cofre',  RAIZ_IMAGENES+'Objetos/Cofres.png', {frameWidth: 16, frameHeight: 16})
     }
 
     //crear aqui los objetos de la escena
     create() {
+        this.anims.create({
+			key: 'cofreCerrado',
+			frames: this.anims.generateFrameNumbers('cofre', { start: 0, end: 0 }),
+			frameRate: 16,
+			repeat: -1
+		});
+
+        this.anims.create({
+			key: 'cofreAbierto',
+			frames: this.anims.generateFrameNumbers('cofre', { start: 1, end: 1 }),
+			frameRate: 16,
+			repeat: -1
+		});
         this.map = this.make.tilemap({ 
             key: 'Playa', 
             tileWidth: 16, 
@@ -87,6 +105,60 @@ init(data){
           this.physics.add.collider(this.character, this.AguaPuente);
           
           this.TopWallLayer = this.map.createLayer('ParedesSobrepuestas', tileset2);
+
+        //Cofres, mejor tocar lo minimo posible, unicamente cambiar que el item q de al jugador como tal en vez de ser un string sea un item
+        //Se que puede parecer una peruanada esto de abajo, pero por favor son la 1 de la mañana, he perdido el tiempo con la puta mierda de la memoria cahe del navegador
+        //y quedan menos de 24 horas asi que dejemonos de cosas de limpieza de codigo con esto
+        //POR FAVOR, HACED CASO A LO DICHO D,:
+        let groupCofres = this.add.group();
+        let cofre1 = this.map.createFromObjects('Cofres', {name: "cofre1", key: 'cofre', item: "item1" });
+		this.anims.play('cofreCerrado', cofre1);
+        groupCofres.addMultiple(cofre1);
+        cofre1.forEach(obj => {
+			console.log("uwu");
+			this.physics.add.existing(obj);
+		});
+
+        let cofre2 = this.map.createFromObjects('Cofres', {name: "cofre2", key: 'cofre', item: "item2" });
+		this.anims.play('cofreCerrado', cofre2);
+        groupCofres.addMultiple(cofre2);
+        cofre2.forEach(obj => {
+			console.log("uwu");
+			this.physics.add.existing(obj);
+		});
+
+        let cofre3 = this.map.createFromObjects('Cofres', {name: "cofre3", key: 'cofre', item: "item3" });
+		this.anims.play('cofreCerrado', cofre3);
+        groupCofres.addMultiple(cofre3);
+        cofre3.forEach(obj => {
+			console.log("uwu");
+			this.physics.add.existing(obj);
+		});
+
+        let cofre4 = this.map.createFromObjects('Cofres', {name: "cofre4", key: 'cofre', item: "item4" });
+		this.anims.play('cofreCerrado', cofre4);
+        groupCofres.addMultiple(cofre4);
+        cofre4.forEach(obj => {
+			console.log("uwu");
+			this.physics.add.existing(obj);
+		});
+
+        let cofre5 = this.map.createFromObjects('Cofres', {name: "cofre5", key: 'cofre', item: "item5" });
+		this.anims.play('cofreCerrado', cofre5);
+        groupCofres.addMultiple(cofre5);
+        cofre5.forEach(obj => {
+			console.log("uwu");
+			this.physics.add.existing(obj);
+		});
+
+        let cofre6 = this.map.createFromObjects('Cofres', {name: "cofre6", key: 'cofre', item: "item6" });
+		this.anims.play('cofreCerrado', cofre6);
+        groupCofres.addMultiple(cofre6);
+        cofre6.forEach(obj => {
+			console.log("uwu");
+			this.physics.add.existing(obj);
+		});
+
 
 
           this.physics.add.overlap(this.character, this.hitbox1[0], ()=>{
@@ -155,6 +227,36 @@ init(data){
                     
           this.cameras.main.startFollow(this.character);      
           this.cameras.main.zoom = 2.2;
+
+        let slimes = [
+            new SlimeEnemigo(this, 100, 0, 1, 1439, 328, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem1'),
+            new SlimeEnemigo(this, 100, 1, 1, 964, 500, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem2'),
+            new SlimeEnemigo(this, 70, 1, 0, 2289, 497, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem3'),
+
+            new SlimeEnemigo(this, 70, 1, 0, 2283, 792, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem1'),
+            new SlimeEnemigo(this, 100, 0, 1, 2625, 1366, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem2'),
+            new SlimeEnemigo(this, 70, 1, 0, 2295, 1919, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem3'),
+
+            new SlimeEnemigo(this, 100, 1, 0, 2294, 1142, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem1'),
+            new SlimeEnemigo(this, 50, 1, 1, 2000, 2192, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem2'),
+            new SlimeEnemigo(this, 100, 1, 1, 1586, 2152, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem3'),
+
+            new SlimeEnemigo(this, 50, 1, 1, 903, 1966, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem1'),
+            new SlimeEnemigo(this, 50, 0, 1, 966, 1709, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem2'),
+            new SlimeEnemigo(this, 50, 1, 0, 1060, 1301, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem3'),
+
+            new SlimeEnemigo(this, 50, 1, -1, 2896, 2178, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem1'),
+            new SlimeEnemigo(this, 100, 1, 0, 3526, 2103, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem2'),
+            new SlimeEnemigo(this, 50, 0, 1, 3430, 2036, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem3'),
+
+            new SlimeEnemigo(this, 50, 0, 1, 3430, 1925, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem1'),
+            new SlimeEnemigo(this, 100, 0, 1, 3624, 2003, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem2')
+        ];
+        slimes.forEach(slime => {
+            if(this.myGameData.CheckDefeated(slime.slimeId)) {
+                slime.destroy();
+            }
+        });
 
     }
 
