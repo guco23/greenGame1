@@ -19,12 +19,6 @@ export class CombatManager {
     current;    //Apunta al personaje o enemigo que tiene el turno
     whoseTurn;  //Booleano, true para jugadores y false para enemigos
 
-    //Parámetros para trackear el apuntado
-    /*
-    target;     //Objetivo de parte del jugador. [-1 para cuando no esté targeteando (tema de renderizado)]
-    whereAim;   //Booleano para el targeteo, true para equipo aliado (curas y bufos), false para los enemigos
-    targetAll;  //Booleano que indica si targetea a todos o no. 
-    */
     //Otros parámetros
 
     spPoints;   //Puntos de habilidad especial
@@ -151,6 +145,7 @@ export class CombatManager {
             this.endTurn();
         }
         else {
+            console.log(this.spPoints);
             if (this.whoseTurn === true) {
                 if (this.current < this.teamSize) {
                     if (this.playerTeam[this.current].living) {
@@ -218,12 +213,15 @@ export class CombatManager {
     doAction(action, target) {
         if (action === 0) { //Ataque
             this.playerTeam[this.current].attack(target);
+            this.changeSp(1);
         }
         else if (action === 1) { //Especial
             this.playerTeam[this.current].special(target);
+            this.changeSp(-1);
         }
         else if(action === 2) { //Defensa
             this.playerTeam[this.current].defend();
+            this.changeSp(1);
         }
     }
 }

@@ -124,6 +124,7 @@ export class Personaje {
     }
     
     gainShield(shield) {
+        shield = Math.floor(shield);
         if(this.escudo + shield > this.maxHp) {
             this.currentCombat.addInfo("defend", this.maxHp - this.escudo, this, null);
             this.escudo = this.maxHp;
@@ -151,7 +152,7 @@ export class Personaje {
     }
 
     sufferDamage(dmg) {
-        let damage = Math.floor(dmg * ((100 - this.def) / 100))
+        let damage = Math.floor(dmg * ((100 - this.def) / 100));
         if(damage < 1) {
             if(this.escudo > 0) {
                 this.escudo--;
@@ -165,7 +166,7 @@ export class Personaje {
             if(this.escudo > 0) {
                 this.escudo -= damage;
                 if(this.escudo < 0) {
-                    this.currentHp -= this.escudo;
+                    this.currentHp += this.escudo;
                     this.escudo = 0;
                 }
             }

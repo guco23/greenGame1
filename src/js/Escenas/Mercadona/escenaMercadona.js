@@ -5,8 +5,11 @@ import dialogo from "../../dialogo.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { Personaje } from "../../Combate JS/Personajes/Personaje.js";
 import { CONTROLES_OVERWORLD } from "../../constants.js";
+import { Comandante } from "../../Combate JS/Personajes/Comandante.js";
+import { Emprendedor } from "../../Combate JS/Personajes/Emprendedor.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
+
 
 export class EscenaMercadona extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -144,14 +147,14 @@ export class EscenaMercadona extends Phaser.Scene {
             var self = this;
             if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.MrBean))new dialogo(this, this.character, 4, function(){
                 self.MrBeanImage.destroy();   
-                self.myGameData.AddCharacter(new Personaje(personajes.MrBean));
+                self.myGameData.AddCharacter(new Emprendedor(personajes.MrBean));
             })     
         })
         this.physics.add.overlap(this.character, this.JudioCesar[0], ()=>{
             var self = this;
             if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.judioCesar))new dialogo(this, this.character, 3, function(){
                 self.JudioCaesarImage.destroy();   
-                self.myGameData.AddCharacter(new Personaje(personajes.judioCesar));
+                self.myGameData.AddCharacter(new Comandante(personajes.judioCesar));
             })     
         })
 
