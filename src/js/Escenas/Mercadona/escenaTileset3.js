@@ -89,13 +89,16 @@ init(data){
             if(this.interact == 0){
                 if (cofre.name == "cofre1"){
                     if(!self.myGameData.AñadeItemEquipable(items.chalecoCuero))
-                {                    
+                {   
+                       
+                    new dialogo(this, this.character,47);                 
                     console.log("Nombre del ítem:", items.chalecoCuero.nombre);
-                    console.log("objeto conseguido");   
-                    new dialogo(this, this.character,47);
+                    console.log("objeto conseguido");
                 }
                 else
                 {
+                       
+                    new dialogo(this, this.character,48);
                     console.log("vacio");  
                 }
                 }

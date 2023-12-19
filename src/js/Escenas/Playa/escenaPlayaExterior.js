@@ -195,28 +195,34 @@ init(data){
             if(this.interact == 0){
                 if (cofre.name == "cofre1"){
                     if(!self.myGameData.AñadeItemEquipable(items.escudoBronce))
-                    {
+                    {   
+                    new dialogo(this, this.character,47);
                     console.log("Nombre del ítem:", items.escudoBronce.nombre);
                     console.log("objeto conseguido");   
                     }
-                    else console.log("vacio");  
+                    else    
+                    new dialogo(this, this.character,48);  
     
                 }
                 else if (cofre.name == "cofre3"){
                     if(!self.myGameData.AñadeItemEquipable(items.guanteCueroPlus))
-                    {
+                    {  
+                    new dialogo(this, this.character,47);
                     console.log("Nombre del ítem:", items.guanteCueroPlus.nombre);
                     console.log("objeto conseguido");   
                     }
-                    else console.log("vacio");
+                    else    
+                    new dialogo(this, this.character,48);
                 }
                 else if (cofre.name == "cofre4"){
                     if(!self.myGameData.AñadeItemEquipable(items.escudoBronce))
-                    {
+                    {   
+                    new dialogo(this, this.character,47);
                     console.log("Nombre del ítem:", items.escudoBronce.nombre);
                     console.log("objeto conseguido");   
                     }
-                    else console.log("vacio");
+                    else    
+                    new dialogo(this, this.character,48);
                 }
                 this.anims.play('cofreAbierto', cofre);
             }

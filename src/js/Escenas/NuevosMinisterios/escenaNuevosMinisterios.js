@@ -230,44 +230,54 @@ init(data){
             if(this.interact == 0){
                 if (cofre.name == "cofre2"){
                     if(!self.myGameData.AñadeItemEquipable(items.chalecoDiamante))
-                    {
+                    {   
+                    new dialogo(this, this.character,47);
                     console.log("Nombre del ítem:", items.chalecoDiamante.nombre);
                     console.log("objeto conseguido");   
                     }
-                    else console.log("vacio");  
+                    else 
+                    new dialogo(this, this.character,48); 
     
                 }
                 else if (cofre.name == "cofre3"){
                     if(!self.myGameData.AñadeItemEquipable(items.guanteDiamante))
                     {
+                    new dialogo(this, this.character,47);
                     console.log("Nombre del ítem:", items.guanteDiamante.nombre);
                     console.log("objeto conseguido");   
                     }
-                    else console.log("vacio");
+                    else 
+                    new dialogo(this, this.character,48);
                 }
                 else if (cofre.name == "cofre4"){
                     if(!self.myGameData.AñadeItemEquipable(items.escudoDiamante))
                     {
+                    new dialogo(this, this.character,47);
                     console.log("Nombre del ítem:", items.escudoDiamante.nombre);
                     console.log("objeto conseguido");   
                     }
-                    else console.log("vacio");
+                    else 
+                    new dialogo(this, this.character,48);
                 }
                 else if (cofre.name == "cofre5"){
                     if(!self.myGameData.AñadeItemEquipable(items.guanteDiamante))
                     {
+                    new dialogo(this, this.character,47);
                     console.log("Nombre del ítem:", items.guanteDiamante.nombre);
                     console.log("objeto conseguido");   
                     }
-                    else console.log("vacio");
+                    else 
+                    new dialogo(this, this.character,48);
                 }
                 else if (cofre.name == "cofre6"){
                     if(!self.myGameData.AñadeItemEquipable(items.chalecoDiamante))
                     {
+                    new dialogo(this, this.character,47);
                     console.log("Nombre del ítem:", items.chalecoDiamante.nombre);
                     console.log("objeto conseguido");   
                     }
-                    else console.log("vacio");
+                    else 
+                    new dialogo(this, this.character,48);
                 }
                 this.anims.play('cofreAbierto', cofre);
             }
