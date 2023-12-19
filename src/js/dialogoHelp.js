@@ -100,6 +100,9 @@ export default class dialogoHelp {
         this.dialogos[40] = ["Le haces un bizum a la máquina con las 65 monedas  que te pedía, consiguiendo así el ticket", "Le salen patas a la puerta que te bloqueaba el pasoy sale corriendo"]
         this.dialogos[41] = ["La máquina sigue funcionando perfectamente, lo cuales bastante inútil, siendo sinceros", "Es decir, no vas a pedir un segundo billete,       ¿verdad?", 
         "Tendrías que recolectar otras 65 monedas más, y    nadie va a gastar su tiempo en ello...", "¿Verdad?"]
+        this.dialogos[42] = ["Has conseguido un objeto, mira el inventario"]
+        this.dialogos[43] = ["Está vacío"]
+
 
         this.images = [];
         this.images[0] = ["Frikol", "Judini","Judini","Frikol","Frikol","Frikol","Frikol","Judini","Judini","Frikol","Judini","Frikol","Judini","Frikol","-"]
