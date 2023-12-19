@@ -222,7 +222,7 @@ init(data){
 
 
         this.physics.add.overlap(this.character, groupCheckPoints, (character, checkPoint) => {
-            this.myGameData.UpdateCheckPoint(this, this.character.x, this.character.y);
+            this.myGameData.UpdateCheckPoint(this, character.x, character.y);
             this.anims.play('banderaVerde', checkPoint);
         });
 

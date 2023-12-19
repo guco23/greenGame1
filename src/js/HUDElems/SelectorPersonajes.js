@@ -103,7 +103,7 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
         for (let i = 0; i < this.arrayImgs.length; i++) {
             //Sólo crea flechas para los personajes que estén vivos
             if (this.personajes[i].living) {
-                this.opciones.push(new Selector(this.scene, this.arrayImgs[i].img.x - 50, this.arrayImgs[i].img.y + this.arrayImgs[i].img.displayHeight / 2, i));}
+                this.opciones.push(new Selector(this.scene, this.arrayImgs[i].img.x - 60, this.arrayImgs[i].img.y, i));}
         }
         //Evita que el selector quede en un una selección indefinida
         if(this.opciones[this.selection] === undefined) {

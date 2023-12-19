@@ -41,7 +41,9 @@ export class CombateEscena extends Phaser.Scene {
             this.load.image(aliado.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_COMBAT + aliado.imgLink);
         });
         //Carga el fondo, dependerá de la zona del juego en la que nos encontremos
+        
         this.load.image('background', RAIZ_IMAGENES + "combatBackground/combatBackgroundPlaceholder.png");
+        this.load.image('ui', RAIZ_IMAGENES + "combatui.png");
         this.load.image("selectorAccion", RAIZ_IMAGENES + 'seleccionAccion.png');
         this.load.image("selectorPersonaje", RAIZ_IMAGENES + 'seleccionPersonaje.png');
         this.load.audio('musicCombateSimple', RAIZ_SOUNDS+RAIZ_SOUNDS_MUSICA+'Combate contra enemigos.mp3')    
@@ -83,20 +85,17 @@ export class CombateEscena extends Phaser.Scene {
             this.aliados[i].imgLink = this.aliados[i].name;
         }
         //Coloca los sprites de los enemigos en la escena, en la versión final los personajes contienen sprites y su funcionalidad
-        this.sceneAliad = new CharacterArray(this, gameWidth / 9, 200, 400, false, this.aliados, 4);
+        this.sceneAliad = new CharacterArray(this, gameWidth / 9, 60, 400, false, this.aliados, 4);
         this.sceneEnem = new CharacterArray(this, gameWidth - (gameWidth / 5), 100, 400, false, this.enemigos, 3);
 
         //Creación de los cuadros del HUD
-        this.graphics = this.add.graphics();
-        this.graphics.fillStyle(0x0033cc, 1);
-        this.graphics.fillRoundedRect(2, gameHeight - 180, 270, 180, { tl: 12, tr: 12, bl: 0, br: 0 });
-        this.graphics.fillRoundedRect(275, gameHeight - 180, 600, 180, { tl: 12, tr: 12, bl: 12, br: 12 });
+        this.add.image(gameWidth / 2, gameHeight / 2 + 45, 'ui').setScale(4.2,4.2);
 
         this.vidasAliados = [];
         for (let i = 0; i < this.aliados.length; i++) {
-            let positionY = 440 + (i * 37);
+            let positionY = 460 + (i * 34);
             this.nombresAliados = this.add.text(20, positionY, this.aliados[i].name);
-            this.vidasAliados.push(new TextoVida(this, 120, positionY, this.aliados[i]));
+            this.vidasAliados.push(new TextoVida(this, 202, positionY + 9, this.aliados[i]));
         }
 
         this.vidasEnemigos = [];
@@ -108,8 +107,8 @@ export class CombateEscena extends Phaser.Scene {
         new DatosAccion("Habilidad", ""), //Esta cambiará en cada turno (mostrando la descripción de la habilidad del personaje)
         new DatosAccion("Defender", "Reduce el daño recibido hasta el siguiente turno")];
 
-        this.textoDescriptivo = new TextoDescriptivo(this, 420, 440);
-        this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 310, 440, 40, datosAcciones);
+        this.textoDescriptivo = new TextoDescriptivo(this, 490, 460);
+        this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 382, 462, 40, datosAcciones);
         this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.sceneEnem.array);
         this.selectorAliados = new SelectorPersonajes(this, this.aliados, this.sceneAliad.array);
 
