@@ -4,6 +4,11 @@ import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
 import { DatosAccion } from "./HUDElems/SelectorAcciones.js";
 import { SelectorPersonajesMenu } from "./HUDElems/SelectorPersonajesMenu.js";
 
+const Estados = {
+    ESTANDAR: "seleccion_estandar", //El usuario está seleccionando que hacer en el menu
+    CAMBIO_PERSONAJE: "seleccion_cambio", //El usuario ha seleccionado un personaje de la party y quiere cambiarlo por otro
+}
+
 export class MenuEscena extends Phaser.Scene {
 
     constructor() {
@@ -76,6 +81,7 @@ export class MenuEscena extends Phaser.Scene {
                 this.Cancel();
             }
         });
+        this.estado = Estados.ESTANDAR;
     }
 
     //Para cerrar el menu y volver a la escena anterior
@@ -91,7 +97,7 @@ export class MenuEscena extends Phaser.Scene {
                     this.opcionPrimaria.desactivar();
                     this.menuActual = this.selectorParty;
                     this.selectorParty.mostrar();
-                    this.descripcion.aplicarTexto("X para inspeccionar otros aliados.")
+                    this.Describir(1);
                 }
                 else if (this.opcionPrimaria.selection === 1) {
                     this.opcionPrimaria.desactivar();
@@ -110,6 +116,25 @@ export class MenuEscena extends Phaser.Scene {
                 this.selectorObjetos.activar();
                 //Equipar el objero y actualizar la interfaz
                 break;
+            case this.selectorParty:
+                //Establece el estado cambio personaje para cambiar el funcionamiento consiguiente
+                this.estado = Estados.CAMBIO_PERSONAJE;
+                this.selectorParty.ocultar();
+                this.menuActual = this.selectorAllies;
+                this.selectorAllies.mostrar();
+                this.Describir(2);
+                break;
+            case this.selectorAllies:
+                //Establece el estado cambio personaje para cambiar el funcionamiento consiguiente
+                if(this.estado === Estados.CAMBIO_PERSONAJE) {
+                    this.gameData.SwapCharacter(this.selectorParty.selection, this.selectorAllies.selection);
+                    this.RefreshCharacterSelectors();
+                    this.estado = Estados.ESTANDAR;
+                    this.selectorAllies.ocultar();
+                    this.menuActual = this.selectorParty;
+                    this.selectorParty.mostrar();
+                }
+                break;
         }
     }
 
@@ -124,9 +149,17 @@ export class MenuEscena extends Phaser.Scene {
                 this.selectorAllies.mostrar();
                 break;
             case this.selectorAllies:
-                this.selectorAllies.ocultar();
-                this.menuActual = this.opcionPrimaria;
-                this.opcionPrimaria.activar();
+                if (this.estado === Estados.ESTANDAR) {
+                    this.selectorAllies.ocultar();
+                    this.menuActual = this.opcionPrimaria;
+                    this.opcionPrimaria.activar();
+                } else if (this.estado === Estados.CAMBIO_PERSONAJE) {
+                    this.selectorAllies.ocultar();
+                    this.menuActual = this.selectorParty;
+                    this.selectorParty.mostrar();
+                    this.estado = Estados.ESTANDAR;
+                    this.Describir(1);
+                }
                 break;
             case this.selectorObjetos:
                 this.selectorObjetos.desactivar();
@@ -164,5 +197,21 @@ export class MenuEscena extends Phaser.Scene {
                 }
                 break;
         }
+    }
+
+    Describir(d) {
+        switch (d) {
+            case 1:
+                this.descripcion.aplicarTexto("X para inspeccionar otros aliados.\nZ para cambiar el personaje.");
+                break;
+            case 2:
+                this.descripcion.aplicarTexto("Selecciona el personaje por el que lo quieres sustituir");
+                break;
+        }
+    }
+
+    RefreshCharacterSelectors() {
+        this.selectorAllies.refresh();
+        this.selectorParty.refresh();
     }
 }
