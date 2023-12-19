@@ -35,8 +35,16 @@ init(data){
     //crear aqui los objetos de la escena
     create() {        
         this.sound.stopAll();
-        this.MainTheme = this.sound.add('musicPlaya')
-        this.MainTheme.play();
+        const musicConfig = {
+            mute: false,
+            volume: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        }
+        this.MainTheme = this.sound.add('musicPlaya');
+        this.MainTheme.play(musicConfig);
         this.timer = 0;
 
         this.anims.create({
