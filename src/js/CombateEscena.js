@@ -1,5 +1,4 @@
 import { RAIZ_IMAGENES, CONTROLES, RAIZ_IMGS_COMBAT } from "./constants.js";
-import { Enemigo } from "./Combate JS/Enemigos/Enemigo.js"
 import { BarraVida } from "./HUDElems/BarraVida.js";
 import { TextoVida } from "./HUDElems/TextoVida.js";
 import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
@@ -137,7 +136,7 @@ export class CombateEscena extends Phaser.Scene {
                         }
                         else if (this.menuActual.selection === 1) {
                             //Llamas al combat manager para pedir la info de la habilidad especial y activas el menu correspondiente
-                            this.combatManager.specialRequestInfo();
+                            this.SpecialHabilityTarget(this.combatManager.specialRequestInfo());
                         }
                         else {
                             this.menuActual = this.selectorAliados;
@@ -215,6 +214,33 @@ export class CombateEscena extends Phaser.Scene {
             let current = this.combatManager.current;
             if (current < this.partySize)
                 this.selectorAcciones.updateAction(1, "Habilidad", this.aliados[current].descripcionHabilidad);
+        }
+    }
+
+    SpecialHabilityTarget(tipo) {
+        switch (tipo) {
+            case 0:
+                this.menuActual = this.selectorEnemigos;
+                this.menuActual.mostrar();
+                break;
+            case 1:
+                this.menuActual = this.selectorAliados;
+                this.menuActual.mostrar();
+                break;
+            case 2:
+                this.menuActual = this.selectorEnemigos;
+                this.menuActual.seleccionCompleta();
+                this.menuActual.mostrar();
+                break;
+            case 3:
+                this.menuActual = this.selectorAliados;
+                this.menuActual.seleccionCompleta();
+                this.menuActual.mostrar();
+                break;
+            case 4:
+                this.menuActual = this.selectorAliados;
+                this.menuActual.seleccionPredefinida(this.combatManager.current);
+                break;
         }
     }
 };
