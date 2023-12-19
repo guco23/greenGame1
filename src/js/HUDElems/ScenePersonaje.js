@@ -19,7 +19,10 @@ class ScenePersonaje extends Phaser.GameObjects.Container {
         this.img.visible = false;
         this.stun.visible = false;
         this.poison.visible = false;
+    }
 
+    mostrar() {
+        this.img.visible = true;
     }
 
     setPoisoned(b) {
@@ -53,6 +56,9 @@ export class CharacterArray {
             this.array[i].setPoisoned(this.personajes[i].dot > 0);
             if (!this.personajes[i].living)
                 this.array[i].ocultar();
+            if (!this.array[i].img.visible && this.personajes[i].living) {
+                this.array[i].mostrar();
+            }
         }
     }
 }

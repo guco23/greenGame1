@@ -195,7 +195,6 @@ export class Personaje {
 
     takeTurn() {
         if(this.stunned === true) {
-            console.log("balls");
             this.stunned = false;
             this.currentCombat.addInfo("stun", 0, this,  null);
             this.endTurn();

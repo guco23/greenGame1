@@ -5,6 +5,7 @@ export class Acuarius extends Enemigo {
     allies;
     resurect;
     startingAtk;
+    second = false;
 
     startCombat(combatManager) {
         this.currentCombat = combatManager;
@@ -13,22 +14,24 @@ export class Acuarius extends Enemigo {
         this.startingAtk = this.atk;
     }
 
-    constructor() {
-        super(idn);
-    }
-
     areaAttack() {
         let target = this.currentCombat.playerTeam;
         for(let i = 0; i < this.currentCombat.teamSize; i++) {
             if(target[i].living) {
                 this.currentCombat.addInfo("attack", target[i].sufferDamage(this.atk / 2), this, target[i]);
                 target[i].checkAlive();
-                if(!resurect) {
+                if(!this.resurect) {
                     this.aturdir(target[i]);
                 }
             }
         }
-        this.endTurn();
+        if(this.second) {
+            this.second = false;
+            this.attack();
+        }
+        else {
+            this.endTurn();
+        }
     }
 
     attack() {
@@ -46,24 +49,32 @@ export class Acuarius extends Enemigo {
             }
         }
         let target = this.getRandomInt(length);
-        if(this.getCrit()) {
-            damage = selecion[target].sufferDamage(this.atk * 3)
-            this.currentCombat.addInfo("attack", damage, this, selecion[target]);
-            this.currentCombat.addInfo("crit", 0, this, null);
-            this.aturdir(selecion[target]);
-            selecion[target].checkAlive();
+        if(selecion[target] != undefined) {
+            if(this.getCrit()) {
+                let damage = selecion[target].sufferDamage(this.atk * 3)
+                this.currentCombat.addInfo("attack", damage, this, selecion[target]);
+                this.currentCombat.addInfo("crit", 0, this, null);
+                this.aturdir(selecion[target]);
+                selecion[target].checkAlive();
+            }
+            else {
+                let damage = selecion[target].sufferDamage(this.atk)
+                this.currentCombat.addInfo("attack", damage, this, selecion[target]);
+                this.aturdir(selecion[target]);
+                selecion[target].checkAlive();
+            }
+            if(!this.revive) {
+                this.currentCombat.addInfo("special", this.name + " robó la vida de su objetivo.\n", this, null);
+                this.heal(damage);
+            }
+        }
+        if(this.second) {
+            this.second = false;
+            this.attack();
         }
         else {
-            let damage = selecion[target].sufferDamage(this.atk)
-            this.currentCombat.addInfo("attack", damage, this, selecion[target]);
-            this.aturdir(selecion[target]);
-            selecion[target].checkAlive();
+            this.endTurn();
         }
-        if(!this.revive) {
-            this.currentCombat.addInfo("special", this.name + " robó la vida de su objetivo.\n", this, null);
-            this.heal(damage);
-        }
-        this.endTurn();
     }
 
     aturdir(target) {
@@ -80,14 +91,16 @@ export class Acuarius extends Enemigo {
                 result++;
             }
         }
-        return (this.getRandomInt(this.currentCombat.enemySize) < result);
+        let pete = this.getRandomInt(this.currentCombat.enemySize);
+        console.log(pete);
+        return pete <= result;
     }
 
     checkAlive() {
         if(this.currentHp <= 0) {
             if (this.revive) {
                 this.currentHp = this.maxHp;
-                this.revive = false;
+                this.resurect = false;
                 this.dot = -25;
                 this.atk = this.startingAtk + 10;
                 this.currentCombat.addInfo("special", "¡" + this.name + " no se va a rendir!\n", this, null);
@@ -102,8 +115,8 @@ export class Acuarius extends Enemigo {
         }
     }
 
-    takeTurn() {
-        if(resurect) {
+    selectAction() {
+        if(this.resurect) {
             if(this.checkRevive()) {
                 this.revive();
             } 
@@ -119,23 +132,25 @@ export class Acuarius extends Enemigo {
         }
         else{
             let rand = this.getRandomInt(2);
+            if(this.currentHp < (this.maxHp / 3)) {
+                this.second = true;
+            }
             if(rand === 0) {
                 this.attack();
             }
             else {
                 this.areaAttack();
             }
-            if(this.currentHp < (this.maxHp / 3)) {
-                this.attack();
-            }
         }
     }
 
     revive() {
-        for(let i = 0; i < this.currentCombat.enemySize(); i++) {
-            if(!ally[i].living) {
-                ally[i].living = true;
-                ally[i].heal(this.maxHp / 10);
+        this.currentCombat.addInfo("special", this.name + " no deja a ningún soldado atrás.", this, null);
+        for(let i = 0; i < this.currentCombat.enemySize; i++) {
+            if(!this.allies[i].living) {
+                this.allies[i].living = true;
+                this.allies[i].heal(this.maxHp / 10);
+                this.currentCombat.livingEnemies++;
             }
         }
         this.endTurn();
