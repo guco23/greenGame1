@@ -237,7 +237,7 @@ init(data){
             if(this.interact == 0) this.scene.start('escenaPlaya',{obj:this.myGameData,cx:1780, cy:2730, dir:2});            
         })
         this.physics.add.overlap(this.character, this.hitbox2[0], ()=>{
-            //Poner qué pasa si se supera la sección de nuevos ministerios 
+            if(this.interact == 0) this.scene.start('zonaFinal', { obj: this.myGameData, cx: 270, cy: 40, dir: 3 });
         })   
         this.physics.add.overlap(this.character, this.Caja1[0], ()=>{
             if(!this.Texto&&this.interact == 0){

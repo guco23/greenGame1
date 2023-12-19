@@ -108,7 +108,9 @@ export default class dialogoHelp {
         //Cinemática inicial de antes de combate
         this.dialogos[45] = ["¿Qué es eso?", "Es una especie de monstruo", "Maldita sea... Está bloqueando la única salida", "Si me acerco a lo mejor me ataca, pero está        enfrente de la única salida", 
         "Tendré que arriesgarme"]
-
+        //Diálogo con el jefe final
+        this.dialogos[46] = ["Bueno, bueno, bueno... Mira quien ha vuelto", "¿Tantas ganas tienes de morir antes de que empieze el apocalipsis?", "Ríndete Judas, ahora soy mucho más fuerte, y vengo acompañado",
+        "Evitaremos el apocalipsis que has empezado", "Oh, me gustará veros intentarlo..."]
 
         this.images = [];
         this.images[0] = ["Frikol", "Judini","Judini","Frikol","Frikol","Frikol","Frikol","Judini","Judini","Frikol","Judini","Frikol","Judini","Frikol","-"]
@@ -156,7 +158,8 @@ export default class dialogoHelp {
         this.images[42] = ["-","-","-","-","-","-","-"]
         this.images[43] = ["-","-","-","-","-","-","-"]
         this.images[44] = ["-","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini"]
-        this.images[45] = ["Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini"]        
+        this.images[45] = ["Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini"]  
+        this.images[46] = ["jefeFinal2","jefeFinal2","Judini","Judini","jefeFinal2"]      
 
         this.ReturnDialogo = function (i) {
             return this.dialogos[i];

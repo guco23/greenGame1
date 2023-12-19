@@ -123,7 +123,7 @@ export class EscenaTilesets extends Phaser.Scene {
                 this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });                                
                 //this.scene.start('escenaPlaya',{obj:this.myGameData,cx:2285, cy:320, dir:3});
                 //this.scene.start('escenaNuevosMinisterios',{obj:this.myGameData,cx:1820, cy:985, dir:0});            
-                //this.scene.start('zonaFinal', { obj: this.myGameData, cx: 270, cy: 20, dir: 3 });                                
+                //this.scene.start('zonaFinal', { obj: this.myGameData, cx: 270, cy: 40, dir: 3 });                                
             }            
         })
         this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {            
