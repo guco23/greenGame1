@@ -128,8 +128,8 @@ export class EscenaTilesets extends Phaser.Scene {
             }            
         })
         this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {            
-            if (this.interact == 0) {                
-                
+            if (this.interact == 0 && !this.Texto) {                
+                new dialogo(this, this.character,48);
             }
         })
 
