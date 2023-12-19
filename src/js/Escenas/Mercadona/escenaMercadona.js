@@ -128,7 +128,7 @@ export class EscenaMercadona extends Phaser.Scene {
                             self.scene.start('combatScene', {
                                 gameData: self.myGameData,
                                 enemigos: [enemies.libra, enemies.libra],
-                                objeto: items.armaduraMadera, //this.objeto,
+                                objeto: items.armaduraMadera, 
                                 scene: self.scene.key,
                                 cx: self.character.x,
                                 cy: self.character.y,
@@ -214,4 +214,42 @@ export class EscenaMercadona extends Phaser.Scene {
         }        
         
     }
+
+    /*
+    ACUARIUS
+    self.scene.start('combatScene', {
+        gameData: self.myGameData,
+        enemigos: [enemies.pepsi, enemies.acuarius, enemies.pepsi],
+        objeto: items.undefined,
+        scene: self.scene.key,
+        cx: self.character.x,
+        cy: self.character.y,
+        dir: self.character.dir,
+        id: "boss2"
+    });
+
+    JUDAS1
+    self.scene.start('combatScene', {
+        gameData: self.myGameData,
+        enemigos: [enemies.meteoro, enemies.judas, enemies.meteoro],
+        objeto: items.armaduraDiamante,
+        scene: self.scene.key,
+        cx: self.character.x,
+        cy: self.character.y,
+        dir: self.character.dir,
+        id: "boss3"
+    });
+
+    JUDASFINAL
+    self.scene.start('combatScene', {
+        gameData: self.myGameData,
+        enemigos: [enemies.hands, enemies.hands, enemies.finalBoss, enemies.hands, enemies.hands],
+        objeto: undefined,
+        scene: self.scene.key,
+        cx: self.character.x,
+        cy: self.character.y,
+        dir: self.character.dir,
+        id: "boss3"
+    });
+    */
 };
