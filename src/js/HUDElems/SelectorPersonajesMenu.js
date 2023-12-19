@@ -2,6 +2,8 @@ import { TextoDescriptivo } from "./TextoDescriptivo.js";
 
 class PersonajeMenu {
     constructor(scene, personaje, x, y, descripcion, imgScale) {
+        this.x = x;
+        this.y = y;
         this.personaje = personaje;
         this.image = scene.add.image(x, y, this.personaje.name).setScale(imgScale);
         this.selectIcon = scene.add.image(x - 48, y, 'selectorPersonaje').setScale(imgScale);
