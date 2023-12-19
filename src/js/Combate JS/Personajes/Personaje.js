@@ -166,7 +166,7 @@ export class Personaje {
             if(this.escudo > 0) {
                 this.escudo -= damage;
                 if(this.escudo < 0) {
-                    this.currentHp -= this.escudo;
+                    this.currentHp += this.escudo;
                     this.escudo = 0;
                 }
             }

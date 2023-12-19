@@ -11,7 +11,8 @@ import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js"
 import { Item } from "../../Item.js"
 import { items } from "../../../../assets/EquipItemDATA.js";
 import { CONTROLES_OVERWORLD } from "../../constants.js";
-import { Defensor } from "../../Combate JS/Personajes/Defensor.js";
+import { Mediador } from "../../Combate JS/Personajes/Mediador.js";
+import { Virtuoso } from "../../Combate JS/Personajes/Virtuoso.js";
 
 export class EscenaTilesets extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -116,7 +117,7 @@ export class EscenaTilesets extends Phaser.Scene {
             }
         });
         
-        this.myGameData.AddCharacter(new Defensor(personajes.protagonista)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Virtuoso(personajes.protagonista)); //No te olvides de cambiarlo de vuelta al final
 
         this.myGameData.AñadeItemEquipable(items.armaduraBronce);
         this.myGameData.AñadeItemEquipable(items.armaduraDiamante);
