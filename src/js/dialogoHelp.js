@@ -114,6 +114,9 @@ export default class dialogoHelp {
         //Cuando abres un cofre
         this.dialogos[47] = ["Abres el cofre y en su interior descubres un objeto", "Abre el inventario para ver qué objetos tienes"]
         this.dialogos[48] = ["Abres el cofre y, desafortunadamente, no encuentrasnada dentro", "Skill Issue"]
+        //PreCombate contra libra
+        this.dialogos[49] = ["¡Alto ahí!", "¿Huh?","Judini, he venido aquí para pararte los pies...", "¿Y tú eres...?", "Soy Libra, signo del zoodiaco", "He sido enviado por Judas para detenerte",
+        "Creí que creía que había muerto", "Pues creíste mal", "Es igual. Libra, te interpones entre nosotros y la salvación del mundo. Hazte a un lado, última       advertencia", "Me temo que solo queda combatir, Judini..."]
 
         this.images = [];
         this.images[0] = ["Frikol", "Judini","Judini","Frikol","Frikol","Frikol","Frikol","Judini","Judini","Frikol","Judini","Frikol","Judini","Frikol","-"]
@@ -165,6 +168,7 @@ export default class dialogoHelp {
         this.images[46] = ["jefeFinal2","jefeFinal2","Judini","Judini","jefeFinal2"]      
         this.images[47] = ["-", "-"]
         this.images[48] = ["-", "-"]
+        this.images[49] = ["-", "Judini", "Libra","Judini","Libra","Libra", "Judini", "Libra","Judini","Libra"]
 
         this.ReturnDialogo = function (i) {
             return this.dialogos[i];

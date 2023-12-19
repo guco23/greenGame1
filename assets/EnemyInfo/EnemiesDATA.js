@@ -79,5 +79,5 @@ export var enemies = {
     
     finalBoss: {class: Zodiac, name:"Judas del Zodíaco", maxHp:2000, atk: 40, def: 35, prefType: "", imgLink: "", crit: -1},
 
-    hands: {class: AoE, name:"Mano Estelares", maxHp:500, atk: 35, def: 30, prefType: "", imgLink: "Meteoro.png", crit: 5}
+    hands: {class: AoE, name:"Mano Estelares", maxHp:400, atk: 35, def: 30, prefType: "", imgLink: "Meteoro.png", crit: 5}
 }

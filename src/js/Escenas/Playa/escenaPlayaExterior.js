@@ -230,7 +230,7 @@ init(data){
                     console.log("objeto conseguido");   
                     }
                     else    
-                    new dialogo(this, this.character,48);
+                    if(this.timer == 0)new dialogo(this, this.character,48);
                 }
                 this.anims.play('cofreAbierto', cofre);
             }
@@ -258,7 +258,7 @@ init(data){
         })
         var self=this;
         this.physics.add.overlap(this.character, this.hitbox6[0], ()=>{  
-            //if(this.myGameData.CheckObjetoClave(4)&&this.myGameData.CheckObjetoClave(5)&&this.myGameData.CheckObjetoClave(6))          
+            if(this.myGameData.CheckObjetoClave(4)&&this.myGameData.CheckObjetoClave(5)&&this.myGameData.CheckObjetoClave(6))          
             if(!this.Texto && !this.myGameData.Interactablehitboxes[4])new dialogo(this, this.character, 34,function(){                                
                 self.myGameData.Interactablehitboxes[4] = true;                
                 self.AguaPuente.visible = false;                  

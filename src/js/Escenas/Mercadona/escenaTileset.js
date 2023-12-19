@@ -1,6 +1,6 @@
 //import {Scene} from 'phaser';
 import Character from "../../character.js";
-import { RAIZ_IMAGENES } from "../../constants.js";
+import { RAIZ_IMAGENES,RAIZ_IMGS_COMBAT } from "../../constants.js";
 import { RAIZ_IMGS_OVERWORLD } from "../../constants.js";
 import GameData from "../../GameData.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
@@ -50,6 +50,7 @@ export class EscenaTilesets extends Phaser.Scene {
         this.load.image('Jhonny', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/JhonnyBean.png');
         this.load.image('SambaDoJudia', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/SambaDoJudia.png');
         this.load.image('SaulJudman', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/SaulJudman.png');
+        this.load.image('Libra', RAIZ_IMAGENES+RAIZ_IMGS_COMBAT+'libra_boss_dialogo.png');
         this.load.image('UI', RAIZ_IMAGENES + 'UI_dialogo.png');
         this.load.spritesheet('Slime', RAIZ_IMAGENES + 'Slime.png', { frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('character', RAIZ_IMAGENES + 'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 });
@@ -129,7 +130,7 @@ export class EscenaTilesets extends Phaser.Scene {
         })
         this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {
             if (this.interact == 0 && !this.Texto) {
-                new dialogo(this, this.character, 48);
+                new dialogo(this, this.character, 49);
             }
         })
 
@@ -138,7 +139,7 @@ export class EscenaTilesets extends Phaser.Scene {
         this.cameras.main.zoom = 2.2;
 
         let slimes = [
-            new SlimeEnemigo(this, 0, 0, 0, 50, 140, "pene de plastico", [enemies.hands, enemies.hands, enemies.judas, enemies.hands, enemies.hands], this.WallLayer, this.character, this.myGameData, 'enem1')
+            new SlimeEnemigo(this, 0, 0, 0, 50, 140, "pene de plastico", [enemies.botella, enemies.botella], this.WallLayer, this.character, this.myGameData, 'enem1')
         ];
         slimes.forEach(slime => {
             if (this.myGameData.CheckDefeated(slime.slimeId)) {
@@ -147,10 +148,12 @@ export class EscenaTilesets extends Phaser.Scene {
         });
 
         this.myGameData.AddCharacter(new Protagonista(personajes.protagonista)); //No te olvides de cambiarlo de vuelta al final
-        /*
+        
         this.myGameData.AddCharacter(new Protagonista(personajes.MrBean)); //No te olvides de cambiarlo de vuelta al final
         this.myGameData.AddCharacter(new Protagonista(personajes.albert)); //No te olvides de cambiarlo de vuelta al final
+        
         this.myGameData.AddCharacter(new Protagonista(personajes.frikol)); //No te olvides de cambiarlo de vuelta al final
+        /*
         this.myGameData.AddCharacter(new Protagonista(personajes.donald)); //No te olvides de cambiarlo de vuelta al final
         this.myGameData.AddCharacter(new Protagonista(personajes.emmet)); //No te olvides de cambiarlo de vuelta al final
         this.myGameData.AddCharacter(new Protagonista(personajes.greta)); //No te olvides de cambiarlo de vuelta al final
@@ -168,10 +171,12 @@ export class EscenaTilesets extends Phaser.Scene {
         this.myGameData.AñadeItemEquipable(items.armaduraDiamante);
         */
 
+        /*
         if (!this.myGameData.Interactablehitboxes[8]) {
             new dialogo(this, this.character, 44) //Comentad si no queréis que os moleste durante el desarrollo
             this.myGameData.Interactablehitboxes[8] = true;
         }
+        */
 
     }
 
