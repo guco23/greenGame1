@@ -1,9 +1,10 @@
 import { TextoDescriptivo } from "./TextoDescriptivo.js";
 
 class PersonajeMenu {
-    constructor(scene, personaje, x, y, descripcion) {
-        this.image = scene.add.image(x, y, personaje.name).setScale(4);
-        this.selectIcon = scene.add.image(x - 48, y, 'selectorPersonaje').setScale(2.8);
+    constructor(scene, personaje, x, y, descripcion, imgScale) {
+        this.personaje = personaje;
+        this.image = scene.add.image(x, y, this.personaje.name).setScale(imgScale);
+        this.selectIcon = scene.add.image(x - 48, y, 'selectorPersonaje').setScale(imgScale);
         this.unselect();
         this.descripcion = descripcion;
     }
@@ -19,8 +20,19 @@ class PersonajeMenu {
         this.selectIcon.visible = false;
     }
 
+    /**
+     * Muestra los datos del personaje en el cuadro de descripción
+     */
     describir() {
-        //TODO
+        let itemName;
+        
+        if(this.personaje.item === -1) {
+            itemName = "SIN EQUIPAR"
+        } else {
+            itemName = this.personaje.item.name;
+        }
+        this.descripcion.aplicarTexto(this.personaje.name + "\n" + this.personaje.MBTI + "\n" + this.personaje.descripcion + 
+        "\n" + itemName);
     }
 
     ocultar() {
@@ -43,10 +55,11 @@ export class SelectorPersonajesMenu extends Phaser.GameObjects.Container {
      * @param {num} nFila La cantidad de personajes mostrados por fila
      * @param {num} padY El espacio en px entre elementos en vertical (filas)
      * @param {num} padX El espacio en px entre elementos en horizontal (columnas)
+     * @param {num} imgScale La escala de las imágenes de los personajes
      * @param {TextoDescriptivo} descripcion El objeto de texto descriptivo donde mostrar la información del personaje
      */
 
-    constructor(scene, personajes, x, y, nFila, padY, padX, descripcion) {
+    constructor(scene, personajes, x, y, nFila, padY, padX, imgScale, descripcion) {
         super(scene);
         this.personajes = personajes;
         this.descripcion = descripcion;
@@ -55,6 +68,8 @@ export class SelectorPersonajesMenu extends Phaser.GameObjects.Container {
         this.padY = padY;
         this.padX = padX;
         this.selection = 0;
+        this.nFila = nFila;
+        this.imgScale = imgScale;
 
         //La construcción del elemento visual se produce en el refresh
         this.refresh();
@@ -117,14 +132,15 @@ export class SelectorPersonajesMenu extends Phaser.GameObjects.Container {
         this.opciones = [];
         let fila = 0;
         let col = 0;
-        for (let i = 0; i < this.personajes.length; i++) {
-            this.opciones.push(new PersonajeMenu(this.scene, this.personajes[i], this.x + col, this.y + this.padY * fila, this.descripcion));
-            if (i != 0 && i % this.nFila == 0) {
+        this.opciones.push(new PersonajeMenu(this.scene, this.personajes[0], this.x + col, this.y + this.padY * fila, this.descripcion, this.imgScale));
+        for (let i = 1; i < this.personajes.length; i++) {
+            if (i % this.nFila == 0) {
                 fila++;
                 col = 0;
             } else {
                 col += this.padX;
             }
+            this.opciones.push(new PersonajeMenu(this.scene, this.personajes[i], this.x + col, this.y + this.padY * fila, this.descripcion, this.imgScale));
         }
     }
 }

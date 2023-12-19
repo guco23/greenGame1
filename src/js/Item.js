@@ -16,3 +16,8 @@ export class Item {
 /**
  * Si el item contiene algún tipo de funcionalidad extra, heradar de esta clase e implementar.
  */
+
+/**Ahora que item no tiene ninguna funcionalidad adicional, esta clase es irrelevante
+ * ya que se pueden utilizas los datos desde la variable json 
+ * de la que este objeto se contruiría
+ */
