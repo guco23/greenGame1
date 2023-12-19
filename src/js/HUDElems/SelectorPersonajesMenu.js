@@ -49,19 +49,15 @@ export class SelectorPersonajesMenu extends Phaser.GameObjects.Container {
     constructor(scene, personajes, x, y, nFila, padY, padX, descripcion) {
         super(scene);
         this.personajes = personajes;
-        this.opciones = [];
+        this.descripcion = descripcion;
+        this.x = x;
+        this.y = y;
+        this.padY = padY;
+        this.padX = padX;
         this.selection = 0;
-        let fila = 0;
-        let col = 0;
-        for (let i = 0; i < personajes.length; i++) {
-            this.opciones.push(new PersonajeMenu(this.scene, personajes[i], x + col, y + padY * fila, descripcion));
-            if(i != 0 && i % nFila == 0) {
-                fila++;
-                col = 0;
-            } else {
-                col += padX;
-            }
-        }
+
+        //La construcción del elemento visual se produce en el refresh
+        this.refresh();
     }
 
     mostrar() {
@@ -108,5 +104,27 @@ export class SelectorPersonajesMenu extends Phaser.GameObjects.Container {
         this.opciones.forEach(element => {
             element.mostrar();
         });
+    }
+
+    refresh() {
+        //Elimina las imagenes anteriores
+        if (this.opciones !== undefined) {
+            this.opciones.forEach(element => {
+                element.image.destroy();
+                element.selectIcon.destroy();
+            });
+        }
+        this.opciones = [];
+        let fila = 0;
+        let col = 0;
+        for (let i = 0; i < this.personajes.length; i++) {
+            this.opciones.push(new PersonajeMenu(this.scene, this.personajes[i], this.x + col, this.y + this.padY * fila, this.descripcion));
+            if (i != 0 && i % this.nFila == 0) {
+                fila++;
+                col = 0;
+            } else {
+                col += this.padX;
+            }
+        }
     }
 }
