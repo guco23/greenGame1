@@ -66,10 +66,10 @@ export default class dialogoHelp {
         "Por cierto, ¿sabes por dónde está la salida? Este  sitio es como un laberinto", "Sí. Bajando por este pasillo en línea recta está lasalida", "Pero hay que conseguir suficientes monedas para    comprar un ticket y salir",
         "Qué cosas", "Indiana Beans se ha unido al grupo"]
         //Mensaje cuando te encuentras con Jhonny Bean
-        this.dialogos[20] = ["Hola, soy Johnny Bean", "Por si no lo has pillado, mi nombre es una         inteligente referencia al popular actor 'Johnny    Depp', con un 'Bean' al final porque soy una judía", "Vaya, eso es hilarante",
+        this.dialogos[20] = ["Hola, soy Johnny Bean", "Por si no lo has pillado, mi nombre es una         inteligente referencia al popular actor 'Johnny    Depp', con un 'Bean' al final porque soy una judía", "Vaya, eso es gracioso",
         "Claro que sí", "De esta interacción se podría sacar un RPG muy     divertido", "No lo dudo", "En fin, ahora te ayudaré en tu aventura", "Johnny Bean se ha unido al grupo"]
         //Mensaje cuando te encuentras con SambaDeJudía
-        this.dialogos[21] = ["¡Vamos! ¡Fiesta! ¡Chacachá!", "Guau, tú si que lo petas en las fiestas, ¿me      equivoco?", "Nop. Soy el alma de la fiesta :D", "Samba do Judía se ha unido al grupo"]
+        this.dialogos[21] = ["¡Vamos! ¡Fiesta! ¡Chacachá!", "Guau, tú si que lo petas en las fiestas, ¿me       equivoco?", "Nop. Soy el alma de la fiesta :D", "Samba do Judía se ha unido al grupo"]
         //Mensaje cuando te encuentras con Saul Judman
         this.dialogos[22] = ["Hola, soy Saul Judman", "¿Sabías que tienes derechos?", "La constitución dice que sí", "Saul Judman se ha unido al grupo"]
         //Mensajes para las puertas de almcén 2

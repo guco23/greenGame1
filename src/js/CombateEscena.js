@@ -1,5 +1,4 @@
 import { RAIZ_IMAGENES, CONTROLES, RAIZ_IMGS_COMBAT } from "./constants.js";
-import { Enemigo } from "./Combate JS/Enemigos/Enemigo.js"
 import { BarraVida } from "./HUDElems/BarraVida.js";
 import { TextoVida } from "./HUDElems/TextoVida.js";
 import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
@@ -58,6 +57,8 @@ export class CombateEscena extends Phaser.Scene {
         for (let i = 0; i < this.enemigos.length; i++) {
             let myClass = this.enemigos[i].class;
             this.enemigos[i] = new myClass(this.enemigos[i], this.combatManager);
+        }
+        for (let i = 0; i < this.enemigos.length; i++) {
             this.enemigos[i].startCombat(this.combatManager);
         }
 
@@ -92,8 +93,6 @@ export class CombateEscena extends Phaser.Scene {
         for (let i = 0; i < this.enemigos.length; i++) {
             this.vidasEnemigos.push(new BarraVida(this, this.sceneEnem.array[i].img.x + this.sceneEnem.array[i].img.width / 2 + 2, this.sceneEnem.array[i].img.y - 10, 80, 18, this.enemigos[i]))
         }
-        //Prueba de la barra de vida
-        this.vidasEnemigos[2].actualizarHp(25);
         //Los datos para crear la lista del selector acciones
         let datosAcciones = [new DatosAccion("Atacar", "Ataque básico a un objetivo"),
         new DatosAccion("Habilidad", ""), //Esta cambiará en cada turno (mostrando la descripción de la habilidad del personaje)
@@ -137,7 +136,7 @@ export class CombateEscena extends Phaser.Scene {
                         }
                         else if (this.menuActual.selection === 1) {
                             //Llamas al combat manager para pedir la info de la habilidad especial y activas el menu correspondiente
-                            this.combatManager.specialRequestInfo();
+                            this.SpecialHabilityTarget(this.combatManager.specialRequestInfo());
                         }
                         else {
                             this.menuActual = this.selectorAliados;
@@ -215,6 +214,33 @@ export class CombateEscena extends Phaser.Scene {
             let current = this.combatManager.current;
             if (current < this.partySize)
                 this.selectorAcciones.updateAction(1, "Habilidad", this.aliados[current].descripcionHabilidad);
+        }
+    }
+
+    SpecialHabilityTarget(tipo) {
+        switch (tipo) {
+            case 0:
+                this.menuActual = this.selectorEnemigos;
+                this.menuActual.mostrar();
+                break;
+            case 1:
+                this.menuActual = this.selectorAliados;
+                this.menuActual.mostrar();
+                break;
+            case 2:
+                this.menuActual = this.selectorEnemigos;
+                this.menuActual.seleccionCompleta();
+                this.menuActual.mostrar();
+                break;
+            case 3:
+                this.menuActual = this.selectorAliados;
+                this.menuActual.seleccionCompleta();
+                this.menuActual.mostrar();
+                break;
+            case 4:
+                this.menuActual = this.selectorAliados;
+                this.menuActual.seleccionPredefinida(this.combatManager.current);
+                break;
         }
     }
 };

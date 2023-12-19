@@ -9,6 +9,7 @@ import { Personaje } from "./../../Combate JS/Personajes/Personaje.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { Item } from "../../Item.js"
 import { items } from "../../../../assets/EquipItemDATA.js";
+import { CONTROLES_OVERWORLD } from "../../constants.js";
 
 export class EscenaTilesets extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -65,7 +66,8 @@ export class EscenaTilesets extends Phaser.Scene {
             tileWidth: 16,
             tileHeight: 16
         });
-        this.interactKey = this.input.keyboard.addKey('E');
+        this.timer = 0;
+        this.interactKey = this.input.keyboard.addKey(CONTROLES_OVERWORLD.ACCEPT);
         this.interact = 1;
         const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
         this.FloorLayer = this.map.createLayer('Suelo', tileset1);
@@ -87,11 +89,11 @@ export class EscenaTilesets extends Phaser.Scene {
         }*/
 
         this.physics.add.overlap(this.character, this.hitbox[0], () => {
-            if (this.interact == 0) {
+            if (this.interact == 0) {                
                 this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });                                
                 //this.scene.start('escenaPlaya',{obj:this.myGameData,cx:2285, cy:320, dir:3});
                 //this.scene.start('escenaNuevosMinisterios',{obj:this.myGameData,cx:1820, cy:985, dir:0});            
-            }
+            }            
         })
         this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {
             this.myGameData.AñadeObjetoClave(1);
@@ -104,19 +106,14 @@ export class EscenaTilesets extends Phaser.Scene {
         this.cameras.main.zoom = 2.2;
                 
         let slimes = [
-            new SlimeEnemigo(this, 0, 0, 0, 50, 140, "pene de plastico", [enemies.sardina, enemies.botella, enemies.pollo], this.WallLayer, this.character, this.myGameData, 'enem1')
+            new SlimeEnemigo(this, 0, 0, 0, 50, 140, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem1')
         ];
         slimes.forEach(slime => {
             if(this.myGameData.CheckDefeated(slime.slimeId)) {
                 slime.destroy();
             }
         });
-
-        //Datos de party de prueba
-        this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
-        this.myGameData.AddCharacter(new Personaje(personajes.frikol));
-        this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
-        this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
+        
         this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
 
         this.myGameData.AñadeItemEquipable(items.armaduraBronce);
@@ -125,17 +122,14 @@ export class EscenaTilesets extends Phaser.Scene {
     }
 
 
-    update() {
-        if (this.interactKey.isDown) {
-            this.scene.start('escenaNuevosMinisterios',{obj:this.myGameData,cx:1820, cy:985, dir:0});  
-            this.interact = 0;
-        } else {
+    update() {        
+        if (this.interactKey.isDown) {                        
+            if(this.timer==0)this.interact = 0;
+            if(this.Texto)this.timer = 25;
+        } else {            
             this.interact = 1;
-        }
-        /*this.image.scale += this.upscaleval;
-        if (this.image.scale > 0.6)
-            this.upscaleval = -0.001;
-        else if (this.image.scale < 0.2)
-            this.upscaleval = 0.001;*/
+            if(this.timer >0 && !this.Texto) this.timer--;
+        }        
+        
     }
 };

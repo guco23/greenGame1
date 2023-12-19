@@ -125,7 +125,7 @@ export class SelectorPersonajes extends Phaser.GameObjects.Container {
      */
     seleccionCompleta() {
         this.estado = Estados.SELECCION_COMPLETA;
-        for (let i; i < this.opciones.length; i++) {
+        for (let i = 0; i < this.opciones.length; i++) {
             this.opciones[i].select();
         }
     }

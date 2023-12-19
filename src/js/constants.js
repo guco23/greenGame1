@@ -13,3 +13,9 @@ export const CONTROLES = {
     CANCEL: "KeyX", //anterior
     MENU: "KeyC"
 }
+
+//El overworld utiliza un sistema de eventos de control distinto, por lo que los strings son distintos
+export const CONTROLES_OVERWORLD = {
+    ACCEPT: "Z", //siguiente
+    CANCEL: "X", //anterior
+}
