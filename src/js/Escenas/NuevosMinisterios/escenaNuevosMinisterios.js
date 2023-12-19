@@ -28,7 +28,7 @@ init(data){
 
     //crear aqui los objetos de la escena
     create() {
-
+        this.timer = 0;
         this.anims.create({
 			key: 'spin',
 			frames: this.anims.generateFrameNumbers('coin', { start: 0, end: 0 }),
@@ -284,12 +284,14 @@ init(data){
     }
 
 
-    update() {   
-        if(this.interactKey.isDown){
-            this.interact = 0;
-            
-        }else{
-            this.interact = 1;            
+    update() {
+        if (this.interactKey.isDown) {
+            if(this.timer==0)this.interact = 0;
+            if(this.Texto)this.timer = 25;
+        } else {
+            this.interact = 1;
+            if(this.timer >0 && !this.Texto) this.timer--;
         }        
+        
     }    
 };

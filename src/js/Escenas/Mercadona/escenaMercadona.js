@@ -29,6 +29,7 @@ export class EscenaMercadona extends Phaser.Scene {
             tileWidth: 16,
             tileHeight: 16
         });
+        this.timer = 0;
         this.interactKey = this.input.keyboard.addKey('Z');
         this.interact = 1;
         const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
@@ -158,10 +159,12 @@ export class EscenaMercadona extends Phaser.Scene {
 
     update() {
         if (this.interactKey.isDown) {
-            this.interact = 0;
-
+            if(this.timer==0)this.interact = 0;
+            if(this.Texto)this.timer = 25;
         } else {
             this.interact = 1;
-        }
+            if(this.timer >0 && !this.Texto) this.timer--;
+        }        
+        
     }
 };

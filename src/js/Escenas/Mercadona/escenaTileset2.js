@@ -32,6 +32,7 @@ export class EscenaTilesets2 extends Phaser.Scene {
             tileWidth: 16,
             tileHeight: 16
         });
+        this.timer = 0;
         this.interactKey = this.input.keyboard.addKey('Z');
         this.interact = 1;
         const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
@@ -65,17 +66,18 @@ export class EscenaTilesets2 extends Phaser.Scene {
         this.physics.add.overlap(this.character, this.hitbox1[0], () => {
             if (this.interact == 0) this.scene.start('escenaTilesets', { obj: this.myGameData, cx: 105, cy: 110, dir: 0 });
         })
-        this.physics.add.overlap(this.character, this.hitbox2[0], () => {
-
-            this.myGameData.CheckObjetoClave(1);
-            if (this.interact == 0) this.scene.start('escenaTilesets3', { obj: this.myGameData, cx: 70, cy: 70, dir: 3 });
-        })
         this.physics.add.overlap(this.character, this.hitbox3[0], () => {
             if (this.interact == 0) this.scene.start('escenaTilesets4', { obj: this.myGameData, cx: 165, cy: 162, dir: 1 });
         })
-        this.physics.add.overlap(this.character, this.hitbox4[0], () => {
+        
+        this.physics.add.overlap(this.character, this.hitbox2[0], () => {            
             if (!this.Texto && this.interact == 0) {                
-                if(this.myGameData.Interactablehitboxes[3] >= 7){
+                this.scene.start('escenaTilesets3', { obj: this.myGameData, cx: 70, cy: 70, dir: 3 });
+            }
+        })
+        this.physics.add.overlap(this.character, this.hitbox4[0], () => {
+            if (!this.Texto && this.interact == 0) {                                
+                if(this.myGameData.Interactablehitboxes[3] > 7){
                     new dialogo(this, this.character,30);                                      
                 }else{                    
                     new dialogo(this, this.character,23 + this.myGameData.Interactablehitboxes[3]);
@@ -85,7 +87,7 @@ export class EscenaTilesets2 extends Phaser.Scene {
         })
         this.physics.add.overlap(this.character, this.hitbox5[0], () => {
             if (!this.Texto && this.interact == 0) {                
-                if(this.myGameData.Interactablehitboxes[3] >= 7){
+                if(this.myGameData.Interactablehitboxes[3] > 7){
                     new dialogo(this, this.character,30);                                      
                 }else{                    
                     new dialogo(this, this.character,23 + this.myGameData.Interactablehitboxes[3]);
@@ -95,7 +97,7 @@ export class EscenaTilesets2 extends Phaser.Scene {
         })
         this.physics.add.overlap(this.character, this.hitbox6[0], () => {
             if (!this.Texto && this.interact == 0) {                
-                if(this.myGameData.Interactablehitboxes[3] >= 7){
+                if(this.myGameData.Interactablehitboxes[3] > 7){
                     new dialogo(this, this.character,30);                                      
                 }else{                    
                     new dialogo(this, this.character,23 + this.myGameData.Interactablehitboxes[3]);
@@ -105,7 +107,7 @@ export class EscenaTilesets2 extends Phaser.Scene {
         })
         this.physics.add.overlap(this.character, this.hitbox7[0], () => {
             if (!this.Texto && this.interact == 0) {                
-                if(this.myGameData.Interactablehitboxes[3] >= 7){
+                if(this.myGameData.Interactablehitboxes[3] > 7){
                     new dialogo(this, this.character,30);                                      
                 }else{                    
                     new dialogo(this, this.character,23 + this.myGameData.Interactablehitboxes[3]);
@@ -115,7 +117,7 @@ export class EscenaTilesets2 extends Phaser.Scene {
         })
         this.physics.add.overlap(this.character, this.hitbox8[0], () => {
             if (!this.Texto && this.interact == 0) {                
-                if(this.myGameData.Interactablehitboxes[3] >= 7){
+                if(this.myGameData.Interactablehitboxes[3] > 7){
                     new dialogo(this, this.character,30);                                      
                 }else{                    
                     new dialogo(this, this.character,23 + this.myGameData.Interactablehitboxes[3]);
@@ -125,7 +127,7 @@ export class EscenaTilesets2 extends Phaser.Scene {
         })
         this.physics.add.overlap(this.character, this.hitbox9[0], () => {
             if (!this.Texto && this.interact == 0) {                
-                if(this.myGameData.Interactablehitboxes[3] >= 7){
+                if(this.myGameData.Interactablehitboxes[3] > 7){
                     new dialogo(this, this.character,30);                                      
                 }else{                    
                     new dialogo(this, this.character,23 + this.myGameData.Interactablehitboxes[3]);
@@ -135,7 +137,7 @@ export class EscenaTilesets2 extends Phaser.Scene {
         })
         this.physics.add.overlap(this.character, this.hitbox10[0], () => {
             if (!this.Texto && this.interact == 0) {                
-                if(this.myGameData.Interactablehitboxes[3] >= 7){
+                if(this.myGameData.Interactablehitboxes[3] > 7){
                     new dialogo(this, this.character,30);                                      
                 }else{                    
                     new dialogo(this, this.character,23 + this.myGameData.Interactablehitboxes[3]);
@@ -160,10 +162,12 @@ export class EscenaTilesets2 extends Phaser.Scene {
 
     update() {
         if (this.interactKey.isDown) {
-            this.interact = 0;
-
+            if(this.timer==0)this.interact = 0;
+            if(this.Texto)this.timer = 25;
         } else {
             this.interact = 1;
-        }
+            if(this.timer >0 && !this.Texto) this.timer--;
+        }        
+        
     }
 };
