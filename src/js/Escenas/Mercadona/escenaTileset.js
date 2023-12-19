@@ -6,6 +6,7 @@ import GameData from "../../GameData.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
 import { Personaje } from "./../../Combate JS/Personajes/Personaje.js";
+import { Protagonista } from "./../../Combate JS/Personajes/Protagonista.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { Item } from "../../Item.js"
 import { items } from "../../../../assets/EquipItemDATA.js";
@@ -114,7 +115,7 @@ export class EscenaTilesets extends Phaser.Scene {
             }
         });
         
-        this.myGameData.AddCharacter(new Personaje(personajes.protagonista));
+        this.myGameData.AddCharacter(new Protagonista(personajes.protagonista));
 
         this.myGameData.AñadeItemEquipable(items.armaduraBronce);
         this.myGameData.AñadeItemEquipable(items.armaduraDiamante);

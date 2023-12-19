@@ -15,7 +15,7 @@ export var enemies = {
         
     dragon: {class: Enemigo, name:"Doragon", maxHP:60, atk:20, def: 15, prefType:"",  imgLink: "", crit: 10},
 
-    libra: {class: Libra, name:"Libra", maxHp:300, atk: 10, def: 30, prefType: "", imgLink: "", crit: 5},
+    libra: {class: Libra, name:"Libra", maxHp:250, atk: 40, def: 30, prefType: "", imgLink: "", crit: 5},
 
     magdalena: {class: Healer, name:"María Magdalena", maxHp:80, atk: 20, def: 15, prefType: "", imgLink: "", crit: 10},
     
