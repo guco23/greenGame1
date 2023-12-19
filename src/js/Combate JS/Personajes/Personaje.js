@@ -32,6 +32,7 @@ export class Personaje {
     MBTI; //El titulo de su personalidad segun el test MBTI
     descripcion; //Una pequeña descripción del personaje
     item; //El objeto que tienen equipado
+    imgIconLink;
 
     /*
     constructor(namer, attk, defs, hpMax, hp) {
@@ -72,6 +73,7 @@ export class Personaje {
         this.descripcion = idn.descripcion;
         this.descripcionHabilidad = idn.descripcionHabilidad;
         this.item = -1; //Item es -1 si no tiene item equipado
+        this.imgIconLink = idn.imgIconLink;
     }
 
     applyDot(value) {

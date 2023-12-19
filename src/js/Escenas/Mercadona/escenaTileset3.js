@@ -26,7 +26,9 @@ init(data){
     }
 
     //crear aqui los objetos de la escena
-    create() {/*
+    create() {
+        this.sound.stopAll();
+        /*
         let screenWidth = this.game.config.width;
         let screenHeight = this.game.config.height;
         //Imagen 1
@@ -69,7 +71,11 @@ init(data){
 
           //Cofres
           let groupCofres = this.add.group();
-          let cofre1 = this.map.createFromObjects('Cofres', {name: "cofre1", key: 'cofre', item: items.escudoMadera });
+          let cofre1 = this.map.createFromObjects('Cofres', {name: "cofre1", itemID: 0, key: 'cofre'});
+          // Asegúrate de que cofres sea un array
+            if (!Array.isArray(cofre1)) {
+                cofre1 = [cofre1];
+            }
           this.anims.play('cofreCerrado', cofre1);
           groupCofres.addMultiple(cofre1);
           cofre1.forEach(obj => {
@@ -77,24 +83,28 @@ init(data){
               this.physics.add.existing(obj);
           });
 
+          let self = this;
           this.physics.add.overlap(this.character, groupCofres, (character, cofre) => {
+            
             if(this.interact == 0){
-                if(!this.myGameData.AddItemEquipable(cofre.item))
-                {
-                    console.log("objeto conseguido");   
+                if (cofre.name == "cofre1"){
+                    if(!self.myGameData.AñadeItemEquipable(items.chalecoCuero))
+                {   
+                       
+                    new dialogo(this, this.character,47);                 
+                    console.log("Nombre del ítem:", items.chalecoCuero.nombre);
+                    console.log("objeto conseguido");
                 }
                 else
                 {
+                       
+                    if(this.timer == 0)new dialogo(this, this.character,48);
                     console.log("vacio");  
+                }
                 }
                 this.anims.play('cofreAbierto', cofre);
             }
         });
-          /*var self=this;
-          var onCollision = function(){                   
-            if(self.interact == 0) console.log("Hay colision");
-            else console.log("No :C");
-          }*/
           this.physics.add.overlap(this.character, this.hitbox1[0], ()=>{
             if(this.interact == 0) this.scene.start('escenaTilesets2',{obj:this.myGameData,cx:295, cy:160, dir:1});            
         })
@@ -107,7 +117,10 @@ init(data){
 
     update() {
         if (this.interactKey.isDown) {
-            if(this.timer==0)this.interact = 0;
+            if(this.timer==0){
+                this.interact = 0;
+                this.timer =0;
+            }
             if(this.Texto)this.timer = 25;
         } else {
             this.interact = 1;

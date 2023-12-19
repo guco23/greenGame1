@@ -1,6 +1,6 @@
 import Character from "../../character.js";
-import { RAIZ_IMAGENES } from "../../constants.js";
-import {RAIZ_IMGS_OBJETOS} from "../../constants.js";
+import { RAIZ_IMAGENES ,RAIZ_IMGS_OBJETOS} from "../../constants.js";
+import {RAIZ_SOUNDS,RAIZ_SOUNDS_MUSICA} from "../../constants.js";
 import dialogo from "../../dialogo.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { Personaje } from "../../Combate JS/Personajes/Personaje.js";
@@ -9,6 +9,8 @@ import { Comandante } from "../../Combate JS/Personajes/Comandante.js";
 import { Emprendedor } from "../../Combate JS/Personajes/Emprendedor.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
+import { Item } from "../../Item.js"
+import { items } from "../../../../assets/EquipItemDATA.js";
 
 
 export class EscenaMercadona extends Phaser.Scene {
@@ -28,10 +30,15 @@ export class EscenaMercadona extends Phaser.Scene {
         this.load.image('Notas', RAIZ_IMAGENES + RAIZ_IMGS_OBJETOS+'Notas.png');
         this.load.spritesheet('character', RAIZ_IMAGENES + 'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 })
         this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
+        this.load.audio('musicMercadona', RAIZ_SOUNDS+RAIZ_SOUNDS_MUSICA+'Mercadona.mp3')
     }
 
     create() {
+        this.sound.stopAll();
+
         this.timer = 0;
+        this.MainTheme = this.sound.add('musicMercadona')
+        this.MainTheme.play();
         this.map = this.make.tilemap({
             key: 'SalaMercadona',
             tileWidth: 16,
@@ -162,13 +169,13 @@ export class EscenaMercadona extends Phaser.Scene {
         this.cameras.main.zoom = 2.2;
 
         let slimes = [
-            new SlimeEnemigo(this, 65, 0, 1, 770, 421, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem2'),
-            new SlimeEnemigo(this, 65, 0, 1, 740, 335, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem3'),
-            new SlimeEnemigo(this, 65, 0, 1, 683, 246, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem4'),
+            new SlimeEnemigo(this, 65, 0, 1, 770, 421, undefined, [enemies.platano, enemies.cocacola], this.WallLayer, this.character, this.myGameData, 'enem2'),
+            new SlimeEnemigo(this, 65, 0, 1, 740, 335, items.escudoMadera, [enemies.magdalena, enemies.pan], this.WallLayer, this.character, this.myGameData, 'enem3'),
+            new SlimeEnemigo(this, 65, 0, 1, 683, 246, items.escudoMadera, [enemies.pan, enemies.salchicha], this.WallLayer, this.character, this.myGameData, 'enem4'),
 
-            new SlimeEnemigo(this, 70, 1, -1, 435, 93, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem5'),
-            new SlimeEnemigo(this, 110, 0, 1, 338, 206, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem6'),
-            new SlimeEnemigo(this, 70, 1, 1, 426, 319, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem7')
+            new SlimeEnemigo(this, 70, 1, -1, 435, 93, items.escudoMadera, [enemies.botella, enemies.salchicha, enemies.sardina], this.WallLayer, this.character, this.myGameData, 'enem5'),
+            new SlimeEnemigo(this, 110, 0, 1, 338, 206, items.chalecoCuero, [enemies.pollo, enemies.calamar], this.WallLayer, this.character, this.myGameData, 'enem6'),
+            new SlimeEnemigo(this, 70, 1, 1, 426, 319, items.chalecoCuero, [enemies.platano, enemies.botella, enemies.magdalena], this.WallLayer, this.character, this.myGameData, 'enem7')
         ];
         slimes.forEach(slime => {
             if(this.myGameData.CheckDefeated(slime.slimeId)) {

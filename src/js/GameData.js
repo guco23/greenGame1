@@ -84,10 +84,9 @@ export default class GameData {
             this.sceneRetrunDead = auxScene;
             this.returnDeadX = auxX;
             this.returnDeadY = auxY;
-            console.log(this.sceneRetrunDead);
-            console.log(this.returnDeadX);
-            console.log(this.returnDeadY);
+            this.CurarTodos();
         }
+
         this.Interactablehitboxes = [];
         this.Interactablehitboxes[0] = false;
         this.Interactablehitboxes[1] = false;
@@ -243,5 +242,11 @@ export default class GameData {
         console.log(first);
         console.log(second);
         console.log(this.party);
+    }
+
+    CurarTodos() {
+        this.allies.forEach(personaje => {
+            personaje.currentHp = personaje.maxHp;
+        });
     }
 }

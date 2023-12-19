@@ -1,5 +1,6 @@
 import { RAIZ_IMAGENES, CONTROLES, RAIZ_IMGS_COMBAT } from "./constants.js";
 import { BarraVida } from "./HUDElems/BarraVida.js";
+import {RAIZ_SOUNDS,RAIZ_SOUNDS_MUSICA} from "./constants.js";
 import { TextoVida } from "./HUDElems/TextoVida.js";
 import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
 import { DatosAccion, SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
@@ -30,10 +31,11 @@ export class CombateEscena extends Phaser.Scene {
 
     preload() {
         //Es importante que los sprites finales tengan la misma resolución
-
+        this.BossFightTheme= false;
         //Añade las imagenes de los aliados y enemigos
         this.enemigos.forEach(enemigo => {
             this.load.image(enemigo.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_COMBAT + enemigo.imgLink);
+            if(enemigo.name =="Libra" || enemigo.name == "acuarius" || enemigo.name == "finalBoss") this.BossFightTheme = true;
         });
         this.aliados.forEach(aliado => {
             this.load.image(aliado.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_COMBAT + aliado.imgLink);
@@ -42,10 +44,18 @@ export class CombateEscena extends Phaser.Scene {
         this.load.image('background', RAIZ_IMAGENES + "combatBackground/combatBackgroundPlaceholder.png");
         this.load.image("selectorAccion", RAIZ_IMAGENES + 'seleccionAccion.png');
         this.load.image("selectorPersonaje", RAIZ_IMAGENES + 'seleccionPersonaje.png');
+        this.load.audio('musicCombateSimple', RAIZ_SOUNDS+RAIZ_SOUNDS_MUSICA+'Combate contra enemigos.mp3')    
+        this.load.audio('musicCombateBoss', RAIZ_SOUNDS+RAIZ_SOUNDS_MUSICA+'Combate contra jefes.mp3')    
     }
 
     //crear aqui los objetos de la escena
     create() {
+        this.sound.stopAll();
+        if(this.BossFightTheme){
+            this.MainTheme = this.sound.add('musicCombateBoss');
+        }
+        else this.MainTheme = this.sound.add('musicCombateSimple');
+        this.MainTheme.play();
         this.graphics = this.add.graphics();
 
         this.combatManager = new CombatManager(this.enemigos, this.aliados, this.partySize, this);
@@ -66,21 +76,21 @@ export class CombateEscena extends Phaser.Scene {
         let gameHeight = this.game.config.height;
 
         //Coloca el fondo
-        this.add.image(gameWidth / 2, gameHeight / 2, 'background');
+        this.add.image(gameWidth / 2, gameHeight / 2, 'background').setScale(4.5,4.5);
 
         //esto es temporal para asignar una imagen que mostrar
         for (let i = 0; i < this.aliados.length; i++) {
             this.aliados[i].imgLink = this.aliados[i].name;
         }
         //Coloca los sprites de los enemigos en la escena, en la versión final los personajes contienen sprites y su funcionalidad
-        this.sceneAliad = new CharacterArray(this, gameWidth / 9, 15, 400, false, this.aliados);
-        this.sceneEnem = new CharacterArray(this, gameWidth - (gameWidth / 5), 30, 400, false, this.enemigos);
+        this.sceneAliad = new CharacterArray(this, gameWidth / 9, 200, 400, false, this.aliados, 4);
+        this.sceneEnem = new CharacterArray(this, gameWidth - (gameWidth / 5), 100, 400, false, this.enemigos, 3);
 
         //Creación de los cuadros del HUD
         this.graphics = this.add.graphics();
         this.graphics.fillStyle(0x0033cc, 1);
-        let hudBox1 = this.graphics.fillRoundedRect(2, gameHeight - 180, 270, 180, { tl: 12, tr: 12, bl: 0, br: 0 });
-        let hudBox2 = this.graphics.fillRoundedRect(275, gameHeight - 180, 600, 180, { tl: 12, tr: 12, bl: 12, br: 12 });
+        this.graphics.fillRoundedRect(2, gameHeight - 180, 270, 180, { tl: 12, tr: 12, bl: 0, br: 0 });
+        this.graphics.fillRoundedRect(275, gameHeight - 180, 600, 180, { tl: 12, tr: 12, bl: 12, br: 12 });
 
         this.vidasAliados = [];
         for (let i = 0; i < this.aliados.length; i++) {
@@ -91,7 +101,7 @@ export class CombateEscena extends Phaser.Scene {
 
         this.vidasEnemigos = [];
         for (let i = 0; i < this.enemigos.length; i++) {
-            this.vidasEnemigos.push(new BarraVida(this, this.sceneEnem.array[i].img.x + this.sceneEnem.array[i].img.width / 2 + 2, this.sceneEnem.array[i].img.y - 10, 80, 18, this.enemigos[i]))
+            this.vidasEnemigos.push(new BarraVida(this, this.sceneEnem.array[i].img, 80, 18, this.enemigos[i]));
         }
         //Los datos para crear la lista del selector acciones
         let datosAcciones = [new DatosAccion("Atacar", "Ataque básico a un objetivo"),
@@ -185,13 +195,19 @@ export class CombateEscena extends Phaser.Scene {
      */
     Victory() {
         this.gameData.AddDefeated(this.slimeId);
-        this.scene.start(this.returnScene, { obj: this.gameData, cx: this.cx, cy: this.cy, dir: this.cdir })
+        if(this.returnScene == 'escenaNuevosMinisterios') {
+            this.gameData.AñadeMonedasNM(5);
+        }
+        if(this.objeto !== undefined) {
+            this.gameData.AñadeItemEquipable(this.objeto);
+        }
+        this.scene.start(this.returnScene, { obj: this.gameData, cx: this.cx, cy: this.cy, dir: this.cdir });
     }
     /**
      * A ser llamado cuando el jugador pierda el combate. Deberá devolver al jugador al último checkpoint.
      */
     Defeat() {
-
+        this.scene.start(this.gameData.sceneRetrunDead, { obj: this.gameData, cx: this.gameData.returnDeadX, cy: this.gameData.returnDeadY, dir: this.cdir });
     }
 
     ActualizarEscena(info) {

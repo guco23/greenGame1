@@ -96,10 +96,10 @@ export default class dialogoHelp {
         "Finalmente los ruidos acaban, y de la máquina sale un pequeño ticket de metro", "La puerta que antes te bloqueaba el paso desaparecepor arte de magia"]
         this.dialogos[38] = ["En la pantalla de la máquina de billetes puedes verel equivalente a la pantalla azul de la muerte en  un cacharro de billetes del metro", "No vas a conseguir más billetes de aquí"]
         //Diálogos de Nuevos ministerios con la terminal 2
-        this.dialogos[39] = ["Es como la máquina de billetes de metro de arriba, pero esta todavía funciona, y es de color rojo", "En su pantalla se puede leer: 'Introduzca 65       monedas'", "Sí que aumenta rápidamente la inflación durante el apocalipsis..."]
-        this.dialogos[40] = ["Le haces un bizum a la máquina con las 65 monedas  que te pedía, consiguiendo así el ticket", "Le salen patas a la puerta que te bloqueaba el pasoy sale corriendo"]
+        this.dialogos[39] = ["Es como la máquina de billetes de metro de arriba, pero esta todavía funciona, y es de color rojo", "En su pantalla se puede leer: 'Introduzca 100      monedas'", "Sí que aumenta rápidamente la inflación durante el apocalipsis..."]
+        this.dialogos[40] = ["Le haces un bizum a la máquina con las 100 monedas  que te pedía, consiguiendo así el ticket", "Le salen patas a la puerta que te bloqueaba el pasoy sale corriendo"]
         this.dialogos[41] = ["La máquina sigue funcionando perfectamente, lo cuales bastante inútil, siendo sinceros", "Es decir, no vas a pedir un segundo billete,       ¿verdad?", 
-        "Tendrías que recolectar otras 65 monedas más, y    nadie va a gastar su tiempo en ello...", "¿Verdad?"]
+        "Tendrías que recolectar otras 100 monedas más, y    nadie va a gastar su tiempo en ello...", "¿Verdad?"]
         this.dialogos[42] = ["Mientras vuelves a pagar otras 65 monedas más,     notas como si una puerta en algún punto de         Nuevos Ministerios se hubiese abierto..."]
         this.dialogos[43] = ["La máquina no funciona"]
         //Diálogo nada más empezar la escena 1
@@ -108,7 +108,12 @@ export default class dialogoHelp {
         //Cinemática inicial de antes de combate
         this.dialogos[45] = ["¿Qué es eso?", "Es una especie de monstruo", "Maldita sea... Está bloqueando la única salida", "Si me acerco a lo mejor me ataca, pero está        enfrente de la única salida", 
         "Tendré que arriesgarme"]
-
+        //Diálogo con el jefe final
+        this.dialogos[46] = ["Bueno, bueno, bueno... Mira quien ha vuelto", "¿Tantas ganas tienes de morir antes de que empieze el apocalipsis?", "Ríndete Judas, ahora soy mucho más fuerte, y vengo acompañado",
+        "Evitaremos el apocalipsis que has empezado", "Oh, me gustará veros intentarlo..."]
+        //Cuando abres un cofre
+        this.dialogos[47] = ["Abres el cofre y en su interior descubres un objeto", "Abre el inventario para ver qué objetos tienes"]
+        this.dialogos[48] = ["Abres el cofre y, desafortunadamente, no encuentrasnada dentro", "Skill Issue"]
 
         this.images = [];
         this.images[0] = ["Frikol", "Judini","Judini","Frikol","Frikol","Frikol","Frikol","Judini","Judini","Frikol","Judini","Frikol","Judini","Frikol","-"]
@@ -156,7 +161,10 @@ export default class dialogoHelp {
         this.images[42] = ["-","-","-","-","-","-","-"]
         this.images[43] = ["-","-","-","-","-","-","-"]
         this.images[44] = ["-","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini"]
-        this.images[45] = ["Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini"]        
+        this.images[45] = ["Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini","Judini"]  
+        this.images[46] = ["jefeFinal2","jefeFinal2","Judini","Judini","jefeFinal2"]      
+        this.images[47] = ["-", "-"]
+        this.images[48] = ["-", "-"]
 
         this.ReturnDialogo = function (i) {
             return this.dialogos[i];

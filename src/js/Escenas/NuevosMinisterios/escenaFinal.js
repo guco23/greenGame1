@@ -1,6 +1,7 @@
 import Character from "../../character.js";
 import dialogo from "../../dialogo.js";
-import { RAIZ_IMAGENES } from "../../constants.js";
+import {RAIZ_SOUNDS,RAIZ_SOUNDS_MUSICA} from "../../constants.js";
+import { RAIZ_IMAGENES,RAIZ_IMGS_COMBAT } from "../../constants.js";
 import { Personaje } from "../../Combate JS/Personajes/Personaje.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
@@ -20,15 +21,25 @@ init(data){
 }
     preload() {        
         this.load.tilemapTiledJSON('ZonaFinal', 'assets/json/ZonaFinal.json');
+        this.load.image('jefeFinal', RAIZ_IMAGENES+RAIZ_IMGS_COMBAT+'final_boss.png');
+        this.load.image('jefeFinal2', RAIZ_IMAGENES+RAIZ_IMGS_COMBAT+'final_boss_texto.png');        
         this.load.image('tileset_nm', RAIZ_IMAGENES+'tilesets/tileset_nm.png');        
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26});                
         this.load.spritesheet('checkPoint',  RAIZ_IMAGENES+'Objetos/CheckPoint.png', {frameWidth: 32, frameHeight: 32});
+        this.load.audio('musicNM', RAIZ_SOUNDS+RAIZ_SOUNDS_MUSICA+'Nuevos ministerios.mp3')
     }
 
     //crear aqui los objetos de la escena
     create() {
+        this.sound.stopAll();
+        this.MainTheme = this.sound.add('musicNM')
+        this.MainTheme.play();
+        this.Final = false;
+        this.Texto = false;
+        this.imageBoss;
+        this.PosBoss = 999;
         this.timer = 0;        
-
+        this.HaLlegadoAlFinal = false;
         this.anims.create({
 			key: 'banderaRoja',
 			frames: this.anims.generateFrameNumbers('checkPoint', { start: 0, end: 0 }),
@@ -62,6 +73,8 @@ init(data){
           this.physics.add.existing(this.hitbox1[0]);
           this.hitboxFinal = this.map.createFromObjects('BatallaFinal', {id:4});          
           this.physics.add.existing(this.hitboxFinal[0]);
+          this.hitboxFinal2 = this.map.createFromObjects('BatallaFinal', {id:5});          
+          this.physics.add.existing(this.hitboxFinal2[0]);
             
 
         //Colisiones
@@ -69,30 +82,35 @@ init(data){
         this.physics.world.enable(this.character);
         this.physics.add.collider(this.character, this.WallLayer);
 
-/*
-        //CheckPoints
-        let groupCheckPoints = this.add.group();
-        let check = this.map.createFromObjects('CheckPoints', {name: "checkPoint", key: 'checkPoint'});
-        this.anims.play('banderaRoja', check);
-        groupCheckPoints.addMultiple(check);
-        check.forEach(obj => {
-			console.log("uwu");
-			this.physics.add.existing(obj);
-		});
-
-
-        this.physics.add.overlap(this.character, groupCheckPoints, (character, checkPoint) => {
-            this.myGameData.UpdateCheckPoint(this, this.character.x, this.character.y);
-            this.anims.play('banderaVerde', checkPoint);
-        });
-
-        this.physics.add.overlap(this.character, groupCofres, (character, cofre) => {
-            if(this.interact == 0){
-                
-                this.anims.play('cofreAbierto', cofre);
+        this.physics.add.overlap(this.character, this.hitbox1[0], () => {            
+            if (this.interact == 0) {                
+                this.scene.start('escenaNuevosMinisterios', { obj: this.myGameData, cx: 1663, cy: 4448, dir: 1 });
             }
-        });                    
-*/
+        })
+        
+        this.physics.add.overlap(this.character, this.hitboxFinal[0], () => {            
+            if(!this.HaLlegadoAlFinal){
+                this.sound.stopAll();   
+                this.HaLlegadoAlFinal = true;        
+                this.PosBoss = 150;
+                this.imageBoss = this.add.image(270, 0, 'jefeFinal');                           
+            }
+            
+        })
+
+        this.physics.add.overlap(this.character, this.hitboxFinal2[0], () => {                     
+            if(this.HaLlegadoAlFinal){
+                this.HaLlegadoAlFinal = false;
+                this.character.Activate();                
+            }
+            if(this.Final && !this.Texto){
+                new dialogo(this, this.character, 46,function(){
+                    //AQUí Empieza el combate final
+                })
+                this.Final = false;
+            }
+            
+        })
 
           this.cameras.main.startFollow(this.character);      
           this.cameras.main.zoom = 2.2;        
@@ -108,6 +126,10 @@ init(data){
             this.interact = 1;
             if(this.timer >0 && !this.Texto) this.timer--;
         }        
-        
+        if(this.PosBoss <290) {            
+            this.PosBoss+=0.5;
+            this.imageBoss.setY(this.PosBoss);            
+            if(this.PosBoss >=290) this.Final = true;
+        }
     }    
 };

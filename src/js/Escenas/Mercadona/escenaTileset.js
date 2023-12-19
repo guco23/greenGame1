@@ -1,7 +1,7 @@
 //import {Scene} from 'phaser';
 import Character from "../../character.js";
 import { RAIZ_IMAGENES } from "../../constants.js";
-import { RAIZ_IMGS_OVERWORLD} from "../../constants.js";
+import { RAIZ_IMGS_OVERWORLD } from "../../constants.js";
 import GameData from "../../GameData.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
@@ -31,54 +31,55 @@ export class EscenaTilesets extends Phaser.Scene {
         }
     }
 
-    preload() {        
+    preload() {
         this.load.tilemapTiledJSON('Almacen1', 'assets/json/Almacen1.json');
-        this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
-        this.load.image('Frikol', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/Frikol.png');
-        this.load.image('Judini', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/Judini.png');
-        this.load.image('JudioCaesar', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/JudioCaesar.png');
-        this.load.image('MrBean', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/MrBean.png');
-        this.load.image('Emmet', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/EmmetBeanckowski.png');
-        this.load.image('Gato', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/FrijolConBotas.png');
-        this.load.image('BealonMusk', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/BealonMusk.png');
-        this.load.image('Greta', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/GretaJudberg.png');
-        this.load.image('Rajoy', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/MarianoRajoy.png');
-        this.load.image('Selena', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/SelenaBeamez.png');
-        this.load.image('Albert', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/AlbertBeanstein.png');       
-        this.load.image('Donald', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/DonaldBean.png');       
-        this.load.image('Indiana', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/IndianaBeans.png');       
-        this.load.image('Jhonny', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/JhonnyBean.png');       
-        this.load.image('SambaDoJudia', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/SambaDoJudia.png');       
-        this.load.image('SaulJudman', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/SaulJudman.png');       
-        this.load.image('UI', RAIZ_IMAGENES+'UI_dialogo.png');
-        this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
-        this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 });
-        this.load.spritesheet('checkPoint',  RAIZ_IMAGENES+'Objetos/CheckPoint.png', {frameWidth: 32, frameHeight: 32});
+        this.load.image('tileset_mercadona', RAIZ_IMAGENES + 'tilesets/tileset_mercadona.png');
+        this.load.image('Frikol', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/Frikol.png');
+        this.load.image('Judini', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/Judini.png');
+        this.load.image('JudioCaesar', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/JudioCaesar.png');
+        this.load.image('MrBean', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/MrBean.png');
+        this.load.image('Emmet', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/EmmetBeanckowski.png');
+        this.load.image('Gato', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/FrijolConBotas.png');
+        this.load.image('BealonMusk', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/BealonMusk.png');
+        this.load.image('Greta', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/GretaJudberg.png');
+        this.load.image('Rajoy', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/MarianoRajoy.png');
+        this.load.image('Selena', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/SelenaBeamez.png');
+        this.load.image('Albert', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/AlbertBeanstein.png');
+        this.load.image('Donald', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/DonaldBean.png');
+        this.load.image('Indiana', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/IndianaBeans.png');
+        this.load.image('Jhonny', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/JhonnyBean.png');
+        this.load.image('SambaDoJudia', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/SambaDoJudia.png');
+        this.load.image('SaulJudman', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/SaulJudman.png');
+        this.load.image('UI', RAIZ_IMAGENES + 'UI_dialogo.png');
+        this.load.spritesheet('Slime', RAIZ_IMAGENES + 'Slime.png', { frameWidth: 16, frameHeight: 16 });
+        this.load.spritesheet('character', RAIZ_IMAGENES + 'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 });
+        this.load.spritesheet('checkPoint', RAIZ_IMAGENES + 'Objetos/CheckPoint.png', { frameWidth: 32, frameHeight: 32 });
     }
 
     //crear aqui los objetos de la escena
     create() {
+        this.sound.stopAll();
         /*let screenWidth = this.game.config.width;
         let screenHeight = this.game.config.height;
         //Imagen 1
         this.image = this.add.image(screenWidth, screenHeight, 'javier'); //omg so sexy
         this.image.setScale(0.3);
         this.image.setPosition(screenWidth / 2, screenHeight / 2);*/
-        
-        this.anims.create({
-			key: 'banderaRoja',
-			frames: this.anims.generateFrameNumbers('checkPoint', { start: 0, end: 0 }),
-			frameRate: 16,
-			repeat: -1
-		});
 
         this.anims.create({
-			key: 'banderaVerde',
-			frames: this.anims.generateFrameNumbers('checkPoint', { start: 1, end: 1 }),
-			frameRate: 16,
-			repeat: -1
-		});
-        
+            key: 'banderaRoja',
+            frames: this.anims.generateFrameNumbers('checkPoint', { start: 0, end: 0 }),
+            frameRate: 16,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'banderaVerde',
+            frames: this.anims.generateFrameNumbers('checkPoint', { start: 1, end: 1 }),
+            frameRate: 16,
+            repeat: -1
+        });
+
         this.map = this.make.tilemap({
             key: 'Almacen1',
             tileWidth: 16,
@@ -104,68 +105,85 @@ export class EscenaTilesets extends Phaser.Scene {
 
         //CheckPoints
         let groupCheckPoints = this.add.group();
-        let check = this.map.createFromObjects('CheckPoints', {name: "checkPoint", key: 'checkPoint'});
+        let check = this.map.createFromObjects('CheckPoints', { name: "checkPoint", key: 'checkPoint' });
         this.anims.play('banderaRoja', check);
         groupCheckPoints.addMultiple(check);
         check.forEach(obj => {
-			console.log("uwu");
-			this.physics.add.existing(obj);
-		});
+            console.log("uwu");
+            this.physics.add.existing(obj);
+        });
 
 
         this.physics.add.overlap(this.character, groupCheckPoints, (character, checkPoint) => {
-            this.myGameData.UpdateCheckPoint(this, this.character.x, this.character.y);
+            this.myGameData.UpdateCheckPoint(this, character.x, character.y);
             this.anims.play('banderaVerde', checkPoint);
         });
 
         this.physics.add.overlap(this.character, this.hitbox[0], () => {
-            if (this.interact == 0) {                
-                this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });                                
+            if (this.interact == 0) {
+                this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });
                 //this.scene.start('escenaPlaya',{obj:this.myGameData,cx:2285, cy:320, dir:3});
                 //this.scene.start('escenaNuevosMinisterios',{obj:this.myGameData,cx:1820, cy:985, dir:0});            
-                //this.scene.start('zonaFinal', { obj: this.myGameData, cx: 270, cy: 20, dir: 3 });                                
-            }            
+                //this.scene.start('zonaFinal', { obj: this.myGameData, cx: 270, cy: 40, dir: 3 });                                
+            }
         })
-        this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {            
-            if (this.interact == 0) {                
-                
+        this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {
+            if (this.interact == 0 && !this.Texto) {
+                new dialogo(this, this.character, 48);
             }
         })
 
 
         this.cameras.main.startFollow(this.character);
         this.cameras.main.zoom = 2.2;
-                
+
         let slimes = [
             new SlimeEnemigo(this, 0, 0, 0, 50, 140, "pene de plastico", [enemies.hands, enemies.hands, enemies.judas, enemies.hands, enemies.hands], this.WallLayer, this.character, this.myGameData, 'enem1')
         ];
         slimes.forEach(slime => {
-            if(this.myGameData.CheckDefeated(slime.slimeId)) {
+            if (this.myGameData.CheckDefeated(slime.slimeId)) {
                 slime.destroy();
             }
         });
-        
+
         this.myGameData.AddCharacter(new Protagonista(personajes.protagonista)); //No te olvides de cambiarlo de vuelta al final
+        /*
+        this.myGameData.AddCharacter(new Protagonista(personajes.MrBean)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.albert)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.frikol)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.donald)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.emmet)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.greta)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.bealonMusk)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.indiana)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.johnny)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.judioCesar)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.frijolConBotas)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.samba)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.saulJudman)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.selena)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.rajoy)); //No te olvides de cambiarlo de vuelta al final
 
         this.myGameData.AñadeItemEquipable(items.armaduraBronce);
         this.myGameData.AñadeItemEquipable(items.armaduraDiamante);
+        */
 
-        if(!this.myGameData.Interactablehitboxes[8]){
-            new dialogo(this, this.character,44) //Comentad si no queréis que os moleste durante el desarrollo
+        if (!this.myGameData.Interactablehitboxes[8]) {
+            new dialogo(this, this.character, 44) //Comentad si no queréis que os moleste durante el desarrollo
             this.myGameData.Interactablehitboxes[8] = true;
         }
-        
+
     }
 
 
-    update() {        
-        if (this.interactKey.isDown) {                        
-            if(this.timer==0)this.interact = 0;
-            if(this.Texto)this.timer = 25;
-        } else {            
+    update() {
+        if (this.interactKey.isDown) {
+            if (this.timer == 0) this.interact = 0;
+            if (this.Texto) this.timer = 25;
+        } else {
             this.interact = 1;
-            if(this.timer >0 && !this.Texto) this.timer--;
-        }        
-        
+            if (this.timer > 0 && !this.Texto) this.timer--;
+        }
+
     }
 };

@@ -3,6 +3,7 @@ import { SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
 import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
 import { DatosAccion } from "./HUDElems/SelectorAcciones.js";
 import { SelectorPersonajesMenu } from "./HUDElems/SelectorPersonajesMenu.js";
+import { StatsDrawer } from "./HUDElems/StatsDrawer.js";
 
 const Estados = {
     ESTANDAR: "seleccion_estandar", //El usuario está seleccionando que hacer en el menu
@@ -26,6 +27,7 @@ export class MenuEscena extends Phaser.Scene {
         //Carga las imágenes de los aliados en la party y fuera de ella
         this.gameData.allies.forEach(ally => {
             this.load.image(ally.name, RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + ally.idleImageLink);
+            this.load.image(ally.name + "ic", RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + ally.imgIconLink);
         });
         this.gameData.party.forEach(ally => {
             this.load.image(ally.name, RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + ally.idleImageLink);
@@ -52,13 +54,15 @@ export class MenuEscena extends Phaser.Scene {
         });
         this.opcionPrimaria = new SelectorAcciones(this, this.descripcion, 66, 70, 30, accionesBase);
         this.menuActual = this.opcionPrimaria;
-        this.selectorParty = new SelectorPersonajesMenu(this, this.gameData.party, 390, 110, 4, 100, 100, 4.3, this.descripcion);
-        this.selectorAllies = new SelectorPersonajesMenu(this, this.gameData.allies, 300, 300, 6, 100, 100, 3, this.descripcion);
+        this.selectorParty = new SelectorPersonajesMenu(this, this.gameData.party, 340, 110, 4, 100, 130, 4.3, this.descripcion, false);
+        this.selectorAllies = new SelectorPersonajesMenu(this, this.gameData.allies, 300, 325, 8, 68, 68, 4.1, this.descripcion, true);
         this.equipadorPersonajes = new SelectorPersonajesMenu(this, this.gameData.party, 670, 130, 2, 120, 100, 4.3, this.descripcion);
         this.selectorObjetos = new SelectorAcciones(this, this.descripcion, 270, 70, 30, listaAccionObjetos);
+        this.statsDrawer = new StatsDrawer(this, this.selectorParty, 20, 130, 300, 160);
         this.selectorObjetos.ocultar();
         this.equipadorPersonajes.hide();
         this.opcionPrimaria.activar();
+        this.statsDrawer.update();
         /**
          * Lo primero es un selector arriba, probablemente en horizontal en el que puedas escoger modificar el equipo o equipar objetos
          * A la derecha se mostrará el equipo actual (sprites), su vida actual y el nombre del objeto que tienen equipado
@@ -135,6 +139,7 @@ export class MenuEscena extends Phaser.Scene {
                     this.selectorParty.ocultar();
                     this.menuActual = this.selectorAllies;
                     this.selectorAllies.mostrar();
+                    this.statsDrawer.update();
                 }
                 break;
             case this.selectorAllies:
@@ -152,6 +157,7 @@ export class MenuEscena extends Phaser.Scene {
                     this.selectorAllies.ocultar();
                     this.menuActual = this.selectorParty;
                     this.selectorParty.mostrar();
+                    this.statsDrawer.update();
                 }
                 break;
         }
@@ -213,12 +219,15 @@ export class MenuEscena extends Phaser.Scene {
                     this.selectorAllies.hide();
                     this.selectorObjetos.mostrar();
                     this.equipadorPersonajes.refresh();
+                    this.statsDrawer.ocultar();
                 } else if (this.opcionPrimaria.selection === 0) {
                     //Selección de personajes
                     this.selectorParty.show();
                     this.selectorAllies.show();
                     this.selectorObjetos.ocultar();
                     this.equipadorPersonajes.hide();
+                    this.statsDrawer.update();
+                    this.statsDrawer.mostrar();
                 }
                 break;
         }

@@ -4,6 +4,8 @@ import dialogo from "../../dialogo.js";
 import { CONTROLES_OVERWORLD } from "../../constants.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
+import { Item } from "../../Item.js"
+import { items } from "../../../../assets/EquipItemDATA.js";
 
 export class EscenaPlayaBosque extends Phaser.Scene {    
 constructor(){
@@ -25,6 +27,7 @@ init(data){
 
     //crear aqui los objetos de la escena
     create() {
+        this.sound.stopAll();
         this.timer = 0;
         this.map = this.make.tilemap({ 
             key: 'PlayaBosque', 
@@ -70,7 +73,7 @@ init(data){
           this.cameras.main.zoom = 2.2;
 
           let slimes = [
-            new SlimeEnemigo(this, 100, 1, 0, 800, 696, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem54'),
+            new SlimeEnemigo(this, 100, 1, 0, 800, 696, undefined, [enemies.langosta, enemies.piraña, enemies.cangrejo], this.WallLayer, this.character, this.myGameData, 'enem54'),
             ];
             slimes.forEach(slime => {
                 if(this.myGameData.CheckDefeated(slime.slimeId)) {
