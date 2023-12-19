@@ -145,8 +145,8 @@ export class CombatManager {
             this.endTurn();
         }
         else {
-            console.log(this.spPoints);
             if (this.whoseTurn === true) {
+                console.log(this.spPoints);
                 if (this.current < this.teamSize) {
                     if (this.playerTeam[this.current].living) {
                         //Está feo el manipular la escena desde aquí 

@@ -79,10 +79,17 @@ export class Enemigo {
     
     
     endTurn() {
-        if(this.dot != 0) {
+        if(this.dot > 0) {
             this.currentHp -= this.dot;
             this.currentCombat.addInfo("dot", this.dot, this, null);
             this.checkAlive(); 
+        }
+        else if (this.dot < 0) {
+            this.currentHp -= this.dot;
+            if(this.currentHp > this.maxHp) {
+                this.currentHp = this.maxHp;
+            }
+            this.currentCombat.addInfo("regen", this.dot, this, null);
         }
         this.currentCombat.endTurn();
     }
