@@ -115,6 +115,28 @@
         }, 
         {
          "draworder":"topdown",
+         "id":4,
+         "name":"Items",
+         "objects":[
+                {
+                 "height":31,
+                 "id":3,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":false,
+                 "width":31.6666666666666,
+                 "x":704,
+                 "y":848.666666666667
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":3,
          "name":"Transiciones",
          "objects":[
@@ -125,9 +147,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":false,
-                 "width":30.6666666666666,
-                 "x":704.666666666667,
-                 "y":1110.66666666667
+                 "width":30.6667,
+                 "x":704.667,
+                 "y":1110.67
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -246,8 +268,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":4,
- "nextobjectid":2,
+ "nextlayerid":5,
+ "nextobjectid":4,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
@@ -256,7 +278,7 @@
         {
          "columns":17,
          "firstgid":1,
-         "image":"..\/..\/assets\/images\/tilesets\/tileset_mercadona.png",
+         "image":"..\/images\/tilesets\/tileset_mercadona.png",
          "imageheight":150,
          "imagewidth":300,
          "margin":1,

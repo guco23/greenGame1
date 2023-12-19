@@ -43,7 +43,7 @@ export default class dialogoHelp {
         //Mensaje cuando te encuentras con Emmet
         this.dialogos[13] = ["Alto ahí, no puedes avanzar por aquí. El puente se ha desmoronado, y es demasiado peligroso seguir    avanzando", "Pero el único camino por el que podemos avanzar    está por ahí...",
         "Señor, usted es arquitecto. ¿Podría arreglar el    puente?", "Hum...", "Puede, pero necesitaría algunos materiales", "Madera, herramientas, unos planos...", 
-        "Vale, pues buscaremos esos materiales. En algún    lado encontraremos algo que nos pueda servir...", "Emmet Beanckowski se ha unido al grupo"]
+        "Vale, pues buscaremos esos materiales. Madera,     herramientas y planos. En algún lado encontraremos algo que nos pueda servir...", "Emmet Beanckowski se ha unido al grupo"]
         //Mensaje cuando te encuentras con Mariano Rajoy
         this.dialogos[14] = ["Es el alcalde que elige al vecino...", "¡Oiga! Usted es Mariano Rajoy, ¿no? Tiene que      resolver esta crisis inmediatamente", "Señor, esta situación es como el agua que cae del  cielo sin que nadie sepa por qué...",
         "No, sí que sabemos por qué está pasando esto,      y podemos impedirlo", "Si viene con nosotros podrá ayudarnos a detener el apocalipsis. Necesitamos toda la ayuda que podamos conseguir",
@@ -81,7 +81,15 @@ export default class dialogoHelp {
         this.dialogos[28] = ["Esta puerta realmente es una ventana, disfrazada depuerta", "Y está cerrada"]
         this.dialogos[29] = ["Esta puerta no está cerrada, pero oyes un grito    infrahumano y escalofriante al otro lado, así que  decides no abrirla"]
         this.dialogos[30] = ["Está cerrada"]
-
+        //Mensaje cuando pillas los planos del suelo
+        this.dialogos[31] = ["Te encuentras los planos de un puente de madera    tirados en el suelo", "Conveniente"]
+        //Mensaje cuando pillas la caja de herramientas
+        this.dialogos[32] = ["Te encuentras una caja de herramientas", "Decides recogerla, ya que podría ser útil en un    futuro"]
+        //Mensaje cuando pilla la madera
+        this.dialogos[33] = ["En medio del bosque te encuentras un tronco de     madera ya cortado, y colocado verticalmente", "Es suficiente madera para hacer un puente"]
+        //Diálogos cuando se construye el puente
+        this.dialogos[34] = ["Bueno, creo que esos son todos los materiales que  necesitábamos", "Ahora toca construir el puente", "..."]
+        this.dialogos[35] = ["Y ya está. Puente construido", "Vaya, eso ha sido rápido", "Bueno, por algo me llaman 'Maestro Constructor'", "Bien hecho, ahora tenemos que seguir avanzando"]
 
         this.images = [];
         this.images[0] = ["Frikol", "Judini","Judini","Frikol","Frikol","Frikol","Frikol","Judini","Judini","Frikol","Judini","Frikol","Judini","Frikol","-"]
@@ -115,6 +123,11 @@ export default class dialogoHelp {
         this.images[28] = ["-", "-"]
         this.images[29] = ["-"]
         this.images[30] = ["-"]
+        this.images[31] = ["-", "-"] 
+        this.images[32] = ["-", "-"] 
+        this.images[33] = ["-", "-"] 
+        this.images[34] = ["Emmet","Emmet", "-"]
+        this.images[35] = ["Emmet", "Judini", "Emmet", "Judini"]
 
 
         this.ReturnDialogo = function (i) {

@@ -25,6 +25,7 @@ export class EscenaMercadona extends Phaser.Scene {
     }
 
     create() {
+        this.timer = 0;
         this.map = this.make.tilemap({
             key: 'SalaMercadona',
             tileWidth: 16,

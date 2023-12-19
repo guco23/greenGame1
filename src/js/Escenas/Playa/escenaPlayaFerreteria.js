@@ -16,7 +16,7 @@ init(data){
     preload() {        
         this.load.tilemapTiledJSON('PlayaFerreteria', 'assets/json/PlayaInteriorFerreteria.json');
         this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
-        //this.load.image('tileset_playa', RAIZ_IMAGENES+'tilesets/tileset_playa.png');
+        this.load.image('Herramientas', RAIZ_IMAGENES+'Objetos/Herramientas.png');
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
     }
 
@@ -38,7 +38,12 @@ init(data){
           
           this.hitbox1 = this.map.createFromObjects('Transiciones', {id:1});          
           this.physics.add.existing(this.hitbox1[0]);
-
+          
+          if(!this.myGameData.CheckObjetoClave(4)){
+            this.Herramientas = this.map.createFromObjects('Items', {id:3});          
+            this.physics.add.existing(this.Herramientas[0]);
+            this.HerramientasImage = this.add.image(719, 863, 'Herramientas');
+        }
 
           this.character = new Character(this, this.cx, this.cy,this.dir);
           this.physics.world.enable(this.character);
@@ -48,7 +53,13 @@ init(data){
           this.physics.add.overlap(this.character, this.hitbox1[0], ()=>{
             if(this.interact == 0)this.scene.start('escenaPlaya',{obj:this.myGameData,cx:395, cy:575, dir:3});
         })
-        
+        this.physics.add.overlap(this.character, this.Herramientas[0], ()=>{
+            var self = this;
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckObjetoClave(4))new dialogo(this, this.character,32, function(){
+                self.HerramientasImage.destroy();   
+                self.myGameData.AñadeObjetoClave(4);
+            })     
+        })
                     
           this.cameras.main.startFollow(this.character);      
           this.cameras.main.zoom = 2.2;

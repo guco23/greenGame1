@@ -19,16 +19,16 @@ init(data){
     this.Texto = false;
 }
     preload() {        
-        this.load.tilemapTiledJSON('Playa', 'assets/json/PlayaExterior.json');
-        //this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
+        this.load.tilemapTiledJSON('Playa', 'assets/json/PlayaExterior.json');        
         this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
         this.load.image('tileset_playa', RAIZ_IMAGENES+'tilesets/tileset_playa.png');
+        this.load.image('Planos', RAIZ_IMAGENES+'Objetos/Planos.png');
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
         this.load.spritesheet('cofre',  RAIZ_IMAGENES+'Objetos/Cofres.png', {frameWidth: 16, frameHeight: 16})
     }
 
     //crear aqui los objetos de la escena
-    create() {
+    create() {        
         this.timer = 0;
         this.anims.create({
 			key: 'cofreCerrado',
@@ -56,8 +56,11 @@ init(data){
           this.FloorLayer = this.map.createLayer('Suelo', tileset2);
           this.WallLayer = this.map.createLayer('Paredes', tileset2);
           this.WallLayer.setCollisionByExclusion([-1]);     
-          this.AguaPuente = this.map.createLayer('CapaDeAguaPuenteRoto', tileset2);
-          //this.AguaPuente.setCollisionByExclusion([-1]);  
+          
+          if(!this.myGameData.Interactablehitboxes[4]){
+              this.AguaPuente = this.map.createLayer('CapaDeAguaPuenteRoto', tileset2);
+              this.AguaPuente.setCollisionByExclusion([-1]);  
+          }
           
           this.hitbox1 = this.map.createFromObjects('Transiciones', {id:8});          
           this.physics.add.existing(this.hitbox1[0]);
@@ -69,6 +72,16 @@ init(data){
           this.physics.add.existing(this.hitbox4[0]);
           this.hitbox5 = this.map.createFromObjects('Transiciones', {id:12});          
           this.physics.add.existing(this.hitbox5[0]);
+          if(!this.myGameData.Interactablehitboxes[4]){
+            this.hitbox6 = this.map.createFromObjects('Items', {id:23});          
+            this.physics.add.existing(this.hitbox6[0]);            
+        }
+          
+          if(!this.myGameData.CheckObjetoClave(6)){
+              this.Planos = this.map.createFromObjects('Items', {id:20});          
+              this.physics.add.existing(this.Planos[0]);
+              this.PlanosImage = this.add.image(961, 722, 'Planos');
+          }
 
           if(!this.myGameData.CheckCharacter(personajes.bealonMusk)){
               this.BealonMusk = this.map.createFromObjects('Personajes', { id: 18 });
@@ -104,7 +117,7 @@ init(data){
           this.character = new Character(this, this.cx, this.cy,this.dir);
           this.physics.world.enable(this.character);
           this.physics.add.collider(this.character, this.WallLayer);
-          this.physics.add.collider(this.character, this.AguaPuente);
+          this.AguaPuenteCollider = this.physics.add.collider(this.character, this.AguaPuente);
           
           this.TopWallLayer = this.map.createLayer('ParedesSobrepuestas', tileset2);
 
@@ -179,6 +192,23 @@ init(data){
         this.physics.add.overlap(this.character, this.hitbox5[0], ()=>{
             if(!this.Texto)new dialogo(this, this.character, 2,function(){                
                 self.scene.start('escenaPlayaSalaSecreta',{obj:this.myGameData,cx:40, cy:85, dir:2});
+            })     
+        })
+        var self=this;
+        this.physics.add.overlap(this.character, this.hitbox6[0], ()=>{  
+            if(this.myGameData.CheckObjetoClave(4)&&this.myGameData.CheckObjetoClave(5)&&this.myGameData.CheckObjetoClave(6))          
+            if(!this.Texto && !this.myGameData.Interactablehitboxes[4])new dialogo(this, this.character, 34,function(){                                
+                self.myGameData.Interactablehitboxes[4] = true;                
+                self.AguaPuente.visible = false;                  
+                self.AguaPuenteCollider.destroy();
+                new dialogo(self, self.character, 35);
+            })     
+        })
+        this.physics.add.overlap(this.character, this.Planos[0], ()=>{
+            var self = this;
+            if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckObjetoClave(6))new dialogo(this, this.character,31, function(){
+                self.PlanosImage.destroy();   
+                self.myGameData.AñadeObjetoClave(6);
             })     
         })
         this.physics.add.overlap(this.character, this.BealonMusk[0], ()=>{
@@ -271,6 +301,5 @@ init(data){
             this.interact = 1;
             if(this.timer >0 && !this.Texto) this.timer--;
         }        
-        
     }      
 };
