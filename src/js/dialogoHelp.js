@@ -56,7 +56,7 @@ export default class dialogoHelp {
         this.dialogos[16] = ["Hola, yo soy Selena Beamez", "Y estás viendo Disney Channel", "*dibuja un ratón con el dedo", "...", "Selena Beamez se ha unido al grupo"]
         //Mensaje cuando te encuentras con Albert Beanstein
         this.dialogos[17] = ["¿Necesitas ayuda para pasar por la puerta de metro de Nuevos Ministerios? No te preocupes, ahora te   hecho un cable", "Para abrir la puerta necesitas comprar un ticket,y para conseguir un ticket tienes que ir a una de lasmáquinas de aquí arriba y comprarlo",
-        "Para pagarlo tendrás que recolectar dinero, eso sí.El dinero lo podrás encontrar por ahí, tirado por  el suelo, y también lo conseguirás al derrotar     enemigos de esta zona", "Bueno, gracias por la explicación, pero no es el   momento de tutoriales",
+        "Para pagarlo tendrás que recolectar dinero, eso sí.El dinero lo podrás encontrar por ahí, tirado por  el suelo, justo como en la vida real", "Bueno, gracias por la explicación, pero no es el   momento de tutoriales",
         "Tenemos que detener el apocalipsis, y cada vez nos queda menos tiempo...", "El tiempo es relativo", "Albert Beanstein se ha unido al grupo"]
         //Mensaje cuando te encuentras con Donald Bean
         this.dialogos[18] = ["Cuack", "...", "Cuack, cuack", "Esta judía está gritando la onomatopeya 'cuack' en voz alta, como si fuera un pato", "Decidís ignorarla, pero aun así esta os sigue",
