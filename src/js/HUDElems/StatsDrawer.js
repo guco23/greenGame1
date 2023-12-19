@@ -46,7 +46,7 @@ export class StatsDrawer extends Phaser.GameObjects.Container {
     /**
     *
     * Listado de estadísticas de personajes para colocar debajo de los mismos
-    * @param {*} scene La escena donde se va a pintar
+    * @param {Phaser.Scene} scene La escena donde se va a pintar
     * @param {SelectorPersonajesMenu} charL El selector a utilizar
     * @param {num} padY El espacio en vertical entre elementos de la lista
     * @param {num} x Posicion horizontal donde colocar el objeto (esquina superior iquierda)
