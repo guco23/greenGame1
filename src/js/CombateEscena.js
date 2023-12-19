@@ -132,6 +132,7 @@ export class CombateEscena extends Phaser.Scene {
                         if (this.menuActual.selection === 0) {
                             this.selectorAcciones.ocultar();
                             this.menuActual = this.selectorEnemigos;
+                            this.menuActual.seleccionNormal();
                             this.menuActual.mostrar();
                         }
                         else if (this.menuActual.selection === 1) {
@@ -229,10 +230,12 @@ export class CombateEscena extends Phaser.Scene {
         switch (tipo) {
             case 0:
                 this.menuActual = this.selectorEnemigos;
+                this.menuActual.seleccionNormal();
                 this.menuActual.mostrar();
                 break;
             case 1:
                 this.menuActual = this.selectorAliados;
+                this.menuActual.seleccionNormal();
                 this.menuActual.mostrar();
                 break;
             case 2:
