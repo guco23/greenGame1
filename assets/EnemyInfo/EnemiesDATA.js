@@ -5,6 +5,9 @@ import { AoE } from "../../src/js/Combate JS/Enemigos/AoE.js"
 import { Fuerte } from "../../src/js/Combate JS/Enemigos/Fuerte.js"
 import {Aturdidor} from "../../src/js/Combate JS/Enemigos/Aturdidor.js"
 import { Libra } from "../../src/js/Combate JS/Enemigos/Jefes/Libra.js"
+import { Acuarius } from "../../src/js/Combate JS/Enemigos/Jefes/Acuarius.js"
+import { Judas } from "../../src/js/Combate JS/Enemigos/Jefes/Judas.js"
+import { Zodiac } from "../../src/js/Combate JS/Enemigos/Jefes/Zodiac.js"
 
 export var enemies = {
 
@@ -50,7 +53,7 @@ export var enemies = {
 
     medusa: {class: Aturdidor, name:"Medusa Pica Pica", maxHp:90, atk: 30, def: 10, prefType: "", imgLink: "Medusa.png", crit: 5},
     
-    acuarius: {class: Libra, name:"Acuarius mamadísimo", maxHp:600, atk: 30, def: 30, prefType: "", imgLink: "acuarius_boss.png", crit: 5},
+    acuarius: {class: Acuarius, name:"Acuarius mamadísimo", maxHp:600, atk: 30, def: 30, prefType: "", imgLink: "acuarius_boss.png", crit: 5},
 
     //Nuevos Ministerios
 
@@ -72,6 +75,9 @@ export var enemies = {
 
     sardinaFuego: {class: Aturdidor, name:"Sardina tostada", maxHp: 110, atk: 40, def: 10, prefType: "", imgLink: "SardinaFuego.png", crit: 5},
     
-    finalBoss: {class: Libra, name:"Judas", maxHp:1000, atk: 35, def: 30, prefType: "", imgLink: "final_boss.png", crit: 5}
+    judas: {class: Judas, name:"Judas", maxHp:600, atk: 35, def: 30, prefType: "", imgLink: "final_boss.png", crit: 5},
+    
+    finalBoss: {class: Zodiac, name:"Judas del Zodíaco", maxHp:2000, atk: 40, def: 35, prefType: "", imgLink: "", crit: -1},
 
+    hands: {class: AoE, name:"Mano Estelares", maxHp:500, atk: 35, def: 30, prefType: "", imgLink: "Meteoro.png", crit: 5}
 }
