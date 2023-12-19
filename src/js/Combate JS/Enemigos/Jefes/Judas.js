@@ -5,12 +5,23 @@ export class Judas extends Enemigo {
     allies;
     evo;
 
-    startCombat() {
+    startCombat(combatManager) {
         this.currentCombat = combatManager;
         this.allies = this.currentCombat.enemyTeam;
-        this.searchEv();
     }
 
+    areaAttack() {
+        let target = this.currentCombat.playerTeam;
+        for(let i = 0; i < this.currentCombat.teamSize; i++) {
+            if(target[i].living) {
+                this.currentCombat.addInfo("attack", target[i].sufferDamage(this.atk / 2), this, target[i]);
+                target[i].checkAlive();
+            }
+        }
+        this.endTurn();
+    }
+
+/*
     searchEv() {
         for(let i = 0; i < this.currentCombat.enemySize; i++) {
             if(this.allies[i].name == "Judas del Zodíaco") {
@@ -29,6 +40,7 @@ export class Judas extends Enemigo {
         }
         this.currentCombat.addInfo("special", "¡Judas resucitó gracias a\n los poderes del zodíaco!", this, null);
     }
+*/
 
     checkAlive(){
         if(this.currentHp <= 0) {
@@ -36,7 +48,6 @@ export class Judas extends Enemigo {
             this.living = false;
             this.currentCombat.hasDied(false);
             this.currentCombat.addInfo("die", 0, this, null);
-            this.evolve();
         }
     }
 

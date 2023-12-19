@@ -1,7 +1,7 @@
 import { Enemigo } from "../Enemigo.js";
 import { Acuarius } from "./Acuarius.js";
 
-export class Judas extends Enemigo {
+export class Zodiac extends Enemigo {
 
     numActions;
     currentZodiac;
@@ -11,10 +11,16 @@ export class Judas extends Enemigo {
     startCombat(combatManager) {
         this.currentCombat = combatManager;
         this.allies = this.currentCombat.enemyTeam;
-        this.numActions = true;
-        this.currentZodiac = false;
+        this.currentZodiac = 0;
         this.aoedebuff = 0.95;
         this.debuff = 0.9;
+    }
+
+    aturdir(target) {
+        let chance = this.getRandomInt(100);
+        if (chance < Math.floor((target.currentHp / target.maxHp) * 100)) {
+            target.stun();
+        }
     }
 
     aries() {        
@@ -34,7 +40,7 @@ export class Judas extends Enemigo {
         let target = this.getRandomInt(length);
         this.currentCombat.addInfo("special", "Aries carga contra " + selecion[target].name + ".\n", this, null);
         this.currentCombat.addInfo("attack", selecion[target].sufferDamage(this.atk), this, selecion[target]);
-        selecion[target].modifyStat(true, debuff, 1);
+        selecion[target].modifyStat(true, this.debuff, 1);
         selecion[target].checkAlive();
         this.checkNext();
     }
@@ -240,11 +246,13 @@ export class Judas extends Enemigo {
 
     checkNext() {
         this.numActions--;
-        if(this.numActions == 0) {
-            this.endTurn;
+        console.log("bolas " + this.numActions);
+        this.currentZodiac++;
+        if(this.numActions === 0) {
+            this.endTurn();
         }
         else {
-            this.nextZodiac;
+            this.nextZodiac();
         }
     }
 
@@ -293,11 +301,20 @@ export class Judas extends Enemigo {
     }
 
     selectAction() {
-        for (let i = 0; i < this.numActions; i++) {
-            this.nextZodiac()
-            this.currentZodiac++;
+        if(this.currentHp < (this.maxHp / 4)) {
+            this.numActions = 4;
         }
-        this.endTurn();
+        else if(this.currentHp < (this.maxHp / 2)) {
+            this.numActions = 3;
+        }
+        else if(this.currentHp < (3 * (this.maxHp / 4))) {
+            this.numActions = 2;
+        }
+        else {
+            this.numActions = 1;
+        }
+        console.log(this.numActions);
+        this.nextZodiac();
     }
 
     takeTurn() {
