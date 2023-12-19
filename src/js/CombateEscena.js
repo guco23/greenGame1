@@ -168,6 +168,7 @@ export class CombateEscena extends Phaser.Scene {
                 }
             }
         }, this);
+        this.ActualizarEscena();
         this.combatManager.nextTurn();
     }
 
@@ -212,7 +213,7 @@ export class CombateEscena extends Phaser.Scene {
             this.sceneAliad.refresh();
             this.sceneEnem.refresh();
             let current = this.combatManager.current;
-            if (current < this.partySize)
+            if (current < this.combatManager.livingParty)
                 this.selectorAcciones.updateAction(1, "Habilidad", this.aliados[current].descripcionHabilidad);
         }
     }
