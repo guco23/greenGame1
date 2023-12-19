@@ -71,7 +71,7 @@ init(data){
           this.cameras.main.zoom = 2.2;
 
           let slimes = [
-            new SlimeEnemigo(this, 100, 1, 0, 800, 696, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem54'),
+            new SlimeEnemigo(this, 100, 1, 0, 800, 696, "nada", [enemies.langosta, enemies.piraña, enemies.cangrejo], this.WallLayer, this.character, this.myGameData, 'enem54'),
             ];
             slimes.forEach(slime => {
                 if(this.myGameData.CheckDefeated(slime.slimeId)) {

@@ -76,7 +76,7 @@ export class CombateEscena extends Phaser.Scene {
         let gameHeight = this.game.config.height;
 
         //Coloca el fondo
-        this.add.image(gameWidth / 2, gameHeight / 2, 'background');
+        this.add.image(gameWidth / 2, gameHeight / 2, 'background').setScale(4.5,4.5);
 
         //esto es temporal para asignar una imagen que mostrar
         for (let i = 0; i < this.aliados.length; i++) {
@@ -195,13 +195,13 @@ export class CombateEscena extends Phaser.Scene {
      */
     Victory() {
         this.gameData.AddDefeated(this.slimeId);
-        this.scene.start(this.returnScene, { obj: this.gameData, cx: this.cx, cy: this.cy, dir: this.cdir })
+        this.scene.start(this.returnScene, { obj: this.gameData, cx: this.cx, cy: this.cy, dir: this.cdir });
     }
     /**
      * A ser llamado cuando el jugador pierda el combate. Deberá devolver al jugador al último checkpoint.
      */
     Defeat() {
-
+        this.scene.start(this.gameData.sceneRetrunDead, { obj: this.gameData, cx: this.gameData.returnDeadX, cy: this.gameData.returnDeadY, dir: this.cdir });
     }
 
     ActualizarEscena(info) {
