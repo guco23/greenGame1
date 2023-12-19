@@ -117,12 +117,26 @@ export class EscenaMercadona extends Phaser.Scene {
                 }
             }
         })
+        /*if(this.myGameData.CheckDefeated(slime.slimeId)) {
+            slime.destroy();
+        }*/
         this.physics.add.overlap(this.character, this.hitbox4[0], ()=>{
             if(this.interact == 0 && !this.Texto) {
                 if(this.myGameData.Interactablehitboxes[1]){
-                    new dialogo(this, this.character, 49, function(){
-                        //Aquí va el combate con libra
-                    })                     
+                    if(!this.myGameData.CheckDefeated('boss1')) {
+                        new dialogo(this, this.character, 49, function(){
+                            self.scene.start('combatScene', {
+                                gameData: self.myGameData,
+                                enemigos: [enemies.libra, enemies.libra],
+                                objeto: items.armaduraMadera, //this.objeto,
+                                scene: self.scene.key,
+                                cx: self.character.x,
+                                cy: self.character.y,
+                                dir: self.character.dir,
+                                id: "boss1"
+                            });
+                        })                                 
+                    }
                 }else{
                     new dialogo(this, this.character, 1,function(){
                         self.DoorJokeLayer.visible = false;                                                                
