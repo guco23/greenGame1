@@ -4,6 +4,8 @@ import dialogo from "../../dialogo.js";
 import { CONTROLES_OVERWORLD } from "../../constants.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
+import { Item } from "../../Item.js"
+import { items } from "../../../../assets/EquipItemDATA.js";
 
 export class EscenaPlayaFerreteria extends Phaser.Scene {    
 constructor(){
@@ -69,7 +71,7 @@ init(data){
           this.cameras.main.zoom = 2.2;
 
           let slimes = [
-            new SlimeEnemigo(this, 100, 1, 0, 720, 977, "nada", [enemies.langosta, enemies.pezPayaso, enemies.cangrejo], this.WallLayer, this.character, this.myGameData, 'enem53'),
+            new SlimeEnemigo(this, 100, 1, 0, 720, 977, undefined, [enemies.langosta, enemies.pezPayaso, enemies.cangrejo], this.WallLayer, this.character, this.myGameData, 'enem53'),
             ];
             slimes.forEach(slime => {
                 if(this.myGameData.CheckDefeated(slime.slimeId)) {

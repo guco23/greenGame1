@@ -175,7 +175,7 @@ export class EscenaTilesets2 extends Phaser.Scene {
         this.cameras.main.zoom = 2.2;
 
         if(!this.myGameData.Interactablehitboxes[9]){
-            new SlimeEnemigo(this, 100,0,0,500,120,"item de prueba", [enemies.botella], this.WallLayer, this.character, this.myGameData, 'slimeTutorial')
+            new SlimeEnemigo(this, 100,0,0,500,120, undefined, [enemies.botella], this.WallLayer, this.character, this.myGameData, 'slimeTutorial')
         }
         /*
         let slimes = [
