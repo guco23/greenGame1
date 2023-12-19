@@ -9,6 +9,7 @@ import { Personaje } from "./../../Combate JS/Personajes/Personaje.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { Item } from "../../Item.js"
 import { items } from "../../../../assets/EquipItemDATA.js";
+import { CONTROLES_OVERWORLD } from "../../constants.js";
 
 export class EscenaTilesets extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -65,7 +66,7 @@ export class EscenaTilesets extends Phaser.Scene {
             tileWidth: 16,
             tileHeight: 16
         });
-        this.interactKey = this.input.keyboard.addKey('Z');
+        this.interactKey = this.input.keyboard.addKey(CONTROLES_OVERWORLD.ACCEPT);
         this.interact = 1;
         const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
         this.FloorLayer = this.map.createLayer('Suelo', tileset1);

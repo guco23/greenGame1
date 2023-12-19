@@ -1,6 +1,7 @@
 import Character from "../../character.js";
 import { RAIZ_IMAGENES } from "../../constants.js";
 import dialogo from "../../dialogo.js";
+import { CONTROLES_OVERWORLD } from "../../constants.js";
 
 export class EscenaCajaFuerte extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -25,7 +26,7 @@ init(data){
             tileWidth: 16, 
             tileHeight: 16 
           });
-          this.interactKey = this.input.keyboard.addKey("Z");
+          this.interactKey = this.input.keyboard.addKey(CONTROLES_OVERWORLD.ACCEPT);
           this.interact = 1;
           const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
           this.FloorLayer = this.map.createLayer('Suelo', tileset1);

@@ -4,6 +4,7 @@ import {RAIZ_IMGS_OBJETOS} from "../../constants.js";
 import dialogo from "../../dialogo.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { Personaje } from "../../Combate JS/Personajes/Personaje.js";
+import { CONTROLES_OVERWORLD } from "../../constants.js";
 
 export class EscenaMercadona extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -29,7 +30,7 @@ export class EscenaMercadona extends Phaser.Scene {
             tileWidth: 16,
             tileHeight: 16
         });
-        this.interactKey = this.input.keyboard.addKey('Z');
+        this.interactKey = this.input.keyboard.addKey(CONTROLES_OVERWORLD.ACCEPT);
         this.interact = 1;
         const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
         this.FloorLayer = this.map.createLayer('Suelo', tileset1);

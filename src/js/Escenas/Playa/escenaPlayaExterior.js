@@ -5,6 +5,7 @@ import { Personaje	 } from "../../Combate JS/Personajes/Personaje.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
+import { CONTROLES_OVERWORLD } from "../../constants.js";
 
 export class EscenaPlaya extends Phaser.Scene {    
 constructor(){
@@ -46,7 +47,7 @@ init(data){
             tileWidth: 16, 
             tileHeight: 16 
           });
-          this.interactKey = this.input.keyboard.addKey('Z');
+          this.interactKey = this.input.keyboard.addKey(CONTROLES_OVERWORLD.ACCEPT);
           this.interact = 1;
           //const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
           const tileset2 = this.map.addTilesetImage('tileset_playa', 'tileset_playa');

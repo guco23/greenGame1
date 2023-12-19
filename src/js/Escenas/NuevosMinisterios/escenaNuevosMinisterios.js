@@ -5,6 +5,7 @@ import { Personaje } from "../../Combate JS/Personajes/Personaje.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
+import { CONTROLES_OVERWORLD } from "../../constants.js";
 
 export class EscenaNuevosMinisterios extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -58,7 +59,7 @@ init(data){
 
         
 
-          this.interactKey = this.input.keyboard.addKey('Z');
+          this.interactKey = this.input.keyboard.addKey(CONTROLES_OVERWORLD.ACCEPT);
           this.interact = 1;
           const tileset1 = this.map.addTilesetImage('tileset_nm', 'tileset_nm');          
           this.LavaLayer = this.map.createLayer('Lava', tileset1);          
