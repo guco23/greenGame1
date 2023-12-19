@@ -190,8 +190,9 @@ export default class GameData {
         while (!encontrado && i < this.party.length) {
             if (this.party[i].name === personaje.name) {
                 encontrado = true;
+            } else {
+                i++;
             }
-            i++;
         }
         if (encontrado)
             return i;
@@ -210,9 +211,12 @@ export default class GameData {
             this.party[first] = this.allies[second];
         } else {
             let aux = this.party[first];
-            this.party[first] = this.party[second];
-            this.party[second] = aux;
+            this.party[first] = this.party[partyIndex];
+            this.party[partyIndex] = aux;
         }
+        console.log(partyIndex);
+        console.log(first);
+        console.log(second);
         console.log(this.party);
     }
 }
