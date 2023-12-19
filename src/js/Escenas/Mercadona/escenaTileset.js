@@ -6,7 +6,7 @@ import GameData from "../../GameData.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
 import { Personaje } from "./../../Combate JS/Personajes/Personaje.js";
-import { Protagonista } from "./../../Combate JS/Personajes/Protagonista.js";
+import { Animador } from "./../../Combate JS/Personajes/Animador.js"; //NTS ES AQUÍ EL CAMBIO
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { Item } from "../../Item.js"
 import { items } from "../../../../assets/EquipItemDATA.js";
@@ -115,7 +115,7 @@ export class EscenaTilesets extends Phaser.Scene {
             }
         });
         
-        this.myGameData.AddCharacter(new Protagonista(personajes.protagonista));
+        this.myGameData.AddCharacter(new Animador(personajes.protagonista)); //No te olvides de cambiarlo de vuelta al final
 
         this.myGameData.AñadeItemEquipable(items.armaduraBronce);
         this.myGameData.AñadeItemEquipable(items.armaduraDiamante);

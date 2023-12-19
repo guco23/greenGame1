@@ -143,9 +143,13 @@ export class Enemigo {
         this.endTurn();
     }
 
+    selectAction() {
+        this.attack();
+    }
+
     takeTurn() {
         if(this.stunned === false) {
-            this.attack();
+            this.selectAction();
         }
         else {
             this.stunned = false;

@@ -7,7 +7,7 @@ export class Protagonista extends Personaje {
     constructor(idn) {
         super(idn);
         this.targetKind = 0;
-        this.healFactor = 1.2;
+        this.healFactor = 1.5;
     }
 
     special(target) {

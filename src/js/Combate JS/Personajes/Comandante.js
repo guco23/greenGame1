@@ -22,7 +22,8 @@ export class Comandante extends Personaje {
                 thisTarg.checkAlive();
             }
         }
-        this.currentCombat.addInfo("special", this.name + " hizo un total de " + total + " daño y aterrorizó a los enemigos.\n");
+        this.currentCombat.addInfo("special", this.name + " hizo un total de " + total + " daño\n");
+        this.currentCombat.addInfo("special", "y aterrorizó a los enemigos.\n");
         this.endTurn();
     }
 }
