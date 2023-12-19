@@ -2,22 +2,21 @@ class Drawer extends Phaser.GameObjects.Container {
     constructor(scene, personajeMenu, padY, x, y) {
         super(scene);
         var style = { wordWrap: {width:100}}; //Para que el nombre del objeto no desborde
-        this.personaje = personajeMenu.personaje;
         this.textHp = scene.add.text(x, y + padY, "");
         this.textAtk = scene.add.text(x, y + padY * 2, "");
         this.textDef = scene.add.text(x, y + padY * 3 , "");
         this.textItem = scene.add.text(x, y + padY * 4, "", style);
-        this.update();
+        this.update(personajeMenu);
     }
 
     /**
      * Actualiza los datos mostrados del elemento
      */
-    update() {
-        this.textHp.setText("HP: " + this.personaje.currentHp + "/" + this.personaje.maxHp);
-        this.textAtk.setText("ATK: " + this.personaje.atk);
-        this.textDef.setText("ATK: " + this.personaje.def);
-        this.textItem.setText(this.personaje.item.nombre);
+    update(personaje) {
+        this.textHp.setText("HP: " + personaje.currentHp + "/" + personaje.maxHp);
+        this.textAtk.setText("ATK: " + personaje.atk);
+        this.textDef.setText("ATK: " + personaje.def);
+        this.textItem.setText(personaje.item.nombre);
     }
 
     /**
@@ -56,8 +55,9 @@ export class StatsDrawer extends Phaser.GameObjects.Container {
     constructor(scene, charL, padY, padX, x, y) {
         super(scene);
         this.drawers = [];
+        this.charL = charL;
         for (let i = 0; i < charL.opciones.length; i++) {
-            this.drawers.push(new Drawer(scene, charL.opciones[i], padY, x + i * padX, y));
+            this.drawers.push(new Drawer(scene, charL.opciones[i].personaje, padY, x + i * padX, y));
         }
     }
 
@@ -65,9 +65,9 @@ export class StatsDrawer extends Phaser.GameObjects.Container {
      * Actualiza todos los elementos de la lista
      */
     update() {
-        this.drawers.forEach(drawer => {
-            drawer.update();
-        });
+        for (let i = 0; i < this.drawers.length; i++) {
+            this.drawers[i].update(this.charL.opciones[i].personaje);
+        }
     }
 
     /**
