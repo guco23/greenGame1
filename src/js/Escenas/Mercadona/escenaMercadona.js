@@ -90,8 +90,7 @@ export class EscenaMercadona extends Phaser.Scene {
         this.physics.add.collider(this.character, this.WallLayer);
         this.Texto = false;
 
-        this.NoWallLayer = this.map.createLayer('Paredes atravesables', tileset1); //Esta capa se coloca después para que esté por "encima" del jugador
-
+        
         var self=this;
         this.physics.add.overlap(this.character, this.hitbox1[0], () => {
             if (this.interact == 0) this.scene.start('escenaTilesets4', { obj: this.myGameData, cx: 100, cy: 65, dir: 3 });
@@ -108,7 +107,9 @@ export class EscenaMercadona extends Phaser.Scene {
         this.physics.add.overlap(this.character, this.hitbox6[0], () => {
             if(!this.Texto){
                 if(this.myGameData.CheckObjetoClave(3)){
-                    //Aquí va el combate con libra y todo eso...
+                    new dialogo(this, this.character, 8,function(){
+                        self.character.x = self.character.x + 5;
+                    })
                 }else{                    
                     new dialogo(this, this.character, 8,function(){
                         self.character.x = self.character.x + 5;
@@ -119,14 +120,16 @@ export class EscenaMercadona extends Phaser.Scene {
         this.physics.add.overlap(this.character, this.hitbox4[0], ()=>{
             if(this.interact == 0 && !this.Texto) {
                 if(this.myGameData.Interactablehitboxes[1]){
-                    new dialogo(this, this.character, 7) 
+                    new dialogo(this, this.character, 49, function(){
+                        //Aquí va el combate con libra
+                    })                     
                 }else{
                     new dialogo(this, this.character, 1,function(){
                         self.DoorJokeLayer.visible = false;                                                                
                     }) 
                     this.myGameData.Interactablehitboxes[1] = true;
                 }
-                               
+                
             }
         })
         this.physics.add.overlap(this.character, this.Nota1[0], () => {
@@ -164,15 +167,15 @@ export class EscenaMercadona extends Phaser.Scene {
                 self.myGameData.AddCharacter(new Comandante(personajes.judioCesar));
             })     
         })
-
+        
         this.cameras.main.startFollow(this.character);
         this.cameras.main.zoom = 2.2;
-
+        
         let slimes = [
             new SlimeEnemigo(this, 65, 0, 1, 770, 421, undefined, [enemies.platano, enemies.cocacola], this.WallLayer, this.character, this.myGameData, 'enem2'),
             new SlimeEnemigo(this, 65, 0, 1, 740, 335, items.escudoMadera, [enemies.magdalena, enemies.pan], this.WallLayer, this.character, this.myGameData, 'enem3'),
             new SlimeEnemigo(this, 65, 0, 1, 683, 246, items.escudoMadera, [enemies.pan, enemies.salchicha], this.WallLayer, this.character, this.myGameData, 'enem4'),
-
+            
             new SlimeEnemigo(this, 70, 1, -1, 435, 93, items.escudoMadera, [enemies.botella, enemies.salchicha, enemies.sardina], this.WallLayer, this.character, this.myGameData, 'enem5'),
             new SlimeEnemigo(this, 110, 0, 1, 338, 206, items.chalecoCuero, [enemies.pollo, enemies.calamar], this.WallLayer, this.character, this.myGameData, 'enem6'),
             new SlimeEnemigo(this, 70, 1, 1, 426, 319, items.chalecoCuero, [enemies.platano, enemies.botella, enemies.magdalena], this.WallLayer, this.character, this.myGameData, 'enem7')
@@ -182,10 +185,11 @@ export class EscenaMercadona extends Phaser.Scene {
                 slime.destroy();
             }
         });
-
+        this.NoWallLayer = this.map.createLayer('Paredes atravesables', tileset1); //Esta capa se coloca después para que esté por "encima" del jugador
+        
     }
-
-
+    
+    
     update() {
         if (this.interactKey.isDown) {
             if(this.timer==0)this.interact = 0;
