@@ -11,6 +11,7 @@ import {EscenaPlayaFerreteria} from "./Escenas/Playa/escenaPlayaFerreteria.js";
 import {EscenaPlayaSalaSecreta} from "./Escenas/Playa/escenaPlayaCuartoSecreto.js"
 import {EscenaNuevosMinisterios} from "./Escenas/NuevosMinisterios/escenaNuevosMinisterios.js"
 import {MenuEscena} from "./MenuEscena.js"
+import { ZonaFinal } from "./Escenas/NuevosMinisterios/escenaFinal.js";
 
 //Configuración inicial del juego
 var config = {
@@ -36,7 +37,7 @@ var config = {
         }
     },
     scene: [EscenaTilesets, EscenaTilesets2,EscenaTilesets4,EscenaTilesets3, EscenaMercadona, EscenaCajaFuerte,EscenaPlaya,EscenaPlayaBosque,
-        EscenaPlayaFerreteria,EscenaPlayaSalaSecreta,EscenaNuevosMinisterios,CombateEscena, MenuEscena], //Array con todas las escenas
+        EscenaPlayaFerreteria,EscenaPlayaSalaSecreta,EscenaNuevosMinisterios,ZonaFinal,CombateEscena, MenuEscena], //Array con todas las escenas
     parent: 'espacio-juego' //El elemento de html sobre el que se colocará el "canvas" de Phaser
 };
 
