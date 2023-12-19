@@ -5,6 +5,8 @@ import dialogo from "../../dialogo.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { Personaje } from "../../Combate JS/Personajes/Personaje.js";
 import { CONTROLES_OVERWORLD } from "../../constants.js";
+import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
+import SlimeEnemigo from "../../SlimeEnemigo.js"
 
 export class EscenaMercadona extends Phaser.Scene {
     //cargar aqui los datos de la escena.
@@ -22,6 +24,7 @@ export class EscenaMercadona extends Phaser.Scene {
         this.load.image('tileset_mercadona', RAIZ_IMAGENES + 'tilesets/tileset_mercadona.png');
         this.load.image('Notas', RAIZ_IMAGENES + RAIZ_IMGS_OBJETOS+'Notas.png');
         this.load.spritesheet('character', RAIZ_IMAGENES + 'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 })
+        this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
     }
 
     create() {
@@ -154,6 +157,21 @@ export class EscenaMercadona extends Phaser.Scene {
 
         this.cameras.main.startFollow(this.character);
         this.cameras.main.zoom = 2.2;
+
+        let slimes = [
+            new SlimeEnemigo(this, 65, 0, 1, 770, 421, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem2'),
+            new SlimeEnemigo(this, 65, 0, 1, 740, 335, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem3'),
+            new SlimeEnemigo(this, 65, 0, 1, 683, 246, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem4'),
+
+            new SlimeEnemigo(this, 70, 1, -1, 435, 93, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem5'),
+            new SlimeEnemigo(this, 110, 0, 1, 338, 206, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem6'),
+            new SlimeEnemigo(this, 70, 1, 1, 426, 319, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem7')
+        ];
+        slimes.forEach(slime => {
+            if(this.myGameData.CheckDefeated(slime.slimeId)) {
+                slime.destroy();
+            }
+        });
 
     }
 

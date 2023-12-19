@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="250" height="180" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="30">
- <editorsettings>
-  <export target="../assets/json/PlayaExterior.json" format="json"/>
- </editorsettings>
  <tileset firstgid="1" name="tileset_playa" tilewidth="16" tileheight="16" spacing="1" margin="1" tilecount="253" columns="23">
-  <image source="../assets/images/tilesets/tileset_playa.png" width="400" height="200"/>
+  <image source="../images/tilesets/tileset_playa.png" width="400" height="200"/>
  </tileset>
  <layer id="2" name="AGUA" width="250" height="180">
   <data encoding="csv">
@@ -952,6 +949,6 @@
   <object id="27" name="cofre2" x="3632" y="1744"/>
  </objectgroup>
  <objectgroup id="12" name="CheckPoints">
-  <object id="29" x="2288" y="1231.33" width="32.6667" height="32.6667"/>
+  <object id="29" name="checkPoint" x="2288" y="1231.33" width="32.6667" height="32.6667"/>
  </objectgroup>
 </map>

@@ -23,13 +23,15 @@ init(data){
         this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
         this.load.image('tileset_playa', RAIZ_IMAGENES+'tilesets/tileset_playa.png');
         this.load.image('Planos', RAIZ_IMAGENES+'Objetos/Planos.png');
-        this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
-        this.load.spritesheet('cofre',  RAIZ_IMAGENES+'Objetos/Cofres.png', {frameWidth: 16, frameHeight: 16})
+        this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26});
+        this.load.spritesheet('cofre',  RAIZ_IMAGENES+'Objetos/Cofres.png', {frameWidth: 16, frameHeight: 16});
+        this.load.spritesheet('checkPoint',  RAIZ_IMAGENES+'Objetos/CheckPoint.png', {frameWidth: 32, frameHeight: 32});
     }
 
     //crear aqui los objetos de la escena
     create() {        
         this.timer = 0;
+
         this.anims.create({
 			key: 'cofreCerrado',
 			frames: this.anims.generateFrameNumbers('cofre', { start: 0, end: 0 }),
@@ -43,6 +45,21 @@ init(data){
 			frameRate: 16,
 			repeat: -1
 		});
+
+        this.anims.create({
+			key: 'banderaRoja',
+			frames: this.anims.generateFrameNumbers('checkPoint', { start: 0, end: 0 }),
+			frameRate: 16,
+			repeat: -1
+		});
+
+        this.anims.create({
+			key: 'banderaVerde',
+			frames: this.anims.generateFrameNumbers('checkPoint', { start: 1, end: 1 }),
+			frameRate: 16,
+			repeat: -1
+		});
+
         this.map = this.make.tilemap({ 
             key: 'Playa', 
             tileWidth: 16, 
@@ -120,7 +137,16 @@ init(data){
           if(!this.myGameData.Interactablehitboxes[4])this.AguaPuenteCollider = this.physics.add.collider(this.character, this.AguaPuente);
           
           this.TopWallLayer = this.map.createLayer('ParedesSobrepuestas', tileset2);
-
+        
+        //CheckPoints
+        let groupCheckPoints = this.add.group();
+        let check = this.map.createFromObjects('CheckPoints', {name: "checkPoint", key: 'checkPoint'});
+        this.anims.play('banderaRoja', check);
+        groupCheckPoints.addMultiple(check);
+        check.forEach(obj => {
+			console.log("uwu");
+			this.physics.add.existing(obj);
+		});
         //Cofres, mejor tocar lo minimo posible, unicamente cambiar que el item q de al jugador como tal en vez de ser un string sea un item
         //Se que puede parecer una peruanada esto de abajo, pero por favor son la 1 de la mañana, he perdido el tiempo con la puta mierda de la memoria cahe del navegador
         //y quedan menos de 24 horas asi que dejemonos de cosas de limpieza de codigo con esto
@@ -134,13 +160,7 @@ init(data){
 			this.physics.add.existing(obj);
 		});
 
-        let cofre2 = this.map.createFromObjects('Cofres', {name: "cofre2", key: 'cofre', item: "item2" });
-		this.anims.play('cofreCerrado', cofre2);
-        groupCofres.addMultiple(cofre2);
-        cofre2.forEach(obj => {
-			console.log("uwu");
-			this.physics.add.existing(obj);
-		});
+        //Por cuestiones de diseño, el cofre2 ha sido borrado
 
         let cofre3 = this.map.createFromObjects('Cofres', {name: "cofre3", key: 'cofre', item: "item3" });
 		this.anims.play('cofreCerrado', cofre3);
@@ -158,21 +178,18 @@ init(data){
 			this.physics.add.existing(obj);
 		});
 
-        let cofre5 = this.map.createFromObjects('Cofres', {name: "cofre5", key: 'cofre', item: "item5" });
-		this.anims.play('cofreCerrado', cofre5);
-        groupCofres.addMultiple(cofre5);
-        cofre5.forEach(obj => {
-			console.log("uwu");
-			this.physics.add.existing(obj);
-		});
 
-        let cofre6 = this.map.createFromObjects('Cofres', {name: "cofre6", key: 'cofre', item: "item6" });
-		this.anims.play('cofreCerrado', cofre6);
-        groupCofres.addMultiple(cofre6);
-        cofre6.forEach(obj => {
-			console.log("uwu");
-			this.physics.add.existing(obj);
-		});
+        this.physics.add.overlap(this.character, groupCheckPoints, (character, checkPoint) => {
+            this.myGameData.UpdateCheckPoint(this, this.character.x, this.character.y);
+            this.anims.play('banderaVerde', checkPoint);
+        });
+
+        this.physics.add.overlap(this.character, groupCofres, (character, cofre) => {
+            if(this.interact == 0){
+                
+                this.anims.play('cofreAbierto', cofre);
+            }
+        });
 
 
 
@@ -261,28 +278,28 @@ init(data){
           this.cameras.main.zoom = 2.2;
 
         let slimes = [
-            new SlimeEnemigo(this, 100, 0, 1, 1439, 328, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem1'),
-            new SlimeEnemigo(this, 100, 1, 1, 964, 500, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem2'),
-            new SlimeEnemigo(this, 70, 1, 0, 2289, 497, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem3'),
+            new SlimeEnemigo(this, 100, 0, 1, 1439, 328, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem8'),
+            new SlimeEnemigo(this, 100, 1, 1, 964, 500, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem9'),
+            new SlimeEnemigo(this, 70, 1, 0, 2289, 497, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem10'),
 
-            new SlimeEnemigo(this, 70, 1, 0, 2283, 792, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem1'),
-            new SlimeEnemigo(this, 100, 0, 1, 2625, 1366, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem2'),
-            new SlimeEnemigo(this, 70, 1, 0, 2295, 1919, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem3'),
+            new SlimeEnemigo(this, 70, 1, 0, 2283, 792, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem11'),
+            new SlimeEnemigo(this, 100, 0, 1, 2625, 1366, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem12'),
+            new SlimeEnemigo(this, 70, 1, 0, 2295, 1919, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem13'),
 
-            new SlimeEnemigo(this, 100, 1, 0, 2294, 1142, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem1'),
-            new SlimeEnemigo(this, 50, 1, 1, 2000, 2192, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem2'),
-            new SlimeEnemigo(this, 100, 1, 1, 1586, 2152, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem3'),
+            new SlimeEnemigo(this, 100, 1, 0, 2294, 1142, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem14'),
+            new SlimeEnemigo(this, 50, 1, 1, 2000, 2192, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem15'),
+            new SlimeEnemigo(this, 100, 1, 1, 1586, 2152, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem16'),
 
-            new SlimeEnemigo(this, 50, 1, 1, 903, 1966, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem1'),
-            new SlimeEnemigo(this, 50, 0, 1, 966, 1709, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem2'),
-            new SlimeEnemigo(this, 50, 1, 0, 1060, 1301, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem3'),
+            new SlimeEnemigo(this, 50, 1, 1, 903, 1966, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem17'),
+            new SlimeEnemigo(this, 50, 0, 1, 966, 1709, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem18'),
+            new SlimeEnemigo(this, 50, 1, 0, 1060, 1301, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem19'),
 
-            new SlimeEnemigo(this, 50, 1, -1, 2896, 2178, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem1'),
-            new SlimeEnemigo(this, 100, 1, 0, 3526, 2103, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem2'),
-            new SlimeEnemigo(this, 50, 0, 1, 3430, 2036, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem3'),
+            new SlimeEnemigo(this, 50, 1, -1, 2896, 2178, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem20'),
+            new SlimeEnemigo(this, 100, 1, 0, 3526, 2103, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem21'),
+            new SlimeEnemigo(this, 50, 0, 1, 3430, 2036, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem22'),
 
-            new SlimeEnemigo(this, 50, 0, 1, 3430, 1925, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem1'),
-            new SlimeEnemigo(this, 100, 0, 1, 3624, 2003, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem2')
+            new SlimeEnemigo(this, 50, 0, 1, 3430, 1925, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem23'),
+            new SlimeEnemigo(this, 100, 0, 1, 3624, 2003, "pene de plastico", [enemies.libra, enemies.libra], this.WallLayer, this.character, this.myGameData, 'enem24')
         ];
         slimes.forEach(slime => {
             if(this.myGameData.CheckDefeated(slime.slimeId)) {

@@ -13,6 +13,9 @@ export default class GameData {
         this.party = [];
         this.allies = [];
         this.partySize = 0;
+        this.sceneRetrunDead;
+        this.returnDeadX = 0;
+        this.returnDeadY = 0;
         this.NMCoins = 0; //Contador de monedas de nuevos ministerios
         let coins = this.NMCoins;
 
@@ -69,6 +72,16 @@ export default class GameData {
             //console.log(this.objects[aux].Pillado);
             return coins;
         }
+
+        this.UpdateCheckPoint = function (auxScene, auxX, auxY) {
+            //console.log(this.objects[aux].Pillado);
+            this.sceneRetrunDead = auxScene;
+            this.returnDeadX = auxX;
+            this.returnDeadY = auxY;
+            console.log(this.sceneRetrunDead);
+            console.log(this.returnDeadX);
+            console.log(this.returnDeadY);
+        }
         this.Interactablehitboxes = [];
         this.Interactablehitboxes[0] = false;
         this.Interactablehitboxes[1] = false;
@@ -96,13 +109,6 @@ export default class GameData {
         return encontrado;
     }
 
-    AñadeMonedasNM(aux) {
-        NMCoins = NMcoins + aux;
-    }
-
-    GetMonedasNM(){
-        return this.NMCoins;
-    }
     //Metodos que comprueban estado de los objetos
 
     CheckObjetoClave(aux) {

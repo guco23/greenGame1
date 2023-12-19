@@ -50,7 +50,8 @@ export class EscenaTilesets extends Phaser.Scene {
         this.load.image('SaulJudman', RAIZ_IMAGENES+RAIZ_IMGS_OVERWORLD+'/SaulJudman.png');       
         this.load.image('UI', RAIZ_IMAGENES+'UI_dialogo.png');
         this.load.spritesheet('Slime', RAIZ_IMAGENES+'Slime.png', { frameWidth: 16, frameHeight: 16 });
-        this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 })
+        this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 });
+        this.load.spritesheet('checkPoint',  RAIZ_IMAGENES+'Objetos/CheckPoint.png', {frameWidth: 32, frameHeight: 32});
     }
 
     //crear aqui los objetos de la escena
@@ -61,6 +62,21 @@ export class EscenaTilesets extends Phaser.Scene {
         this.image = this.add.image(screenWidth, screenHeight, 'javier'); //omg so sexy
         this.image.setScale(0.3);
         this.image.setPosition(screenWidth / 2, screenHeight / 2);*/
+        
+        this.anims.create({
+			key: 'banderaRoja',
+			frames: this.anims.generateFrameNumbers('checkPoint', { start: 0, end: 0 }),
+			frameRate: 16,
+			repeat: -1
+		});
+
+        this.anims.create({
+			key: 'banderaVerde',
+			frames: this.anims.generateFrameNumbers('checkPoint', { start: 1, end: 1 }),
+			frameRate: 16,
+			repeat: -1
+		});
+        
         this.map = this.make.tilemap({
             key: 'Almacen1',
             tileWidth: 16,
@@ -87,6 +103,22 @@ export class EscenaTilesets extends Phaser.Scene {
           if(self.interact == 0) console.log("Hay colision");
           else console.log("No :C");
         }*/
+
+        //CheckPoints
+        let groupCheckPoints = this.add.group();
+        let check = this.map.createFromObjects('CheckPoints', {name: "checkPoint", key: 'checkPoint'});
+        this.anims.play('banderaRoja', check);
+        groupCheckPoints.addMultiple(check);
+        check.forEach(obj => {
+			console.log("uwu");
+			this.physics.add.existing(obj);
+		});
+
+
+        this.physics.add.overlap(this.character, groupCheckPoints, (character, checkPoint) => {
+            this.myGameData.UpdateCheckPoint(this, this.character.x, this.character.y);
+            this.anims.play('banderaVerde', checkPoint);
+        });
 
         this.physics.add.overlap(this.character, this.hitbox[0], () => {
             if (this.interact == 0) {                

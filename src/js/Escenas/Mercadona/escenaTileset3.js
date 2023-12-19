@@ -19,6 +19,7 @@ init(data){
         this.load.tilemapTiledJSON('Almacen3', 'assets/json/Almacen3.json');
         this.load.image('tileset_mercadona', RAIZ_IMAGENES+'tilesets/tileset_mercadona.png');
         this.load.spritesheet('character', RAIZ_IMAGENES+'spritespjs/Main_char.png', {frameWidth: 28, frameHeight: 26})
+        this.load.spritesheet('cofre',  RAIZ_IMAGENES+'Objetos/Cofres.png', {frameWidth: 16, frameHeight: 16});
     }
 
     //crear aqui los objetos de la escena
@@ -30,6 +31,21 @@ init(data){
         this.image.setScale(0.3);
         this.image.setPosition(screenWidth / 2, screenHeight / 2);*/
         this.timer = 0;
+
+        this.anims.create({
+			key: 'cofreCerrado',
+			frames: this.anims.generateFrameNumbers('cofre', { start: 0, end: 0 }),
+			frameRate: 16,
+			repeat: -1
+		});
+
+        this.anims.create({
+			key: 'cofreAbierto',
+			frames: this.anims.generateFrameNumbers('cofre', { start: 1, end: 1 }),
+			frameRate: 16,
+			repeat: -1
+		});
+
         this.map = this.make.tilemap({ 
             key: 'Almacen3', 
             tileWidth: 16, 
@@ -47,6 +63,23 @@ init(data){
           this.character = new Character(this, this.cx, this.cy,this.dir);
           this.physics.world.enable(this.character);
           this.physics.add.collider(this.character, this.WallLayer);
+
+          //Cofres
+          let groupCofres = this.add.group();
+          let cofre1 = this.map.createFromObjects('Cofres', {name: "cofre1", key: 'cofre', item: "item1" });
+          this.anims.play('cofreCerrado', cofre1);
+          groupCofres.addMultiple(cofre1);
+          cofre1.forEach(obj => {
+              console.log("uwu");
+              this.physics.add.existing(obj);
+          });
+
+          this.physics.add.overlap(this.character, groupCofres, (character, cofre) => {
+            if(this.interact == 0){
+                
+                this.anims.play('cofreAbierto', cofre);
+            }
+        });
           /*var self=this;
           var onCollision = function(){                   
             if(self.interact == 0) console.log("Hay colision");

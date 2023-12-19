@@ -151,7 +151,7 @@ export class EscenaTilesets2 extends Phaser.Scene {
         this.cameras.main.zoom = 2.2;
 
         let slimes = [
-            new SlimeEnemigo(this, 100, 1, 1, 50, 110, "item de prueba", [enemies.botella, enemies.cocacola, enemies.pollo], this.WallLayer, this.character, this.myGameData, 'enem2')
+            new SlimeEnemigo(this, 100, 1, 1, 427, 117, "item de prueba", [enemies.botella], this.WallLayer, this.character, this.myGameData, 'enem1')
         ];
         slimes.forEach(slime => {
             if(this.myGameData.CheckDefeated(slime.slimeId)) {
