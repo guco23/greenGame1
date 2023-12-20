@@ -119,6 +119,10 @@ El combate tiene un estilo de rpg clásico. Los turnos suceden uno tras otro sin
 
 La idea de gastar puntos de habilidad de una barra conjunta para el equipo y que obtengas puntos usando ataques básicos la hemos tomado de Honkai: Star Rail. Nos parece una mecánica muy interesante por su sencillez y la cantidad de toma de decisiones que añade al combate. ¿Quiero gastar mis puntos ahora para curar o prefiero generar más para después?
 
+**UML**
+Diagrama de clases del proyecto.
+![](./assets/images/gddImages/UML.png)
+
 "Nadie sabe pues, qué deparará el destino... quizás la ambición ahogará el brote de vuestra empresa... quizás es sólo la primera semilla de algo mucho más grande... sea como sea; muy libra de tu parte."
 
 - Augurio de la Judía Astral
