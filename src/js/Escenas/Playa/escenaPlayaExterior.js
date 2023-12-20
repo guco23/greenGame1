@@ -3,12 +3,19 @@ import { RAIZ_IMAGENES } from "../../constants.js";
 import {RAIZ_SOUNDS,RAIZ_SOUNDS_MUSICA} from "../../constants.js";
 import dialogo from "../../dialogo.js";
 import { Personaje	 } from "../../Combate JS/Personajes/Personaje.js";
+import { Innovador	 } from "../../Combate JS/Personajes/Innovador.js";
+import { Aventurero	 } from "../../Combate JS/Personajes/Aventurero.js";
+import { Arquitecto	 } from "../../Combate JS/Personajes/Arquitecto.js";
+import { Ejecutivo	 } from "../../Combate JS/Personajes/Ejecutivo.js";
+import { Activista	 } from "../../Combate JS/Personajes/Activista.js";
+import { Defensor	 } from "../../Combate JS/Personajes/Defensor.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
 import { CONTROLES_OVERWORLD } from "../../constants.js";
 import { Item } from "../../Item.js"
 import { items } from "../../../../assets/EquipItemDATA.js";
+
 
 export class EscenaPlaya extends Phaser.Scene {    
 constructor(){
@@ -300,42 +307,42 @@ init(data){
             var self = this;
             if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.bealonMusk))new dialogo(this, this.character,11, function(){
                 self.BealonMuskImage.destroy();   
-                self.myGameData.AddCharacter(new Personaje(personajes.bealonMusk));
+                self.myGameData.AddCharacter(new Innovador(personajes.bealonMusk));
             })     
         })
         this.physics.add.overlap(this.character, this.Gato[0], ()=>{
             var self = this;
             if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.frijolConBotas))new dialogo(this, this.character,12, function(){
                 self.GatoImage.destroy();   
-                self.myGameData.AddCharacter(new Personaje(personajes.frijolConBotas));
+                self.myGameData.AddCharacter(new Aventurero(personajes.frijolConBotas));
             })     
         })
         this.physics.add.overlap(this.character, this.Emmet[0], ()=>{
             var self = this;
             if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.emmet))new dialogo(this, this.character,13, function(){
                 self.EmmetImage.destroy();   
-                self.myGameData.AddCharacter(new Personaje(personajes.emmet));
+                self.myGameData.AddCharacter(new Arquitecto(personajes.emmet));
             })     
         })
         this.physics.add.overlap(this.character, this.MarianoRajoy[0], ()=>{
             var self = this;
             if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.rajoy))new dialogo(this, this.character,14, function(){
                 self.MarianoRajoyImage.destroy();   
-                self.myGameData.AddCharacter(new Personaje(personajes.rajoy));
+                self.myGameData.AddCharacter(new Ejecutivo(personajes.rajoy));
             })     
         })
         this.physics.add.overlap(this.character, this.Greta[0], ()=>{
             var self = this;
             if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.greta))new dialogo(this, this.character,15, function(){
                 self.GretaImage.destroy();   
-                self.myGameData.AddCharacter(new Personaje(personajes.greta));
+                self.myGameData.AddCharacter(new Activista(personajes.greta));
             })     
         })
         this.physics.add.overlap(this.character, this.Selena[0], ()=>{
             var self = this;
             if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.selena))new dialogo(this, this.character,16  , function(){
                 self.SelenaImage.destroy();   
-                self.myGameData.AddCharacter(new Personaje(personajes.selena));
+                self.myGameData.AddCharacter(new Defensor(personajes.selena));
             })     
         })
         

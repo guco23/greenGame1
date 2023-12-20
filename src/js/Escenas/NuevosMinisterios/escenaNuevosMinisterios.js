@@ -3,6 +3,12 @@ import dialogo from "../../dialogo.js";
 import { RAIZ_IMAGENES } from "../../constants.js";
 import {RAIZ_SOUNDS,RAIZ_SOUNDS_MUSICA} from "../../constants.js";
 import { Personaje } from "../../Combate JS/Personajes/Personaje.js";
+import { Logico	 } from "../../Combate JS/Personajes/Logico.js";
+import { Consul	 } from "../../Combate JS/Personajes/Consul.js";
+import { Virtuoso	 } from "../../Combate JS/Personajes/Virtuoso.js";
+import { Mediador	 } from "../../Combate JS/Personajes/Mediador.js";
+import { Animador	 } from "../../Combate JS/Personajes/Animador.js";
+import { Abogado	 } from "../../Combate JS/Personajes/Abogado.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
@@ -349,42 +355,42 @@ init(data){
             var self = this;
             if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.albert))new dialogo(this, this.character,17, function(){
                 self.AlbertImage.destroy();   
-                self.myGameData.AddCharacter(new Personaje(personajes.albert));
+                self.myGameData.AddCharacter(new Logico(personajes.albert));
             })     
         })
         this.physics.add.overlap(this.character, this.Donald[0], ()=>{
             var self = this;
             if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.donald))new dialogo(this, this.character,18, function(){
                 self.DonaldImage.destroy();   
-                self.myGameData.AddCharacter(new Personaje(personajes.donald));
+                self.myGameData.AddCharacter(new Consul(personajes.donald));
             })     
         })
         this.physics.add.overlap(this.character, this.Indiana[0], ()=>{
             var self = this;
             if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.indiana))new dialogo(this, this.character,19, function(){
                 self.IndianaImage.destroy();   
-                self.myGameData.AddCharacter(new Personaje(personajes.indiana));
+                self.myGameData.AddCharacter(new Virtuoso(personajes.indiana));
             })     
         })
         this.physics.add.overlap(this.character, this.Jhonny[0], ()=>{
             var self = this;
             if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.johnny))new dialogo(this, this.character,20, function(){
                 self.JhonnyImage.destroy();   
-                self.myGameData.AddCharacter(new Personaje(personajes.johnny));
+                self.myGameData.AddCharacter(new Mediador(personajes.johnny));
             })     
         })
         this.physics.add.overlap(this.character, this.SambaDoJudia[0], ()=>{
             var self = this;
             if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.samba))new dialogo(this, this.character,21, function(){
                 self.SambaDoJudiaImage.destroy();   
-                self.myGameData.AddCharacter(new Personaje(personajes.samba));
+                self.myGameData.AddCharacter(new Animador(personajes.samba));
             })     
         })
         this.physics.add.overlap(this.character, this.SaulJudman[0], ()=>{
             var self = this;
             if(!this.Texto&&this.interact == 0&&!this.myGameData.CheckCharacter(personajes.saulJudman))new dialogo(this, this.character,22 , function(){
                 self.SaulJudmanImage.destroy();   
-                self.myGameData.AddCharacter(new Personaje(personajes.saulJudman));
+                self.myGameData.AddCharacter(new Abogado(personajes.saulJudman));
             })     
         })
 

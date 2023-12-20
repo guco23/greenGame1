@@ -142,9 +142,9 @@ export class EscenaTilesets extends Phaser.Scene {
         this.cameras.main.zoom = 2.2;
 
         this.myGameData.AddCharacter(new Protagonista(personajes.protagonista));
-        /*
-         //No te olvides de cambiarlo de vuelta al final
         
+         //No te olvides de cambiarlo de vuelta al final
+ /*       
         this.myGameData.AddCharacter(new Protagonista(personajes.MrBean)); //No te olvides de cambiarlo de vuelta al final
         this.myGameData.AddCharacter(new Protagonista(personajes.albert)); //No te olvides de cambiarlo de vuelta al final
         
@@ -165,8 +165,8 @@ export class EscenaTilesets extends Phaser.Scene {
 
         this.myGameData.AñadeItemEquipable(items.armaduraBronce);
         this.myGameData.AñadeItemEquipable(items.armaduraDiamante);
-        */
-
+        
+*/
         
         if (!this.myGameData.Interactablehitboxes[8]) {
             new dialogo(this, this.character, 44) //Comentad si no queréis que os moleste durante el desarrollo
