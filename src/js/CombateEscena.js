@@ -1,12 +1,13 @@
 import { RAIZ_IMAGENES, CONTROLES, RAIZ_IMGS_COMBAT } from "./constants.js";
 import { BarraVida } from "./HUDElems/BarraVida.js";
-import {RAIZ_SOUNDS,RAIZ_SOUNDS_MUSICA} from "./constants.js";
+import { RAIZ_SOUNDS, RAIZ_SOUNDS_MUSICA } from "./constants.js";
 import { TextoVida } from "./HUDElems/TextoVida.js";
 import { TextoDescriptivo } from "./HUDElems/TextoDescriptivo.js";
 import { DatosAccion, SelectorAcciones } from "./HUDElems/SelectorAcciones.js";
 import { SelectorPersonajes } from "./HUDElems/SelectorPersonajes.js";
 import { CombatManager } from "./Combate JS/CombatManager.js";
 import { CharacterArray } from "./HUDElems/ScenePersonaje.js";
+import { BarraHabilidades } from "./HUDElems/BarraHabilidades.js";
 
 export class CombateEscena extends Phaser.Scene {
     //CombatManager combatManager;
@@ -31,23 +32,23 @@ export class CombateEscena extends Phaser.Scene {
 
     preload() {
         //Es importante que los sprites finales tengan la misma resolución
-        this.BossFightTheme= false;
+        this.BossFightTheme = false;
         //Añade las imagenes de los aliados y enemigos
         this.enemigos.forEach(enemigo => {
             this.load.image(enemigo.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_COMBAT + enemigo.imgLink);
-            if(enemigo.name =="Libra" || enemigo.name == "acuarius" || enemigo.name == "finalBoss") this.BossFightTheme = true;
+            if (enemigo.name == "Libra" || enemigo.name == "acuarius" || enemigo.name == "finalBoss") this.BossFightTheme = true;
         });
         this.aliados.forEach(aliado => {
             this.load.image(aliado.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_COMBAT + aliado.imgLink);
         });
         //Carga el fondo, dependerá de la zona del juego en la que nos encontremos
-        
+
         this.load.image('background', RAIZ_IMAGENES + "combatBackground/combatBackgroundPlaceholder.png");
         this.load.image('ui', RAIZ_IMAGENES + "combatui.png");
         this.load.image("selectorAccion", RAIZ_IMAGENES + 'seleccionAccion.png');
         this.load.image("selectorPersonaje", RAIZ_IMAGENES + 'seleccionPersonaje.png');
-        this.load.audio('musicCombateSimple', RAIZ_SOUNDS+RAIZ_SOUNDS_MUSICA+'Combate contra enemigos.mp3')    
-        this.load.audio('musicCombateBoss', RAIZ_SOUNDS+RAIZ_SOUNDS_MUSICA+'Combate contra jefes.mp3')    
+        this.load.audio('musicCombateSimple', RAIZ_SOUNDS + RAIZ_SOUNDS_MUSICA + 'Combate contra enemigos.mp3')
+        this.load.audio('musicCombateBoss', RAIZ_SOUNDS + RAIZ_SOUNDS_MUSICA + 'Combate contra jefes.mp3')
     }
 
     //crear aqui los objetos de la escena
@@ -61,7 +62,7 @@ export class CombateEscena extends Phaser.Scene {
             loop: true,
             delay: 0
         }
-        if(this.BossFightTheme){
+        if (this.BossFightTheme) {
             this.MainTheme = this.sound.add('musicCombateBoss');
         }
         else this.MainTheme = this.sound.add('musicCombateSimple');
@@ -86,7 +87,7 @@ export class CombateEscena extends Phaser.Scene {
         let gameHeight = this.game.config.height;
 
         //Coloca el fondo
-        this.add.image(gameWidth / 2, gameHeight / 2, 'background').setScale(4.5,4.5);
+        this.add.image(gameWidth / 2, gameHeight / 2, 'background').setScale(4.5, 4.5);
 
         //esto es temporal para asignar una imagen que mostrar
         for (let i = 0; i < this.aliados.length; i++) {
@@ -96,8 +97,10 @@ export class CombateEscena extends Phaser.Scene {
         this.sceneAliad = new CharacterArray(this, gameWidth / 9, 60, 400, false, this.aliados, 4);
         this.sceneEnem = new CharacterArray(this, gameWidth - (gameWidth / 5), 100, 400, false, this.enemigos, 3);
 
+        this.barraHabildades = new BarraHabilidades(this, 85, 420, 45, 20, this.combatManager, this.aliados.length);
+
         //Creación de los cuadros del HUD
-        this.add.image(gameWidth / 2, gameHeight / 2 + 45, 'ui').setScale(4.2,4.2);
+        this.add.image(gameWidth / 2, gameHeight / 2 + 45, 'ui').setScale(4.2, 4.2);
 
         this.vidasAliados = [];
         for (let i = 0; i < this.aliados.length; i++) {
@@ -105,7 +108,7 @@ export class CombateEscena extends Phaser.Scene {
             this.nombresAliados = this.add.text(20, positionY, this.aliados[i].name);
             this.vidasAliados.push(new TextoVida(this, 202, positionY + 9, this.aliados[i]));
         }
-        
+
         this.vidasEnemigos = [];
         for (let i = 0; i < this.enemigos.length; i++) {
             this.vidasEnemigos.push(new BarraVida(this, this.sceneEnem.array[i].img, 80, 18, this.enemigos[i]));
@@ -119,6 +122,7 @@ export class CombateEscena extends Phaser.Scene {
         this.selectorAcciones = new SelectorAcciones(this, this.textoDescriptivo, 382, 462, 40, datosAcciones);
         this.selectorEnemigos = new SelectorPersonajes(this, this.enemigos, this.sceneEnem.array);
         this.selectorAliados = new SelectorPersonajes(this, this.aliados, this.sceneAliad.array);
+        console.log(this.aliados.length);
 
         this.selectorAliados.ocultar();
         this.selectorEnemigos.ocultar();
@@ -134,9 +138,11 @@ export class CombateEscena extends Phaser.Scene {
             if (this.menuActual != this.textoDescriptivo) {
                 if (event.code === CONTROLES.UP) {
                     this.menuActual.anterior();
+                    this.PreviewBarraHabilidad();
                 }
                 else if (event.code === CONTROLES.DOWN) {
                     this.menuActual.siguiente();
+                    this.PreviewBarraHabilidad();
                 }
                 else if (event.code === CONTROLES.CANCEL) {
                     this.menuActual.ocultar();
@@ -154,7 +160,7 @@ export class CombateEscena extends Phaser.Scene {
                         }
                         else if (this.menuActual.selection === 1) {
                             //Llamas al combat manager para pedir la info de la habilidad especial y activas el menu correspondiente
-                            if(this.combatManager.spPoints > 0) {
+                            if (this.combatManager.spPoints > 0) {
                                 this.selectorAcciones.ocultar();
                                 this.SpecialHabilityTarget(this.combatManager.specialRequestInfo());
                             }
@@ -187,18 +193,18 @@ export class CombateEscena extends Phaser.Scene {
                 }
 
                 //Texto que muestra lo conseguido en combate antes de que se salga de este entrando por la actualizazion de interfaz posterior, además de añadir monedas o items al game data
-                if (this.combatManager.endCombatVictory){
-                        this.graphics = this.add.graphics();
-                        this.graphics.fillStyle(0x0033cc, 1);
+                if (this.combatManager.endCombatVictory) {
+                    this.graphics = this.add.graphics();
+                    this.graphics.fillStyle(0x0033cc, 1);
 
-                    if(this.returnScene == 'escenaNuevosMinisterios') {
+                    if (this.returnScene == 'escenaNuevosMinisterios') {
                         this.graphics.fillRect(2, 34, 320, 30, { tl: 12, tr: 12, bl: 0, br: 0 });
                         this.victoryItemText = this.add.text(10, 40, "Conseguiste: 5 monedas");
                         this.gameData.AñadeMonedasNM(5);
                     }
 
-                    if(this.objeto !== undefined) {
-                        if(!this.gameData.AñadeItemEquipable(this.objeto)){
+                    if (this.objeto !== undefined) {
+                        if (!this.gameData.AñadeItemEquipable(this.objeto)) {
                             this.graphics.fillRect(2, 2, 320, 30, { tl: 12, tr: 12, bl: 0, br: 0 });
                             this.victoryItemText = this.add.text(10, 10, "Conseguiste: " + this.objeto.nombre);
                         }
@@ -214,7 +220,6 @@ export class CombateEscena extends Phaser.Scene {
         }, this);
         this.ActualizarEscena();
         this.combatManager.nextTurn();
-        
     }
 
     /**
@@ -223,13 +228,13 @@ export class CombateEscena extends Phaser.Scene {
     Victory() {
         this.gameData.AddDefeated(this.slimeId);
         for (let i = 0; i < this.aliados.length; i++) {
-            if(this.aliados[i].checkIsDead()){
+            if (this.aliados[i].checkIsDead()) {
                 this.aliados[i].revive();
                 this.aliados[i].revive1PS();
                 console.log("curado");
             }
         }
-        
+
         this.scene.start(this.returnScene, { obj: this.gameData, cx: this.cx, cy: this.cy, dir: this.cdir });
     }
     /**
@@ -272,6 +277,8 @@ export class CombateEscena extends Phaser.Scene {
             let current = this.combatManager.current;
             if (current < this.combatManager.livingParty)
                 this.selectorAcciones.updateAction(1, "Habilidad", this.aliados[current].descripcionHabilidad);
+            this.barraHabildades.actualizar();
+            this.PreviewBarraHabilidad();
         }
     }
 
@@ -302,5 +309,12 @@ export class CombateEscena extends Phaser.Scene {
                 this.menuActual.seleccionPredefinida(this.combatManager.current);
                 break;
         }
+    }
+
+    PreviewBarraHabilidad() {
+        if (this.selectorAcciones.selection === 1)
+            this.barraHabildades.showDecrease();
+        else
+            this.barraHabildades.showIncrease();
     }
 };

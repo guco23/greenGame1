@@ -22,6 +22,7 @@ export class MenuEscena extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('ui', RAIZ_IMAGENES + "UI_menuItems.png");
         this.load.image("selectorPersonaje", RAIZ_IMAGENES + "seleccionPersonaje.png");
         this.load.image("selectorAccion", RAIZ_IMAGENES + 'seleccionAccion.png');
         //Carga las imágenes de los aliados en la party y fuera de ella
@@ -35,14 +36,9 @@ export class MenuEscena extends Phaser.Scene {
     }
 
     create() {
-        this.graphics = this.add.graphics();
+        this.add.image(this.game.config.width / 2, this.game.config.height / 2, 'ui').setScale(4, 4);
 
-        this.graphics = this.add.graphics();
-        this.graphics.fillStyle(0x0033cc, 1);
-        this.graphics.fillRoundedRect(33, 50, 200, 200, { tl: 12, tr: 12, bl: 12, br: 12 });
-        this.graphics.fillRoundedRect(237, 50, 600, 500, { tl: 12, tr: 12, bl: 12, br: 12 });
-
-        this.descripcion = new TextoDescriptivo(this, 250, 460, "Selecciona una opción"); //Cuadro de descripción de la escena
+        this.descripcion = new TextoDescriptivo(this, 290, 460, "Selecciona una opción"); //Cuadro de descripción de la escena
         //Establece las opciones primarias de la escena
         let accionesBase = [
             new DatosAccion("Grupo", "Escoge los personajes para combatir"),
@@ -52,13 +48,13 @@ export class MenuEscena extends Phaser.Scene {
         this.gameData.items.forEach(item => {
             listaAccionObjetos.push(new DatosAccion(item.nombre, item.descripcion));
         });
-        this.opcionPrimaria = new SelectorAcciones(this, this.descripcion, 66, 70, 30, accionesBase);
+        this.opcionPrimaria = new SelectorAcciones(this, this.descripcion, 68, 70, 30, accionesBase);
         this.menuActual = this.opcionPrimaria;
-        this.selectorParty = new SelectorPersonajesMenu(this, this.gameData.party, 340, 110, 4, 100, 130, 4.3, this.descripcion, false);
-        this.selectorAllies = new SelectorPersonajesMenu(this, this.gameData.allies, 300, 325, 8, 68, 68, 4.1, this.descripcion, true);
+        this.selectorParty = new SelectorPersonajesMenu(this, this.gameData.party, 357, 110, 4, 100, 130, 4.3, this.descripcion, false);
+        this.selectorAllies = new SelectorPersonajesMenu(this, this.gameData.allies, 317, 325, 8, 68, 68, 4.1, this.descripcion, true);
         this.equipadorPersonajes = new SelectorPersonajesMenu(this, this.gameData.party, 670, 130, 2, 120, 100, 4.3, this.descripcion);
-        this.selectorObjetos = new SelectorAcciones(this, this.descripcion, 270, 70, 30, listaAccionObjetos);
-        this.statsDrawer = new StatsDrawer(this, this.selectorParty, 20, 130, 300, 160);
+        this.selectorObjetos = new SelectorAcciones(this, this.descripcion, 280, 70, 30, listaAccionObjetos);
+        this.statsDrawer = new StatsDrawer(this, this.selectorParty, 20, 130, 317, 160);
         this.selectorObjetos.ocultar();
         this.equipadorPersonajes.hide();
         this.opcionPrimaria.activar();

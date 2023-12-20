@@ -39,7 +39,6 @@ export class BarraHabilidades extends Phaser.GameObjects.Container {
                 this.base[i].visible = true;
             else
                 this.base[i].visible = false;
-
         }
     }
 
@@ -47,17 +46,17 @@ export class BarraHabilidades extends Phaser.GameObjects.Container {
      * Previsualiza el estado de la barra si se ganan puntos
      */
     showIncrease() {
-        if (this.combatManager.spPoints < 5 && this.combatManager.spPoints < this.cantAliados) {
+        if (this.combatManager.spPoints < this.cantAliados + 1 && this.combatManager.spPoints > 0) {
             this.green[this.combatManager.spPoints].visible = true;
+            this.red[this.combatManager.spPoints - 1].visible = false;
         }
-        this.red[this.combatManager.spPoints - 1].visible = false;
     }
 
     /**
      * Previsualiza el estado de la barra si se pierden puntos
      */
     showDecrease() {
-        if (this.combatManager.spPoints > 0) {
+        if (this.combatManager.spPoints > 0 && this.combatManager.spPoints < this.cantAliados + 1) {
             this.red[this.combatManager.spPoints - 1].visible = true;
             this.green[this.combatManager.spPoints].visible = false;
         }
