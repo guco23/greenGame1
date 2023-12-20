@@ -192,12 +192,12 @@ export class EscenaMercadona extends Phaser.Scene {
         
         let slimes = [
             new SlimeEnemigo(this, 65, 0, 1, 770, 421, undefined, [enemies.platano, enemies.cocacola], this.WallLayer, this.character, this.myGameData, 'enem2'),
-            new SlimeEnemigo(this, 65, 0, 1, 740, 335, items.escudoMadera, [enemies.magdalena, enemies.pan], this.WallLayer, this.character, this.myGameData, 'enem3'),
-            new SlimeEnemigo(this, 65, 0, 1, 683, 246, items.escudoMadera, [enemies.pan, enemies.salchicha], this.WallLayer, this.character, this.myGameData, 'enem4'),
+            new SlimeEnemigo(this, 80, 0, 1, 740, 335, items.escudoMadera, [enemies.magdalena, enemies.pan], this.WallLayer, this.character, this.myGameData, 'enem3'),
+            new SlimeEnemigo(this, 80, 0, 1, 683, 246, items.escudoMadera, [enemies.pan, enemies.salchicha], this.WallLayer, this.character, this.myGameData, 'enem4'),
             
-            new SlimeEnemigo(this, 70, 1, -1, 435, 93, items.escudoMadera, [enemies.botella, enemies.salchicha, enemies.sardina], this.WallLayer, this.character, this.myGameData, 'enem5'),
-            new SlimeEnemigo(this, 110, 0, 1, 338, 206, items.chalecoCuero, [enemies.pollo, enemies.calamar], this.WallLayer, this.character, this.myGameData, 'enem6'),
-            new SlimeEnemigo(this, 70, 1, 1, 426, 319, items.chalecoCuero, [enemies.platano, enemies.botella, enemies.magdalena], this.WallLayer, this.character, this.myGameData, 'enem7')
+            new SlimeEnemigo(this, 80, 1, -1, 435, 93, items.escudoMadera, [enemies.botella, enemies.salchicha, enemies.sardina], this.WallLayer, this.character, this.myGameData, 'enem5'),
+            new SlimeEnemigo(this, 130, 0, 1, 338, 206, items.chalecoCuero, [enemies.pollo, enemies.calamar], this.WallLayer, this.character, this.myGameData, 'enem6'),
+            new SlimeEnemigo(this, 80, 1, 1, 426, 319, items.chalecoCuero, [enemies.platano, enemies.botella, enemies.magdalena], this.WallLayer, this.character, this.myGameData, 'enem7')
         ];
         slimes.forEach(slime => {
             if(this.myGameData.CheckDefeated(slime.slimeId)) {
