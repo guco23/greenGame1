@@ -108,6 +108,8 @@ init(data){
             this.hitbox6 = this.map.createFromObjects('Items', {id:23});          
             this.physics.add.existing(this.hitbox6[0]);            
         }
+        this.hitbox7 = this.map.createFromObjects('Items', {id:30});          
+          this.physics.add.existing(this.hitbox7[0]);
           
           if(!this.myGameData.CheckObjetoClave(6)){
               this.Planos = this.map.createFromObjects('Items', {id:20});          
@@ -265,6 +267,22 @@ init(data){
                 self.AguaPuenteCollider.destroy();
                 new dialogo(self, self.character, 35);
             })     
+        })
+        this.physics.add.overlap(this.character, this.hitbox7[0], ()=>{
+            if(!this.myGameData.CheckDefeated('boss2')){
+                new dialogo(this, this.character, 50, function(){
+                    self.scene.start('combatScene', {
+                        gameData: self.myGameData,
+                        enemigos: [enemies.pepsi, enemies.acuarius, enemies.pepsi],
+                        objeto: items.undefined,
+                        scene: self.scene.key,
+                        cx: self.character.x,
+                        cy: self.character.y,
+                        dir: self.character.dir,
+                        id: "boss2"
+                    });
+                })    
+            }            
         })
         this.physics.add.overlap(this.character, this.Planos[0], ()=>{
             var self = this;

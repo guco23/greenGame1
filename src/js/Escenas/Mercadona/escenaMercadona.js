@@ -114,9 +114,20 @@ export class EscenaMercadona extends Phaser.Scene {
         this.physics.add.overlap(this.character, this.hitbox6[0], () => {
             if(!this.Texto){
                 if(this.myGameData.CheckObjetoClave(3)){
-                    new dialogo(this, this.character, 8,function(){
-                        self.character.x = self.character.x + 5;
-                    })
+                    if(!this.myGameData.CheckDefeated('boss1')) {
+                        new dialogo(this, this.character, 49, function(){
+                            self.scene.start('combatScene', {
+                                gameData: self.myGameData,
+                                enemigos: [enemies.libra, enemies.libra],
+                                objeto: items.armaduraMadera, //this.objeto,
+                                scene: self.scene.key,
+                                cx: self.character.x,
+                                cy: self.character.y,
+                                dir: self.character.dir,
+                                id: "boss1"
+                            });
+                        })                                 
+                    }
                 }else{                    
                     new dialogo(this, this.character, 8,function(){
                         self.character.x = self.character.x + 5;
@@ -130,20 +141,7 @@ export class EscenaMercadona extends Phaser.Scene {
         this.physics.add.overlap(this.character, this.hitbox4[0], ()=>{
             if(this.interact == 0 && !this.Texto) {
                 if(this.myGameData.Interactablehitboxes[1]){
-                    if(!this.myGameData.CheckDefeated('boss1')) {
-                        new dialogo(this, this.character, 49, function(){
-                            self.scene.start('combatScene', {
-                                gameData: self.myGameData,
-                                enemigos: [enemies.libra, enemies.libra],
-                                objeto: items.armaduraMadera, 
-                                scene: self.scene.key,
-                                cx: self.character.x,
-                                cy: self.character.y,
-                                dir: self.character.dir,
-                                id: "boss1"
-                            });
-                        })                                 
-                    }
+                    new dialogo(this, this.character, 7)
                 }else{
                     new dialogo(this, this.character, 1,function(){
                         self.DoorJokeLayer.visible = false;                                                                
@@ -221,6 +219,8 @@ export class EscenaMercadona extends Phaser.Scene {
         }        
         
     }
+
+
 
     /*
     ACUARIUS

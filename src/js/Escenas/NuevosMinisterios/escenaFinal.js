@@ -35,6 +35,7 @@ init(data){
         this.MainTheme = this.sound.add('musicNM')
         this.MainTheme.play();
         this.Final = false;
+        this.Fase2 = false;
         this.Texto = false;
         this.imageBoss;
         this.PosBoss = 999;
@@ -97,7 +98,7 @@ init(data){
             }
             
         })
-
+        let self = this;
         this.physics.add.overlap(this.character, this.hitboxFinal2[0], () => {                     
             if(this.HaLlegadoAlFinal){
                 this.HaLlegadoAlFinal = false;
@@ -105,9 +106,39 @@ init(data){
             }
             if(this.Final && !this.Texto){
                 new dialogo(this, this.character, 46,function(){
-                    //AQUí Empieza el combate final
+                    self.scene.start('combatScene', {
+                        gameData: self.myGameData,
+                        enemigos: [enemies.meteoro, enemies.judas, enemies.meteoro],
+                        objeto: items.armaduraDiamante,
+                        scene: self.scene.key,
+                        cx: self.character.x,
+                        cy: self.character.y,
+                        dir: self.character.dir,
+                        id: "boss3"
+                    });
                 })
                 this.Final = false;
+            }else{
+                if(this.Final && !this.Fase2){
+                    this.Fase2 = true;
+                    new dialogo(this, this.character, 51,function(){
+                        self.scene.start('combatScene', {
+                            gameData: self.myGameData,
+                            enemigos: [enemies.hands, enemies.hands, enemies.finalBoss, enemies.hands, enemies.hands],
+                            objeto: undefined,
+                            scene: self.scene.key,
+                            cx: self.character.x,
+                            cy: self.character.y,
+                            dir: self.character.dir,
+                            id: "boss3"
+                        });
+                    })
+                }else{
+                    if(this.Fase2){
+                        this.scene.start('finalCinematica');
+                    }
+    
+                }
             }
             
         })
