@@ -279,7 +279,7 @@ init(data){
                     self.scene.start('combatScene', {
                         gameData: self.myGameData,
                         enemigos: [enemies.pepsi, enemies.acuarius, enemies.pepsi],
-                        objeto: items.undefined,
+                        objeto: items.armaduraBronce,
                         scene: self.scene.key,
                         cx: self.character.x,
                         cy: self.character.y,

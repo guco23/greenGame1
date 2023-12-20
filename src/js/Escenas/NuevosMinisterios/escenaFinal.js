@@ -151,7 +151,7 @@ init(data){
                 self.myGameData.Interactablehitboxes[14] = true;
                 self.scene.start('combatScene', {
                     gameData: self.myGameData,
-                    enemigos: [enemies.hands, enemies.hands, enemies.finalBoss, enemies.hands, enemies.hands],
+                    enemigos: [enemies.hand1, enemies.hand2, enemies.finalBoss, enemies.hand3, enemies.hand4],
                     objeto: undefined,
                     scene: self.scene.key,
                     cx: self.character.x,
