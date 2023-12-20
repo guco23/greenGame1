@@ -1,3 +1,4 @@
 Los assets visuales, es decir sprites, diseños de personales y graficos del videojuego, son de nuestra propiedad, de BerdEstudios, y creados desde cero, pero teniendo como inspiración el estilo gráfico de juegos rpgs en 8 bits de antaño como los Pokemon de GameBoy, Final Fantasy y Mother, y sin copiar nada.
+En el caso de los assets de audio hemos conseguido la música de varios sitios, siendo todas remixes o versiones 8 bits de canciones ya exitentes, no creadas por nosotros. Las hemos implementado no con un fin lucrativo, sino más bien educativo, porque esto es un proyecto de universidad, y nos pareció bien incluir estas piezas musicales por su alta calidad.
 
 Todos los derechos de los assets visuales propios reservados Copyright (C) 2023 atribuido a sus respectivos autores del equipo de desarrollo BerdEstudios.

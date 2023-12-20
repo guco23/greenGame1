@@ -37,7 +37,7 @@ export class CombateEscena extends Phaser.Scene {
         //Añade las imagenes de los aliados y enemigos
         this.enemigos.forEach(enemigo => {
             this.load.image(enemigo.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_COMBAT + enemigo.imgLink);
-            if (enemigo.name == "Libra" || enemigo.name == "acuarius" || enemigo.name == "finalBoss") this.BossFightTheme = true;
+            if (enemigo.name == "Libra" || enemigo.name == "Acuarius mamadísimo" || enemigo.name == "Judas" || enemigo.name == "Judas del Zodíaco") this.BossFightTheme = true;
         });
         this.aliados.forEach(aliado => {
             this.load.image(aliado.name + "C", RAIZ_IMAGENES + RAIZ_IMGS_COMBAT + aliado.imgLink);
