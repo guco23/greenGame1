@@ -180,6 +180,7 @@ export class EscenaTilesets extends Phaser.Scene {
     update() {
         
         if (this.interactKey.isDown) {
+            this.scene.start('escenaPlaya', { obj: this.myGameData, cx: 2285, cy: 320, dir: 3 });
             if (this.timer == 0) this.interact = 0;
             if (this.Texto) this.timer = 25;
         } else {
