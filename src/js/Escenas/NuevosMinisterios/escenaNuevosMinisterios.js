@@ -91,6 +91,7 @@ init(data){
 
           this.interactKey = this.input.keyboard.addKey(CONTROLES_OVERWORLD.ACCEPT);
           this.interact = 1;
+          this.checkInteract = 0;
           const tileset1 = this.map.addTilesetImage('tileset_nm', 'tileset_nm');          
           this.LavaLayer = this.map.createLayer('Lava', tileset1);          
           this.FloorLayer = this.map.createLayer('Suelo', tileset1);
@@ -230,8 +231,12 @@ init(data){
 
 
         this.physics.add.overlap(this.character, groupCheckPoints, (character, checkPoint) => {
-            this.myGameData.UpdateCheckPoint(this, character.x, character.y);
-            this.anims.play('banderaVerde', checkPoint);
+            if (this.checkInteract == 0){
+                console.log("uff");
+                this.myGameData.UpdateCheckPoint(this, character.x, character.y);
+                this.anims.play('banderaVerde', checkPoint);
+                this.checkInteract = 1;
+            }
         });
 
         this.physics.add.overlap(this.character, groupCofres, (character, cofre) => {

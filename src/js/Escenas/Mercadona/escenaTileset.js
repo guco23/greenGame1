@@ -91,6 +91,7 @@ export class EscenaTilesets extends Phaser.Scene {
         this.timer = 0;
         this.interactKey = this.input.keyboard.addKey(CONTROLES_OVERWORLD.ACCEPT);
         this.interact = 1;
+        this.checkInteract = 0;
         const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
         this.FloorLayer = this.map.createLayer('Suelo', tileset1);
         this.WallLayer = this.map.createLayer('Paredes', tileset1);
@@ -118,16 +119,18 @@ export class EscenaTilesets extends Phaser.Scene {
 
 
         this.physics.add.overlap(this.character, groupCheckPoints, (character, checkPoint) => {
-            this.myGameData.UpdateCheckPoint(this, character.x, character.y);
-            this.anims.play('banderaVerde', checkPoint);
+            if (this.checkInteract == 0){
+                console.log("uff");
+                this.myGameData.UpdateCheckPoint(this, character.x, character.y);
+                this.anims.play('banderaVerde', checkPoint);
+                this.checkInteract = 1;
+            }
+
         });
 
         this.physics.add.overlap(this.character, this.hitbox[0], () => {
             if (this.interact == 0) {
-                this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });
-                //this.scene.start('escenaPlaya',{obj:this.myGameData,cx:2285, cy:320, dir:3});
-                //this.scene.start('escenaNuevosMinisterios',{obj:this.myGameData,cx:1820, cy:985, dir:0});            
-                //this.scene.start('zonaFinal', { obj: this.myGameData, cx: 270, cy: 40, dir: 3 });                                
+                this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });                              
             }
         })
         this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {
@@ -139,22 +142,15 @@ export class EscenaTilesets extends Phaser.Scene {
         this.cameras.main.startFollow(this.character);
         this.cameras.main.zoom = 2.2;
 
-        let slimes = [
-            new SlimeEnemigo(this, 0, 0, 0, 50, 140, "pene de plastico", [enemies.botella, enemies.botella], this.WallLayer, this.character, this.myGameData, 'enem1')
-        ];
-        slimes.forEach(slime => {
-            if (this.myGameData.CheckDefeated(slime.slimeId)) {
-                slime.destroy();
-            }
-        });
-
-        this.myGameData.AddCharacter(new Protagonista(personajes.protagonista)); //No te olvides de cambiarlo de vuelta al final
+        this.myGameData.AddCharacter(new Protagonista(personajes.protagonista));
+        /*
+         //No te olvides de cambiarlo de vuelta al final
         
         this.myGameData.AddCharacter(new Protagonista(personajes.MrBean)); //No te olvides de cambiarlo de vuelta al final
         this.myGameData.AddCharacter(new Protagonista(personajes.albert)); //No te olvides de cambiarlo de vuelta al final
         
         this.myGameData.AddCharacter(new Protagonista(personajes.frikol)); //No te olvides de cambiarlo de vuelta al final
-        /*
+        
         this.myGameData.AddCharacter(new Protagonista(personajes.donald)); //No te olvides de cambiarlo de vuelta al final
         this.myGameData.AddCharacter(new Protagonista(personajes.emmet)); //No te olvides de cambiarlo de vuelta al final
         this.myGameData.AddCharacter(new Protagonista(personajes.greta)); //No te olvides de cambiarlo de vuelta al final
@@ -172,12 +168,12 @@ export class EscenaTilesets extends Phaser.Scene {
         this.myGameData.AñadeItemEquipable(items.armaduraDiamante);
         */
 
-        /*
+        
         if (!this.myGameData.Interactablehitboxes[8]) {
             new dialogo(this, this.character, 44) //Comentad si no queréis que os moleste durante el desarrollo
             this.myGameData.Interactablehitboxes[8] = true;
         }
-        */
+        
 
     }
 
