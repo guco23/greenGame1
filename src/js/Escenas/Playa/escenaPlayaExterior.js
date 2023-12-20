@@ -81,6 +81,7 @@ init(data){
             tileHeight: 16 
           });
           this.interactKey = this.input.keyboard.addKey(CONTROLES_OVERWORLD.ACCEPT);
+          this.checkInteract = 0;
           this.interact = 1;
           //const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
           const tileset2 = this.map.addTilesetImage('tileset_playa', 'tileset_playa');
@@ -197,8 +198,12 @@ init(data){
 
 
         this.physics.add.overlap(this.character, groupCheckPoints, (character, checkPoint) => {
-            this.myGameData.UpdateCheckPoint(this, character.x, character.y);
-            this.anims.play('banderaVerde', checkPoint);
+            if (this.checkInteract == 0){
+                console.log("uff");
+                this.myGameData.UpdateCheckPoint(this, character.x, character.y);
+                this.anims.play('banderaVerde', checkPoint);
+                this.checkInteract = 1;
+            }
         });
 
         this.physics.add.overlap(this.character, groupCofres, (character, cofre) => {
