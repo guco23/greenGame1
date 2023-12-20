@@ -48,7 +48,7 @@ export class MenuEscena extends Phaser.Scene {
         this.gameData.items.forEach(item => {
             listaAccionObjetos.push(new DatosAccion(item.nombre, item.descripcion));
         });
-        this.opcionPrimaria = new SelectorAcciones(this, this.descripcion, 68, 70, 30, accionesBase);
+        this.opcionPrimaria = new SelectorAcciones(this, this.descripcion, 72, 60, 30, accionesBase);
         this.menuActual = this.opcionPrimaria;
         this.selectorParty = new SelectorPersonajesMenu(this, this.gameData.party, 357, 110, 4, 100, 130, 4.3, this.descripcion, false);
         this.selectorAllies = new SelectorPersonajesMenu(this, this.gameData.allies, 317, 325, 8, 68, 68, 4.1, this.descripcion, true);

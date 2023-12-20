@@ -1,11 +1,18 @@
 export class BarraVida extends Phaser.GameObjects.Container {
+    /**
+     * Una barra de vida para colocar sobre un personaje en la escena y mostrar su vida
+     * La ubicacion la saca de la imagen que le pasas
+     * @param {Phaser.Scene} scene La escena donde se va a pintar
+     * @param {Phaser.image} img La imagen del personaje que va a obtener la barra
+     * @param {num} w El tamaño horizontal de la barra
+     * @param {num} h La imagen del personaje que va a obtener la barra
+    * @param {Personaje} h El personaje al que pertenece la barra
+    */
     constructor(scene, img, w, h, personaje) {
         super(scene);
         this.personaje = personaje;
         let x = img.x - img.displayWidth / 2.7;
         let y = img.y - img.displayHeight / 2;
-        console.log(x);
-        console.log(y);
 
         this.prop = w / personaje.maxHp; //La proporcion resultante del tamaño y la vida máxima, utilizada para cambiar el tamaño de la barra
         this.rectBase = scene.add.rectangle(x, y, w, h, 0xffffff).setOrigin(0, 0);
