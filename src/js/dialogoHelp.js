@@ -117,6 +117,10 @@ export default class dialogoHelp {
         //PreCombate contra libra
         this.dialogos[49] = ["¡Alto ahí!", "¿Huh?","Judini, he venido aquí para pararte los pies...", "¿Y tú eres...?", "Soy Libra, signo del zoodiaco", "He sido enviado por Judas para detenerte",
         "Creí que creía que había muerto", "Pues creíste mal", "Es igual. Libra, te interpones entre nosotros y la salvación del mundo. Hazte a un lado, última       advertencia", "Me temo que solo queda combatir, Judini..."]
+        this.dialogos[50] = ["¡Alto ahí!", "¿¡Huh!?","Judini, he venido aquí para pararte los pies...", "¿Y tú eres...?","Soy Acuarius, signo del zoodiaco","He sido enviado por Judas para detenerte",
+        "Acabo de tener un deja vu", "En fin. Acuarius, apártate de nuestro camino o nos veremos obligados a apartarte", "¡Adelante!"]
+        this.dialogos[51] = ["Oh, no... No puede ser...", "Has podido derrotarme...", "...usando un 1% de mi poder", "Bueno, supongo que lo intentaré con ganas ahora", "MUAJAJAJAJAJAJAJJAJJAJAJAJAJJAJAJAJJAJAJAJJAJAJAJJAJAJAJAJAJAJAJJAJJAJAJAJAJJAJAJAJJAJAJAJJAJAJAJJAJAJAJAJAJAJAJJAJJAJAJAJAJJAJAJAJJAJAJAJJAJAJAJJAJAJAJAJAJAJAJJAJJAJAJAJAJJAJAJAJJAJAJAJJAJAJAJJAJAJAJAJAJ"]
+
 
         this.images = [];
         this.images[0] = ["Frikol", "Judini","Judini","Frikol","Frikol","Frikol","Frikol","Judini","Judini","Frikol","Judini","Frikol","Judini","Frikol","-"]
@@ -168,7 +172,9 @@ export default class dialogoHelp {
         this.images[46] = ["jefeFinal2","jefeFinal2","Judini","Judini","jefeFinal2"]      
         this.images[47] = ["-", "-"]
         this.images[48] = ["-", "-"]
-        this.images[49] = ["-", "Judini", "Libra","Judini","Libra","Libra", "Judini", "Libra","Judini","Libra"]
+        this.images[49] = ["-", "Judini", "LibraText","Judini","LibraText","LibraText", "Judini", "LibraText","Judini","LibraText"]
+        this.images[50] = ["-", "Judini", "AquariusText", "Judini", "AquariusText", "AquariusText", "Judini", "Judini", "AquariusText"]
+        this.images[51] = ["jefeFinal2","jefeFinal2","jefeFinal2","jefeFinal2","jefeFinal2","jefeFinal2"]   
 
         this.ReturnDialogo = function (i) {
             return this.dialogos[i];

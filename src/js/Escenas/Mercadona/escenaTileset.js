@@ -50,7 +50,9 @@ export class EscenaTilesets extends Phaser.Scene {
         this.load.image('Jhonny', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/JhonnyBean.png');
         this.load.image('SambaDoJudia', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/SambaDoJudia.png');
         this.load.image('SaulJudman', RAIZ_IMAGENES + RAIZ_IMGS_OVERWORLD + '/SaulJudman.png');
-        this.load.image('Libra', RAIZ_IMAGENES+RAIZ_IMGS_COMBAT+'libra_boss_dialogo.png');
+        this.load.image('LibraText', RAIZ_IMAGENES+RAIZ_IMGS_COMBAT+'libra_boss_dialogo.png');
+        this.load.image('AquariusText', RAIZ_IMAGENES+RAIZ_IMGS_COMBAT+'acuarius_boss_text.png');
+        this.load.image('jefeFinal2', RAIZ_IMAGENES+RAIZ_IMGS_COMBAT+'final_boss_texto.png');    
         this.load.image('UI', RAIZ_IMAGENES + 'UI_dialogo.png');
         this.load.spritesheet('Slime', RAIZ_IMAGENES + 'Slime.png', { frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('character', RAIZ_IMAGENES + 'spritespjs/Main_char.png', { frameWidth: 28, frameHeight: 26 });
@@ -129,8 +131,7 @@ export class EscenaTilesets extends Phaser.Scene {
             }
         })
         this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {
-            if (this.interact == 0 && !this.Texto) {
-                new dialogo(this, this.character, 49);
+            if (this.interact == 0 && !this.Texto) {          
             }
         })
 
