@@ -146,6 +146,17 @@ export class Personaje {
         }
     }
 
+    revive(){
+        this.living = true;
+    }
+    revive1PS(){
+        this.currentHp = 1;
+    }
+
+    checkIsDead(){
+        return !this.living;
+    }
+
     heal(heal) {
         this.currentHp += Math.floor(heal);
         if(this.currentHp > this.maxHp) {

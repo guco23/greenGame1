@@ -122,7 +122,7 @@ export class EscenaTilesets extends Phaser.Scene {
             if (this.checkInteract == 0){
                 console.log("uff");
                 this.myGameData.UpdateCheckPoint(this, character.x, character.y);
-                self.myGameData.CurarTodos();
+                //self.myGameData.CurarTodos();
                 this.anims.play('banderaVerde', checkPoint);
                 this.checkInteract = 1;
             }

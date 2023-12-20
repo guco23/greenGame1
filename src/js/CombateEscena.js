@@ -214,6 +214,7 @@ export class CombateEscena extends Phaser.Scene {
         }, this);
         this.ActualizarEscena();
         this.combatManager.nextTurn();
+        
     }
 
     /**
@@ -221,6 +222,13 @@ export class CombateEscena extends Phaser.Scene {
      */
     Victory() {
         this.gameData.AddDefeated(this.slimeId);
+        for (let i = 0; i < this.aliados.length; i++) {
+            if(this.aliados[i].checkIsDead()){
+                this.aliados[i].revive();
+                this.aliados[i].revive1PS();
+                console.log("curado");
+            }
+        }
         
         this.scene.start(this.returnScene, { obj: this.gameData, cx: this.cx, cy: this.cy, dir: this.cdir });
     }
@@ -228,6 +236,10 @@ export class CombateEscena extends Phaser.Scene {
      * A ser llamado cuando el jugador pierda el combate. Deberá devolver al jugador al último checkpoint.
      */
     Defeat() {
+        for (let i = 0; i < this.aliados.length; i++) {
+            this.aliados[i].revive();
+            console.log("curado");
+        }
         this.scene.start(this.gameData.sceneRetrunDead, { obj: this.gameData, cx: this.gameData.returnDeadX, cy: this.gameData.returnDeadY, dir: this.cdir });
     }
 
