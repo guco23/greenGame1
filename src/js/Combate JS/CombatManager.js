@@ -96,7 +96,7 @@ export class CombatManager {
     changeSp(shift) {
         this.spPoints += shift;
         if (this.spPoints < 0) this.spPoints = 0;
-        else if (this.spPoints > this.teamSize) this.spPoints = this.teamSize;
+        else if (this.spPoints > this.teamSize + 1) this.spPoints = this.teamSize;
     }
 
     addInfo(action, value, from, to) {
