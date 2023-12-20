@@ -55,7 +55,7 @@ export class CombateEscena extends Phaser.Scene {
         this.sound.stopAll();
         const musicConfig = {
             mute: false,
-            volume: 1,
+            volume: 0.5,
             detune: 0,
             seek: 0,
             loop: true,
@@ -185,6 +185,25 @@ export class CombateEscena extends Phaser.Scene {
                     //para SelectorAcciones 0 = Atacar, 1 = Habilidad, 2 = Defender
                     //para SelectorEnemigos es el indice propio del array de enemigos
                 }
+
+                //Texto que muestra lo conseguido en combate antes de que se salga de este entrando por la actualizazion de interfaz posterior, además de añadir monedas o items al game data
+                if (this.combatManager.endCombatVictory){
+                        this.graphics = this.add.graphics();
+                        this.graphics.fillStyle(0x0033cc, 1);
+
+                    if(this.returnScene == 'escenaNuevosMinisterios') {
+                        this.graphics.fillRect(2, 34, 320, 30, { tl: 12, tr: 12, bl: 0, br: 0 });
+                        this.victoryItemText = this.add.text(10, 40, "Conseguiste: 5 monedas");
+                        this.gameData.AñadeMonedasNM(5);
+                    }
+
+                    if(this.objeto !== undefined) {
+                        if(!this.gameData.AñadeItemEquipable(this.objeto)){
+                            this.graphics.fillRect(2, 2, 320, 30, { tl: 12, tr: 12, bl: 0, br: 0 });
+                            this.victoryItemText = this.add.text(10, 10, "Conseguiste: " + this.objeto.nombre);
+                        }
+                    }
+                }
             }
             else {
                 if (event.code === CONTROLES.ACCEPT) {
@@ -202,12 +221,7 @@ export class CombateEscena extends Phaser.Scene {
      */
     Victory() {
         this.gameData.AddDefeated(this.slimeId);
-        if(this.returnScene == 'escenaNuevosMinisterios') {
-            this.gameData.AñadeMonedasNM(5);
-        }
-        if(this.objeto !== undefined) {
-            this.gameData.AñadeItemEquipable(this.objeto);
-        }
+        
         this.scene.start(this.returnScene, { obj: this.gameData, cx: this.cx, cy: this.cy, dir: this.cdir });
     }
     /**

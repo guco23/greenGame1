@@ -37,7 +37,7 @@ export class EscenaMercadona extends Phaser.Scene {
         this.sound.stopAll();
         const musicConfig = {
             mute: false,
-            volume: 1,
+            volume: 0.5,
             detune: 0,
             seek: 0,
             loop: true,

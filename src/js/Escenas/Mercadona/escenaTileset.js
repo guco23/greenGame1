@@ -117,11 +117,12 @@ export class EscenaTilesets extends Phaser.Scene {
             this.physics.add.existing(obj);
         });
 
-
+        let self = this;
         this.physics.add.overlap(this.character, groupCheckPoints, (character, checkPoint) => {
             if (this.checkInteract == 0){
                 console.log("uff");
                 this.myGameData.UpdateCheckPoint(this, character.x, character.y);
+                self.myGameData.CurarTodos();
                 this.anims.play('banderaVerde', checkPoint);
                 this.checkInteract = 1;
             }
@@ -179,6 +180,7 @@ export class EscenaTilesets extends Phaser.Scene {
 
 
     update() {
+        
         if (this.interactKey.isDown) {
             if (this.timer == 0) this.interact = 0;
             if (this.Texto) this.timer = 25;

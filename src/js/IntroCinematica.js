@@ -33,8 +33,16 @@ export class IntroCinematica extends Phaser.Scene {
         this.Pos = 0;
         this.OldPos = 0;
         this.sound.stopAll();
-        this.MainTheme = this.sound.add('musicIntro')
-        this.MainTheme.play();
+        const musicConfig = {
+            mute: false,
+            volume: 0.5,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        }
+        this.MainTheme = this.sound.add('musicIntro');
+        this.MainTheme.play(musicConfig);
         this.BackGround1 = this.add.image(0, 0, 'BackgroundCinematica');
         this.BackGround1.scale = 70;        
         this.Im1 = this.add.image(450, 200, 'Inicio1');

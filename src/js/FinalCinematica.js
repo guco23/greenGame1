@@ -22,8 +22,16 @@ export class FinalCinematica extends Phaser.Scene {
         this.Pos = 0;
         this.OldPos = 0;
         this.sound.stopAll();
-        this.MainTheme = this.sound.add('musicFin')
-        this.MainTheme.play();
+        const musicConfig = {
+            mute: false,
+            volume: 0.5,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        }
+        this.MainTheme = this.sound.add('musicFin');
+        this.MainTheme.play(musicConfig);
         
         this.Fin1 = this.add.image(450, 300, 'Fin1');
         this.Fin1.scale = 0.35;

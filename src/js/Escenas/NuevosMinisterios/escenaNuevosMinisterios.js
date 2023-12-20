@@ -37,7 +37,7 @@ init(data){
         this.sound.stopAll();
         const musicConfig = {
             mute: false,
-            volume: 1,
+            volume: 0.5,
             detune: 0,
             seek: 0,
             loop: true,
@@ -402,41 +402,41 @@ init(data){
         
         //Slimes
         let slimes = [
-            new SlimeEnemigo(this, 50, 1, -1, 1412, 1250, undefined, [enemies.botella3, enemies.platanoRojo, enemies.fanta], this.WallLayer, this.character, this.myGameData, 'enem25'),
-            new SlimeEnemigo(this, 50, 1, 0, 1200, 1312, undefined, [enemies.fanta, enemies.meteoro, enemies.fanta, enemies.cono], this.WallLayer, this.character, this.myGameData, 'enem26'),
-            new SlimeEnemigo(this, 50, 1, 1, 1376, 2048, items.guanteHierro, [enemies.meteoro, enemies.cono, enemies.cono, enemies.chocoMagdalena], this.WallLayer, this.character, this.myGameData, 'enem27'),
+            new SlimeEnemigo(this, 100, 1, -1, 1412, 1250, undefined, [enemies.botella3, enemies.platanoRojo, enemies.fanta], this.WallLayer, this.character, this.myGameData, 'enem25'),
+            new SlimeEnemigo(this, 100, 1, 0, 1200, 1312, undefined, [enemies.fanta, enemies.meteoro, enemies.fanta, enemies.cono], this.WallLayer, this.character, this.myGameData, 'enem26'),
+            new SlimeEnemigo(this, 100, 1, 1, 1376, 2048, items.guanteHierro, [enemies.meteoro, enemies.cono, enemies.cono, enemies.chocoMagdalena], this.WallLayer, this.character, this.myGameData, 'enem27'),
 
-            new SlimeEnemigo(this, 50, 1, 1, 2000, 2048, undefined, [enemies.chocoMagdalena, enemies.chocoMagdalena, enemies.escombro, enemies.botella3], this.WallLayer, this.character, this.myGameData, 'enem28'),
-            new SlimeEnemigo(this, 50, 1, -1, 2336, 2064, items.guanteHierro, [enemies.escombro, enemies.escombro, enemies.platanoRojo], this.WallLayer, this.character, this.myGameData, 'enem29'),
+            new SlimeEnemigo(this, 100, 1, 1, 2000, 2048, undefined, [enemies.chocoMagdalena, enemies.chocoMagdalena, enemies.escombro, enemies.botella3], this.WallLayer, this.character, this.myGameData, 'enem28'),
+            new SlimeEnemigo(this, 100, 1, -1, 2336, 2064, items.guanteHierro, [enemies.escombro, enemies.escombro, enemies.platanoRojo], this.WallLayer, this.character, this.myGameData, 'enem29'),
             new SlimeEnemigo(this, 140, 1, 0, 2976, 2000, undefined, [enemies.aceite, enemies.meteoro, enemies.sardinaFuego], this.WallLayer, this.character, this.myGameData, 'enem30'),
 
-            new SlimeEnemigo(this, 50, 0, 1, 1984, 2338, items.chalecoHierro, [enemies.chocoMagdalena, enemies.meteoro, enemies.cono, enemies.fanta], this.WallLayer, this.character, this.myGameData, 'enem31'),
+            new SlimeEnemigo(this, 100, 0, 1, 1984, 2338, items.chalecoHierro, [enemies.chocoMagdalena, enemies.meteoro, enemies.cono, enemies.fanta], this.WallLayer, this.character, this.myGameData, 'enem31'),
             new SlimeEnemigo(this, 140, 0, 1, 2831, 2740, undefined, [enemies.meteoro, enemies.sardinaFuego, enemies.cono, enemies.platanoRojo], this.WallLayer, this.character, this.myGameData, 'enem32'),
             new SlimeEnemigo(this, 150, 0, 1, 3022, 2694, items.armaduraHierro, [enemies.chocoMagdalena, enemies.escombro, enemies.meteoro, enemies.platanoRojo], this.WallLayer, this.character, this.myGameData, 'enem33'),
 
             new SlimeEnemigo(this, 150, 0, 1, 3024, 3156, items.guanteHierro, [enemies.chocoMagdalena, enemies.escombro, enemies.cono, enemies.fanta], this.WallLayer, this.character, this.myGameData, 'enem34'),
-            new SlimeEnemigo(this, 50, 1, 1, 2476, 3152, undefined, [enemies.chocoMagdalena, enemies.chocoMagdalena, enemies.aceite, enemies.aceite], this.WallLayer, this.character, this.myGameData, 'enem35'),
-            new SlimeEnemigo(this, 50, 1, -1, 2572, 3477, items.armaduraHierro, [enemies.meteoro, enemies.meteoro, enemies.cono], this.WallLayer, this.character, this.myGameData, 'enem36'),
+            new SlimeEnemigo(this, 100, 1, 1, 2476, 3152, undefined, [enemies.chocoMagdalena, enemies.chocoMagdalena, enemies.aceite, enemies.aceite], this.WallLayer, this.character, this.myGameData, 'enem35'),
+            new SlimeEnemigo(this, 100, 1, -1, 2572, 3477, items.armaduraHierro, [enemies.meteoro, enemies.meteoro, enemies.cono], this.WallLayer, this.character, this.myGameData, 'enem36'),
 
             new SlimeEnemigo(this, 140, 1, 0, 1943, 3040, undefined, [enemies.chocoMagdalena, enemies.meteoro, enemies.escombro], this.WallLayer, this.character, this.myGameData, 'enem37'),
-            new SlimeEnemigo(this, 50, 1, -1, 1950, 3468, items.chalecoHierro, [enemies.chocoMagdalena, enemies.chocoMagdalena, enemies.escombro, enemies.platanoRojo], this.WallLayer, this.character, this.myGameData, 'enem38'),
+            new SlimeEnemigo(this, 100, 1, -1, 1950, 3468, items.chalecoHierro, [enemies.chocoMagdalena, enemies.chocoMagdalena, enemies.escombro, enemies.platanoRojo], this.WallLayer, this.character, this.myGameData, 'enem38'),
             new SlimeEnemigo(this, 150, 1, 0, 2345, 3962, undefined, [enemies.cono, enemies.cono, enemies.magdalena], this.WallLayer, this.character, this.myGameData, 'enem39'),
 
             new SlimeEnemigo(this, 100, 1, 1, 1670, 2985, undefined, [enemies.aceite, enemies.meteoro, enemies.chocoMagdalena, enemies.botella3], this.WallLayer, this.character, this.myGameData, 'enem40'),
-            new SlimeEnemigo(this, 50, 1, 1, 1333, 3470, items.armaduraHierro, [enemies.sardinaFuego, enemies.chocoMagdalena, enemies.escombro], this.WallLayer, this.character, this.myGameData, 'enem41'),
+            new SlimeEnemigo(this, 100, 1, 1, 1333, 3470, items.armaduraHierro, [enemies.sardinaFuego, enemies.chocoMagdalena, enemies.escombro], this.WallLayer, this.character, this.myGameData, 'enem41'),
             new SlimeEnemigo(this, 150, 1, 0, 1125, 3966, undefined, [enemies.meteoro, enemies.escombro, enemies.chocoMagdalena], this.WallLayer, this.character, this.myGameData, 'enem42'),
 
-            new SlimeEnemigo(this, 50, 0, 1, 1097, 2297, undefined, [enemies.cono, enemies.escombro, enemies.platanoRojo], this.WallLayer, this.character, this.myGameData, 'enem43'),
-            new SlimeEnemigo(this, 50, 1, 1, 880, 2064, items.chalecoHierro, [enemies.meteoro, enemies.meteoro, enemies.meteoro, enemies.platanoRojo], this.WallLayer, this.character, this.myGameData, 'enem44'),
-            new SlimeEnemigo(this, 50, 1, 0, 1350, 2732, undefined, [enemies.chocoMagdalena, enemies.aceite, enemies.cono, enemies.fanta], this.WallLayer, this.character, this.myGameData, 'enem45'),
+            new SlimeEnemigo(this, 100, 0, 1, 1097, 2297, undefined, [enemies.cono, enemies.escombro, enemies.platanoRojo], this.WallLayer, this.character, this.myGameData, 'enem43'),
+            new SlimeEnemigo(this, 100, 1, 1, 880, 2064, items.chalecoHierro, [enemies.meteoro, enemies.meteoro, enemies.meteoro, enemies.platanoRojo], this.WallLayer, this.character, this.myGameData, 'enem44'),
+            new SlimeEnemigo(this, 100, 1, 0, 1350, 2732, undefined, [enemies.chocoMagdalena, enemies.aceite, enemies.cono, enemies.fanta], this.WallLayer, this.character, this.myGameData, 'enem45'),
 
-            new SlimeEnemigo(this, 50, 1, 1, 1108, 2958, items.chalecoHierro, [enemies.meteoro, enemies.escombro, enemies.cono], this.WallLayer, this.character, this.myGameData, 'enem46'),
-            new SlimeEnemigo(this, 50, 1, 1, 880, 2064, undefined, [enemies.sardinaFuego, enemies.meteoro, enemies.escombro], this.WallLayer, this.character, this.myGameData, 'enem47'),
-            new SlimeEnemigo(this, 50, 1, 0, 757, 3473, undefined, [enemies.escombro, enemies.meteoro, enemies.fanta, enemies.platanoRojo], this.WallLayer, this.character, this.myGameData, 'enem48'),
+            new SlimeEnemigo(this, 100, 1, 1, 1108, 2958, items.chalecoHierro, [enemies.meteoro, enemies.escombro, enemies.cono], this.WallLayer, this.character, this.myGameData, 'enem46'),
+            new SlimeEnemigo(this, 100, 1, 1, 880, 2064, undefined, [enemies.sardinaFuego, enemies.meteoro, enemies.escombro], this.WallLayer, this.character, this.myGameData, 'enem47'),
+            new SlimeEnemigo(this, 100, 1, 0, 757, 3473, undefined, [enemies.escombro, enemies.meteoro, enemies.fanta, enemies.platanoRojo], this.WallLayer, this.character, this.myGameData, 'enem48'),
 
-            new SlimeEnemigo(this, 50, 1, -1, 703, 2867, items.chalecoHierro, [enemies.meteoro, enemies.sardinaFuego, enemies.aceite], this.WallLayer, this.character, this.myGameData, 'enem49'),
-            new SlimeEnemigo(this, 50, 1, -1, 487, 1744, undefined, [enemies.cono, enemies.cono, enemies.meteoro], this.WallLayer, this.character, this.myGameData, 'enem50'),
-            new SlimeEnemigo(this, 50, 0, 1, 322, 2955, items.armaduraHierro, [enemies.chocoMagdalena, enemies.meteoro, enemies.escombro], this.WallLayer, this.character, this.myGameData, 'enem51'),
+            new SlimeEnemigo(this, 100, 1, -1, 703, 2867, items.chalecoHierro, [enemies.meteoro, enemies.sardinaFuego, enemies.aceite], this.WallLayer, this.character, this.myGameData, 'enem49'),
+            new SlimeEnemigo(this, 100, 1, -1, 487, 1744, undefined, [enemies.cono, enemies.cono, enemies.meteoro], this.WallLayer, this.character, this.myGameData, 'enem50'),
+            new SlimeEnemigo(this, 100, 0, 1, 322, 2955, items.armaduraHierro, [enemies.chocoMagdalena, enemies.meteoro, enemies.escombro], this.WallLayer, this.character, this.myGameData, 'enem51'),
             
             new SlimeEnemigo(this, 140, 0, 1, 321, 3088, items.chalecoHierro, [enemies.cono, enemies.fanta, enemies.fanta, enemies.magdalena], this.WallLayer, this.character, this.myGameData, 'enem52')
             ];
