@@ -140,7 +140,7 @@ export class EscenaTilesets extends Phaser.Scene {
         this.cameras.main.zoom = 2.2;
 
         let slimes = [
-            new SlimeEnemigo(this, 0, 0, 0, 50, 140, "pene de plastico", [enemies.hands, enemies.hands, enemies.judas, enemies.hands, enemies.hands], this.WallLayer, this.character, this.myGameData, 'enem1')
+            new SlimeEnemigo(this, 0, 0, 0, 50, 140, "pene de plastico", [enemies.botella, enemies.botella], this.WallLayer, this.character, this.myGameData, 'enem1')
         ];
         slimes.forEach(slime => {
             if (this.myGameData.CheckDefeated(slime.slimeId)) {
@@ -149,10 +149,12 @@ export class EscenaTilesets extends Phaser.Scene {
         });
 
         this.myGameData.AddCharacter(new Protagonista(personajes.protagonista)); //No te olvides de cambiarlo de vuelta al final
-        /*
+        
         this.myGameData.AddCharacter(new Protagonista(personajes.MrBean)); //No te olvides de cambiarlo de vuelta al final
         this.myGameData.AddCharacter(new Protagonista(personajes.albert)); //No te olvides de cambiarlo de vuelta al final
+        
         this.myGameData.AddCharacter(new Protagonista(personajes.frikol)); //No te olvides de cambiarlo de vuelta al final
+        /*
         this.myGameData.AddCharacter(new Protagonista(personajes.donald)); //No te olvides de cambiarlo de vuelta al final
         this.myGameData.AddCharacter(new Protagonista(personajes.emmet)); //No te olvides de cambiarlo de vuelta al final
         this.myGameData.AddCharacter(new Protagonista(personajes.greta)); //No te olvides de cambiarlo de vuelta al final
@@ -170,10 +172,12 @@ export class EscenaTilesets extends Phaser.Scene {
         this.myGameData.AñadeItemEquipable(items.armaduraDiamante);
         */
 
+        /*
         if (!this.myGameData.Interactablehitboxes[8]) {
             new dialogo(this, this.character, 44) //Comentad si no queréis que os moleste durante el desarrollo
             this.myGameData.Interactablehitboxes[8] = true;
         }
+        */
 
     }
 

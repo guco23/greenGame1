@@ -35,10 +35,17 @@ export class EscenaMercadona extends Phaser.Scene {
 
     create() {
         this.sound.stopAll();
-
+        const musicConfig = {
+            mute: false,
+            volume: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        }
         this.timer = 0;
-        this.MainTheme = this.sound.add('musicMercadona')
-        this.MainTheme.play();
+        this.MainTheme = this.sound.add('musicMercadona');
+        this.MainTheme.play(musicConfig);
         this.map = this.make.tilemap({
             key: 'SalaMercadona',
             tileWidth: 16,

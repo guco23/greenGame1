@@ -14,6 +14,7 @@ import {MenuEscena} from "./MenuEscena.js"
 import { ZonaFinal } from "./Escenas/NuevosMinisterios/escenaFinal.js";
 import { IntroCinematica } from "./IntroCinematica.js";
 import { FinalCinematica } from "./FinalCinematica.js";
+import { MainMenu } from "./MainMenu.js";
 
 //Configuración inicial del juego
 var config = {
@@ -38,7 +39,7 @@ var config = {
             right: true
         }
     },
-    scene: [EscenaTilesets, IntroCinematica,EscenaTilesets2,EscenaTilesets4,EscenaTilesets3, EscenaMercadona, EscenaCajaFuerte,EscenaPlaya,EscenaPlayaBosque,
+    scene: [MainMenu, EscenaTilesets, IntroCinematica,EscenaTilesets2,EscenaTilesets4,EscenaTilesets3, EscenaMercadona, EscenaCajaFuerte,EscenaPlaya,EscenaPlayaBosque,
         EscenaPlayaFerreteria,EscenaPlayaSalaSecreta,EscenaNuevosMinisterios,ZonaFinal,FinalCinematica,CombateEscena, MenuEscena], //Array con todas las escenas
     parent: 'espacio-juego' //El elemento de html sobre el que se colocará el "canvas" de Phaser
 };

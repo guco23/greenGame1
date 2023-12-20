@@ -146,7 +146,6 @@ export class CombatManager {
         }
         else {
             if (this.whoseTurn === true) {
-                console.log(this.spPoints);
                 if (this.current < this.teamSize) {
                     if (this.playerTeam[this.current].living) {
                         //Está feo el manipular la escena desde aquí 
@@ -212,16 +211,16 @@ export class CombatManager {
 
     doAction(action, target) {
         if (action === 0) { //Ataque
-            this.playerTeam[this.current].attack(target);
             this.changeSp(1);
+            this.playerTeam[this.current].attack(target);
         }
         else if (action === 1) { //Especial
-            this.playerTeam[this.current].special(target);
             this.changeSp(-1);
+            this.playerTeam[this.current].special(target);
         }
         else if(action === 2) { //Defensa
-            this.playerTeam[this.current].defend();
             this.changeSp(1);
+            this.playerTeam[this.current].defend();
         }
     }
 }

@@ -53,11 +53,19 @@ export class CombateEscena extends Phaser.Scene {
     //crear aqui los objetos de la escena
     create() {
         this.sound.stopAll();
+        const musicConfig = {
+            mute: false,
+            volume: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        }
         if(this.BossFightTheme){
             this.MainTheme = this.sound.add('musicCombateBoss');
         }
         else this.MainTheme = this.sound.add('musicCombateSimple');
-        this.MainTheme.play();
+        this.MainTheme.play(musicConfig);
         this.graphics = this.add.graphics();
 
         this.combatManager = new CombatManager(this.enemigos, this.aliados, this.partySize, this);
@@ -97,7 +105,7 @@ export class CombateEscena extends Phaser.Scene {
             this.nombresAliados = this.add.text(20, positionY, this.aliados[i].name);
             this.vidasAliados.push(new TextoVida(this, 202, positionY + 9, this.aliados[i]));
         }
-
+        
         this.vidasEnemigos = [];
         for (let i = 0; i < this.enemigos.length; i++) {
             this.vidasEnemigos.push(new BarraVida(this, this.sceneEnem.array[i].img, 80, 18, this.enemigos[i]));
