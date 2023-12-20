@@ -281,20 +281,24 @@ init(data){
             })     
         })
         this.physics.add.overlap(this.character, this.hitbox7[0], ()=>{
-            if(!this.myGameData.CheckDefeated('boss2')){
-                new dialogo(this, this.character, 50, function(){
-                    self.scene.start('combatScene', {
-                        gameData: self.myGameData,
-                        enemigos: [enemies.pepsi, enemies.acuarius, enemies.pepsi],
-                        objeto: items.armaduraBronce,
-                        scene: self.scene.key,
-                        cx: self.character.x,
-                        cy: self.character.y,
-                        dir: self.character.dir,
-                        id: "boss2"
-                    });
-                })    
-            }            
+            
+            if(!this.Texto){
+                if(!this.myGameData.CheckDefeated('boss2')){
+                    new dialogo(this, this.character, 50, function(){
+                        self.scene.start('combatScene', {
+                            gameData: self.myGameData,
+                            enemigos: [enemies.pepsi, enemies.acuarius, enemies.pepsi],
+                            objeto: items.armaduraBronce,
+                            scene: self.scene.key,
+                            cx: self.character.x,
+                            cy: self.character.y,
+                            dir: self.character.dir,
+                            id: "boss2"
+                        });
+                    })    
+                } 
+            }
+                       
         })
         this.physics.add.overlap(this.character, this.Planos[0], ()=>{
             var self = this;
