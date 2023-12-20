@@ -153,7 +153,7 @@ init(data){
 		let groupCoinsNM = this.add.group();
 		groupCoinsNM.addMultiple(coinsNM);
 		coinsNM.forEach(obj => {
-			console.log("uwu");
+			
 			this.physics.add.existing(obj);
 		});
 
@@ -168,16 +168,14 @@ init(data){
         let cofre2 = this.map.createFromObjects('Cofres', {name: "cofre2", key: 'cofre'});
 		this.anims.play('cofreCerrado', cofre2);
         groupCofres.addMultiple(cofre2);
-        cofre2.forEach(obj => {
-			console.log("uwu");
+        cofre2.forEach(obj => {			
 			this.physics.add.existing(obj);
 		});
 
         let cofre3 = this.map.createFromObjects('Cofres', {name: "cofre3", key: 'cofre'});
 		this.anims.play('cofreCerrado', cofre3);
         groupCofres.addMultiple(cofre3);
-        cofre3.forEach(obj => {
-			console.log("uwu");
+        cofre3.forEach(obj => {			
 			this.physics.add.existing(obj);
 		});
 
@@ -185,23 +183,20 @@ init(data){
 		this.anims.play('cofreCerrado', cofre4);
         groupCofres.addMultiple(cofre4);
         cofre4.forEach(obj => {
-			console.log("uwu");
 			this.physics.add.existing(obj);
 		});
 
         let cofre5 = this.map.createFromObjects('Cofres', {name: "cofre5", key: 'cofre'});
 		this.anims.play('cofreCerrado', cofre5);
         groupCofres.addMultiple(cofre5);
-        cofre5.forEach(obj => {
-			console.log("uwu");
+        cofre5.forEach(obj => {			
 			this.physics.add.existing(obj);
 		});
 
         let cofre6 = this.map.createFromObjects('Cofres', {name: "cofre6", key: 'cofre'});
 		this.anims.play('cofreCerrado', cofre6);
         groupCofres.addMultiple(cofre6);
-        cofre6.forEach(obj => {
-			console.log("uwu");
+        cofre6.forEach(obj => {			
 			this.physics.add.existing(obj);
 		});
 
@@ -213,8 +208,7 @@ init(data){
         if(!this.myGameData.Interactablehitboxes[5])this.Puerta1Collider = this.physics.add.collider(this.character, this.Puerta1);
         if(!this.myGameData.Interactablehitboxes[6])this.Puerta2Collider = this.physics.add.collider(this.character, this.Puerta2);
         this.physics.add.collider(this.character, groupCoinsNM, (character, coin) => {
-            this.myGameData.AñadeMonedasNM(1);
-            console.log(this.myGameData.GetMonedasNM())
+            this.myGameData.AñadeMonedasNM(1);            
             coin.destroy();
         });
 
@@ -224,8 +218,7 @@ init(data){
         let check = this.map.createFromObjects('CheckPoints', {name: "checkPoint", key: 'checkPoint'});
         this.anims.play('banderaRoja', check);
         groupCheckPoints.addMultiple(check);
-        check.forEach(obj => {
-			console.log("uwu");
+        check.forEach(obj => {			
 			this.physics.add.existing(obj);
 		});
 

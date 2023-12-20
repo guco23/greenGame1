@@ -24,8 +24,6 @@ export class Personaje {
 
     targetKind; //Determina el tipo de targeteo para la habilidad. 0 un enemigo, 1 un aliado, 2 todo enemigo, 3 todo aliado, 4 es a sí mismo
 
-    //ableToAct;  //Booleano que le da el control al jugador para que pueda meter input en su turno, en cuyo caso será 0
-
     imgLink; //La imagen del personaje durante el combate
     idleImageLink; //La imagen del personaje en el menú de selección
 
@@ -34,27 +32,6 @@ export class Personaje {
     item; //El objeto que tienen equipado
     imgIconLink;
 
-    /*
-    constructor(namer, attk, defs, hpMax, hp) {
-        this.name = namer;
-        
-        this.atk = attk;
-        this.def = (100 - defs) / 100;
-        this.maxHp = hpMax;
-        this.currentHp = hp;
-
-        this.escudo = 0;
-        this.living = true;
-        this.stunned = false;
-        this.dot = 0;
-        this.status = 0;
-        this.accion = 0;
-
-        this.targetKind = 0;
-
-        this.personality = "Green";
-    }*/
-  
     constructor(idn) {
         this.name = idn.name;
 

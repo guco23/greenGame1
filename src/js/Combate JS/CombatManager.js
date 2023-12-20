@@ -21,46 +21,10 @@ export class CombatManager {
 
     //Otros parámetros
 
-    spPoints;   //Puntos de habilidad especial
-    dropId;     //Item dropeado al finalizar el combate
-    dropChance; //Probabilidad de dropear el objeto
-
     waitingConfirmation;    //Espera a que el jugador pulse A (mensajes en pantalla)
     actInfo;             //Info del resultado de cada acción
 
     combatScene;
-/*
-    constructor(combatInfo, partyInfo, scene) {
-        //Mamá sacame de javascript xd
-        this.enemySize = combatInfo.participants;
-        this.livingEnemies = this.enemySize;
-        this.enemyTeam = new Array(this.enemySize);
-        for (i = 0; i < this.enemySize; i++) {
-            let e = "e" + i;
-            enemy = combatInfo[e];
-            this.enemyTeam[i] = new Enemigo(enemy, this);
-        }
-
-        this.teamSize = partyInfo.number;
-        this.livingParty = this.teamSize;
-        this.playerTeam = new Array(this.teamSize);
-        for (i = 0; i < this.teamSize; i++) {
-            let p = "p" + i;
-            player = partyInfo[p];
-            this.playerTeam[i] = new Personaje(p, this);
-        }
-
-        this.endCombat = false;
-        this.whereAim = false;
-        this.targetAll = false;
-
-        this.spPoints = Math.floor(this.teamSize / 2);
-        this.dropId = combatInfo.itemId;
-        this.dropChance = combatInfo.dropChance;
-
-        this.combatScene = scene;
-    }
-*/
 
     constructor(enmyTeam, playrTeam, partySize, scene) {
         this.enemyTeam = enmyTeam;

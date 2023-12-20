@@ -112,15 +112,13 @@ export class EscenaTilesets extends Phaser.Scene {
         let check = this.map.createFromObjects('CheckPoints', { name: "checkPoint", key: 'checkPoint' });
         this.anims.play('banderaRoja', check);
         groupCheckPoints.addMultiple(check);
-        check.forEach(obj => {
-            console.log("uwu");
+        check.forEach(obj => {            
             this.physics.add.existing(obj);
         });
 
         let self = this;
         this.physics.add.overlap(this.character, groupCheckPoints, (character, checkPoint) => {
-            if (this.checkInteract == 0){
-                console.log("uff");
+            if (this.checkInteract == 0){                
                 this.myGameData.UpdateCheckPoint(this, character.x, character.y);
                 //self.myGameData.CurarTodos();
                 this.anims.play('banderaVerde', checkPoint);
