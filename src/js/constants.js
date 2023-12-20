@@ -1,5 +1,5 @@
-export const RAIZ_IMAGENES = "greenGame1/assets/images/"; //La dirección de las imágenes como ruta absoluta
-export const RAIZ_SOUNDS = "greenGame1/assets/audio/"; //La dirección de las imágenes como ruta absoluta
+export const RAIZ_IMAGENES = "assets/images/"; //La dirección de las imágenes como ruta absoluta
+export const RAIZ_SOUNDS = "assets/audio/"; //La dirección de las imágenes como ruta absoluta
 
 export const RAIZ_IMGS_COMBAT = "spritespjs/"; //La direción dentro de RAIZ_IMAGENES de las imágenees de combate
 export const RAIZ_IMGS_OVERWORLD = "OverworldCharacters/"; //La direción dentro de RAIZ_IMAGENES de las imágenees de personajes en el overworld
