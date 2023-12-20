@@ -10,6 +10,8 @@ export class Personaje {
 
     atk;
     def;
+    bsatk;
+    bsdef;
 
     escudo;     //Valor que sirve como vida extra. Tiene como máximo maxHp;
 
@@ -35,7 +37,9 @@ export class Personaje {
     constructor(idn) {
         this.name = idn.name;
 
+        this.bsatk = idn.atk;
         this.atk = idn.atk;
+        this.bsdef = idn.def;
         this.def = idn.def;
         this.maxHp = idn.maxHp;
         this.currentHp = idn.maxHp;
@@ -82,6 +86,8 @@ export class Personaje {
 
     startCombat(combatManager) {
         this.currentCombat = combatManager;
+        this.atk = this.bsatk;
+        this.def = this.bsdef;
     }
 
     endTurn() {
@@ -128,6 +134,13 @@ export class Personaje {
     }
     revive1PS(){
         this.currentHp = 1;
+    }
+
+    restablecerEstados(){
+        this.atk = this.bsatk;
+        this.def = this.bsdef;
+        this.stunned = false;
+        this.dot = 0;
     }
 
     checkIsDead(){
@@ -201,7 +214,7 @@ export class Personaje {
         }
         this.item = item;
         this.maxHp += item.vidaEx;
-        this.atk += item.ataqEx;
+        this.bsatk += item.ataqEx;
     }
 
     /**
@@ -209,6 +222,6 @@ export class Personaje {
      */
     removeItem() {
         this.maxHp -= this.item.vidaEx;
-        this.atk -= this.item.ataqEx;
+        this.bsatk -= this.item.ataqEx;
     }
 }

@@ -257,6 +257,9 @@ export class CombateEscena extends Phaser.Scene {
 
     ActualizarEscena(info) {
         if (this.combatManager.endCombat) {
+            this.aliados.forEach(personaje =>{
+                personaje.restablecerEstados();
+            });
             if (this.combatManager.endCombatVictory)
                 this.Victory();
             else if (this.combatManager.endCombatDerrota)

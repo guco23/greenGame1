@@ -15,7 +15,7 @@ class Drawer extends Phaser.GameObjects.Container {
     update(personaje) {
         this.textHp.setText("HP: " + personaje.currentHp + "/" + personaje.maxHp);
         this.textAtk.setText("ATK: " + personaje.atk);
-        this.textDef.setText("ATK: " + personaje.def);
+        this.textDef.setText("DEF: " + personaje.def);
         this.textItem.setText(personaje.item.nombre);
     }
 
