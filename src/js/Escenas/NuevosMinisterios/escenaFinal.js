@@ -6,6 +6,7 @@ import { Personaje } from "../../Combate JS/Personajes/Personaje.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
+import { items } from "../../../../assets/EquipItemDATA.js";
 import { CONTROLES_OVERWORLD } from "../../constants.js";
 
 export class ZonaFinal extends Phaser.Scene {
@@ -105,7 +106,9 @@ init(data){
                 this.character.Activate();                
             }
             if(this.Final && !this.Texto){
+                this.Final = false;
                 new dialogo(this, this.character, 46,function(){
+                    self.myGameData.Interactablehitboxes[13] = true;
                     self.scene.start('combatScene', {
                         gameData: self.myGameData,
                         enemigos: [enemies.meteoro, enemies.judas, enemies.meteoro],
@@ -117,28 +120,6 @@ init(data){
                         id: "boss3"
                     });
                 })
-                this.Final = false;
-            }else{
-                if(this.Final && !this.Fase2){
-                    this.Fase2 = true;
-                    new dialogo(this, this.character, 51,function(){
-                        self.scene.start('combatScene', {
-                            gameData: self.myGameData,
-                            enemigos: [enemies.hands, enemies.hands, enemies.finalBoss, enemies.hands, enemies.hands],
-                            objeto: undefined,
-                            scene: self.scene.key,
-                            cx: self.character.x,
-                            cy: self.character.y,
-                            dir: self.character.dir,
-                            id: "boss3"
-                        });
-                    })
-                }else{
-                    if(this.Fase2){
-                        this.scene.start('finalCinematica');
-                    }
-    
-                }
             }
             
         })
@@ -162,5 +143,27 @@ init(data){
             this.imageBoss.setY(this.PosBoss);            
             if(this.PosBoss >=290) this.Final = true;
         }
+
+        if(this.myGameData.CheckDefeated('boss3') &&!this.Fase2){
+            self = this;            
+            this.Fase2 = true;
+            new dialogo(this, this.character, 51,function(){
+                self.myGameData.Interactablehitboxes[14] = true;
+                self.scene.start('combatScene', {
+                    gameData: self.myGameData,
+                    enemigos: [enemies.hands, enemies.hands, enemies.finalBoss, enemies.hands, enemies.hands],
+                    objeto: undefined,
+                    scene: self.scene.key,
+                    cx: self.character.x,
+                    cy: self.character.y,
+                    dir: self.character.dir,
+                    id: "boss4"
+                });
+            })
+        }
+        if(this.myGameData.CheckDefeated('boss4')){
+            this.scene.start('finalCinematica');
+        }
+
     }    
 };

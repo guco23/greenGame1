@@ -101,6 +101,8 @@ export default class GameData {
         this.Interactablehitboxes[10] = false;
         this.Interactablehitboxes[11] = false;
         this.Interactablehitboxes[12] = false;
+        this.Interactablehitboxes[13] = false;
+        this.Interactablehitboxes[14] = false;
 
     }
 
