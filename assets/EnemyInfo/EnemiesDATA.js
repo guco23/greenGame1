@@ -31,7 +31,7 @@ export var enemies = {
 
     sardina: {class: Aturdidor, name:"Cap. Sardinez", maxHp:120, atk: 20, def: 10, prefType: "", imgLink: "Sardina.png", crit: 5},
     
-    libra: {class: Libra, name:"Libra", maxHp:900, atk: 20, def: 30, prefType: "", imgLink: "libra_boss.png", crit: 5},
+    libra: {class: Libra, name:"Libra", maxHp:600, atk: 20, def: 30, prefType: "", imgLink: "libra_boss.png", crit: 5},
 
     //Playa
 
@@ -53,7 +53,7 @@ export var enemies = {
 
     medusa: {class: Aturdidor, name:"Medusa Pica Pica", maxHp:180, atk: 30, def: 10, prefType: "", imgLink: "Medusa.png", crit: 5},
     
-    acuarius: {class: Acuarius, name:"Acuarius mamadísimo", maxHp:2000, atk: 30, def: 30, prefType: "", imgLink: "acuarius_boss.png", crit: 5},
+    acuarius: {class: Acuarius, name:"Acuarius mamadísimo", maxHp:1000, atk: 30, def: 30, prefType: "", imgLink: "acuarius_boss.png", crit: 5},
 
     //Nuevos Ministerios
 
