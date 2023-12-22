@@ -135,6 +135,9 @@ export class Personaje {
     revive1PS(){
         this.currentHp = 1;
     }
+    reviveAllPS(){
+        this.currentHp = this.maxHp;
+    }
 
     restablecerEstados(){
         this.atk = this.bsatk;

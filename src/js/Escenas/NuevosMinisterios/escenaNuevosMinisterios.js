@@ -98,6 +98,7 @@ init(data){
           this.interactKey = this.input.keyboard.addKey(CONTROLES_OVERWORLD.ACCEPT);
           this.interact = 1;
           this.checkInteract = 0;
+          this.checkCountDown = 0;
           const tileset1 = this.map.addTilesetImage('tileset_nm', 'tileset_nm');          
           this.LavaLayer = this.map.createLayer('Lava', tileset1);          
           this.FloorLayer = this.map.createLayer('Suelo', tileset1);
@@ -439,7 +440,7 @@ init(data){
             
             new SlimeEnemigo(this, 300, 0, 1, 321, 3088, items.chalecoHierro, [enemies.cono, enemies.fanta, enemies.fanta, enemies.magdalena], this.WallLayer, this.character, this.myGameData, 'enem52')
             ];
-            slimes.forEach(slime => {s
+            slimes.forEach(slime => {
                 if(this.myGameData.CheckDefeated(slime.slimeId)) {
                     slime.destroy();
                 }
@@ -449,6 +450,13 @@ init(data){
 
 
     update() {
+        if (this.checkInteract == 1){
+            this.checkCountDown++;
+            if(this.checkCountDown == 100){
+                this.checkInteract = 0;
+                this.checkCountDown = 0;
+            }
+        }
         if (this.interactKey.isDown) {
             if(this.timer==0)this.interact = 0;
             if(this.Texto)this.timer = 25;

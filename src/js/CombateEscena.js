@@ -250,6 +250,7 @@ export class CombateEscena extends Phaser.Scene {
     Defeat() {
         for (let i = 0; i < this.aliados.length; i++) {
             this.aliados[i].revive();
+            this.aliados[i].reviveAllPS();
             console.log("curado");
         }
         this.scene.start(this.gameData.sceneRetrunDead, { obj: this.gameData, cx: this.gameData.returnDeadX, cy: this.gameData.returnDeadY, dir: this.cdir });

@@ -57,27 +57,27 @@ export var enemies = {
 
     //Nuevos Ministerios
 
-    botella3: {class: Enemigo, name:"Botella de agua contaminada", maxHp:250, atk: 45, def: 15, prefType: "", imgLink: "Botella3.png", crit: -1},
+    botella3: {class: Enemigo, name:"Botella de agua contaminada", maxHp:250, atk: 40, def: 15, prefType: "", imgLink: "Botella3.png", crit: -1},
 
-    aceite: {class: Veneno, name:"Aceite aceitoso", maxHp:250, atk: 40, def: 10, prefType: "", imgLink: "Aceite.png", crit: 10},
+    aceite: {class: Veneno, name:"Aceite aceitoso", maxHp:250, atk: 35, def: 10, prefType: "", imgLink: "Aceite.png", crit: 10},
 
-    fanta: {class: Enemigo, name:"Fanta caducada", maxHp:250, atk: 45, def: 10, prefType: "", imgLink: "Fanta.png", crit: -1},
+    fanta: {class: Enemigo, name:"Fanta caducada", maxHp:250, atk: 40, def: 10, prefType: "", imgLink: "Fanta.png", crit: -1},
 
-    chocoMagdalena: {class: Healer, name:"Choco Magdalena", maxHp:260, atk: 40, def: 15, prefType: "", imgLink: "ChocoMagdalena.png", crit: 10},
+    chocoMagdalena: {class: Healer, name:"Choco Magdalena", maxHp:260, atk: 35, def: 15, prefType: "", imgLink: "ChocoMagdalena.png", crit: 10},
     
-    escombro: {class: Enemigo, name:"Escombro", maxHp:800, atk: 35, def: 20, prefType: "", imgLink: "Escombro.png", crit: 10},
+    escombro: {class: Enemigo, name:"Escombro", maxHp:800, atk: 30, def: 20, prefType: "", imgLink: "Escombro.png", crit: 10},
 
-    platanoRojo: {class: Enemigo, name:"Platano encabronado", maxHp:250, atk: 45, def: 15, prefType: "", imgLink: "PlatanoRojo.png", crit: -1},
+    platanoRojo: {class: Enemigo, name:"Platano encabronado", maxHp:250, atk: 40, def: 15, prefType: "", imgLink: "PlatanoRojo.png", crit: -1},
 
-    meteoro: {class: AoE, name:"Meteoro", maxHp: 270, atk: 45, def: 5, prefType: "", imgLink: "Meteoro.png", crit: 15},
+    meteoro: {class: AoE, name:"Meteoro", maxHp: 270, atk: 40, def: 5, prefType: "", imgLink: "Meteoro.png", crit: 15},
 
-    cono: {class: Fuerte, name: "Cono", maxHp:270, atk: 45, def: 5, prefType: "", imgLink: "Cono.png", crit: 10},
+    cono: {class: Fuerte, name: "Cono", maxHp:270, atk: 40, def: 5, prefType: "", imgLink: "Cono.png", crit: 10},
 
-    sardinaFuego: {class: Aturdidor, name:"Sardina tostada", maxHp: 260, atk: 40, def: 10, prefType: "", imgLink: "SardinaFuego.png", crit: 5},
+    sardinaFuego: {class: Aturdidor, name:"Sardina tostada", maxHp: 260, atk: 35, def: 10, prefType: "", imgLink: "SardinaFuego.png", crit: 5},
     
-    judas: {class: Judas, name:"Judas", maxHp:4000, atk: 35, def: 30, prefType: "", imgLink: "final_boss.png", crit: 5},
+    judas: {class: Judas, name:"Judas", maxHp:4000, atk: 30, def: 30, prefType: "", imgLink: "final_boss.png", crit: 5},
     
-    finalBoss: {class: Zodiac, name:"Judas del Zodíaco", maxHp:8000, atk: 35, def: 35, prefType: "", imgLink: "final_boss2.png", crit: -1},
+    finalBoss: {class: Zodiac, name:"Judas del Zodíaco", maxHp:6500, atk: 30, def: 35, prefType: "", imgLink: "final_boss2.png", crit: -1},
 
     hand1: {class: AoE, name:"Mano Derecha Meteoro", maxHp:1000, atk: 35, def: 30, prefType: "", imgLink: "ManoDer.png", crit: 5},
 

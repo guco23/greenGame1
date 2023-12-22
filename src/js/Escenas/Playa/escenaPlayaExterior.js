@@ -88,6 +88,7 @@ init(data){
             tileHeight: 16 
           });
           this.interactKey = this.input.keyboard.addKey(CONTROLES_OVERWORLD.ACCEPT);
+          this.checkCountDown = 0;
           this.checkInteract = 0;
           this.interact = 1;
           //const tileset1 = this.map.addTilesetImage('tileset_mercadona', 'tileset_mercadona');
@@ -363,10 +364,10 @@ init(data){
             new SlimeEnemigo(this, 150, 1, 0, 958, 774, undefined, [enemies.pirania, enemies.langosta, enemies.pezPayaso], this.WallLayer, this.character, this.myGameData, 'enem10'),
 
             new SlimeEnemigo(this, 150, 1, 0, 2283, 792, items.chalecoBronce, [enemies.pirania, enemies.pezGlobo], this.WallLayer, this.character, this.myGameData, 'enem11'),
-            new SlimeEnemigo(this, 460, 0, 1, 2625, 1366, undefined, [enemies.botella2, enemies.pepsi, enemies.pepsi, enemies.platanoMaduro], this.WallLayer, this.character, this.myGameData, 'enem12'),
+            new SlimeEnemigo(this, 750, 0, 1, 2625, 1366, undefined, [enemies.botella2, enemies.pepsi, enemies.pepsi, enemies.platanoMaduro], this.WallLayer, this.character, this.myGameData, 'enem12'),
             new SlimeEnemigo(this, 150, 1, 0, 2295, 1919, items.chalecoBronce, [enemies.cangrejo, enemies.platanoMaduro, enemies.platanoMaduro, enemies.platanoMaduro], this.WallLayer, this.character, this.myGameData, 'enem13'),
 
-            new SlimeEnemigo(this, 460, 1, 0, 2294, 1142, undefined, [enemies.cangrejo, enemies.langosta], this.WallLayer, this.character, this.myGameData, 'enem14'),
+            new SlimeEnemigo(this, 750, 1, 0, 2294, 1142, undefined, [enemies.cangrejo, enemies.langosta], this.WallLayer, this.character, this.myGameData, 'enem14'),
             new SlimeEnemigo(this, 150, 1, 1, 2000, 2192, undefined, [enemies.medusa, enemies.langosta, enemies.medusa], this.WallLayer, this.character, this.myGameData, 'enem15'),
             new SlimeEnemigo(this, 150, 1, 1, 1586, 2152, items.chalecoBronce, [enemies.pezGlobo, enemies.pezGlobo, enemies.pirania, enemies.pirania], this.WallLayer, this.character, this.myGameData, 'enem16'),
 
@@ -391,6 +392,13 @@ init(data){
 
 
     update() {
+        if (this.checkInteract == 1){
+            this.checkCountDown++;
+            if(this.checkCountDown == 100){
+                this.checkInteract = 0;
+                this.checkCountDown = 0;
+            }
+        }
         if (this.interactKey.isDown) {
             if(this.timer==0)this.interact = 0;
             if(this.Texto)this.timer = 25;
