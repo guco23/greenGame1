@@ -178,7 +178,6 @@ export class EscenaTilesets extends Phaser.Scene {
 
 
     update() {
-        
         if (this.interactKey.isDown) {
             if (this.timer == 0) this.interact = 0;
             if (this.Texto) this.timer = 25;

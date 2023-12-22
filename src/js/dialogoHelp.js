@@ -10,7 +10,7 @@ export default class dialogoHelp {
         //Pillando el item de la puerta
         this.dialogos[1] = ["Recoges la puerta", "La puerta ha sido añadida a tu inventario"];
         //Puerta secreta en el lateral del Mercadona
-        this.dialogos[2] = ["Notas que hay una puerta en el lateral del         Mercadona TM", "Decides atravesarla"];
+        this.dialogos[2] = ["Notas que hay una puerta en el lateral del         Mercadona TM", "No hay nada interesante, por lo que no entras"];
         //Encuentro con Judio César        
         this.dialogos[3] = ["Oh, por fin. Un empleado", "Discúlpame, ¿le importaría decirme dónde está la   sección de toallas?", "Oye, ¿No será usted Judio César, emperador del     Imperio Romano?",
         "Em... ¿Nos conocemos de algo?", "Estamos intentando detener el apocalipsis, y tu    ayuda podría venirnos muy bien", "Ah, eso suena importante", "Está bien, os ayudaré", "Judio César se ha unido al grupo"];

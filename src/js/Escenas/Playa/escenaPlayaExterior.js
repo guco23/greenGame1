@@ -266,9 +266,10 @@ init(data){
         })
         var self=this;
         this.physics.add.overlap(this.character, this.hitbox5[0], ()=>{
-            if(!this.Texto)new dialogo(this, this.character, 2,function(){                
-                self.scene.start('escenaPlayaSalaSecreta',{obj:this.myGameData,cx:40, cy:85, dir:2});
-            })     
+            if(!this.Texto){
+                if (this.interact == 0) new dialogo(this, this.character, 2);
+            }
+
         })
         var self=this;
         this.physics.add.overlap(this.character, this.hitbox6[0], ()=>{  
