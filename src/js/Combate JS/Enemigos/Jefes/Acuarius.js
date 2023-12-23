@@ -99,7 +99,7 @@ export class Acuarius extends Enemigo {
 
     checkAlive() {
         if(this.currentHp <= 0) {
-            if (this.revive) {
+            if (this.resurect) {
                 this.currentHp = this.maxHp;
                 this.resurect = false;
                 this.dot = -25;
