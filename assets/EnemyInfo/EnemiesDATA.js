@@ -53,7 +53,7 @@ export var enemies = {
 
     medusa: {class: Aturdidor, name:"Medusa Pica Pica", maxHp:180, atk: 30, def: 10, prefType: "", imgLink: "Medusa.png", crit: 5},
     
-    acuarius: {class: Acuarius, name:"Acuarius mamadísimo", maxHp:1000, atk: 30, def: 30, prefType: "", imgLink: "acuarius_boss.png", crit: 5},
+    acuarius: {class: Acuarius, name:"Acuarius mamadísimo", maxHp:750, atk: 25, def: 30, prefType: "", imgLink: "acuarius_boss.png", crit: 5},
 
     //Nuevos Ministerios
 
@@ -75,15 +75,15 @@ export var enemies = {
 
     sardinaFuego: {class: Aturdidor, name:"Sardina tostada", maxHp: 260, atk: 35, def: 10, prefType: "", imgLink: "SardinaFuego.png", crit: 5},
     
-    judas: {class: Judas, name:"Judas", maxHp:4000, atk: 30, def: 30, prefType: "", imgLink: "final_boss.png", crit: 5},
+    judas: {class: Judas, name:"Judas", maxHp:3000, atk: 30, def: 30, prefType: "", imgLink: "final_boss.png", crit: 5},
     
-    finalBoss: {class: Zodiac, name:"Judas del Zodíaco", maxHp:6500, atk: 30, def: 35, prefType: "", imgLink: "final_boss2.png", crit: -1},
+    finalBoss: {class: Zodiac, name:"Judas del Zodíaco", maxHp:5000, atk: 30, def: 35, prefType: "", imgLink: "final_boss2.png", crit: -1},
 
-    hand1: {class: AoE, name:"Mano Derecha Meteoro", maxHp:1000, atk: 35, def: 30, prefType: "", imgLink: "ManoDer.png", crit: 5},
+    hand1: {class: AoE, name:"Mano Derecha Meteoro", maxHp:750, atk: 30, def: 30, prefType: "", imgLink: "ManoDer.png", crit: 5},
 
-    hand2: {class: Healer, name:"Mano Derecha Curativa", maxHp:1000, atk: 35, def: 30, prefType: "", imgLink: "ManoDer.png", crit: 5},
+    hand2: {class: Healer, name:"Mano Derecha Curativa", maxHp:750, atk: 30, def: 30, prefType: "", imgLink: "ManoDer.png", crit: 5},
 
-    hand3: {class: Aturdidor, name:"Mano Izquierda Aturdidora", maxHp:1000, atk: 35, def: 30, prefType: "", imgLink: "ManoIzq.png", crit: 5},
+    hand3: {class: Aturdidor, name:"Mano Izquierda Aturdidora", maxHp:750, atk: 30, def: 30, prefType: "", imgLink: "ManoIzq.png", crit: 5},
 
-    hand4: {class: Veneno, name:"Mano Izquierda Venenosa", maxHp:1000, atk: 35, def: 30, prefType: "", imgLink: "ManoIzq.png", crit: 5}
+    hand4: {class: Veneno, name:"Mano Izquierda Venenosa", maxHp:750, atk: 30, def: 30, prefType: "", imgLink: "ManoIzq.png", crit: 5}
 }
