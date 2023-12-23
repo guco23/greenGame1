@@ -75,9 +75,9 @@ export var enemies = {
 
     sardinaFuego: {class: Aturdidor, name:"Sardina tostada", maxHp: 260, atk: 35, def: 10, prefType: "", imgLink: "SardinaFuego.png", crit: 5},
     
-    judas: {class: Judas, name:"Judas", maxHp:3000, atk: 30, def: 30, prefType: "", imgLink: "final_boss.png", crit: 5},
+    judas: {class: Judas, name:"Judas", maxHp:2500, atk: 30, def: 30, prefType: "", imgLink: "final_boss.png", crit: 5},
     
-    finalBoss: {class: Zodiac, name:"Judas del Zodíaco", maxHp:5000, atk: 30, def: 35, prefType: "", imgLink: "final_boss2.png", crit: -1},
+    finalBoss: {class: Zodiac, name:"Judas del Zodíaco", maxHp:4000, atk: 30, def: 35, prefType: "", imgLink: "final_boss2.png", crit: -1},
 
     hand1: {class: AoE, name:"Mano Derecha Meteoro", maxHp:750, atk: 30, def: 30, prefType: "", imgLink: "ManoDer.png", crit: 5},
 
