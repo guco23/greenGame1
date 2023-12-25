@@ -77,13 +77,13 @@ export var enemies = {
     
     judas: {class: Judas, name:"Judas", maxHp:2500, atk: 30, def: 30, prefType: "", imgLink: "final_boss.png", crit: 5},
     
-    finalBoss: {class: Zodiac, name:"Judas del Zodíaco", maxHp:4000, atk: 30, def: 35, prefType: "", imgLink: "final_boss2.png", crit: -1},
+    finalBoss: {class: Zodiac, name:"Judas del Zodíaco", maxHp:3500, atk: 25, def: 35, prefType: "", imgLink: "final_boss2.png", crit: -1},
 
-    hand1: {class: AoE, name:"Mano Derecha Meteoro", maxHp:750, atk: 30, def: 30, prefType: "", imgLink: "ManoDer.png", crit: 5},
+    hand1: {class: AoE, name:"Mano Derecha Meteoro", maxHp:650, atk: 20, def: 30, prefType: "", imgLink: "ManoDer.png", crit: 5},
 
-    hand2: {class: Healer, name:"Mano Derecha Curativa", maxHp:750, atk: 30, def: 30, prefType: "", imgLink: "ManoDer.png", crit: 5},
+    hand2: {class: Healer, name:"Mano Derecha Curativa", maxHp:650, atk: 20, def: 30, prefType: "", imgLink: "ManoDer.png", crit: 5},
 
-    hand3: {class: Aturdidor, name:"Mano Izquierda Aturdidora", maxHp:750, atk: 30, def: 30, prefType: "", imgLink: "ManoIzq.png", crit: 5},
+    hand3: {class: Aturdidor, name:"Mano Izquierda Aturdidora", maxHp:650, atk: 20, def: 30, prefType: "", imgLink: "ManoIzq.png", crit: 5},
 
-    hand4: {class: Veneno, name:"Mano Izquierda Venenosa", maxHp:750, atk: 30, def: 30, prefType: "", imgLink: "ManoIzq.png", crit: 5}
+    hand4: {class: Veneno, name:"Mano Izquierda Venenosa", maxHp:650, atk: 20, def: 30, prefType: "", imgLink: "ManoIzq.png", crit: 5}
 }
