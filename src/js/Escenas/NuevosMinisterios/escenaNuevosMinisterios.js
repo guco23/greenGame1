@@ -238,7 +238,7 @@ init(data){
                 this.checkInteract = 1;
             }
         });
-
+        var self = this;
         this.physics.add.overlap(this.character, groupCofres, (character, cofre) => {
             if(this.interact == 0){
                 if (cofre.name == "cofre2"){

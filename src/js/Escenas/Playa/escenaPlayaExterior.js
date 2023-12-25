@@ -213,7 +213,7 @@ init(data){
                 this.checkInteract = 1;
             }
         });
-
+        var self=this;
         this.physics.add.overlap(this.character, groupCofres, (character, cofre) => {
             if(this.interact == 0){
                 if (cofre.name == "cofre1"){
@@ -265,14 +265,14 @@ init(data){
         this.physics.add.overlap(this.character, this.hitbox4[0], ()=>{
             if(this.interact == 0) this.scene.start('escenaMercadona',{obj:this.myGameData,cx:40, cy:200, dir:2});            
         })
-        var self=this;
+
         this.physics.add.overlap(this.character, this.hitbox5[0], ()=>{
             if(!this.Texto){
                 if (this.interact == 0) new dialogo(this, this.character, 2);
             }
 
         })
-        var self=this;
+        
         this.physics.add.overlap(this.character, this.hitbox6[0], ()=>{  
             if(this.myGameData.CheckObjetoClave(4)&&this.myGameData.CheckObjetoClave(5)&&this.myGameData.CheckObjetoClave(6))          
             if(!this.Texto && !this.myGameData.Interactablehitboxes[4])new dialogo(this, this.character, 34,function(){                                
