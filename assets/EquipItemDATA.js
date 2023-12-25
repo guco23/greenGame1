@@ -31,9 +31,9 @@ export var items = {
     },
     guanteCueroPlus: {
         nombre: "Guante de cuero +",
-        descripcion: "Aumenta la vida y el daño en 30 y 40 puntos respectivamente",
+        descripcion: "Aumenta la vida y el daño en 30 y 50 puntos respectivamente",
         vidaEx: 30,
-        ataqEx: 40
+        ataqEx: 50
     },
     chalecoBronce: {
         nombre: "Chaleco de bronce",
