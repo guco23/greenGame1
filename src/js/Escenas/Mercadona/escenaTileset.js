@@ -7,6 +7,15 @@ import { enemies } from "../../../../assets/EnemyInfo/EnemiesDATA.js";
 import SlimeEnemigo from "../../SlimeEnemigo.js"
 import { Personaje } from "./../../Combate JS/Personajes/Personaje.js";
 import { Protagonista } from "./../../Combate JS/Personajes/Protagonista.js"; //NTS ES AQUÍ EL CAMBIO
+import { Comandante } from "../../Combate JS/Personajes/Comandante.js";
+import { Emprendedor } from "../../Combate JS/Personajes/Emprendedor.js";
+import { Logista } from "../../Combate JS/Personajes/Logista.js";
+import { Innovador	 } from "../../Combate JS/Personajes/Innovador.js";
+import { Aventurero	 } from "../../Combate JS/Personajes/Aventurero.js";
+import { Arquitecto	 } from "../../Combate JS/Personajes/Arquitecto.js";
+import { Ejecutivo	 } from "../../Combate JS/Personajes/Ejecutivo.js";
+import { Activista	 } from "../../Combate JS/Personajes/Activista.js";
+import { Defensor	 } from "../../Combate JS/Personajes/Defensor.js";
 import { personajes } from "../../../../assets/CharactersInfo/CharactersDATA.js";
 import { Item } from "../../Item.js"
 import { items } from "../../../../assets/EquipItemDATA.js";
@@ -106,7 +115,7 @@ export class EscenaTilesets extends Phaser.Scene {
         this.physics.add.collider(this.character, this.WallLayer);
         this.Texto = false;
 
-
+        var self = this;
         //CheckPoints
         let groupCheckPoints = this.add.group();
         let check = this.map.createFromObjects('CheckPoints', { name: "checkPoint", key: 'checkPoint' });
@@ -116,7 +125,6 @@ export class EscenaTilesets extends Phaser.Scene {
             this.physics.add.existing(obj);
         });
 
-        let self = this;
         this.physics.add.overlap(this.character, groupCheckPoints, (character, checkPoint) => {
             if (this.checkInteract == 0){                
                 this.myGameData.UpdateCheckPoint(this, character.x, character.y);
@@ -130,8 +138,8 @@ export class EscenaTilesets extends Phaser.Scene {
         this.physics.add.overlap(this.character, this.hitbox[0], () => {
             if (this.interact == 0) {
                 //this.scene.start('escenaPlaya', { obj: this.myGameData, cx: 2285, cy: 320, dir: 3 });
-                //this.scene.start('escenaNuevosMinisterios',{obj:this.myGameData,cx:1820, cy:985, dir:0});  
-                this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });                              
+                this.scene.start('escenaNuevosMinisterios',{obj:this.myGameData,cx:1820, cy:985, dir:0});  
+                //this.scene.start('escenaTilesets2', { obj: this.myGameData, cx: 30, cy: 110, dir: 2 });                              
             }
         })
         this.physics.add.overlap(this.character, this.Hitboxdialogo[0], () => {
@@ -144,7 +152,16 @@ export class EscenaTilesets extends Phaser.Scene {
         this.cameras.main.zoom = 2.2;
 
         this.myGameData.AddCharacter(new Protagonista(personajes.protagonista));
-        
+        self.myGameData.AddCharacter(new Logista(personajes.frikol));
+        self.myGameData.AddCharacter(new Emprendedor(personajes.MrBean));
+        self.myGameData.AddCharacter(new Comandante(personajes.judioCesar));
+            self.myGameData.AddCharacter(new Innovador(personajes.bealonMusk));
+            self.myGameData.AddCharacter(new Aventurero(personajes.frijolConBotas));
+            self.myGameData.AddCharacter(new Arquitecto(personajes.emmet));
+            self.myGameData.AddCharacter(new Ejecutivo(personajes.rajoy));
+            self.myGameData.AddCharacter(new Activista(personajes.greta));
+            self.myGameData.AddCharacter(new Defensor(personajes.selena));
+            self.myGameData.AñadeItemEquipable(items.armaduraBronce);
          //No te olvides de cambiarlo de vuelta al final
  /*       
         this.myGameData.AddCharacter(new Protagonista(personajes.MrBean)); //No te olvides de cambiarlo de vuelta al final
